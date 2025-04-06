@@ -300,5 +300,208 @@ public:
 
 };
 
+
+//-------------------------------------------------------------------------------------------------
+/*
+	BitfieldFlags is a wrapper class that exists as a stopgap solution for unifiying both codebases,
+	it intentionally mimicks function signatures of BitFlags so when we are ready to test and debug
+	change to BitFlags it's just a case of changing BitfieldFlags to BitFlags
+	Note it can only be templated to basic types char to unsigned int64
+*/
+template <size_t NUMBITS, typename BASIC_TYPE>
+class BitfieldFlags
+{
+private:
+	BASIC_TYPE							m_bits;
+	static const char*					s_bitNameList[];
+
+public:
+	
+	/*
+		just a little syntactic sugar so that there is no "foo = 0" compatible constructor
+	*/
+	enum BogusInitType
+	{
+		kInit = 0
+	};
+
+	inline BitfieldFlags()
+	{
+	}
+
+	inline BitfieldFlags(BogusInitType k, Int idx1)
+	{
+		set(idx1);
+	}
+
+	inline BitfieldFlags(BogusInitType k, Int idx1, Int idx2)
+	{
+		set(idx1);
+		set(idx2);
+	}
+
+	inline BitfieldFlags(BogusInitType k, Int idx1, Int idx2, Int idx3)
+	{
+		set(idx1);
+		set(idx2);
+		set(idx3);
+	}
+
+	inline BitfieldFlags(BogusInitType k, Int idx1, Int idx2, Int idx3, Int idx4)
+	{
+		set(idx1);
+		set(idx2);
+		set(idx3);
+		set(idx4);
+	}
+
+	inline BitfieldFlags(BogusInitType k, Int idx1, Int idx2, Int idx3, Int idx4, Int idx5)
+	{
+		set(idx1);
+		set(idx2);
+		set(idx3);
+		set(idx4);
+		set(idx5);
+	}
+
+	inline BitfieldFlags(BogusInitType k, 
+										Int idx1, 
+										Int idx2, 
+										Int idx3, 
+										Int idx4, 
+										Int idx5,
+										Int idx6,
+										Int idx7,
+										Int idx8,
+										Int idx9,
+										Int idx10,
+										Int idx11,
+										Int idx12
+									)
+	{
+		set(idx1);
+		set(idx2);
+		set(idx3);
+		set(idx4);
+		set(idx5);
+		set(idx6);
+		set(idx7);
+		set(idx8);
+		set(idx9);
+		set(idx10);
+		set(idx11);
+		set(idx12);
+	}
+
+	inline Bool operator==(const BitfieldFlags& that) const
+	{
+		return this->m_bits == that.m_bits;
+	}
+
+	inline Bool operator!=(const BitfieldFlags& that) const
+	{
+		return this->m_bits != that.m_bits;
+	}
+
+	inline void set(Int i, Int val = 1)
+	{
+		const auto bit = (1 << i);
+		if (val) {
+			m_bits |= bit;
+		} else {
+			m_bits &= ~bit;
+		}
+	}
+
+	inline Bool test(Int i) const
+	{
+		const auto bit = (1 << i);
+		return (m_bits & bit) != 0;
+	}
+
+	//Tests for any bits that are set in both.
+	inline Bool testForAny( const BitfieldFlags& that ) const
+	{
+		BitfieldFlags tmp = *this;
+		tmp.m_bits &= that.m_bits;
+		return tmp.any();
+	} 
+
+	//All argument bits must be set in our bits too in order to return TRUE
+	inline Bool testForAll( const BitfieldFlags& that ) const
+	{
+		DEBUG_ASSERTCRASH( that.any(), ("BitfieldFlags::testForAll is always true if you ask about zero flags.  Did you mean that?") );
+
+		BitfieldFlags tmp = *this;
+		tmp.flip();
+		tmp.m_bits &= that.m_bits;
+		return !tmp.any();
+	}
+
+	//None of the argument bits must be set in our bits in order to return TRUE
+	inline Bool testForNone( const BitfieldFlags& that ) const
+	{
+		BitfieldFlags tmp = *this;
+		tmp.m_bits &= that.m_bits;
+		return !tmp.any();
+	}
+
+	inline Int size() const
+	{
+		return sizeof(BASIC_TYPE);
+	}
+
+	inline Int count() const
+	{
+		return sizeof(BASIC_TYPE) * 8;
+	}
+
+	inline Bool any() const
+	{
+		return m_bits != 0;
+	}
+
+	inline void flip()
+	{
+		m_bits = ~m_bits;
+	}
+
+	inline void clear()
+	{
+		m_bits = 0;
+	}
+
+	inline void clear(const BitfieldFlags& clr)
+	{
+		m_bits &= ~clr.m_bits;
+	}
+
+	inline void set(const BitfieldFlags& set)
+	{
+		m_bits |= set.m_bits;
+	}
+
+	inline void clearAndSet(const BitfieldFlags& clr, const BitfieldFlags& set)
+	{
+		m_bits &= ~clr.m_bits;
+		m_bits |= set.m_bits;
+	}
+
+	inline BASIC_TYPE get()
+	{
+		return m_bits;
+	}
+
+	static const char** getBitNames()
+	{
+	  return s_bitNameList;
+	}
+
+	void parse(INI* ini, AsciiString* str);
+	void xfer(Xfer* xfer);
+	static void parseFromINI(INI* ini, void* /*instance*/, void *store, const void* /*userData*/);
+
+};
+
 #endif // __BitFlags_H_
 

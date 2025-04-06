@@ -755,7 +755,7 @@ public:
 		SHAKE_INTENSITY,		// Int, specifies which Intensity to use (Intensity in 10 cities!)
 		COMMAND_BUTTON,  		// String
 		FONT_NAME,       		// String, the name of the desired font
-		OBJECT_STATUS,			// String, specifies ObjectStatusBits name. However, translated to an int on read.
+		OBJECT_STATUS,			// String, specifies ObjectStatusTypes name. However, translated to an ObjectStatusMaskType on read
 		COMMANDBUTTON_ALL_ABILITIES, // String, refers to all command buttons
 		SKIRMISH_WAYPOINT_PATH, // String, name of a predefined skirmish waypoint path.
 		COLOR,							// color (as int) in ARGB format.

@@ -2111,9 +2111,9 @@ Parameter *Parameter::ReadParameter(DataChunkInput &file)
 	if (pParm->getParameterType() == OBJECT_STATUS) 
 	{
 		// Need to change the string to an integer
-		for (int i = 0; TheObjectStatusBitNames[i]; ++i) 
+		for (int i = 0; ObjectStatusMaskType::getBitNames()[i]; ++i) 
 		{
-			if (pParm->m_string.compareNoCase(TheObjectStatusBitNames[i]) == 0) 
+			if (pParm->m_string.compareNoCase(ObjectStatusMaskType::getBitNames()[i]) == 0) 
 			{
 				pParm->setInt(1 << i);
 				break;
