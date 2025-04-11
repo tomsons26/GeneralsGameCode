@@ -197,10 +197,10 @@ public:
 	inline Int getUseStats( void ) const;		///< Does this game count towards gamespy stats?
 	inline void setUseStats( Int useStats );
 
-  inline UnsignedShort getSuperweaponRestriction( void ) const; ///< Get any optional limits on superweapons
-  void setSuperweaponRestriction( UnsignedShort restriction ); ///< Set the optional limits on superweapons
-  inline const Money & getStartingCash(void) const; 
-  void setStartingCash( const Money & startingCash );
+	inline UnsignedShort getSuperweaponRestriction( void ) const; ///< Get any optional limits on superweapons
+	void setSuperweaponRestriction( UnsignedShort restriction ); ///< Set the optional limits on superweapons
+	inline const Money & getStartingCash(void) const; 
+	void setStartingCash( const Money & startingCash );
 
 	void setSlotPointer( Int index, GameSlot *slot );	///< Set the slot info pointer
 
@@ -230,8 +230,8 @@ public:
 	Bool isPlayerPreorder(Int index);
 	void markPlayerAsPreorder(Int index);
 
-  inline Bool oldFactionsOnly(void) const;
-  inline void setOldFactionsOnly( Bool oldFactionsOnly );
+	inline Bool oldFactionsOnly(void) const;
+	inline void setOldFactionsOnly( Bool oldFactionsOnly );
 
 protected:
 	Int m_preorderMask;
@@ -251,9 +251,9 @@ protected:
 	Int m_mapMask;
 	Int m_seed;
 	Int m_useStats;
-  Money         m_startingCash;
-  UnsignedShort m_superweaponRestriction;
-  Bool m_oldFactionsOnly; // Only USA, China, GLA -- not USA Air Force General, GLA Toxic General, et al
+	Money			m_startingCash;
+	UnsignedShort	m_superweaponRestriction;
+	Bool m_oldFactionsOnly; // Only USA, China, GLA -- not USA Air Force General, GLA Toxic General, et al
 };
 
 extern GameInfo *TheGameInfo;

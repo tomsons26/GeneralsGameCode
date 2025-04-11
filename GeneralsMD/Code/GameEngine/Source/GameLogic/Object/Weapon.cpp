@@ -208,7 +208,7 @@ const FieldParse WeaponTemplate::TheWeaponTemplateFieldParseTable[] =
 	{ "ContinuousFireOne",				INI::parseInt,													NULL,							offsetof(WeaponTemplate, m_continuousFireOneShotsNeeded) },		
 	{ "ContinuousFireTwo",				INI::parseInt,													NULL,							offsetof(WeaponTemplate, m_continuousFireTwoShotsNeeded) },		
 	{ "ContinuousFireCoast",			INI::parseDurationUnsignedInt,					NULL,							offsetof(WeaponTemplate, m_continuousFireCoastFrames) },		
- 	{ "AutoReloadWhenIdle",				INI::parseDurationUnsignedInt,					NULL,							offsetof(WeaponTemplate, m_autoReloadWhenIdleFrames) },		
+	{ "AutoReloadWhenIdle",				INI::parseDurationUnsignedInt,					NULL,							offsetof(WeaponTemplate, m_autoReloadWhenIdleFrames) },		
 	{ "ClipReloadTime",						INI::parseDurationUnsignedInt,					NULL,							offsetof(WeaponTemplate, m_clipReloadTime) },		
 	{ "DelayBetweenShots",				WeaponTemplate::parseShotDelay,					NULL,							0 },
 	{ "ShotsPerBarrel",						INI::parseInt,													NULL,							offsetof(WeaponTemplate, m_shotsPerBarrel) },
@@ -301,7 +301,7 @@ WeaponTemplate::WeaponTemplate() : m_nextTemplate(NULL)
 	m_continuousFireOneShotsNeeded	= INT_MAX;
 	m_continuousFireTwoShotsNeeded	= INT_MAX;
 	m_continuousFireCoastFrames			= 0;
- 	m_autoReloadWhenIdleFrames			= 0;
+	m_autoReloadWhenIdleFrames			= 0;
 	m_clipReloadTime								= 0;
 	m_minDelayBetweenShots					= 0;
 	m_maxDelayBetweenShots					= 0;
@@ -596,18 +596,16 @@ Real WeaponTemplate::estimateWeaponTemplateDamage(
 		}
 	}
 
-  
-  // hmm.. must be shooting a firebase or such, if there is noone home to take the bullet, return 0!
-  if ( victimObj->isKindOf( KINDOF_STRUCTURE) && damageType == DAMAGE_SNIPER )
-  {
-    if ( victimObj->getContain() )
-    {
-      if ( victimObj->getContain()->getContainCount() == 0 )
-        return 0.0f;
-    }
-  }
 
-
+	// hmm.. must be shooting a firebase or such, if there is noone home to take the bullet, return 0!
+	if ( victimObj->isKindOf( KINDOF_STRUCTURE) && damageType == DAMAGE_SNIPER )
+	{
+		if ( victimObj->getContain() )
+		{
+			if ( victimObj->getContain()->getContainCount() == 0 )
+				return 0.0f;
+		}
+	}
 
 
 	if (damageType == DAMAGE_SURRENDER || m_allowAttackGarrisonedBldgs)
@@ -3004,11 +3002,11 @@ void Weapon::processRequestAssistance( const Object *requestingObject, Object *v
 	}
 
 //#if defined(_DEBUG) || defined(_INTERNAL)
-//  Real muzzleHeight = attachTransform.Get_Z_Translation();
-//  DEBUG_ASSERTCRASH( muzzleHeight > 0.001f, ("YOUR TURRET HAS A VERY LOW PROJECTILE LAUNCH POSITION, BUT FOUND A VALID BONE. DID YOU PICK THE WRONG ONE? %s", launcher->getTemplate()->getName().str()));
+//	Real muzzleHeight = attachTransform.Get_Z_Translation();
+//	DEBUG_ASSERTCRASH( muzzleHeight > 0.001f, ("YOUR TURRET HAS A VERY LOW PROJECTILE LAUNCH POSITION, BUT FOUND A VALID BONE. DID YOU PICK THE WRONG ONE? %s", launcher->getTemplate()->getName().str()));
 //#endif
-  
-  launcher->convertBonePosToWorldPos(NULL, &attachTransform, NULL, &worldTransform);
+
+	launcher->convertBonePosToWorldPos(NULL, &attachTransform, NULL, &worldTransform);
 
 	Vector3 tmp = worldTransform.Get_Translation();
 	worldPos.x = tmp.X;

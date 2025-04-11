@@ -172,7 +172,6 @@ class ArchiveFileSystem : public SubsystemInterface
 
 	// Unprotected this for copy-protection routines
 	AsciiString						getArchiveFilenameForFile(const AsciiString& filename) const;
-	
 	void loadMods( void );
 
 protected:

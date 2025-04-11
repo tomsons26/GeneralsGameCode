@@ -157,7 +157,7 @@ public:
 	void resetAll();
 	void shutdownAll();
 #ifdef DUMP_PERF_STATS
- 	AsciiString dumpTimesForAll();
+	AsciiString dumpTimesForAll();
 #endif
 
 private:

@@ -105,7 +105,6 @@ enum FilterModes
 	FM_VIEW_MB_END_PAN_ALPHA, // Moton blur on screen pan (for camera tracks object mode)
 
 	
-	
 	// NOTE: This has to be the last entry in this enum.
 	// Add new entries before this one.  jba.
 	FM_VIEW_MB_PAN_ALPHA, // Moton blur on screen pan (for camera tracks object mode)

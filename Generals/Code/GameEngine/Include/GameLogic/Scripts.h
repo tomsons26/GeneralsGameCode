@@ -210,7 +210,7 @@ public:
 	/// @todo Use a "symbol table" so we can re-order this enum without breaking old maps (MSB)
 	enum ScriptActionType 
 	{
-		DEBUG_MESSAGE_BOX=0,							///< Show a message box.
+		DEBUG_MESSAGE_BOX,							///< Show a message box.
 		SET_FLAG,													///< Set a flag true of false.
 		SET_COUNTER,											///< Set a counter to an integer.
 		VICTORY,													///< Announce victory.
@@ -852,7 +852,7 @@ class Condition : public MemoryPoolObject  // This is the conditional class.
 public:
 	enum ConditionType 
 	{
-		CONDITION_FALSE=0,										// Always evaluates to false.
+		CONDITION_FALSE,										// Always evaluates to false.
 		COUNTER,															// COUNTER, COMPARISON, INT
 		FLAG,																	// FLAG BOOLEAN compares flag to value.
 		CONDITION_TRUE,												// Always evaluates to true.

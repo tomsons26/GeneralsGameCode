@@ -34,7 +34,7 @@
 #include "Common/Player.h"
 #include "Common/RandomValue.h"
 #include "Common/ThingTemplate.h"
-#include "Common/Xfer.h" 
+#include "Common/Xfer.h"
 
 #include "GameLogic/AIPathfind.h"
 #include "GameLogic/Locomotor.h"
@@ -351,10 +351,10 @@ UpdateSleepTime ParachuteContain::update( void )
 				parachuteAI->aiMoveToPosition( &target, CMD_FROM_AI );
 			}
 		}
-    else if ( rider )
+		else if ( rider )
 			rider->clearAndSetModelConditionState( MODELCONDITION_PARACHUTING, MODELCONDITION_FREEFALL );
 
-  }
+	}
 	draw->setDrawableHidden(!m_opened);
 
 	if (!m_opened || getContainCount() == 0)
@@ -565,18 +565,18 @@ void ParachuteContain::onRemoving( Object *rider )
 	// If we land outside the map from a faulty parachute, we die too.  
 	// Otherwise we exist outside the PartitionManger like a cheater.
 	if( rider->isOffMap() 
-    || (cellType == PathfindCell::CELL_CLIFF) 
-    || (cellType == PathfindCell::CELL_WATER) 
-    || (cellType == PathfindCell::CELL_IMPASSABLE) )
+		|| (cellType == PathfindCell::CELL_CLIFF) 
+		|| (cellType == PathfindCell::CELL_WATER) 
+		|| (cellType == PathfindCell::CELL_IMPASSABLE) )
 	{
 		// The Paradrop command was legal, the parachute destination was legal, but the parachute
 		// can still fail to adjust back on the map.  SO this is the place to cap the cheater.
 		rider->kill();
 	}
 
-  // Note: for future enhancement of this feature, we should test the object against the cell type he is on,
-  // using obj->getAI()->hasLocomotorForSurface( __ ). We cshould not assume here that the parachutist can not 
-  // find happiness on cliffs or water or whatever.
+	// Note: for future enhancement of this feature, we should test the object against the cell type he is on,
+	// using obj->getAI()->hasLocomotorForSurface( __ ). We cshould not assume here that the parachutist can not 
+	// find happiness on cliffs or water or whatever.
 
 
 }

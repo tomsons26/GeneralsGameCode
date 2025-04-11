@@ -146,7 +146,7 @@ public:
   }
 
 protected:
-  std::map<unsigned,Image *> m_imageMap;  ///< maps named keys to images
+	std::map<unsigned,Image *> m_imageMap;  ///< maps named keys to images
 };  // end ImageCollection
 
 // INLINING ///////////////////////////////////////////////////////////////////////////////////////

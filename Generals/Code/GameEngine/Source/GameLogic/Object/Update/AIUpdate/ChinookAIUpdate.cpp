@@ -961,7 +961,7 @@ Bool ChinookAIUpdate::isAvailableForSupplying() const
 //-------------------------------------------------------------------------------------------------
 Bool ChinookAIUpdate::isAllowedToAdjustDestination() const
 {
-	 if (m_flightStatus == CHINOOK_LANDED)
+	if (m_flightStatus == CHINOOK_LANDED)
 		return false;
 	
 	return SupplyTruckAIUpdate::isAllowedToAdjustDestination(); 

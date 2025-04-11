@@ -265,7 +265,6 @@ UpdateSleepTime AutoHealBehavior::update( void )
 						}
 					}
 				}
-			
 			}
 		}  // end for obj
 

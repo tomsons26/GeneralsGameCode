@@ -664,7 +664,7 @@ Int GameWindow::winEnable( Bool enable )
 //=============================================================================
 Bool GameWindow::winGetEnabled( void )
 {
-  return BitIsSet( m_status, WIN_STATUS_ENABLED );
+	return BitIsSet( m_status, WIN_STATUS_ENABLED );
 
 }  // end winGetEnabled
 

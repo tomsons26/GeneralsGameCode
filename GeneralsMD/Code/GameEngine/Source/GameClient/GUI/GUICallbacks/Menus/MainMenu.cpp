@@ -247,15 +247,13 @@ static void showSelectiveButtons( Int show )
 	buttonChinaRecentSave->winHide(!(show == SHOW_CHINA ));
 	buttonChinaLoadGame->winHide(!(show == SHOW_CHINA ));
 }
- 
+
 static void quitCallback( void )
 {
 	buttonPushed = TRUE;
 	TheScriptEngine->signalUIInteract(TheShellHookNames[SHELL_SCRIPT_HOOK_MAIN_MENU_EXIT_SELECTED]);
 	TheShell->pop();
 	TheGameEngine->setQuitting( TRUE );
-
-  
 
 	//if (!TheGameLODManager->didMemPass())
 	{	//GIANT CRAPTACULAR HACK ALERT!!!!  On sytems with little memory, we skip all normal exit code

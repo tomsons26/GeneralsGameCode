@@ -390,6 +390,7 @@ void AudioManager::update()
 			m_zoomVolume = 1.0f - scalar * maxBoostScalar;
 		}
 	}
+
 	set3DVolumeAdjustment( m_zoomVolume );
 
 }

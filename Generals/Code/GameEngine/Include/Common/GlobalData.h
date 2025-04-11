@@ -412,7 +412,7 @@ public:
 	UnsignedInt m_unlookPersistDuration;	///< How long after unlook until the sighting info executes the undo
 
 	Bool m_shouldUpdateTGAToDDS;					///< Should we attempt to update old TGAs to DDS stuff on loadup?
-	
+
 	UnsignedInt m_doubleClickTimeMS;	///< What is the maximum amount of time that can seperate two clicks in order
 																		///< for us to generate a double click message?
 
@@ -486,7 +486,6 @@ public:
 
 	Bool				m_isBreakableMovie;							///< if we enter a breakable movie, set this flag
 	Bool				m_breakTheMovie;								///< The user has hit escape!
-	
 	AsciiString m_modDir;
 	AsciiString m_modBIG;
 

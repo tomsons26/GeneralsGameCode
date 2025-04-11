@@ -226,8 +226,7 @@ class MilesAudioManager : public AudioManager
 
 		virtual void closeAnySamplesUsingFile( const void *fileToClose );
 
-    
-    virtual Bool has3DSensitiveStreamsPlaying( void ) const; 
+	virtual Bool has3DSensitiveStreamsPlaying( void ) const; 
 
 
 	protected:	

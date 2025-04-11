@@ -926,7 +926,7 @@ void GlobalLightOptions::OnClose()
 
 	WbView3d * pView = CWorldBuilderDoc::GetActive3DView();	
 	if (pView) {
-		Coord3D lightRay; 
+		Coord3D lightRay;
 		lightRay.x=0.0f;lightRay.y=0.0f;lightRay.z=-1.0f;	//default light above terrain.
 		pView->doLightFeedback(false,lightRay,0);	//turn off the light direction indicator
 	}

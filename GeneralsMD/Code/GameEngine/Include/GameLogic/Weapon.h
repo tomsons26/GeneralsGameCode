@@ -439,7 +439,7 @@ public:
 	inline Int getContinuousFireOneShotsNeeded() const { return m_continuousFireOneShotsNeeded; }
 	inline Int getContinuousFireTwoShotsNeeded() const { return m_continuousFireTwoShotsNeeded; }
 	inline UnsignedInt getContinuousFireCoastFrames() const { return m_continuousFireCoastFrames; }
- 	inline UnsignedInt getAutoReloadWhenIdleFrames() const { return m_autoReloadWhenIdleFrames; }
+	inline UnsignedInt getAutoReloadWhenIdleFrames() const { return m_autoReloadWhenIdleFrames; }
 	inline UnsignedInt getSuspendFXDelay() const { return m_suspendFXDelay; }
 
 	inline const FXList* getFireFX(VeterancyLevel v) const { return m_fireFXs[v]; }
@@ -533,7 +533,7 @@ private:
 	Int m_continuousFireOneShotsNeeded;			///< How many consecutive shots will give my owner the ContinuousFire Property
 	Int m_continuousFireTwoShotsNeeded;			///< How many consecutive shots will give my owner the ContinuousFireTwo Property
 	UnsignedInt m_continuousFireCoastFrames;///< How long after we should have shot should we start to wind down from Continuous fire mode
- 	UnsignedInt m_autoReloadWhenIdleFrames;	///< How long we have to wait after our last shot to force a reload
+	UnsignedInt m_autoReloadWhenIdleFrames;	///< How long we have to wait after our last shot to force a reload
 	Int m_shotsPerBarrel;										///< If non zero, don't cycle through your launch points every shot, mod the shot by this to get even chucks of firing
 	Int m_antiMask;													///< what we can target
 	Int m_affectsMask;											///< what we can affect
@@ -617,7 +617,7 @@ public:
 	{
 		return estimateWeaponDamage(source, NULL, pos);
 	}
-	
+
 	void onWeaponBonusChange(const Object *source);///< Our Object's weapon bonus changed, so we need to update to reflect that instead of waiting
 
 	/** return true if the target is within attack range, false otherwise.
@@ -698,7 +698,7 @@ public:
 	inline Int getContinuousFireOneShotsNeeded() const { return m_template->getContinuousFireOneShotsNeeded(); }
 	inline Int getContinuousFireTwoShotsNeeded() const { return m_template->getContinuousFireTwoShotsNeeded(); }
 	inline UnsignedInt getContinuousFireCoastFrames() const { return m_template->getContinuousFireCoastFrames(); }
- 	inline UnsignedInt getAutoReloadWhenIdleFrames() const { return m_template->getAutoReloadWhenIdleFrames(); }
+	inline UnsignedInt getAutoReloadWhenIdleFrames() const { return m_template->getAutoReloadWhenIdleFrames(); }
 	inline const AudioEventRTS& getFireSound() const { return m_template->getFireSound(); }
 	inline UnsignedInt getFireSoundLoopTime() const { return m_template->getFireSoundLoopTime(); }
 	inline DamageType getDamageType() const { return m_template->getDamageType(); }

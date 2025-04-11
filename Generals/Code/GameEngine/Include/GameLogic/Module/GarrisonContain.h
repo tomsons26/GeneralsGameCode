@@ -54,6 +54,7 @@ public:
 	Real m_framesForFullHeal;
 	Bool m_mobileGarrison;
 	Bool m_immuneToClearBuildingAttacks;
+
 	InitialRoster		m_initialRoster;
 
 	GarrisonContainModuleData( void );

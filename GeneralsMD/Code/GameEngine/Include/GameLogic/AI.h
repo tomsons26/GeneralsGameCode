@@ -836,7 +836,7 @@ public:
 		parms.m_commandButton = commandButton;
 		aiDoCommand(&parms);
 	}
-	
+
 	inline void aiDoCommandButtonAtObject( const CommandButton *commandButton, Object *obj, CommandSourceType cmdSource )
 	{
 		AICommandParms parms(AICMD_COMMANDBUTTON_OBJ, cmdSource);

@@ -72,83 +72,83 @@
 class TestSeismicFilter : public SeismicSimulationFilterBase
 {
 
-  virtual SeismicSimStatusCode filterCallback( WorldHeightMapInterfaceClass *heightMap, const SeismicSimulationNode *node )
-  {
+	virtual SeismicSimStatusCode filterCallback( WorldHeightMapInterfaceClass *heightMap, const SeismicSimulationNode *node )
+	{
 
 
-    Int life = node->m_life;
+		Int life = node->m_life;
 
-    if ( heightMap == NULL )
-      return SEISMIC_STATUS_INVALID;
-
-
-    if ( life == 0 )
-      return SEISMIC_STATUS_ACTIVE;
-    if ( life < 15 )
-    {
-      // ADD HEIGHT BECAUSE THE EXPLOSION IS PUSHING DIRT UP
-
-      Real magnitude = node->m_magnitude;
-
-      Real offsScalar =  magnitude / (Real)life; // real-life, get it?
-      Int radius = node->m_radius;
-      Int border = heightMap->getBorderSize();
-      Int centerX = node->m_center.x + border ;
-      Int centerY = node->m_center.y + border ;
-  
-      UnsignedInt workspaceWidth = radius*2;
-      Real *workspace = NEW( Real[ sqr(workspaceWidth) ] );
-      Real *workspaceEnd = workspace + sqr(workspaceWidth);
+		if ( heightMap == NULL )
+			return SEISMIC_STATUS_INVALID;
 
 
-      for ( Real *t = workspace; t < workspaceEnd; ++t ) *t = 0.0f;// clear the workspace
+		if ( life == 0 )
+			return SEISMIC_STATUS_ACTIVE;
+		if ( life < 15 )
+		{
+			// ADD HEIGHT BECAUSE THE EXPLOSION IS PUSHING DIRT UP
 
-      Int x = 0;
-      for (; x < radius; ++x)
-      {
-        for (Int y = 0; y < radius; ++y)
-        {
+			Real magnitude = node->m_magnitude;
 
-          Real distance = sqrt( sqr(x) + sqr(y) );//Pythagoras
-      
-          if ( distance < radius )
-          {
-            Real distScalar = cos( ( distance / radius * (PI/2) ) );
-            Real height = (offsScalar * distScalar); 
+			Real offsScalar =	magnitude / (Real)life; // real-life, get it?
+			Int radius = node->m_radius;
+			Int border = heightMap->getBorderSize();
+			Int centerX = node->m_center.x + border ;
+			Int centerY = node->m_center.y + border ;
+	
+			UnsignedInt workspaceWidth = radius*2;
+			Real *workspace = NEW( Real[ sqr(workspaceWidth) ] );
+			Real *workspaceEnd = workspace + sqr(workspaceWidth);
 
-            workspace[ (radius + x) +  workspaceWidth * (radius + y) ] = height + heightMap->getBilinearSampleSeismicZVelocity( centerX + x,  centerY + y ) ;//kaleidoscope
-            
-            if ( x != 0 ) // non-zero test prevents cross-shaped double stamp 
-            {
-      			  workspace[ (radius - x) + workspaceWidth * (radius + y) ] = height + heightMap->getBilinearSampleSeismicZVelocity( centerX - x,  centerY + y ) ;
-              if ( y != 0 )
-                workspace[ (radius - x) + workspaceWidth * (radius - y) ] =  height + heightMap->getBilinearSampleSeismicZVelocity( centerX - x,  centerY - y ) ;
-            }
-            if ( y != 0 )
-      			  workspace[ (radius + x) + workspaceWidth * (radius - y) ] = height + heightMap->getBilinearSampleSeismicZVelocity( centerX + x,  centerY - y ) ;
-          }
-        }
-      }
 
-      // stuff the values from the workspace into the heightmap's velocities
-      for (x = 0; x < workspaceWidth; ++x)
-        for (Int y = 0; y < workspaceWidth; ++y)
-    			heightMap->setSeismicZVelocity( centerX - radius + x, centerY - radius + y,  workspace[  x + workspaceWidth * y ]  );
+			for ( Real *t = workspace; t < workspaceEnd; ++t ) *t = 0.0f;// clear the workspace
 
-      delete [] workspace;
+			Int x = 0;
+			for (; x < radius; ++x)
+			{
+				for (Int y = 0; y < radius; ++y)
+				{
 
-      return SEISMIC_STATUS_ACTIVE;
-    }
-    else
-      return SEISMIC_STATUS_ZERO_ENERGY;
-  }
+					Real distance = sqrt( sqr(x) + sqr(y) );//Pythagoras
+			
+					if ( distance < radius )
+					{
+						Real distScalar = cos( ( distance / radius * (PI/2) ) );
+						Real height = (offsScalar * distScalar); 
 
-  virtual Real applyGravityCallback( Real velocityIn )
-  {
-    Real velocityOut = velocityIn;
-    velocityOut -= 1.5f;
-    return velocityOut;
-  }
+						workspace[ (radius + x) +	workspaceWidth * (radius + y) ] = height + heightMap->getBilinearSampleSeismicZVelocity( centerX + x,	centerY + y ) ;//kaleidoscope
+						
+						if ( x != 0 ) // non-zero test prevents cross-shaped double stamp 
+						{
+							workspace[ (radius - x) + workspaceWidth * (radius + y) ] = height + heightMap->getBilinearSampleSeismicZVelocity( centerX - x,	centerY + y ) ;
+							if ( y != 0 )
+								workspace[ (radius - x) + workspaceWidth * (radius - y) ] =	height + heightMap->getBilinearSampleSeismicZVelocity( centerX - x,	centerY - y ) ;
+						}
+						if ( y != 0 )
+							workspace[ (radius + x) + workspaceWidth * (radius - y) ] = height + heightMap->getBilinearSampleSeismicZVelocity( centerX + x,	centerY - y ) ;
+					}
+				}
+			}
+
+			// stuff the values from the workspace into the heightmap's velocities
+			for (x = 0; x < workspaceWidth; ++x)
+				for (Int y = 0; y < workspaceWidth; ++y)
+					heightMap->setSeismicZVelocity( centerX - radius + x, centerY - radius + y,	workspace[	x + workspaceWidth * y ]	);
+
+			delete [] workspace;
+
+			return SEISMIC_STATUS_ACTIVE;
+		}
+		else
+			return SEISMIC_STATUS_ZERO_ENERGY;
+	}
+
+	virtual Real applyGravityCallback( Real velocityIn )
+	{
+		Real velocityOut = velocityIn;
+		velocityOut -= 1.5f;
+		return velocityOut;
+	}
 
 
 };
@@ -165,11 +165,10 @@ W3DTerrainVisual::W3DTerrainVisual()
 	m_terrainRenderObject = NULL;
 	m_waterRenderObject = NULL;
 	TheWaterRenderObj = NULL;
-	
-  m_logicHeightMap   = NULL;
-  
+	m_logicHeightMap   = NULL;
+
 #ifdef DO_SEISMIC_SIMULATIONS
-  m_clientHeightMap = NULL;
+	m_clientHeightMap = NULL;
 #endif
 
 
@@ -345,9 +344,9 @@ void W3DTerrainVisual::reset( void )
 	}
 
 #ifdef DO_SEISMIC_SIMULATIONS
-  m_seismicSimulationList.clear();
+	m_seismicSimulationList.clear();
 #endif
-  
+
 }  // end reset
 
 //-------------------------------------------------------------------------------------------------
@@ -360,7 +359,7 @@ void W3DTerrainVisual::update( void )
 	TerrainVisual::update();
 
 #ifdef DO_SEISMIC_SIMULATIONS
-  handleSeismicSimulations();
+	handleSeismicSimulations();
 #endif
 	// if we have a water render object, it has an update method
 	if( m_waterRenderObject )
@@ -374,101 +373,101 @@ void W3DTerrainVisual::update( void )
 
 void W3DTerrainVisual::addSeismicSimulation( const SeismicSimulationNode& sim )
 {
-    // HERE WOULD BE A GREAT PLACE FOR AN IDIOT TEST:
-  // REJECT SIMULATION NODES THAT ARE OFF SCREEN!!!!!!!!!!
-    // HERE WOULD BE A GREAT PLACE FOR AN IDIOT TEST:
-  // REJECT SIMULATION NODES THAT ARE OFF SCREEN!!!!!!!!!!
+		// HERE WOULD BE A GREAT PLACE FOR AN IDIOT TEST:
+	// REJECT SIMULATION NODES THAT ARE OFF SCREEN!!!!!!!!!!
+		// HERE WOULD BE A GREAT PLACE FOR AN IDIOT TEST:
+	// REJECT SIMULATION NODES THAT ARE OFF SCREEN!!!!!!!!!!
 
 
-  m_seismicSimulationList.push_back( sim );
+	m_seismicSimulationList.push_back( sim );
 }
 
 
 
 void W3DTerrainVisual::handleSeismicSimulations( void )
 {
-  if ( ! m_clientHeightMap || ! m_logicHeightMap || ! m_terrainRenderObject )
-    return;
+	if ( ! m_clientHeightMap || ! m_logicHeightMap || ! m_terrainRenderObject )
+		return;
 
 
-  if ( ! m_seismicSimulationList.empty() )
-  {
-    SeismicSimulationListIt it = m_seismicSimulationList.begin();
-    
-    
-    m_clientHeightMap->clearSeismicUpdateFlags();
+	if ( ! m_seismicSimulationList.empty() )
+	{
+		SeismicSimulationListIt it = m_seismicSimulationList.begin();
+		
+		
+		m_clientHeightMap->clearSeismicUpdateFlags();
 
 
-    while ( it != m_seismicSimulationList.end() )
-	  {
-      SeismicSimulationNode *ssn = &*it;
+		while ( it != m_seismicSimulationList.end() )
+		{
+			SeismicSimulationNode *ssn = &*it;
 
-      if ( ssn )
-      {
-        SeismicSimulationFilterBase::SeismicSimStatusCode code = ssn->handleFilterCallback( m_clientHeightMap );
-        DEBUG_ASSERTCRASH( code != SeismicSimulationFilterBase::SEISMIC_STATUS_INVALID, ("Trouble in the Seismic simulator.") );
-      
-        switch ( code ) 
-        {
-          case SeismicSimulationFilterBase::SEISMIC_STATUS_ACTIVE:
-          {
-        	  break;
-          }
-          case SeismicSimulationFilterBase::SEISMIC_STATUS_ZERO_ENERGY:
-          {
-        	  break;
-          }
-        }
+			if ( ssn )
+			{
+				SeismicSimulationFilterBase::SeismicSimStatusCode code = ssn->handleFilterCallback( m_clientHeightMap );
+				DEBUG_ASSERTCRASH( code != SeismicSimulationFilterBase::SEISMIC_STATUS_INVALID, ("Trouble in the Seismic simulator.") );
+			
+				switch ( code ) 
+				{
+					case SeismicSimulationFilterBase::SEISMIC_STATUS_ACTIVE:
+					{
+						break;
+					}
+					case SeismicSimulationFilterBase::SEISMIC_STATUS_ZERO_ENERGY:
+					{
+						break;
+					}
+				}
 
-        Int border = m_clientHeightMap->getBorderSizeInline();
+				Int border = m_clientHeightMap->getBorderSizeInline();
 
-        // Now we apply some gravity to the dirt, so it falls back to its "original" height
-        UnsignedInt fallCount = 0;
-        for (Int x = border+ssn->m_region.lo.x; x < border+ssn->m_region.hi.x; ++x)
-        {
-          for (Int y = border+ssn->m_region.lo.y; y < border+ssn->m_region.hi.y; ++y)
-          {
-            if ( ! m_clientHeightMap->getSeismicUpdateFlag( x, y ) )
-            {
-              UnsignedByte heightOfOriginal = m_logicHeightMap->getHeight( x, y ); // LOGIC, YES DEFINITELY THE LOGIC
+				// Now we apply some gravity to the dirt, so it falls back to its "original" height
+				UnsignedInt fallCount = 0;
+				for (Int x = border+ssn->m_region.lo.x; x < border+ssn->m_region.hi.x; ++x)
+				{
+					for (Int y = border+ssn->m_region.lo.y; y < border+ssn->m_region.hi.y; ++y)
+					{
+						if ( ! m_clientHeightMap->getSeismicUpdateFlag( x, y ) )
+						{
+							UnsignedByte heightOfOriginal = m_logicHeightMap->getHeight( x, y ); // LOGIC, YES DEFINITELY THE LOGIC
 
-              Real oldSpeed = m_clientHeightMap->getSeismicZVelocity( x, y );
-              Real newSpeed = ssn->applyGravity( oldSpeed );// - 0.5f;
-              
-              m_clientHeightMap->setSeismicZVelocity( x, y, newSpeed );
+							Real oldSpeed = m_clientHeightMap->getSeismicZVelocity( x, y );
+							Real newSpeed = ssn->applyGravity( oldSpeed );// - 0.5f;
+							
+							m_clientHeightMap->setSeismicZVelocity( x, y, newSpeed );
 
-              Int heightToUse = m_clientHeightMap->getHeight( x, y ) + newSpeed ;
+							Int heightToUse = m_clientHeightMap->getHeight( x, y ) + newSpeed ;
 
 
-              if (heightToUse <= heightOfOriginal)
-              {
-                heightToUse = heightOfOriginal;
-                m_clientHeightMap->setSeismicZVelocity( x, y, 0.0f ); //poof! the dirt hit ground level so stop "falling"
-              }
-              else
-              {
-                ++fallCount;
-                
-                if ( heightToUse > 255 )
-                  heightToUse = 255;
+							if (heightToUse <= heightOfOriginal)
+							{
+								heightToUse = heightOfOriginal;
+								m_clientHeightMap->setSeismicZVelocity( x, y, 0.0f ); //poof! the dirt hit ground level so stop "falling"
+							}
+							else
+							{
+								++fallCount;
+								
+								if ( heightToUse > 255 )
+									heightToUse = 255;
 
-              }
-    			    m_clientHeightMap->setRawHeight( x, y, heightToUse ); 
-              m_clientHeightMap->setSeismicUpdateFlag( x, y, TRUE );
-            }
-            
-          }
-        }
+							}
+							m_clientHeightMap->setRawHeight( x, y, heightToUse ); 
+							m_clientHeightMap->setSeismicUpdateFlag( x, y, TRUE );
+						}
+						
+					}
+				}
 
-        if ( fallCount == 0 )
-          ssn->m_clean = TRUE;
+				if ( fallCount == 0 )
+					ssn->m_clean = TRUE;
 
-      }
+			}
 
-      ++it;
+			++it;
 
-	  }
-  }
+		}
+	}
 
 
 
@@ -476,10 +475,10 @@ void W3DTerrainVisual::handleSeismicSimulations( void )
 
 }
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void W3DTerrainVisual::updateSeismicSimulations( void )
 {
 
@@ -489,49 +488,49 @@ void W3DTerrainVisual::updateSeismicSimulations( void )
 	if (m_clientHeightMap==NULL) 
 		return;
 
-  if (m_terrainRenderObject==NULL)
-    return;
+	if (m_terrainRenderObject==NULL)
+		return;
 
-  if ( ! m_seismicSimulationList.empty() )
-  {
-    SeismicSimulationListIt it = m_seismicSimulationList.begin();
+	if ( ! m_seismicSimulationList.empty() )
+	{
+		SeismicSimulationListIt it = m_seismicSimulationList.begin();
 
-    // First we run through the list and do our business for each region
+		// First we run through the list and do our business for each region
 
-	  while ( it != m_seismicSimulationList.end() )
-	  {
-      SeismicSimulationNode *hur = &*it;
-      if ( hur )
-      {
-        Int border = m_clientHeightMap->getBorderSizeInline();
+		while ( it != m_seismicSimulationList.end() )
+		{
+			SeismicSimulationNode *hur = &*it;
+			if ( hur )
+			{
+				Int border = m_clientHeightMap->getBorderSizeInline();
 
-		    TheTerrainRenderObject->updateBlock(
-          hur->m_region.lo.x + border, 
-          hur->m_region.lo.y + border, 
-          hur->m_region.hi.x + border, 
-          hur->m_region.hi.y + border, 
-          m_clientHeightMap, 
-          0);
-      }
+				TheTerrainRenderObject->updateBlock(
+					hur->m_region.lo.x + border, 
+					hur->m_region.lo.y + border, 
+					hur->m_region.hi.x + border, 
+					hur->m_region.hi.y + border, 
+					m_clientHeightMap, 
+					0);
+			}
 
-      ++it;
+			++it;
 
-	  }
-    // Then we check to see if these need to get erased from the list
-    it = m_seismicSimulationList.begin();
-	  while ( it != m_seismicSimulationList.end() )
-	  {
-      SeismicSimulationNode *hur = &*it;
-      if ( hur->m_clean )
-      {
-		    it = m_seismicSimulationList.erase( it );
-      }
-      else
-        ++it; 
+		}
+		// Then we check to see if these need to get erased from the list
+		it = m_seismicSimulationList.begin();
+		while ( it != m_seismicSimulationList.end() )
+		{
+			SeismicSimulationNode *hur = &*it;
+			if ( hur->m_clean )
+			{
+				it = m_seismicSimulationList.erase( it );
+			}
+			else
+				++it; 
 
-	  }
+		}
 
-  }
+	}
 }
 
 
@@ -589,10 +588,10 @@ Bool W3DTerrainVisual::load( AsciiString filename )
 		return FALSE;
 
 
-  ChunkInputStream *pStrm = &fileStrm;
+	ChunkInputStream *pStrm = &fileStrm;
 
-  // allocate new height map data to read from file
-  REF_PTR_RELEASE( m_logicHeightMap );
+	// allocate new height map data to read from file
+	REF_PTR_RELEASE( m_logicHeightMap );
 	m_logicHeightMap = NEW WorldHeightMap(pStrm);
 
 
@@ -600,12 +599,12 @@ Bool W3DTerrainVisual::load( AsciiString filename )
 
 #ifdef DO_SEISMIC_SIMULATIONS
 
-  fileStrm.close();
-  fileStrm.open(filename);
-  pStrm = &fileStrm;
+	fileStrm.close();
+	fileStrm.open(filename);
+	pStrm = &fileStrm;
 
 	REF_PTR_RELEASE( m_clientHeightMap );
-  m_clientHeightMap = NEW WorldHeightMap( pStrm );
+	m_clientHeightMap = NEW WorldHeightMap( pStrm );
 
 #endif
 
@@ -939,7 +938,7 @@ void W3DTerrainVisual::setRawMapHeight(const ICoord2D *gridPos, Int height)
   // THIS IS TRUE ONLY WHEN DO_SEISMIC_SIMULATIONS is defined M Lorenzen, 8/23/03
 
 	if (m_logicHeightMap) 
-  {
+	{
 		Int x = gridPos->x+m_logicHeightMap->getBorderSizeInline();
 		Int y = gridPos->y+m_logicHeightMap->getBorderSizeInline();
  		//if (m_logicHeightMap->getHeight(x,y) != height) //ML changed to prevent scissoring with roads
@@ -950,11 +949,11 @@ void W3DTerrainVisual::setRawMapHeight(const ICoord2D *gridPos, Int height)
 
 
 #ifdef DO_SEISMIC_SIMULATIONS 
-      if ( m_clientHeightMap )
-      {
-        if ( height < m_clientHeightMap->getHeight( x,y ) )
-          m_clientHeightMap->setRawHeight( x, y, height ); // if the client map is heigher than this height, it will fall down to it anyway!
-      }
+			if ( m_clientHeightMap )
+			{
+				if ( height < m_clientHeightMap->getHeight( x,y ) )
+					m_clientHeightMap->setRawHeight( x, y, height ); // if the client map is heigher than this height, it will fall down to it anyway!
+			}
 #endif
 
 		}
@@ -966,13 +965,13 @@ void W3DTerrainVisual::setRawMapHeight(const ICoord2D *gridPos, Int height)
 Int W3DTerrainVisual::getRawMapHeight(const ICoord2D *gridPos)
 {
 	if (m_logicHeightMap) 
-  {
+	{
 		Int x = gridPos->x+m_logicHeightMap->getBorderSizeInline();
 		Int y = gridPos->y+m_logicHeightMap->getBorderSizeInline();
  		//if (m_logicHeightMap->getHeight(x,y) != height) //ML changed to prevent scissoring with roads
-    return m_logicHeightMap->getHeight(x,y) ;
+		return m_logicHeightMap->getHeight(x,y) ;
 	}
-  return 0;
+	return 0;
 
 }
 
@@ -1027,7 +1026,7 @@ void W3DTerrainVisual::addFactionBib(Object *factionBuilding, Bool highlight, Re
 #else
 	if (m_logicHeightMap) 
 #endif
-  {
+	{
 		const Matrix3D * mtx = factionBuilding->getTransformMatrix();
 		Vector3 corners[4];
 		Coord3D pos;

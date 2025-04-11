@@ -463,9 +463,9 @@ Bool TurretAI::friend_turnTowardsPitch(Real desiredPitch, Real rateModifier)
 //----------------------------------------------------------------------------------------------------------
 Bool TurretAI::isWeaponSlotOkToFire(WeaponSlotType wslot) const
 {
-  // If we turrets are linked, ai wants us to fire together, regardless of slot 
-  if( getOwner()->getAI()->areTurretsLinked() )
-    return TRUE;
+	// If we turrets are linked, ai wants us to fire together, regardless of slot 
+	if( getOwner()->getAI()->areTurretsLinked() )
+		return TRUE;
 
 	return isWeaponSlotOnTurret(wslot);
 }
@@ -659,10 +659,8 @@ void TurretAI::recenterTurret()
 Bool TurretAI::isTurretInNaturalPosition() const
 {
 
-  if( this->getOwner()->testStatus( OBJECT_STATUS_UNDER_CONSTRUCTION))
-    return true;//ML so that under-construction base-defenses do not re-center while under construction
-
-
+	if( this->getOwner()->testStatus( OBJECT_STATUS_UNDER_CONSTRUCTION))
+		return true;//ML so that under-construction base-defenses do not re-center while under construction
 
 	if( getNaturalTurretAngle() == getTurretAngle() && 
 			getNaturalTurretPitch() == getTurretPitch() )
@@ -1127,12 +1125,12 @@ StateReturnType TurretAIAimTurretState::update()
 			v.z -= obj->getGeometryInfo().getMaxHeightAbovePosition() / 2; // I kinda hate our logic/client split.  
 			//The point to fire from should be intrinsic to the turret, but in reality it is very slow to look it up.
 
- 			Real actualPitch;
- 			if( v.length() > 0 )
- 				actualPitch = ASin( v.z / v.length() ); 
- 			else
- 				actualPitch = 0;// Don't point at NAN, just point at 0 if they are right on us
- 
+			Real actualPitch;
+			if( v.length() > 0 )
+				actualPitch = ASin( v.z / v.length() ); 
+			else
+				actualPitch = 0;// Don't point at NAN, just point at 0 if they are right on us
+
 			desiredPitch = actualPitch;
 			if( desiredPitch < turret->getMinPitch() )
 			{
@@ -1228,9 +1226,8 @@ StateReturnType TurretAIRecenterTurretState::update()
 	//DEBUG_LOG(("TurretAIRecenterTurretState frame %d: %08lx\n",TheGameLogic->getFrame(),getTurretAI()->getOwner()));
 
 
-  if( getMachineOwner()->testStatus( OBJECT_STATUS_UNDER_CONSTRUCTION))
-    return STATE_CONTINUE;//ML so that under-construction base-defenses do not re-center while under construction
-
+	if( getMachineOwner()->testStatus( OBJECT_STATUS_UNDER_CONSTRUCTION))
+		return STATE_CONTINUE;//ML so that under-construction base-defenses do not re-center while under construction
 
 	TurretAI* turret = getTurretAI();
 	Bool angleAligned = turret->friend_turnTowardsAngle(turret->getNaturalTurretAngle(), 0.5f, 0.0f);
@@ -1382,8 +1379,8 @@ StateReturnType TurretAIIdleScanState::update()
 {
 	//DEBUG_LOG(("TurretAIIdleScanState frame %d: %08lx\n",TheGameLogic->getFrame(),getTurretAI()->getOwner()));
 
-  if( getMachineOwner()->testStatus( OBJECT_STATUS_UNDER_CONSTRUCTION))
-    return STATE_CONTINUE;//ML so that under-construction base-defenses do not idle-scan while under construction
+	if( getMachineOwner()->testStatus( OBJECT_STATUS_UNDER_CONSTRUCTION))
+		return STATE_CONTINUE;//ML so that under-construction base-defenses do not idle-scan while under construction
 
 	Bool angleAligned = getTurretAI()->friend_turnTowardsAngle(getTurretAI()->getNaturalTurretAngle() + m_desiredAngle, 0.5f, 0.0f);
 	Bool pitchAligned = getTurretAI()->friend_turnTowardsPitch(getTurretAI()->getNaturalTurretPitch(), 0.5f);

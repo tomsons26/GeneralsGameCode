@@ -211,7 +211,7 @@ extern Bool contextCommandForNewSelection(const DrawableList *currentlySelectedD
 
 		if (outSelectionInfo->newCountMine > 0) {
 			if (outSelectionInfo->newCountMine == 1 && selectionIsPoint && !TheInGameUI->isInPreferSelectionMode()) {
- 				return TheGameClient->evaluateContextCommand(newMine, newMine->getPosition(), CommandTranslator::EVALUATE_ONLY) != GameMessage::MSG_INVALID;
+				return TheGameClient->evaluateContextCommand(newMine, newMine->getPosition(), CommandTranslator::EVALUATE_ONLY) != GameMessage::MSG_INVALID;
 			}
 
 			return FALSE;
@@ -358,20 +358,20 @@ Bool addDrawableToList( Drawable *draw, void *userData )
 		return FALSE;
 
 	if (!draw->isSelectable())
-  {
-    const Object *obj = draw->getObject();
-    if ( obj && obj->getContainedBy() )//hmm, interesting... he is not selectable but he is contained
-    {// What we are after here is to propagate the selection the selection ti the container
-      // if the cobtainer is non-enclosing... see also selectionxlat, in the left_click case
+	{
+		const Object *obj = draw->getObject();
+		if ( obj && obj->getContainedBy() )//hmm, interesting... he is not selectable but he is contained
+		{// What we are after here is to propagate the selection the selection ti the container
+			// if the cobtainer is non-enclosing... see also selectionxlat, in the left_click case
 
-      ContainModuleInterface *contain = obj->getContainedBy()->getContain();
-      Drawable *containDraw = obj->getContainedBy()->getDrawable();
-      if (contain && ! contain->isEnclosingContainerFor( obj ) && containDraw )
-        return addDrawableToList( containDraw, userData );
-    }
-    else
-      return FALSE;
-  }
+			ContainModuleInterface *contain = obj->getContainedBy()->getContain();
+			Drawable *containDraw = obj->getContainedBy()->getDrawable();
+			if (contain && ! contain->isEnclosingContainerFor( obj ) && containDraw )
+				return addDrawableToList( containDraw, userData );
+		}
+		else
+			return FALSE;
+	}
 
 	//Kris: Aug 9, 2003!!! Wow, this bug has been around a LONG time!!
 	//Basically, it was possible to drag select a single enemy/neutral unit even if you couldn't see it

@@ -588,8 +588,6 @@ void RTS3DScene::renderOneObject(RenderInfoClass &rinfo, RenderObjClass *robj, I
 	Bool doExtraFlagsPop=FALSE;
 	LightClass **sceneLights=m_globalLight;
 
-
-
 	if (robj->Class_ID() == RenderObjClass::CLASSID_IMAGE3D	)
 	{	robj->Render(rinfo);	//notify decals system that this track is visible
 		return;	//decals are not lit by this system yet so skip rest of lighting
@@ -710,18 +708,18 @@ void RTS3DScene::renderOneObject(RenderInfoClass &rinfo, RenderObjClass *robj, I
 		{
 			rinfo.materialPassEmissiveOverride = draw->getSecondMaterialPassOpacity();
 
-      //if ( draw->testTintStatus( TINT_STATUS_FRENZY ) )
-      //{
-			//	rinfo.Push_Material_Pass(m_heatVisionMaterialPass);
-      //}
+			//if ( draw->testTintStatus( TINT_STATUS_FRENZY ) )
+			//{
+				//	rinfo.Push_Material_Pass(m_heatVisionMaterialPass);
+			//}
 			//else 
-      if (draw->getStealthLook() == STEALTHLOOK_VISIBLE_DETECTED )
+			if (draw->getStealthLook() == STEALTHLOOK_VISIBLE_DETECTED )
 			{
 			  rinfo.materialPassEmissiveOverride = draw->getSecondMaterialPassOpacity();
 				// THIS WILL EXPLICITLY SKIP THE FIRST PASS SO THAT HEATVISION ONLY WILL RENDER
 				rinfo.Push_Override_Flags(RenderInfoClass::RINFO_OVERRIDE_ADDITIONAL_PASSES_ONLY);
 				rinfo.Push_Material_Pass(m_heatVisionOnlyPass);
-        doExtraFlagsPop = TRUE;
+				doExtraFlagsPop = TRUE;
 			}
 			else
 			{
@@ -768,23 +766,23 @@ void RTS3DScene::renderOneObject(RenderInfoClass &rinfo, RenderObjClass *robj, I
 			}
 		}
 
-    if( draw && draw->getReceivesDynamicLights() )
-    {
-		  // dynamic lights
-		  RefRenderObjListIterator dynaLightIt(&m_dynamicLightList);	
-		  for (dynaLightIt.First(); !dynaLightIt.Is_Done(); dynaLightIt.Next())
-		  {	
-			  W3DDynamicLight* pDyna = (W3DDynamicLight*)dynaLightIt.Peek_Obj();
-			  if (!pDyna->isEnabled()) {
-				  continue;
-			  }
-			  SphereClass lSph = pDyna->Get_Bounding_Sphere();
-			  if (pDyna->Get_Type() == LightClass::POINT && !Spheres_Intersect(sph, lSph)) {
-				  continue;
-			  }
-			  lightEnv.Add_Light(*(LightClass*)dynaLightIt.Peek_Obj());
-		  }
-    }
+		if( draw && draw->getReceivesDynamicLights() )
+		{
+			// dynamic lights
+			RefRenderObjListIterator dynaLightIt(&m_dynamicLightList);	
+			for (dynaLightIt.First(); !dynaLightIt.Is_Done(); dynaLightIt.Next())
+			{	
+				W3DDynamicLight* pDyna = (W3DDynamicLight*)dynaLightIt.Peek_Obj();
+				if (!pDyna->isEnabled()) {
+					continue;
+				}
+				SphereClass lSph = pDyna->Get_Bounding_Sphere();
+				if (pDyna->Get_Type() == LightClass::POINT && !Spheres_Intersect(sph, lSph)) {
+					continue;
+				}
+				lightEnv.Add_Light(*(LightClass*)dynaLightIt.Peek_Obj());
+			}
+		}
 		
 		lightEnv.Pre_Render_Update(rinfo.Camera.Get_Transform());
 		rinfo.light_environment = &lightEnv;

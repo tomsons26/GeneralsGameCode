@@ -688,7 +688,6 @@ void ReleaseCrash(const char *reason)
 			ShowWindow(ApplicationHWnd, SW_HIDE);
 		}
 	}
-
 #if defined(_DEBUG) || defined(_INTERNAL)
 	/* static */ char buff[8192]; // not so static so we can be threadsafe
 	_snprintf(buff, 8192, "Sorry, a serious error occurred. (%s)", reason);

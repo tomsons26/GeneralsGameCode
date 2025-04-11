@@ -1364,7 +1364,7 @@ void DeletePolygonUndoable::Undo(void)
 // MultipleUndoable - constructor.
 //
 MultipleUndoable::MultipleUndoable(void)
-  : m_undoableList( NULL )
+	: m_undoableList( NULL )
 {
 }
 
@@ -1373,10 +1373,10 @@ MultipleUndoable::MultipleUndoable(void)
 //
 MultipleUndoable::~MultipleUndoable(void)
 {
-  if ( m_undoableList )
-  {
-    REF_PTR_RELEASE(m_undoableList);
-  }
+	if ( m_undoableList )
+	{
+		REF_PTR_RELEASE(m_undoableList);
+	}
 }
 
 //
@@ -1384,9 +1384,9 @@ MultipleUndoable::~MultipleUndoable(void)
 //
 void MultipleUndoable::addUndoable( Undoable * undoable )
 {
-  undoable->LinkNext( m_undoableList );
+	undoable->LinkNext( m_undoableList );
 
-  REF_PTR_SET( m_undoableList, undoable );
+	REF_PTR_SET( m_undoableList, undoable );
 }
 
 
@@ -1395,14 +1395,14 @@ void MultipleUndoable::addUndoable( Undoable * undoable )
 //
 void MultipleUndoable::Do(void)
 {
-  Undoable * undoable = m_undoableList;
+	Undoable * undoable = m_undoableList;
 
-  while ( undoable != NULL )
-  {
-    Undoable * next = undoable->GetNext();
-    undoable->Do();
-    undoable = next;
-  }
+	while ( undoable != NULL )
+	{
+		Undoable * next = undoable->GetNext();
+		undoable->Do();
+		undoable = next;
+	}
 }
 
 
@@ -1411,12 +1411,12 @@ void MultipleUndoable::Do(void)
 //
 static void undoHelper(Undoable * undoable)
 {
-  if ( undoable == NULL )
-    return;
+	if ( undoable == NULL )
+		return;
 
-  undoHelper( undoable->GetNext() );
+	undoHelper( undoable->GetNext() );
 
-  undoable->Undo();
+	undoable->Undo();
 }
 
 //
@@ -1425,7 +1425,7 @@ static void undoHelper(Undoable * undoable)
 //
 void MultipleUndoable::Undo(void)
 {
-  undoHelper(m_undoableList);
+	undoHelper(m_undoableList);
 }
 
 
@@ -1434,13 +1434,13 @@ void MultipleUndoable::Undo(void)
 //
 void MultipleUndoable::Redo(void)
 {
-  Undoable * undoable = m_undoableList;
-  
-  while ( undoable != NULL )
-  {
-    Undoable * next = undoable->GetNext();
-    undoable->Redo();
-    undoable = next;
-  }
+	Undoable * undoable = m_undoableList;
+	
+	while ( undoable != NULL )
+	{
+		Undoable * next = undoable->GetNext();
+		undoable->Redo();
+		undoable = next;
+	}
 }
 

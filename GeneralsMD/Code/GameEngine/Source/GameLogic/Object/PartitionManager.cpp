@@ -5524,8 +5524,8 @@ Bool PartitionFilterStealthedAndUndetected::allow( Object *objOther )
 		else if( disguised )
 		{
 			//Exception case -- bomb trucks can't be considered stealthed units when they are disguised as the enemy.
-      
-      StealthUpdate *update = objOther->getStealth();
+
+			StealthUpdate *update = objOther->getStealth();
 
 			if( update && update->isDisguised() )
 			{

@@ -141,7 +141,7 @@ class LayersList : public CDialog
 
 		HTREEITEM findTreeLayerNamed(const AsciiString& nameToFind);
 		HTREEITEM findTreeObjectNamed(const AsciiString& objectToFind, HTREEITEM layerItem);
-			   
+
 		// This function takes an MapObject, and does one of the following: 
 		// 1) Return true if the MapObject can be found, and 
 		//    layerIt points to a valid layer iterator in which the MapObject was found 
@@ -176,7 +176,6 @@ class LayersList : public CDialog
 		afx_msg void OnMergeViewSelection(UINT commandID);
 		afx_msg void OnSelectActiveLayer();
 
-				
 		afx_msg void OnSelectLayerObject();
 		afx_msg void OnNewLayer();
 		afx_msg void OnDeleteLayer();

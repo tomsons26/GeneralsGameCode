@@ -152,7 +152,6 @@ class LayersList : public CDialog
 		afx_msg void OnMergeObject(UINT commandID);
 		afx_msg void OnMergeViewSelection(UINT commandID);
 
-		
 		afx_msg void OnNewLayer();
 		afx_msg void OnDeleteLayer();
 		afx_msg void OnHideShowLayer();

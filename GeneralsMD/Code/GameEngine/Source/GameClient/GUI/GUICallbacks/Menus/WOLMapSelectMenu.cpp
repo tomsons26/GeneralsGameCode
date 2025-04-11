@@ -338,9 +338,6 @@ WindowMsgHandledType WOLMapSelectMenuSystem( GameWindow *window, UnsignedInt msg
 				break;
 			}
 		//---------------------------------------------------------------------------------------------
-
-
-
 			case GLM_SELECTED:
 			{
 				

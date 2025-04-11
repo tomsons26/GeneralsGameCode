@@ -6938,7 +6938,7 @@ void ScriptEngine::checkConditionsForTeamNames(Script *pScript)
 		if (!singletonTeamName.isEmpty()) {
 			pScript->setConditionTeamName(singletonTeamName);
 		}
-  } else { 
+	} else {
 		pScript->setConditionTeamName(multiTeamName);
 	}
 
@@ -7014,7 +7014,7 @@ void ScriptEngine::executeScript( Script *pScript )
 
 				// Only do this is there are actually false actions.
 				executeActions(pScript->getFalseAction());
-      } 
+			}
 		}
 
 	} else {
@@ -7789,14 +7789,14 @@ void ScriptEngine::removeAllSequentialScripts(Object *obj)
 	for (it = m_sequentialScripts.begin(); it != m_sequentialScripts.end(); /* empty */) {
 		SequentialScript *seqScript = (*it);
 		if (!seqScript) {
-      ++it;
+			++it;
 			continue;
 		}
 		if (seqScript->m_objectID == id) {
 			it = cleanupSequentialScript(it, TRUE);
 		}
-    else
-		  ++it;
+		else
+			++it;
 	}
 }
 
@@ -10351,4 +10351,3 @@ static void _cleanUpVTune()
 	VTResume = NULL;
 }
 #endif	// VTUNE
-

@@ -16,6 +16,7 @@
 **	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+
 // WbView3d.h
 // Class to encapsulate height map.
 // Author: Steven Johnson, Aug 2001

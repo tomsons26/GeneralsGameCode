@@ -543,6 +543,7 @@ void MapSelectorTooltip(GameWindow *window,
 	
 }
 
+
 void positionStartSpotControls( GameWindow *win, GameWindow *mapWindow, Coord3D *pos, MapMetaData *mmd, GameWindow *buttonMapStartPositions[])
 {
 	if(!win || !mmd || !mapWindow || !buttonMapStartPositions)
@@ -1230,7 +1231,7 @@ void SkirmishGameOptionsMenuInit( WindowLayout *layout, void *userData )
 		TheSkirmishGameInfo->markPlayerAsPreorder(0);
 	}
 
-  TheSkirmishGameInfo->setMap(prefs.getPreferredMap());
+	TheSkirmishGameInfo->setMap(prefs.getPreferredMap());
 	const MapMetaData *md = TheMapCache->findMap(TheSkirmishGameInfo->getMap());
 	if (!md)
 	{
@@ -1248,8 +1249,8 @@ void SkirmishGameOptionsMenuInit( WindowLayout *layout, void *userData )
 	std::map<AsciiString, MapMetaData>::iterator it = TheMapCache->find(lowerMap);
 	if (it != TheMapCache->end())
 	{
-    GadgetStaticTextSetText(textEntryMapDisplay, it->second.m_displayName);
-  }
+		GadgetStaticTextSetText(textEntryMapDisplay, it->second.m_displayName);
+	}
 
 	skirmishPositionStartSpots();
 	//updateSkirmishGameOptions();
@@ -1344,6 +1345,7 @@ void SkirmishGameOptionsMenuShutdown( WindowLayout *layout, void *userData )
 
 	// our shutdown is complete
 	TheTransitionHandler->reverse("SkirmishGameOptionsMenuFade");
+
 }  // void SkirmishGameOptionsMenuShutdown( WindowLayout *layout, void *userData )
 
 //-------------------------------------------------------------------------------------------------
@@ -1460,13 +1462,13 @@ WindowMsgHandledType SkirmishGameOptionsMenuSystem( GameWindow *window, Unsigned
 					{
 						handleTeamSelection(i);
 					}
-          else if (controlID == comboBoxPlayerID[i])
-          {
-            handlePlayerSelection(i);
-          }
+					else if (controlID == comboBoxPlayerID[i])
+					{
+						handlePlayerSelection(i);
+					}
 				}
 				sandboxOk = FALSE;
-        skirmishUpdateSlotList();
+				skirmishUpdateSlotList();
 			}// case GCM_SELECTED:
 		//-------------------------------------------------------------------------------------------------
 		case GSM_SLIDER_TRACK:
@@ -1523,11 +1525,10 @@ WindowMsgHandledType SkirmishGameOptionsMenuSystem( GameWindow *window, Unsigned
 				else if ( controlID == buttonStartID )
 				{
 					buttonPushed = TRUE;
-          SkirmishPreferences prefs;
-          prefs.write();
+					SkirmishPreferences prefs;
+					prefs.write();
 					startPressed();
 				}
-
 				else if ( controlID == buttonResetID )
 				{
 					SkirmishBattleHonors stats;

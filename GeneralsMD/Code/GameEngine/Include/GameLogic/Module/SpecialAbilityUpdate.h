@@ -77,8 +77,8 @@ public:
 	Bool									m_doCaptureFX;					///< the house color flashing while a building is getting captured
 	Bool									m_loseStealthOnTrigger;
 	Bool									m_approachRequiresLOS;
-  Bool                  m_needToFaceTarget;
-  Bool                  m_persistenceRequiresRecharge;
+	Bool									m_needToFaceTarget;
+	Bool									m_persistenceRequiresRecharge;
 
 	const ParticleSystemTemplate *m_disableFXParticleSystem;
 	AudioEventRTS					m_packSound;
@@ -114,8 +114,8 @@ public:
 		m_skillPointsForTriggering = -1;
 		m_approachRequiresLOS = TRUE;
 		m_preTriggerUnstealthFrames = 0;
-    m_needToFaceTarget = TRUE;
-    m_persistenceRequiresRecharge = FALSE;
+		m_needToFaceTarget = TRUE;
+		m_persistenceRequiresRecharge = FALSE;
 	}
 
 	static void buildFieldParse(MultiIniFieldParse& p) 
@@ -160,8 +160,8 @@ public:
 			{ "SkillPointsForTriggering",		INI::parseInt,										NULL, offsetof( SpecialAbilityUpdateModuleData, m_skillPointsForTriggering ) },
 			{ "ApproachRequiresLOS",				INI::parseBool,										NULL, offsetof( SpecialAbilityUpdateModuleData, m_approachRequiresLOS ) },
 			{ "ApproachRequiresLOS",				INI::parseBool,										NULL, offsetof( SpecialAbilityUpdateModuleData, m_approachRequiresLOS ) },
-      { "NeedToFaceTarget",           INI::parseBool,										NULL, offsetof( SpecialAbilityUpdateModuleData, m_needToFaceTarget ) },
-      { "PersistenceRequiresRecharge",INI::parseBool,										NULL, offsetof( SpecialAbilityUpdateModuleData, m_persistenceRequiresRecharge ) },
+			{ "NeedToFaceTarget",           INI::parseBool,										NULL, offsetof( SpecialAbilityUpdateModuleData, m_needToFaceTarget ) },
+			{ "PersistenceRequiresRecharge",INI::parseBool,										NULL, offsetof( SpecialAbilityUpdateModuleData, m_persistenceRequiresRecharge ) },
 			{ 0, 0, 0, 0 }
 		};
     p.add(dataFieldParse);
@@ -244,9 +244,9 @@ protected:
 	Bool needToFace() const;
 	void startFacing();
 
-  // Lorenzen added this additional flag to support the NapalmBombDrop
-  // It causes this update to force a recharge of the SPM between drops
-  Bool getDoesPersistenceRequireRecharge() const { return getSpecialAbilityUpdateModuleData()->m_persistenceRequiresRecharge; }
+	// Lorenzen added this additional flag to support the NapalmBombDrop
+	// It causes this update to force a recharge of the SPM between drops
+	Bool getDoesPersistenceRequireRecharge() const { return getSpecialAbilityUpdateModuleData()->m_persistenceRequiresRecharge; }
 //	void setBusy ( Bool is ) { m_isBusy = is; }
 //	Bool m_isBusy; ///< whether I am between trigger and completion
 

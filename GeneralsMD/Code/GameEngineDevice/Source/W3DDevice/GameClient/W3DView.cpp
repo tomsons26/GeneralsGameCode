@@ -835,18 +835,18 @@ static void drawDrawableExtents( Drawable *draw, void *userData )
 			// draw cylinder
 			for( int i=0; i<2; i++ )
 			{
-        drawDebugCircle( center, radius, 1.0f, color );
+				drawDebugCircle( center, radius, 1.0f, color );
 
-        // next time 'round, draw the top of the cylinder
-        center.z += draw->getDrawableGeometryInfo().getMaxHeightAbovePosition();
+				// next time 'round, draw the top of the cylinder
+				center.z += draw->getDrawableGeometryInfo().getMaxHeightAbovePosition();
 			}	// end for i
 
 			// draw centerline
-      ICoord2D start, end;
-      center = *draw->getPosition();
-      TheTacticalView->worldToScreen( &center, &start );
-      center.z += draw->getDrawableGeometryInfo().getMaxHeightAbovePosition();
-      TheTacticalView->worldToScreen( &center, &end );
+			ICoord2D start, end;
+			center = *draw->getPosition();
+			TheTacticalView->worldToScreen( &center, &start );
+			center.z += draw->getDrawableGeometryInfo().getMaxHeightAbovePosition();
+			TheTacticalView->worldToScreen( &center, &end );
 			TheDisplay->drawLine( start.x, start.y, end.x, end.y, 1.0f, color );
 
 			break;
@@ -875,12 +875,12 @@ void drawAudioLocations( Drawable *draw, void *userData );
 // ------------------------------------------------------------------------------------------------
 static void drawContainedAudioLocations( Object *obj, void *userData )
 {
-  Drawable *draw = obj->getDrawable();
-  
-  if( draw )
-    drawAudioLocations( draw, userData );
-  
-}  // end drawContainedAudio
+	Drawable *draw = obj->getDrawable();
+	
+	if( draw )
+		drawAudioLocations( draw, userData );
+	
+}	// end drawContainedAudio
 
 
 //-------------------------------------------------------------------------------------------------
@@ -888,62 +888,62 @@ static void drawContainedAudioLocations( Object *obj, void *userData )
 //-------------------------------------------------------------------------------------------------
 static void drawAudioLocations( Drawable *draw, void *userData )
 {
-  // draw audio for things that are contained by this
-  Object *obj = draw->getObject();
-  if( obj )
-  {
-    ContainModuleInterface *contain = obj->getContain();
-    
-    if( contain )
-      contain->iterateContained( drawContainedAudioLocations, userData, FALSE );
-    
-  }  // end if
+	// draw audio for things that are contained by this
+	Object *obj = draw->getObject();
+	if( obj )
+	{
+		ContainModuleInterface *contain = obj->getContain();
+		
+		if( contain )
+			contain->iterateContained( drawContainedAudioLocations, userData, FALSE );
+		
+	}	// end if
 
-  const ThingTemplate * thingTemplate = draw->getTemplate();
+	const ThingTemplate * thingTemplate = draw->getTemplate();
 
-  if ( thingTemplate == NULL || thingTemplate->getEditorSorting() != ES_AUDIO )
-  {
-    return; // All done
-  }
+	if ( thingTemplate == NULL || thingTemplate->getEditorSorting() != ES_AUDIO )
+	{
+		return; // All done
+	}
 
-  // Copied in hideously inappropriate code copying ways from DrawObject.cpp
-  // Should definately be a global, probably read in from an INI file <gasp>
-  static const Int poleHeight = 20;
-  static const Int flagHeight = 10;
-  static const Int flagWidth = 10;
-  const Color color = GameMakeColor(0x25, 0x25, 0xEF, 0xFF);
+	// Copied in hideously inappropriate code copying ways from DrawObject.cpp
+	// Should definately be a global, probably read in from an INI file <gasp>
+	static const Int poleHeight = 20;
+	static const Int flagHeight = 10;
+	static const Int flagWidth = 10;
+	const Color color = GameMakeColor(0x25, 0x25, 0xEF, 0xFF);
 
-  // Draw flag for audio-only objects:
-  //  *
-  //  * *
-  //  *   *
-  //  *     *
-  //  *   *
-  //  * *
-  //  *
-  //  *
-  //  *
-  //  *
-  //  *
+	// Draw flag for audio-only objects:
+	//	*
+	//	* *
+	//	*	 *
+	//	*		 *
+	//	*	 *
+	//	* *
+	//	*
+	//	*
+	//	*
+	//	*
+	//	*
 
-  Coord3D worldPoint;
-  ICoord2D start, end;
+	Coord3D worldPoint;
+	ICoord2D start, end;
 
-  worldPoint = *draw->getPosition();
-  TheTacticalView->worldToScreen( &worldPoint, &start );
-  worldPoint.z += poleHeight;
-  TheTacticalView->worldToScreen( &worldPoint, &end );
-  TheDisplay->drawLine( start.x, start.y, end.x, end.y, 1.0f, color );
-  
-  worldPoint.z -= flagHeight / 2;
-  worldPoint.x += flagWidth;
-  TheTacticalView->worldToScreen( &worldPoint, &start );
-  TheDisplay->drawLine( start.x, start.y, end.x, end.y, 1.0f, color );
+	worldPoint = *draw->getPosition();
+	TheTacticalView->worldToScreen( &worldPoint, &start );
+	worldPoint.z += poleHeight;
+	TheTacticalView->worldToScreen( &worldPoint, &end );
+	TheDisplay->drawLine( start.x, start.y, end.x, end.y, 1.0f, color );
+	
+	worldPoint.z -= flagHeight / 2;
+	worldPoint.x += flagWidth;
+	TheTacticalView->worldToScreen( &worldPoint, &start );
+	TheDisplay->drawLine( start.x, start.y, end.x, end.y, 1.0f, color );
 
-  worldPoint.z -= flagHeight / 2;
-  worldPoint.x -= flagWidth;
-  TheTacticalView->worldToScreen( &worldPoint, &end );
-  TheDisplay->drawLine( start.x, start.y, end.x, end.y, 1.0f, color );
+	worldPoint.z -= flagHeight / 2;
+	worldPoint.x -= flagWidth;
+	TheTacticalView->worldToScreen( &worldPoint, &end );
+	TheDisplay->drawLine( start.x, start.y, end.x, end.y, 1.0f, color );
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -951,32 +951,32 @@ static void drawAudioLocations( Drawable *draw, void *userData )
 //-------------------------------------------------------------------------------------------------
 static void drawAudioRadii( const Drawable * drawable )
 {
-  
-  // Draw radii, if sound is playing
-  const AudioEventRTS * ambientSound = drawable->getAmbientSound();
-  
-  if ( ambientSound && ambientSound->isCurrentlyPlaying() )
-  {
-    const AudioEventInfo * ambientInfo = ambientSound->getAudioEventInfo();
-    
-    if ( ambientInfo == NULL )
-    {
-      // I don't think that's right...
-      OutputDebugString( ("Playing sound has NULL AudioEventInfo?\n" ) );
-      
-      if ( TheAudio != NULL )
-      {
-        ambientInfo = TheAudio->findAudioEventInfo( ambientSound->getEventName() );
-      }
-    }
-    
-    if ( ambientInfo != NULL )
-    {
-      // Colors match those used in WorldBuilder
-      drawDebugCircle( *drawable->getPosition(), ambientInfo->m_minDistance, 1.0f, GameMakeColor(0x00, 0x00, 0xFF, 0xFF) );
-      drawDebugCircle( *drawable->getPosition(), ambientInfo->m_maxDistance, 1.0f, GameMakeColor(0xFF, 0x00, 0xFF, 0xFF) );
-    }
-  }
+	
+	// Draw radii, if sound is playing
+	const AudioEventRTS * ambientSound = drawable->getAmbientSound();
+	
+	if ( ambientSound && ambientSound->isCurrentlyPlaying() )
+	{
+		const AudioEventInfo * ambientInfo = ambientSound->getAudioEventInfo();
+		
+		if ( ambientInfo == NULL )
+		{
+			// I don't think that's right...
+			OutputDebugString( ("Playing sound has NULL AudioEventInfo?\n" ) );
+			
+			if ( TheAudio != NULL )
+			{
+				ambientInfo = TheAudio->findAudioEventInfo( ambientSound->getEventName() );
+			}
+		}
+		
+		if ( ambientInfo != NULL )
+		{
+			// Colors match those used in WorldBuilder
+			drawDebugCircle( *drawable->getPosition(), ambientInfo->m_minDistance, 1.0f, GameMakeColor(0x00, 0x00, 0xFF, 0xFF) );
+			drawDebugCircle( *drawable->getPosition(), ambientInfo->m_maxDistance, 1.0f, GameMakeColor(0xFF, 0x00, 0xFF, 0xFF) );
+		}
+	}
 }
 
 #endif
@@ -1379,8 +1379,8 @@ void W3DView::update(void)
 
 
 #ifdef DO_SEISMIC_SIMULATIONS
-  // Give the terrain a chance to refresh animaing (Seismic) regions, if any.
-  TheTerrainVisual->updateSeismicSimulations();
+	// Give the terrain a chance to refresh animaing (Seismic) regions, if any.
+	TheTerrainVisual->updateSeismicSimulations();
 #endif
   
 	Region3D axisAlignedRegion;
@@ -1746,17 +1746,17 @@ void W3DView::draw( void )
 
 	}
 
-  if ( TheGlobalData->m_showAudioLocations )
-  {
-    // Draw audio radii for ALL drawables, not just those on screen
-    const Drawable * drawable = TheGameClient->getDrawableList();
+	if ( TheGlobalData->m_showAudioLocations )
+	{
+		// Draw audio radii for ALL drawables, not just those on screen
+		const Drawable * drawable = TheGameClient->getDrawableList();
 
-    while ( drawable != NULL )
-    {
-      drawAudioRadii( drawable );
-      drawable = drawable->getNextDrawable();
-    }
-  }
+		while ( drawable != NULL )
+		{
+			drawAudioRadii( drawable );
+			drawable = drawable->getNextDrawable();
+		}
+	}
 #endif // DEBUG or INTERNAL
 
 	Region3D axisAlignedRegion;
@@ -2022,7 +2022,7 @@ View::WorldToScreenReturn W3DView::worldToScreenTriReturn( const Coord3D *w, ICo
 {
 	// sanity
 	if( w == NULL || s == NULL )
-    return WTS_INVALID;
+		return WTS_INVALID;
 
 	if( m_3DCamera )
 	{
@@ -2036,7 +2036,7 @@ View::WorldToScreenReturn W3DView::worldToScreenTriReturn( const Coord3D *w, ICo
 			// Can't get a valid number if it's beyond the clip planes.  jba
 			s->x = 0;
 			s->y = 0;
-      return WTS_INVALID;
+			return WTS_INVALID;
 		}
 
 		//
@@ -2055,14 +2055,14 @@ View::WorldToScreenReturn W3DView::worldToScreenTriReturn( const Coord3D *w, ICo
 //		s->y = (getHeight() * (-screen.Y + 1.0f)) / 2.0f;
 		if (projection != CameraClass::INSIDE_FRUSTUM)
 		{
-      return WTS_OUTSIDE_FRUSTUM;
+			return WTS_OUTSIDE_FRUSTUM;
 		}
 
-    return WTS_INSIDE_FRUSTUM;
+		return WTS_INSIDE_FRUSTUM;
 
 	}  // end if
 
-  return WTS_INVALID;
+	return WTS_INVALID;
 }  // end worldToScreenTriReturn
 
 //-------------------------------------------------------------------------------------------------

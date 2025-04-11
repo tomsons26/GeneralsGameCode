@@ -3443,31 +3443,43 @@ void AIPlayer::getPlayerStructureBounds(Region2D *bounds, Int playerNdx )
 	objBounds.hi.x = objBounds.lo.x = objBounds.hi.y = objBounds.lo.x = 0;
 
 	Player* pPlayer = ThePlayerList->getNthPlayer(playerNdx);
-	if (pPlayer == NULL) return;
-	for (it = pPlayer->getPlayerTeams()->begin(); it != pPlayer->getPlayerTeams()->end(); ++it) {
-		for (DLINK_ITERATOR<Team> iter = (*it)->iterate_TeamInstanceList(); !iter.done(); iter.advance()) {
+	if (pPlayer == NULL) 
+		return;
+	for (it = pPlayer->getPlayerTeams()->begin(); it != pPlayer->getPlayerTeams()->end(); ++it) 
+	{
+		for (DLINK_ITERATOR<Team> iter = (*it)->iterate_TeamInstanceList(); !iter.done(); iter.advance()) 
+		{
 			Team *team = iter.cur();
-			if (!team) continue;
-			for (DLINK_ITERATOR<Object> iter = team->iterate_TeamMemberList(); !iter.done(); iter.advance()) {
+			if (!team) 
+				continue;
+			for (DLINK_ITERATOR<Object> iter = team->iterate_TeamMemberList(); !iter.done(); iter.advance()) 
+			{
 				Object *pObj = iter.cur();
-				if (!pObj) continue;
-				if (pObj->isKindOf(KINDOF_STRUCTURE)) {
+				if (!pObj) 
+					continue;
+				if( pObj->isKindOf(KINDOF_STRUCTURE) ) 
+				{
 					Coord3D pos = *pObj->getPosition();
 					if (firstObject) {
 						objBounds.lo.x = objBounds.hi.x = pos.x;
 						objBounds.lo.y = objBounds.hi.y = pos.y;
 						firstObject = false;
-					}	else {
+					}	
+					else 
+					{
 						if (objBounds.lo.x>pos.x) objBounds.lo.x = pos.x;
 						if (objBounds.lo.y>pos.y) objBounds.lo.y = pos.y;
 						if (objBounds.hi.x<pos.x) objBounds.hi.x = pos.x;
 						if (objBounds.hi.y<pos.y) objBounds.hi.y = pos.y;
 					}
-					if (firstStructure) {
+					if (firstStructure) 
+					{
 						bounds->lo.x = bounds->hi.x = pos.x;
 						bounds->lo.y = bounds->hi.y = pos.y;
 						firstStructure = false;
-					}	else {
+					}	
+					else 
+					{
 						if (bounds->lo.x>pos.x) bounds->lo.x = pos.x;
 						if (bounds->lo.y>pos.y) bounds->lo.y = pos.y;
 						if (bounds->hi.x<pos.x) bounds->hi.x = pos.x;

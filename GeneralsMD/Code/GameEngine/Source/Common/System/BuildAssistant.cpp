@@ -348,7 +348,7 @@ Object *BuildAssistant::buildObjectNow( Object *constructorObject, const ThingTe
 											 ("buildObjectNow: Constructor object player is not the same as the controlling player passed in\n") );
 
 	}  // end if
-	
+
 	// Need to validate that we can make this in case someone fakes their CommandSet
 	// A NULL constructor Object means a script built building so let it slide.
 	if( (constructorObject != NULL) && !isPossibleToMakeUnit(constructorObject, what) )

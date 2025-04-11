@@ -120,7 +120,7 @@ static void drawStaticTextText( GameWindow *window, WinInstanceData *instData,
 	clipRegion.hi.y = origin.y + size.y;
 	
 	// horizontal centering?
-	if( tData->centered ) 
+	if( tData->centered )
 	{
 		textPos.x = origin.x + (size.x / 2) - (textWidth / 2);
 	}

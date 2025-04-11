@@ -190,7 +190,7 @@ void AssistedTargetingUpdate::xfer( Xfer *xfer )
 // ------------------------------------------------------------------------------------------------
 void AssistedTargetingUpdate::loadPostProcess( void )
 {
-  const AssistedTargetingUpdateModuleData *d = getAssistedTargetingUpdateModuleData();
+	const AssistedTargetingUpdateModuleData *d = getAssistedTargetingUpdateModuleData();
 
 	m_laserFromAssisted = TheThingFactory->findTemplate( d->m_laserFromAssistedName );
 	m_laserToTarget =TheThingFactory->findTemplate( d->m_laserFromAssistedName );

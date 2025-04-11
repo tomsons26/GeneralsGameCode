@@ -122,17 +122,17 @@ static const char *TheDrawableIconNames[] =
  *
  * OK, so it's a bit of a hack, but it saves memory in every Drawable
  */
-static DynamicAudioEventInfo  * getNoSoundMarker()
+static DynamicAudioEventInfo	* getNoSoundMarker()
 {
-  static DynamicAudioEventInfo  * marker = NULL;
-   
-  if ( marker == NULL )
-  {
-    // Initialize first time function is called
-    marker = newInstance( DynamicAudioEventInfo  );
-  }
+	static DynamicAudioEventInfo	* marker = NULL;
+	 
+	if ( marker == NULL )
+	{
+		// Initialize first time function is called
+		marker = newInstance( DynamicAudioEventInfo	);
+	}
 
-  return marker;
+	return marker;
 }
 
 
@@ -205,8 +205,8 @@ DrawableLocoInfo::DrawableLocoInfo()
 	m_wheelInfo.m_framesAirborne = 0;
 	m_wheelInfo.m_wheelAngle = 0;
 
-  m_yawModulator = 0.0f;
-  m_pitchModulator = 0.0f;
+	m_yawModulator = 0.0f;
+	m_pitchModulator = 0.0f;
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -387,9 +387,9 @@ Drawable::Drawable( const ThingTemplate *thingTemplate, DrawableStatus statusBit
 																TheInGameUI->isDrawableCaptionBold() ));
 
 	m_ambientSound = NULL;
-  m_ambientSoundEnabled = true;
-  m_ambientSoundEnabledFromScript = true;
- 
+	m_ambientSoundEnabled = true;
+	m_ambientSoundEnabledFromScript = true;
+
 	m_decalOpacityFadeTarget = 0;
 	m_decalOpacityFadeRate = 0;
 	m_decalOpacity = 0;
@@ -446,8 +446,8 @@ Drawable::Drawable( const ThingTemplate *thingTemplate, DrawableStatus statusBit
 	m_secondMaterialPassOpacity = 0.0f;
 	m_drawableFullyObscuredByShroud = false;
 
-  m_receivesDynamicLights = TRUE; // a good default... overridden by one of my draw modules if at all
-	
+	m_receivesDynamicLights = TRUE; // a good default... overridden by one of my draw modules if at all
+
 	// allocate any modules we need to, we should keep
 	// this at or near the end of the drawable construction so that we have
 	// all the valid data about the thing when we create the module
@@ -509,22 +509,22 @@ Drawable::Drawable( const ThingTemplate *thingTemplate, DrawableStatus statusBit
 
 	initStaticImages(); 
 
-  // If we are inside GameLogic::startNewGame(), then starting the ambient sound 
-  // will be taken care of by Drawable::onLevelStart(). It's important that we 
-  // wait until Drawable::onLevelStart(), because we may have a customized ambient
-  // sound which we'll only learn about after the constructor is finished. The
-  // map maker may also have disabled the ambient sound; again, we only learn that
-  // after the constructor is done.
-  // By the same token, when loading from save, we may learn that the ambient sound 
-  // is enabled or disabled in xfer(), and we may learn we have a customized sound there,
-  // so don't start the ambient sound yet. 
-  // This is all really traceable to the fact that stopAmbientSound() won't stop a sound which 
-  // is in the middle of playing; it will only stop it when the current wavefile is finished.
-  // So we have to be very careful of called startAmbientSound() because we can't "take it back" later.
-  if ( TheGameLogic != NULL && !TheGameLogic->isLoadingMap() && TheGameState != NULL && !TheGameState->isInLoadGame() )
-  {
-  	startAmbientSound();
-  }
+	// If we are inside GameLogic::startNewGame(), then starting the ambient sound 
+	// will be taken care of by Drawable::onLevelStart(). It's important that we 
+	// wait until Drawable::onLevelStart(), because we may have a customized ambient
+	// sound which we'll only learn about after the constructor is finished. The
+	// map maker may also have disabled the ambient sound; again, we only learn that
+	// after the constructor is done.
+	// By the same token, when loading from save, we may learn that the ambient sound 
+	// is enabled or disabled in xfer(), and we may learn we have a customized sound there,
+	// so don't start the ambient sound yet. 
+	// This is all really traceable to the fact that stopAmbientSound() won't stop a sound which 
+	// is in the middle of playing; it will only stop it when the current wavefile is finished.
+	// So we have to be very careful of called startAmbientSound() because we can't "take it back" later.
+	if ( TheGameLogic != NULL && !TheGameLogic->isLoadingMap() && TheGameState != NULL && !TheGameState->isInLoadGame() )
+	{
+		startAmbientSound();
+	}
 
 }  // end Drawable
 
@@ -563,7 +563,7 @@ Drawable::~Drawable()
 		m_ambientSound = NULL;
 	}
 
-  clearCustomSoundAmbient( false );
+	clearCustomSoundAmbient( false );
 
 	/// @todo this is nasty, we need a real general effects system
 	// remove any entries that might be present from the ray effect system
@@ -635,10 +635,10 @@ Bool Drawable::getShouldAnimate( Bool considerPower ) const
 		if (obj->isDisabled())
 		{
 			if( 
-         ! obj->isKindOf( KINDOF_PRODUCED_AT_HELIPAD )  && 
-        // mal sez: helicopters just look goofy if they stop animating, so keep animating them, anyway
+		! obj->isKindOf( KINDOF_PRODUCED_AT_HELIPAD )  && 
+		// mal sez: helicopters just look goofy if they stop animating, so keep animating them, anyway
 
-        (  obj->isDisabledByType( DISABLED_HACKED ) 
+			( obj->isDisabledByType( DISABLED_HACKED ) 
 				|| obj->isDisabledByType( DISABLED_PARALYZED ) 
 				|| obj->isDisabledByType( DISABLED_EMP ) 
 				|| obj->isDisabledByType( DISABLED_SUBDUED ) 
@@ -646,7 +646,7 @@ Bool Drawable::getShouldAnimate( Bool considerPower ) const
 				// which have a slight barrel animation even when at rest). if this causes
 				// a problem, we will need to fix gattling tanks in another way.
 				|| obj->isDisabledByType( DISABLED_UNMANNED ) )
-        
+
 				)
 				return FALSE;
 
@@ -1116,10 +1116,10 @@ void Drawable::reactToBodyDamageStateChange(BodyDamageType newState)
 		MAKE_MODELCONDITION_MASK3(MODELCONDITION_DAMAGED, MODELCONDITION_REALLY_DAMAGED, MODELCONDITION_RUBBLE), 
 		newDamage);
 
-  // When loading map, ambient sound starting is handled by onLevelStart(), so that we can
-  // correctly react to customizations
-  if ( !TheGameLogic->isLoadingMap() )
- 	  startAmbientSound(newState, TheGlobalData->m_timeOfDay);
+	// When loading map, ambient sound starting is handled by onLevelStart(), so that we can
+	// correctly react to customizations
+	if ( !TheGameLogic->isLoadingMap() )
+		startAmbientSound(newState, TheGlobalData->m_timeOfDay);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1138,28 +1138,17 @@ void Drawable::setEffectiveOpacity( Real pulseFactor, Real explicitOpacity /* = 
 	m_effectiveStealthOpacity = m_stealthOpacity + pulseAmount; 
 }		///< get alpha/opacity value used to override defaults when drawing.
 
-
-
 //-------------------------------------------------------------------------------------------------
 void Drawable::imitateStealthLook( Drawable& otherDraw )
 {
-  m_stealthOpacity = otherDraw.friend_getStealthOpacity();
-  m_explicitOpacity = otherDraw.friend_getExplicitOpacity();
-  m_effectiveStealthOpacity = otherDraw.friend_getEffectiveStealthOpacity();
-  m_hidden = otherDraw.isDrawableEffectivelyHidden();
-  m_hiddenByStealth = otherDraw.isDrawableEffectivelyHidden();
-  m_stealthLook = otherDraw.getStealthLook();
-  m_secondMaterialPassOpacity = otherDraw.getSecondMaterialPassOpacity();
-
+	m_stealthOpacity = otherDraw.friend_getStealthOpacity();
+	m_explicitOpacity = otherDraw.friend_getExplicitOpacity();
+	m_effectiveStealthOpacity = otherDraw.friend_getEffectiveStealthOpacity();
+	m_hidden = otherDraw.isDrawableEffectivelyHidden();
+	m_hiddenByStealth = otherDraw.isDrawableEffectivelyHidden();
+	m_stealthLook = otherDraw.getStealthLook();
+	m_secondMaterialPassOpacity = otherDraw.getSecondMaterialPassOpacity();
 }
-
-
-
-
-
-
-
-
 
 //-------------------------------------------------------------------------------------------------
 /** update is called once per frame */
@@ -1272,9 +1261,8 @@ void Drawable::updateDrawable( void )
 			if (m_colorTintEnvelope == NULL)
 				m_colorTintEnvelope = newInstance(TintEnvelope);
 
-      m_colorTintEnvelope->play( isKindOf( KINDOF_INFANTRY) ? &FRENZY_COLOR_INFANTRY:&FRENZY_COLOR, 30, 30, SUSTAIN_INDEFINITELY);
-		
-    }
+		m_colorTintEnvelope->play( isKindOf( KINDOF_INFANTRY) ? &FRENZY_COLOR_INFANTRY:&FRENZY_COLOR, 30, 30, SUSTAIN_INDEFINITELY);
+		}
 //		else if ( testTintStatus( TINT_STATUS_POISONED) )
 //		{
 //			if (m_colorTintEnvelope == NULL)
@@ -1312,47 +1300,47 @@ void Drawable::updateDrawable( void )
 		m_selectionFlashEnvelope->update(); // selection flashing
 
 	//If we have an ambient sound, and we aren't currently playing it, attempt to play it now.
-  // However, if the attached sound is a one-shot (non-looping) sound, don't restart it -- only
-  // start it ONCE. The problem is, looping sounds need to keep being restarted. Why? Because 
-  // MilesAudioManager will kill the sound (in MilesAudioManager::processPlayingList) if gets 
-  // out of range. Looping ambient sounds need to restart if the user moves back into range.
-  // The MilesAudioManager doesn't handle this, so we need to keep checking looping sounds 
-  // to see if they are in range. But this messes up non-looping sounds -- they keep looping!
-  // End result: a hack of testing the looping bit and only restarting the sound if the looping
-  // bit is on and the loop count is 0 (loop forever).
-  if( m_ambientSound && m_ambientSoundEnabled && m_ambientSoundEnabledFromScript && 
-      !m_ambientSound->m_event.getEventName().isEmpty() && !m_ambientSound->m_event.isCurrentlyPlaying() ) 
-  {
-    const AudioEventInfo * eventInfo = m_ambientSound->m_event.getAudioEventInfo();
+	// However, if the attached sound is a one-shot (non-looping) sound, don't restart it -- only
+	// start it ONCE. The problem is, looping sounds need to keep being restarted. Why? Because 
+	// MilesAudioManager will kill the sound (in MilesAudioManager::processPlayingList) if gets 
+	// out of range. Looping ambient sounds need to restart if the user moves back into range.
+	// The MilesAudioManager doesn't handle this, so we need to keep checking looping sounds 
+	// to see if they are in range. But this messes up non-looping sounds -- they keep looping!
+	// End result: a hack of testing the looping bit and only restarting the sound if the looping
+	// bit is on and the loop count is 0 (loop forever).
+	if( m_ambientSound && m_ambientSoundEnabled && m_ambientSoundEnabledFromScript && 
+			!m_ambientSound->m_event.getEventName().isEmpty() && !m_ambientSound->m_event.isCurrentlyPlaying() ) 
+	{
+		const AudioEventInfo * eventInfo = m_ambientSound->m_event.getAudioEventInfo();
 
-    if ( eventInfo == NULL && TheAudio != NULL )
-    {
-      // We'll need this in a second anyway so cache it
-      TheAudio->getInfoForAudioEvent( &m_ambientSound->m_event );
-      eventInfo = m_ambientSound->m_event.getAudioEventInfo();
-    }
+		if ( eventInfo == NULL && TheAudio != NULL )
+		{
+			// We'll need this in a second anyway so cache it
+			TheAudio->getInfoForAudioEvent( &m_ambientSound->m_event );
+			eventInfo = m_ambientSound->m_event.getAudioEventInfo();
+		}
 
-    if ( eventInfo == NULL || ( eventInfo->isPermanentSound() ) )
-    {
-  		startAmbientSound();
-    }
- 	}
+		if ( eventInfo == NULL || ( eventInfo->isPermanentSound() ) )
+		{
+			startAmbientSound();
+		}
+	}
 }	
  
 //-------------------------------------------------------------------------------------------------
 // Called just after the level loads. Only called for NEW games, not save games.
 void Drawable::onLevelStart()
 {
-  // Make sure the current ambient sound is playing if it should be playing. Needed because
-  // the call to startAmbientSound in the constructor is too early to
-  // actually start the sound if the constructor is called during level load. 
-  if( m_ambientSoundEnabled && m_ambientSoundEnabledFromScript && 
-      ( m_ambientSound == NULL || 
-        ( !m_ambientSound->m_event.getEventName().isEmpty() && !m_ambientSound->m_event.isCurrentlyPlaying() ) ) )
-  {
-    // Unlike the check in the update() function, we want to do this for looping & one-shot sounds equally
-    startAmbientSound();
-  }
+	// Make sure the current ambient sound is playing if it should be playing. Needed because
+	// the call to startAmbientSound in the constructor is too early to
+	// actually start the sound if the constructor is called during level load. 
+	if( m_ambientSoundEnabled && m_ambientSoundEnabledFromScript && 
+			( m_ambientSound == NULL || 
+				( !m_ambientSound->m_event.getEventName().isEmpty() && !m_ambientSound->m_event.isCurrentlyPlaying() ) ) )
+	{
+		// Unlike the check in the update() function, we want to do this for looping & one-shot sounds equally
+		startAmbientSound();
+	}
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1405,7 +1393,6 @@ void Drawable::applyPhysicsXform(Matrix3D* mtx)
 		mtx->Rotate_Y( info.m_totalPitch );
 		mtx->Rotate_X( -info.m_totalRoll );
 		mtx->Rotate_Z( info.m_totalYaw );
-
 	}
 }
 
@@ -1448,19 +1435,19 @@ Bool Drawable::calcPhysicsXform(PhysicsXformInfo& info)
 		}
 	}
 
-  if (hasPhysicsXform)
-  {
-    // HOTFIX: Ensure that we are not passing denormalized values back to caller
-    // @todo remove hotfix
-    if (info.m_totalPitch>-1e-20f&&info.m_totalPitch<1e-20f)
-      info.m_totalPitch=0.f;
-    if (info.m_totalRoll>-1e-20f&&info.m_totalRoll<1e-20f)
-      info.m_totalRoll=0.f;
-    if (info.m_totalYaw>-1e-20f&&info.m_totalYaw<1e-20f)
-      info.m_totalYaw=0.f;
-    if (info.m_totalZ>-1e-20f&&info.m_totalZ<1e-20f)
-      info.m_totalZ=0.f;
-  }
+	if (hasPhysicsXform)
+	{
+		// HOTFIX: Ensure that we are not passing denormalized values back to caller
+		// @todo remove hotfix
+		if (info.m_totalPitch>-1e-20f&&info.m_totalPitch<1e-20f)
+			info.m_totalPitch=0.f;
+		if (info.m_totalRoll>-1e-20f&&info.m_totalRoll<1e-20f)
+			info.m_totalRoll=0.f;
+		if (info.m_totalYaw>-1e-20f&&info.m_totalYaw<1e-20f)
+			info.m_totalYaw=0.f;
+		if (info.m_totalZ>-1e-20f&&info.m_totalZ<1e-20f)
+			info.m_totalZ=0.f;
+	}
 
 	return hasPhysicsXform;
 }
@@ -1564,7 +1551,6 @@ void Drawable::calcPhysicsXformHoverOrWings( const Locomotor *locomotor, Physics
 	const Real LATERAL_ACCEL_COEFF = locomotor->getLateralAccelCoef();	
 	const Real UNIFORM_AXIAL_DAMPING = locomotor->getUniformAxialDamping();	
 
-
 	// get object from logic
 	Object *obj = getObject();
 	if (obj == NULL)
@@ -1649,9 +1635,8 @@ void Drawable::calcPhysicsXformHoverOrWings( const Locomotor *locomotor, Physics
 	const Real ELEVATOR_CORRECTION_DEGREE = locomotor->getElevatorCorrectionDegree();	
 	const Real ELEVATOR_CORRECTION_RATE   = locomotor->getElevatorCorrectionRate();	
 
-  info.m_totalYaw = RUDDER_CORRECTION_DEGREE * sin( m_locoInfo->m_yawModulator += RUDDER_CORRECTION_RATE );
-  info.m_totalPitch += ELEVATOR_CORRECTION_DEGREE * cos( m_locoInfo->m_pitchModulator += ELEVATOR_CORRECTION_RATE );
-
+	info.m_totalYaw = RUDDER_CORRECTION_DEGREE * sin( m_locoInfo->m_yawModulator += RUDDER_CORRECTION_RATE );
+	info.m_totalPitch += ELEVATOR_CORRECTION_DEGREE * cos( m_locoInfo->m_pitchModulator += ELEVATOR_CORRECTION_RATE );
 
 	info.m_totalZ = 0.0f;
 }
@@ -2636,15 +2621,15 @@ void Drawable::setStealthLook(StealthLookType look)
 void Drawable::draw( View *view )
 {
 
-  if ( testTintStatus( TINT_STATUS_FRENZY ) == FALSE )
-  {
-    if ( getObject() && getObject()->isEffectivelyDead() )
-		  m_secondMaterialPassOpacity = 0.0f;//dead folks don't stealth anyway
-	  else if ( m_secondMaterialPassOpacity > VERY_TRANSPARENT_MATERIAL_PASS_OPACITY )// keep fading any add'l material unless something has set it to zero
-		  m_secondMaterialPassOpacity *= MATERIAL_PASS_OPACITY_FADE_SCALAR;
-	  else
-		  m_secondMaterialPassOpacity = 0.0f;
-  }
+	if ( testTintStatus( TINT_STATUS_FRENZY ) == FALSE )
+	{
+		if ( getObject() && getObject()->isEffectivelyDead() )
+			m_secondMaterialPassOpacity = 0.0f;//dead folks don't stealth anyway
+		else if ( m_secondMaterialPassOpacity > VERY_TRANSPARENT_MATERIAL_PASS_OPACITY )// keep fading any add'l material unless something has set it to zero
+			m_secondMaterialPassOpacity *= MATERIAL_PASS_OPACITY_FADE_SCALAR;
+		else
+			m_secondMaterialPassOpacity = 0.0f;
+	}
 
 
 	if (m_hidden || m_hiddenByStealth || getFullyObscuredByShroud())
@@ -3370,7 +3355,7 @@ void Drawable::drawEnthusiastic(const IRegion2D* healthBarRegion)
 				scale = 0.75f;
 			else
 				scale = 0.5f;
- 
+
 			Int frameWidth = getIconInfo()->m_icon[ iconIndex ]->getCurrentFrameWidth() * scale;
 			Int frameHeight = getIconInfo()->m_icon[ iconIndex ]->getCurrentFrameHeight() * scale;
 
@@ -3744,8 +3729,8 @@ void Drawable::drawConstructPercent( const IRegion2D *healthBarRegion )
 	// convert drawable center position to screen coords
 	TheTacticalView->worldToScreen( &pos, &screen );
 
-  if ( screen.x < 1 )
-    return;
+	if ( screen.x < 1 )
+		return;
 
 	// draw the text
 	Color color = GameMakeColor( 255, 255, 255, 255 );
@@ -4385,11 +4370,11 @@ void	Drawable::setTimeOfDay(TimeOfDay tod)
  */
 const AudioEventInfo * Drawable::getBaseSoundAmbientInfo() const
 {
-  const AudioEventRTS * baseAmbient = getTemplate()->getSoundAmbient();
-  if ( baseAmbient )
-    return baseAmbient->getAudioEventInfo();
+	const AudioEventRTS * baseAmbient = getTemplate()->getSoundAmbient();
+	if ( baseAmbient )
+		return baseAmbient->getAudioEventInfo();
 
-  return NULL;
+	return NULL;
 }
 
 /** 
@@ -4397,10 +4382,10 @@ const AudioEventInfo * Drawable::getBaseSoundAmbientInfo() const
  */
 void Drawable::mangleCustomAudioName( DynamicAudioEventInfo * audioToMangle ) const
 {
-  AsciiString customizedName;
-  customizedName.format( " CUSTOM %d ", (Int)getID() ); // Note space at beginning prevents collision with any names from INI file
-  customizedName.concat( audioToMangle->m_audioName );
-  audioToMangle->overrideAudioName( customizedName );
+	AsciiString customizedName;
+	customizedName.format( " CUSTOM %d ", (Int)getID() ); // Note space at beginning prevents collision with any names from INI file
+	customizedName.concat( audioToMangle->m_audioName );
+	audioToMangle->overrideAudioName( customizedName );
 }
 
 /** 
@@ -4408,9 +4393,9 @@ void Drawable::mangleCustomAudioName( DynamicAudioEventInfo * audioToMangle ) co
  */
 void Drawable::setCustomSoundAmbientOff()
 {
-  clearCustomSoundAmbient( false );
-  
-  m_customSoundAmbientInfo = getNoSoundMarker();  
+	clearCustomSoundAmbient( false );
+	
+	m_customSoundAmbientInfo = getNoSoundMarker();	
 }
 
 /** 
@@ -4419,17 +4404,17 @@ void Drawable::setCustomSoundAmbientOff()
  */
 void Drawable::setCustomSoundAmbientInfo( DynamicAudioEventInfo * customAmbientInfo )
 {
-  clearCustomSoundAmbient( false );
+	clearCustomSoundAmbient( false );
 
-  // This is mostly to make sure no one delete's the no sound marker, causing it to be 
-  // recycled as a new no sound marker
-  DEBUG_ASSERTCRASH( customAmbientInfo != getNoSoundMarker(), ("No sound marker passed as custom ambient") );
+	// This is mostly to make sure no one delete's the no sound marker, causing it to be 
+	// recycled as a new no sound marker
+	DEBUG_ASSERTCRASH( customAmbientInfo != getNoSoundMarker(), ("No sound marker passed as custom ambient") );
 
-  // Set name to something different so we don't get confused
+	// Set name to something different so we don't get confused
  
-  m_customSoundAmbientInfo = customAmbientInfo;
+	m_customSoundAmbientInfo = customAmbientInfo;
 
-  startAmbientSound(); // Note: checks for enabled flag
+	startAmbientSound(); // Note: checks for enabled flag
 }
 
 /** 
@@ -4437,21 +4422,21 @@ void Drawable::setCustomSoundAmbientInfo( DynamicAudioEventInfo * customAmbientI
  */
 void Drawable::clearCustomSoundAmbient( bool restartSound )
 {
-  if ( m_ambientSound )
-  {
-    // Make sure sound doesn't keep a reference to the deleted pointer
-    m_ambientSound->m_event.setAudioEventInfo( NULL );
-  }
+	if ( m_ambientSound )
+	{
+		// Make sure sound doesn't keep a reference to the deleted pointer
+		m_ambientSound->m_event.setAudioEventInfo( NULL );
+	}
 
-  // Stop using old info
-  stopAmbientSound();
+	// Stop using old info
+	stopAmbientSound();
 
-  m_customSoundAmbientInfo = NULL;
-  
-  if ( restartSound )
-  {
-    startAmbientSound(); // Note: checks for enabled flag
-  }
+	m_customSoundAmbientInfo = NULL;
+	
+	if ( restartSound )
+	{
+		startAmbientSound(); // Note: checks for enabled flag
+	}
 }
 
 
@@ -4462,80 +4447,80 @@ void Drawable::startAmbientSound(BodyDamageType dt, TimeOfDay tod, Bool onlyIfPe
 {
 	stopAmbientSound();
 
-  Bool trySound = FALSE;
+	Bool trySound = FALSE;
 
-  // Look for customized sound info
-  if ( dt != BODY_RUBBLE && m_customSoundAmbientInfo != NULL )
-  {
-    if ( m_customSoundAmbientInfo != getNoSoundMarker() )
-    {
-      if (m_ambientSound == NULL)
-        m_ambientSound = newInstance(DynamicAudioEventRTS);
+	// Look for customized sound info
+	if ( dt != BODY_RUBBLE && m_customSoundAmbientInfo != NULL )
+	{
+		if ( m_customSoundAmbientInfo != getNoSoundMarker() )
+		{
+			if (m_ambientSound == NULL)
+				m_ambientSound = newInstance(DynamicAudioEventRTS);
 
-      // Make sure m_event will accept the custom info
-      m_ambientSound->m_event.setEventName( m_customSoundAmbientInfo->m_audioName );
-      m_ambientSound->m_event.setAudioEventInfo( m_customSoundAmbientInfo );
-      trySound = TRUE;
-    }       
-  }
-  else
-  {
-    // Didn't get customized sound
-    //Get the specific ambient sound for the damage type.
-	  const AudioEventRTS& audio = getAmbientSoundByDamage(dt);
-	  if( audio.getEventName().isNotEmpty() )
-	  {
-		  if (m_ambientSound == NULL)
-			  m_ambientSound = newInstance(DynamicAudioEventRTS);
+			// Make sure m_event will accept the custom info
+			m_ambientSound->m_event.setEventName( m_customSoundAmbientInfo->m_audioName );
+			m_ambientSound->m_event.setAudioEventInfo( m_customSoundAmbientInfo );
+			trySound = TRUE;
+		}			 
+	}
+	else
+	{
+		// Didn't get customized sound
+		//Get the specific ambient sound for the damage type.
+		const AudioEventRTS& audio = getAmbientSoundByDamage(dt);
+		if( audio.getEventName().isNotEmpty() )
+		{
+			if (m_ambientSound == NULL)
+				m_ambientSound = newInstance(DynamicAudioEventRTS);
 
-		  (m_ambientSound->m_event) = audio;
-		  trySound = TRUE;
-	  }
-	  else if( dt != BODY_PRISTINE && dt != BODY_RUBBLE )
-	  {
-		  //If the ambient sound was absent in the case of non-pristine damage types,
-		  //try getting the pristine one. Most of our cases actually specify just the
-		  //pristine sound and want to use it for all states (except dead/rubble).
-		  const AudioEventRTS& pristineAudio = getAmbientSoundByDamage( BODY_PRISTINE );
-		  if( pristineAudio.getEventName().isNotEmpty() )
-		  {
-			  if (m_ambientSound == NULL)
-				  m_ambientSound = newInstance(DynamicAudioEventRTS);
-			  (m_ambientSound->m_event) = pristineAudio;
-			  trySound = TRUE;
-		  }
-	  }
-  }
-  
+			(m_ambientSound->m_event) = audio;
+			trySound = TRUE;
+		}
+		else if( dt != BODY_PRISTINE && dt != BODY_RUBBLE )
+		{
+			//If the ambient sound was absent in the case of non-pristine damage types,
+			//try getting the pristine one. Most of our cases actually specify just the
+			//pristine sound and want to use it for all states (except dead/rubble).
+			const AudioEventRTS& pristineAudio = getAmbientSoundByDamage( BODY_PRISTINE );
+			if( pristineAudio.getEventName().isNotEmpty() )
+			{
+				if (m_ambientSound == NULL)
+					m_ambientSound = newInstance(DynamicAudioEventRTS);
+				(m_ambientSound->m_event) = pristineAudio;
+				trySound = TRUE;
+			}
+		}
+	}
+	
 	
 	if( trySound && m_ambientSound )
 	{
 		const AudioEventInfo *info = m_ambientSound->m_event.getAudioEventInfo();
 		if( info )
 		{
-      if ( !onlyIfPermanent || info->isPermanentSound() )
-      {
-			  if( BitIsSet( info->m_type, ST_GLOBAL) || info->m_priority == AP_CRITICAL )
-			  {
-				  //Play it anyways.
-				  m_ambientSound->m_event.setDrawableID(getID());
-				  m_ambientSound->m_event.setTimeOfDay(tod);
-				  m_ambientSound->m_event.setPlayingHandle(TheAudio->addAudioEvent( &m_ambientSound->m_event ));
-			  }
-			  else
-			  {
-				  //Check if it's close enough to try playing (optimization)
-				  Coord3D vector = *getPosition();
-				  vector.sub( TheAudio->getListenerPosition() );
-				  Real distSqr = vector.lengthSqr();
-				  if( distSqr < sqr( info->m_maxDistance ) )
-				  {
-					  m_ambientSound->m_event.setDrawableID(getID());
-					  m_ambientSound->m_event.setTimeOfDay(tod);
-					  m_ambientSound->m_event.setPlayingHandle(TheAudio->addAudioEvent( &m_ambientSound->m_event ));
-				  }
-			  }
-      }
+			if ( !onlyIfPermanent || info->isPermanentSound() )
+			{
+				if( BitIsSet( info->m_type, ST_GLOBAL) || info->m_priority == AP_CRITICAL )
+				{
+					//Play it anyways.
+					m_ambientSound->m_event.setDrawableID(getID());
+					m_ambientSound->m_event.setTimeOfDay(tod);
+					m_ambientSound->m_event.setPlayingHandle(TheAudio->addAudioEvent( &m_ambientSound->m_event ));
+				}
+				else
+				{
+					//Check if it's close enough to try playing (optimization)
+					Coord3D vector = *getPosition();
+					vector.sub( TheAudio->getListenerPosition() );
+					Real distSqr = vector.lengthSqr();
+					if( distSqr < sqr( info->m_maxDistance ) )
+					{
+						m_ambientSound->m_event.setDrawableID(getID());
+						m_ambientSound->m_event.setTimeOfDay(tod);
+						m_ambientSound->m_event.setPlayingHandle(TheAudio->addAudioEvent( &m_ambientSound->m_event ));
+					}
+				}
+			}
 		}
 		else
 		{
@@ -4551,11 +4536,11 @@ void Drawable::startAmbientSound(BodyDamageType dt, TimeOfDay tod, Bool onlyIfPe
 //-------------------------------------------------------------------------------------------------
 void Drawable::startAmbientSound( Bool onlyIfPermanent )
 {
-  // Must go through enableAmbientSound() if sound is disabled
-  if ( !m_ambientSoundEnabled || !m_ambientSoundEnabledFromScript )
-    return;
-  
-  stopAmbientSound();
+	// Must go through enableAmbientSound() if sound is disabled
+	if ( !m_ambientSoundEnabled || !m_ambientSoundEnabledFromScript )
+		return;
+	
+	stopAmbientSound();
 	BodyDamageType bodyCondition = BODY_PRISTINE;
 	Object *obj = getObject();
 	if( obj )
@@ -4603,21 +4588,21 @@ void Drawable::enableAmbientSound( Bool enable )
 // Enable and disable sound because the map designer wants us too
 void Drawable::enableAmbientSoundFromScript( Bool enable )
 {
-  // Note: deliberately skipping if( m_ambientSoundEnabledFromScript == enable ) check here
-  // Allow ENABLE_OBJECT_SOUND to trigger one-shot attached sound multiple times
+	// Note: deliberately skipping if( m_ambientSoundEnabledFromScript == enable ) check here
+	// Allow ENABLE_OBJECT_SOUND to trigger one-shot attached sound multiple times
 
-  m_ambientSoundEnabledFromScript = enable;
-  if( enable )
-  {
-    if ( m_ambientSoundEnabled )
-    {
-      startAmbientSound();
-    }
-  }
-  else
-  {
-    stopAmbientSound();
-  }
+	m_ambientSoundEnabledFromScript = enable;
+	if( enable )
+	{
+		if ( m_ambientSoundEnabled )
+		{
+			startAmbientSound();
+		}
+	}
+	else
+	{
+		stopAmbientSound();
+	}
 }
 
 
@@ -4917,8 +4902,8 @@ void Drawable::xferDrawableModules( Xfer *xfer )
 	*    during the module xfer (CBD)
 	* 4: Added m_ambientSoundEnabled flag
 	* 5: save full mtx, not pos+orient.
-  * 6: Added m_ambientSoundEnabledFromScript flag
-  * 7: Save the customize ambient sound info
+	* 6: Added m_ambientSoundEnabledFromScript flag
+	* 7: Save the customize ambient sound info
 	*/
 // ------------------------------------------------------------------------------------------------
 void Drawable::xfer( Xfer *xfer )
@@ -5314,105 +5299,105 @@ void Drawable::xfer( Xfer *xfer )
 		m_isModelDirty = TRUE;
 #endif
 
-  if( xfer->getXferMode() == XFER_LOAD )
-  {
-    stopAmbientSound(); // Restarted in loadPostProcess()
-  }
+	if( xfer->getXferMode() == XFER_LOAD )
+	{
+		stopAmbientSound(); // Restarted in loadPostProcess()
+	}
 
-  if( version >= 4 )
+	if( version >= 4 )
 	{
 		xfer->xferBool( &m_ambientSoundEnabled );
 	}
 
-  if( version >= 6 )
-  {
-    xfer->xferBool( &m_ambientSoundEnabledFromScript );
-  }
+	if( version >= 6 )
+	{
+		xfer->xferBool( &m_ambientSoundEnabledFromScript );
+	}
 
 
-  if ( version >= 7 )
-  {
-    Bool customized = ( m_customSoundAmbientInfo != NULL );
-    xfer->xferBool( &customized );
+	if ( version >= 7 )
+	{
+		Bool customized = ( m_customSoundAmbientInfo != NULL );
+		xfer->xferBool( &customized );
 
-    if ( customized )
-    {
-      Bool customizedToSilence = ( m_customSoundAmbientInfo == getNoSoundMarker() );
+		if ( customized )
+		{
+			Bool customizedToSilence = ( m_customSoundAmbientInfo == getNoSoundMarker() );
 
-      xfer->xferBool( &customizedToSilence );
-      if ( xfer->getXferMode() == XFER_LOAD )
-      {
-        if ( customizedToSilence )
-        {
-          setCustomSoundAmbientOff();
-        }
-        else
-        {
-          AsciiString baseInfoName;
-          xfer->xferAsciiString( &baseInfoName );
+			xfer->xferBool( &customizedToSilence );
+			if ( xfer->getXferMode() == XFER_LOAD )
+			{
+				if ( customizedToSilence )
+				{
+					setCustomSoundAmbientOff();
+				}
+				else
+				{
+					AsciiString baseInfoName;
+					xfer->xferAsciiString( &baseInfoName );
 
-          const AudioEventInfo * baseInfo = TheAudio->findAudioEventInfo( baseInfoName );
-          DynamicAudioEventInfo * customizedInfo;
-          Bool successfulLoad = true;
+					const AudioEventInfo * baseInfo = TheAudio->findAudioEventInfo( baseInfoName );
+					DynamicAudioEventInfo * customizedInfo;
+					Bool successfulLoad = true;
 
-          if ( baseInfo == NULL )
-          {
-            DEBUG_CRASH( ( "Load failed to load customized ambient sound because sound '%s' no longer exists", baseInfoName.str() ) );
-            
-            // Keep trying to load if we possibly can... Don't completely ruin save files just because an old sound
-            // entry in the INI files was removed or renamed
-            customizedInfo = newInstance( DynamicAudioEventInfo );
-            successfulLoad = false;
-          }
-          else
-          {
-            customizedInfo = newInstance( DynamicAudioEventInfo )( *baseInfo );
-          }
+					if ( baseInfo == NULL )
+					{
+						DEBUG_CRASH( ( "Load failed to load customized ambient sound because sound '%s' no longer exists", baseInfoName.str() ) );
+						
+						// Keep trying to load if we possibly can... Don't completely ruin save files just because an old sound
+						// entry in the INI files was removed or renamed
+						customizedInfo = newInstance( DynamicAudioEventInfo );
+						successfulLoad = false;
+					}
+					else
+					{
+						customizedInfo = newInstance( DynamicAudioEventInfo )( *baseInfo );
+					}
 
-          try
-          {
-            // Get custom name back
-            mangleCustomAudioName( customizedInfo );
-        
-            customizedInfo->xferNoName( xfer );
+					try
+					{
+						// Get custom name back
+						mangleCustomAudioName( customizedInfo );
+				
+						customizedInfo->xferNoName( xfer );
 
-            if ( successfulLoad )
-            {
-              TheAudio->addAudioEventInfo( customizedInfo );
+						if ( successfulLoad )
+						{
+							TheAudio->addAudioEventInfo( customizedInfo );
 
-              clearCustomSoundAmbient( false );
-              m_customSoundAmbientInfo = customizedInfo;
-              
-              customizedInfo = NULL; // Belongs to TheAudio now
-            }
-            else
-            {
-              customizedInfo->deleteInstance();
-              customizedInfo = NULL;
-            }
-          }
-          catch( ... )
-          {
-            // since Xfer can throw exceptions -- don't leak memory!
-            if ( customizedInfo != NULL ) 
-              customizedInfo->deleteInstance();
+							clearCustomSoundAmbient( false );
+							m_customSoundAmbientInfo = customizedInfo;
+							
+							customizedInfo = NULL; // Belongs to TheAudio now
+						}
+						else
+						{
+							customizedInfo->deleteInstance();
+							customizedInfo = NULL;
+						}
+					}
+					catch( ... )
+					{
+						// since Xfer can throw exceptions -- don't leak memory!
+						if ( customizedInfo != NULL ) 
+							customizedInfo->deleteInstance();
 
-            throw; //rethrow
-          }
-        }
-      }
-      else // else we are saving...
-      {
-        if ( !customizedToSilence )
-        {
-          AsciiString baseInfoName = m_customSoundAmbientInfo->getOriginalName();
-          xfer->xferAsciiString( &baseInfoName );
-          m_customSoundAmbientInfo->xferNoName( xfer );
-        }
-      }
-    }
-  }
-}  // end xfer
+						throw; //rethrow
+					}
+				}
+			}
+			else // else we are saving...
+			{
+				if ( !customizedToSilence )
+				{
+					AsciiString baseInfoName = m_customSoundAmbientInfo->getOriginalName();
+					xfer->xferAsciiString( &baseInfoName );
+					m_customSoundAmbientInfo->xferNoName( xfer );
+				}
+			}
+		}
+	}
+}	// end xfer
 
 // ------------------------------------------------------------------------------------------------
 /** Load post process */
@@ -5428,14 +5413,14 @@ void Drawable::loadPostProcess( void )
 	
 	if( m_ambientSoundEnabled && m_ambientSoundEnabledFromScript )
 	{
-    // Do we actually want to start the ambient sound up? 
-    // If it is a permanent sound, then yes; but if it is
-    // a one-shot sound, we don't want to start it even
-    // if it's enabled (because the sound might have finished
-    // playing long ago). This is what the "onlyIfPermanent"
-    // parameter does -- almost like it was added just for
-    // this special case! 
-    startAmbientSound( true );
+		// Do we actually want to start the ambient sound up? 
+		// If it is a permanent sound, then yes; but if it is
+		// a one-shot sound, we don't want to start it even
+		// if it's enabled (because the sound might have finished
+		// playing long ago). This is what the "onlyIfPermanent"
+		// parameter does -- almost like it was added just for
+		// this special case! 
+		startAmbientSound( true );
 	}
 	else
 	{

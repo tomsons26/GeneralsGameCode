@@ -66,7 +66,7 @@
 //-----------------------------------------------------------------------------
 namespace wnd
 {
-AnimateWindow::AnimateWindow(void)
+AnimateWindow::AnimateWindow( void )
 {
 	m_delay = 0;
 	m_startPos.x = m_startPos.y = 0;

@@ -1988,18 +1988,16 @@ AsciiString Parameter::getUiText(void) const
 				default : DEBUG_CRASH(("Unknown Radar event type."));
 			}
 			break;
-			
-    case LEFT_OR_RIGHT:
-      switch (m_int)
-      {
-        case EVAC_BURST_FROM_CENTER: uiText.format("normal (burst from center)"); break;
-        case EVAC_TO_LEFT: uiText.format("left"); break;
-        case EVAC_TO_RIGHT: uiText.format("right"); break;
-        default :  uiText.format("unspecified"); break;
-      }
-      break;
-      
 
+		case LEFT_OR_RIGHT:
+			switch (m_int)
+			{
+				case EVAC_BURST_FROM_CENTER: uiText.format("normal (burst from center)"); break;
+				case EVAC_TO_LEFT: uiText.format("left"); break;
+				case EVAC_TO_RIGHT: uiText.format("right"); break;
+				default :	uiText.format("unspecified"); break;
+			}
+			break;
 
 		case DIALOG:
 			uiText.format("'%s'", uiString.str());

@@ -3403,7 +3403,7 @@ void Object::crc( Xfer *xfer )
 		CRCDEBUG_LOG(("CRC of Object %d (%s), owned by player %d, ", m_id, getTemplate()->getName().str(), getControllingPlayer()->getPlayerIndex()));
 		DUMPMATRIX3D(mtx);
 	}
-#endif //DEBUG_CRC
+#endif // DEBUG_CRC
 
 
 	xfer->xferUser(&m_id,															sizeof(m_id));
@@ -4861,12 +4861,12 @@ void Object::doCommandButtonAtObject( const CommandButton *commandButton, Object
 				break;
 
 			case GUICOMMANDMODE_HIJACK_VEHICLE:
-				if ( ai )
+				if( ai )
 				{
-					ai->aiEnter(obj, cmdSource);
+					ai->aiEnter( obj, cmdSource );
 				}
 				break;
-		
+
 			//Feel free to implement object based command buttons.
 			case GUI_COMMAND_DOZER_CONSTRUCT:
 			case GUI_COMMAND_DOZER_CONSTRUCT_CANCEL:
@@ -4976,7 +4976,6 @@ void Object::doCommandButtonAtPosition( const CommandButton *commandButton, cons
 		}
 	}
 }
-
 
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------

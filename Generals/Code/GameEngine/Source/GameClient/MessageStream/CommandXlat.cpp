@@ -3318,16 +3318,16 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 
 			const CommandButton *command = TheInGameUI->getGUICommand();
 			// maintain this as the set of GUI button initiated commands that require a left click action in alt mouse mode
- 			Bool isFiringGUICommand = (command	&& (command->getCommandType() == GUI_COMMAND_SPECIAL_POWER
- 												|| command->getCommandType() == GUI_COMMAND_SPECIAL_POWER_FROM_COMMAND_CENTER
+			Bool isFiringGUICommand = (command	&& (command->getCommandType() == GUI_COMMAND_SPECIAL_POWER
+												|| command->getCommandType() == GUI_COMMAND_SPECIAL_POWER_FROM_COMMAND_CENTER
 												|| command->getCommandType() == GUI_COMMAND_FIRE_WEAPON
 												|| command->getCommandType() == GUI_COMMAND_COMBATDROP
 												|| command->getCommandType() == GUICOMMANDMODE_HIJACK_VEHICLE
 												|| command->getCommandType() == GUICOMMANDMODE_CONVERT_TO_CARBOMB));
- 
- 			// in alternate mouse mode, this left click is only actioned here if we're firing a gui command
- 			if ((TheGlobalData->m_useAlternateMouse) && (! isFiringGUICommand))
- 				break;
+
+			// in alternate mouse mode, this left click is only actioned here if we're firing a gui command
+			if ((TheGlobalData->m_useAlternateMouse) && (! isFiringGUICommand))
+				break;
 
 			Bool controllable = TheInGameUI->areSelectedObjectsControllable()
 													|| (command && command->getCommandType() == GUI_COMMAND_SPECIAL_POWER_FROM_COMMAND_CENTER);

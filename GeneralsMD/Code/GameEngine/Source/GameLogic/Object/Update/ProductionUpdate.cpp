@@ -282,7 +282,7 @@ Bool ProductionUpdate::queueUpgrade( const UpgradeTemplate *upgrade )
 	// you cannot queue the production of an upgrade twice in this queue
 	if( isUpgradeInQueue( upgrade ) == TRUE )
 		return FALSE;
-	
+
 	// STOP cheaters by making sure they can actually build this
 	if( !getObject()->canProduceUpgrade(upgrade) )
 		return FALSE;

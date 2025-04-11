@@ -138,10 +138,13 @@ void BorderTool::mouseDown(TTrackingMode m, CPoint viewPt, WbView* pView, CWorld
 
 	Int motion;
 	pDoc->findBoundaryNear(&groundPt, BOUNDARY_PICK_DISTANCE, &m_modifyBorderNdx, &motion);
-	if (motion == 0) {
+	if (motion == 0) 
+	{
 		// modifying the bottom left is not allowed.
 		m_modifyBorderNdx = -1;
-	} else {
+	} 
+	else
+	{
 		m_modificationType = (ModificationType) motion;
 	}
 }

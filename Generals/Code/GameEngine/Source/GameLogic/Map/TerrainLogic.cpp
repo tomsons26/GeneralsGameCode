@@ -136,7 +136,7 @@ Object *Bridge::createTower( Coord3D *worldPos,
 	if( towerTemplate == NULL || bridge == NULL )
 	{
 
-		DEBUG_CRASH(( "createTower: Invalid params\n" ));
+		DEBUG_CRASH(( "Bridge::createTower(): Invalid params\n" ));
 		return NULL;
 
 	}  // end if

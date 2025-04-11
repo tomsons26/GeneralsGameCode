@@ -197,23 +197,23 @@ Bool FileSystem::doesFileExist(const Char *filename) const
 {
 	USE_PERF_TIMER(FileSystem)
 
-  unsigned key=TheNameKeyGenerator->nameToLowercaseKey(filename);
-  std::map<unsigned,bool>::iterator i=m_fileExist.find(key);
-  if (i!=m_fileExist.end())
-    return i->second;
+	unsigned key=TheNameKeyGenerator->nameToLowercaseKey(filename);
+	std::map<unsigned,bool>::iterator i=m_fileExist.find(key);
+	if (i!=m_fileExist.end())
+		return i->second;
 
 	if (TheLocalFileSystem->doesFileExist(filename)) 
-  {
-    m_fileExist[key]=true;
+	{
+		m_fileExist[key]=true;
 		return TRUE;
 	}
 	if (TheArchiveFileSystem->doesFileExist(filename)) 
-  {
-    m_fileExist[key]=true;
+	{
+		m_fileExist[key]=true;
 		return TRUE;
 	}
 
-  m_fileExist[key]=false;
+	m_fileExist[key]=false;
 	return FALSE;
 }
 
@@ -267,7 +267,7 @@ Bool FileSystem::createDirectory(AsciiString directory)
 Bool FileSystem::areMusicFilesOnCD()
 {
 #if 1
-    return TRUE;
+	return TRUE;
 #else
 	if (!TheCDManager) {
 		DEBUG_LOG(("FileSystem::areMusicFilesOnCD() - No CD Manager; returning false\n"));

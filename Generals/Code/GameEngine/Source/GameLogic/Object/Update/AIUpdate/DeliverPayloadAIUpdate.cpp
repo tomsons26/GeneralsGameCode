@@ -38,12 +38,12 @@
 #include "GameClient/FXList.h"
 #include "GameClient/InGameUI.h"
 #include "GameLogic/Locomotor.h"
-#include "GameLogic/Module/BodyModule.h"
-#include "GameLogic/Module/ContainModule.h"
-#include "GameLogic/Module/DeliverPayloadAIUpdate.h"
 #include "GameLogic/Module/GenerateMinefieldBehavior.h"
-#include "GameLogic/Module/PhysicsUpdate.h"
+#include "GameLogic/Module/DeliverPayloadAIUpdate.h"
 #include "GameLogic/Module/ParachuteContain.h"
+#include "GameLogic/Module/ContainModule.h"
+#include "GameLogic/Module/PhysicsUpdate.h"
+#include "GameLogic/Module/BodyModule.h"
 #include "GameLogic/Object.h"
 #include "GameLogic/PartitionManager.h"
 #include "GameLogic/Weapon.h"
@@ -416,7 +416,8 @@ void DeliverPayloadAIUpdate::crc( Xfer *xfer )
 // ------------------------------------------------------------------------------------------------
 /** Xfer method
 	* Version Info:
-	* 1: Initial version */
+	* 1: Initial version 
+*/
 // ------------------------------------------------------------------------------------------------
 void DeliverPayloadAIUpdate::xfer( Xfer *xfer )
 {

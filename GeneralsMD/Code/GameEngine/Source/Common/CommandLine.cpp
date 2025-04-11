@@ -1233,10 +1233,10 @@ static CommandLineParam params[] =
 	{ "-munkee", parseMunkee },
 	{ "-displayDebug", parseDisplayDebug },
 	{ "-file", parseFile },
-  
+
 //	{ "-preload", parsePreload },
 	
-  { "-preloadEverything", parsePreloadEverything },
+	{ "-preloadEverything", parsePreloadEverything },
 	{ "-logAssets", parseLogAssets },
 	{ "-netMinPlayers", parseNetMinPlayers },
 	{ "-DemoLoadScreen", parseDemoLoadScreen },

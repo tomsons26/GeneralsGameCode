@@ -102,7 +102,7 @@ protected:
 private:
 
 	void createPayload();
-	
+
 	Bool m_payloadCreated;	
 	Int m_extraSlotsInUse;
 	UnsignedInt m_frameExitNotBusy;

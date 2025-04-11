@@ -70,6 +70,7 @@ void HiveStructureBody::attemptDamage( DamageInfo *damageInfo )
 	
 	if( getDamageTypeFlag( data->m_damageTypesToPropagateToSlaves, damageInfo->in.m_damageType ) )
 	{
+
 		//We have the right type of damage types incoming to propagate to slaves. Do we have slaves?
 		SpawnBehaviorInterface *spawnInterface = hive->getSpawnBehaviorInterface();
 		if( spawnInterface )
@@ -99,6 +100,7 @@ void HiveStructureBody::attemptDamage( DamageInfo *damageInfo )
 		{
 			DEBUG_CRASH( ("%s has a HiveStructureBody module, which requires a SpawnBehavior module. Thus it is unable to propagate damage to slaves.", hive->getTemplate()->getName().str() ) );
 		}
+
 	}
 
 	//Nothing to propagate (either different damage type or no slaves), 

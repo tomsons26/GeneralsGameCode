@@ -153,7 +153,7 @@ public:
 	inline void setGameName( UnicodeString name ) { m_gameName = name; }
 	inline UnicodeString getGameName( void ) const { return m_gameName; }
 
-	inline void setLocalName( AsciiString name ) { m_localName = name; } 
+	inline void setLocalName( AsciiString name ) { m_localName = name; }
 };
 
 extern GameSpyStagingRoom *TheGameSpyGame;

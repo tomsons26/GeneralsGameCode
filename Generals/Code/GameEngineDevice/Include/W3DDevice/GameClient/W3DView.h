@@ -160,8 +160,8 @@ public:
 	virtual void moveCameraTo(const Coord3D *o, Int miliseconds,  Int shutter, Bool orient);
 	virtual void moveCameraAlongWaypointPath(Waypoint *pWay, Int frames, Int shutter, Bool orient);
 	virtual Bool isCameraMovementFinished(void);
- 	virtual void resetCamera(const Coord3D *location, Int frames);	///< Move camera to location, and reset to default angle & zoom.
- 	virtual void rotateCamera(Real rotations, Int frames);					///< Rotate camera about current viewpoint.
+	virtual void resetCamera(const Coord3D *location, Int frames);	///< Move camera to location, and reset to default angle & zoom.
+	virtual void rotateCamera(Real rotations, Int frames);					///< Rotate camera about current viewpoint.
 	virtual void rotateCameraTowardObject(ObjectID id, Int milliseconds, Int holdMilliseconds);	///< Rotate camera to face an object, and hold on it
 	virtual void rotateCameraTowardPosition(const Coord3D *pLoc, Int milliseconds);	///< Rotate camera to face a location.
 	virtual void cameraModFreezeTime(void){ m_freezeTimeForCameraMovement = true;}					///< Freezes time during the next camera movement.
@@ -231,7 +231,6 @@ private:
 	Real m_shakeAngleCos;														///< the cosine of the orientation of the oscillation
 	Real m_shakeAngleSin;														///< the sine of the orientation of the oscillation
 	Real m_shakeIntensity;													///< the intensity of the oscillation
-
 
 	TRotateCameraInfo	m_rcInfo;
 	Bool		m_doingRotateCamera;										///< True if we are doing a camera rotate.

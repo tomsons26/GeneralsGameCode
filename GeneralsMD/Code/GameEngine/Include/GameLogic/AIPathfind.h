@@ -452,7 +452,6 @@ struct TCheckMovementInfo;
 class ZoneBlock
 {
 public: 
-
 	ZoneBlock();
 	~ZoneBlock();  // not virtual, please don't override without making virtual.  jba.
 
@@ -476,7 +475,6 @@ protected:
 	zoneStorageType m_firstZone; // First zone in this block.
 	UnsignedShort m_numZones;	 // Number of zones in this block.  If == 1, there is only one zone, and 
 														 // no zone equivalency arrays will be allocated.
-
 
 	UnsignedShort m_zonesAllocated;
 	zoneStorageType *m_groundCliffZones;
@@ -509,8 +507,8 @@ public:
 	void reset(void);
 
 	Bool needToCalculateZones(void) const {return m_nextFrameToCalculateZones <= TheGameLogic->getFrame() ;} ///< Returns true if the zones need to be recalculated.
- 	void markZonesDirty( Bool insert ) ; ///< Called when the zones need to be recalculated.
- 	void updateZonesForModify( PathfindCell **map,  PathfindLayer layers[], const IRegion2D &structureBounds, const IRegion2D &globalBounds ) ; ///< Called to recalculate an area when a structure has been removed.
+	void markZonesDirty( Bool insert ) ; ///< Called when the zones need to be recalculated.
+	void updateZonesForModify( PathfindCell **map,  PathfindLayer layers[], const IRegion2D &structureBounds, const IRegion2D &globalBounds ) ; ///< Called to recalculate an area when a structure has been removed.
 	void calculateZones(	PathfindCell **map, PathfindLayer layers[], const IRegion2D &bounds);	///< Does zone calculations.  
 	zoneStorageType getEffectiveZone(LocomotorSurfaceTypeMask acceptableSurfaces, Bool crusher, zoneStorageType zone) const;
 	zoneStorageType getEffectiveTerrainZone(zoneStorageType zone) const;

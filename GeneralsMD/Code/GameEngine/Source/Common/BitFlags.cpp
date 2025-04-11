@@ -39,7 +39,7 @@
 
 const char* ModelConditionFlags::s_bitNameList[] = 
 {	
-	"TOPPLED", 
+	"TOPPLED",
 	"FRONTCRUSHED",
 	"BACKCRUSHED",
 	"DAMAGED",

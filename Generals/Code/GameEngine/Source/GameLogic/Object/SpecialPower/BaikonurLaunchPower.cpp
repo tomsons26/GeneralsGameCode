@@ -22,7 +22,7 @@
 //																																						//
 ////////////////////////////////////////////////////////////////////////////////
 
-// FILE: BaikonurLaunchPower.h /////////////////////////////////////////////////
+// FILE: BaikonurLaunchPower.cpp////////////////////////////////////////////////
 //-----------------------------------------------------------------------------
 //                                                                          
 //                       Electronic Arts Pacific.                          
@@ -34,7 +34,7 @@
 //
 //	Created:	November 2002
 //
-//	Filename: BaikonurLaunchPower.h
+//	Filename: BaikonurLaunchPower.cpp
 //
 //	Author:		Kris Morness
 //

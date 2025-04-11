@@ -265,7 +265,8 @@ void W3DTruckDraw::enableEmitters( Bool enable  )
 	}
 }
 //-------------------------------------------------------------------------------------------------
-void W3DTruckDraw::updateBones( void ) {
+void W3DTruckDraw::updateBones( void ) 
+{
 	if( getW3DTruckDrawModuleData() ) 
 	{
 		//Front tires

@@ -428,7 +428,7 @@ AsciiString TheThingTemplateBeingParsedName;
 	}
 
 	thingTemplate->validate();
-	
+
 	if( ini->getLoadType() == INI_LOAD_CREATE_OVERRIDES )
 	{
 		thingTemplate->resolveNames();

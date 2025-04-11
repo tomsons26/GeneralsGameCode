@@ -93,25 +93,25 @@ void W3DDependencyModelDraw::doDrawModule(const Matrix3D* transformMtx)
 		W3DModelDraw::doDrawModule( transformMtx );
 		m_dependencyCleared = FALSE;
 
-    
-    // A handy place to synchronize my drawable with container's
-    Drawable *myDrawable = getDrawable();
-    if ( ! myDrawable )
-      return;
-      
-    const Object *me = myDrawable->getObject();
-    if ( ! me )
-      return;
-
-	  Drawable *theirDrawable = NULL;
-    
-	  if( me->getContainedBy() && !me->getContainedBy()->getContain()->isEnclosingContainerFor(me) )
-		  theirDrawable = me->getContainedBy()->getDrawable();
 		
-    if( ! theirDrawable )
-		  return;
+		// A handy place to synchronize my drawable with container's
+		Drawable *myDrawable = getDrawable();
+		if ( ! myDrawable )
+			return;
+			
+		const Object *me = myDrawable->getObject();
+		if ( ! me )
+			return;
 
-    myDrawable->imitateStealthLook( *theirDrawable );
+		Drawable *theirDrawable = NULL;
+		
+		if( me->getContainedBy() && !me->getContainedBy()->getContain()->isEnclosingContainerFor(me) )
+			theirDrawable = me->getContainedBy()->getDrawable();
+		
+		if( ! theirDrawable )
+			return;
+
+		myDrawable->imitateStealthLook( *theirDrawable );
 
 	}
 }
@@ -149,7 +149,7 @@ void W3DDependencyModelDraw::adjustTransformMtx(Matrix3D& mtx) const
 			}
 			else
 			{
-        mtx = *theirDrawable->getTransformMatrix();//TransformMatrix();
+				mtx = *theirDrawable->getTransformMatrix();//TransformMatrix();
 				DEBUG_LOG(("m_attachToDrawableBoneInContainer %s not found\n",getW3DDependencyModelDrawModuleData()->m_attachToDrawableBoneInContainer.str()));
 			}
 		}

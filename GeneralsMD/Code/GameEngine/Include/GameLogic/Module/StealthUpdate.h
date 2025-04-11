@@ -52,7 +52,7 @@ enum
 	STEALTH_ONLY_WITH_BLACK_MARKET			= 0x00000040,
 	STEALTH_NOT_WHILE_TAKING_DAMAGE			= 0x00000080,
 	STEALTH_NOT_WHILE_FIRING_WEAPON			= (STEALTH_NOT_WHILE_FIRING_PRIMARY | STEALTH_NOT_WHILE_FIRING_SECONDARY | STEALTH_NOT_WHILE_FIRING_TERTIARY),
-  STEALTH_NOT_WHILE_RIDERS_ATTACKING  = 0x00000100,
+	STEALTH_NOT_WHILE_RIDERS_ATTACKING  = 0x00000100,
 };
 
 #ifdef DEFINE_STEALTHLEVEL_NAMES
@@ -66,7 +66,7 @@ static const char *TheStealthLevelNames[] =
 	"FIRING_TERTIARY",
 	"NO_BLACK_MARKET",
 	"TAKING_DAMAGE",
-  "RIDERS_ATTACKING",
+	"RIDERS_ATTACKING",
 	NULL
 };
 #endif
@@ -77,11 +77,11 @@ static const char *TheStealthLevelNames[] =
 class StealthUpdateModuleData : public UpdateModuleData
 {
 public:
-	ObjectStatusMaskType m_hintDetectableStates;
-	ObjectStatusMaskType m_requiredStatus;
-	ObjectStatusMaskType m_forbiddenStatus;
-	FXList				*m_disguiseRevealFX;
-	FXList				*m_disguiseFX;
+	ObjectStatusMaskType	m_hintDetectableStates;
+	ObjectStatusMaskType	m_requiredStatus;
+	ObjectStatusMaskType	m_forbiddenStatus;
+	FXList					*m_disguiseRevealFX;
+	FXList					*m_disguiseFX;
 	Real					m_stealthSpeed;
 	Real					m_friendlyOpacityMin;
 	Real					m_friendlyOpacityMax;
@@ -92,13 +92,13 @@ public:
 	UnsignedInt		m_stealthDelay;
 	UnsignedInt		m_stealthLevel;
 	UnsignedInt		m_blackMarketCheckFrames;
-  EvaMessage    m_enemyDetectionEvaEvent;
-  EvaMessage    m_ownDetectionEvaEvent;
-  Bool					m_innateStealth;
+	EvaMessage    m_enemyDetectionEvaEvent;
+	EvaMessage    m_ownDetectionEvaEvent;
+	Bool					m_innateStealth;
 	Bool					m_orderIdleEnemiesToAttackMeUponReveal;
 	Bool					m_teamDisguised;
 	Bool					m_useRiderStealth;
-  Bool          m_grantedBySpecialPower;
+	Bool          m_grantedBySpecialPower;
 
   StealthUpdateModuleData();
 	static void buildFieldParse(MultiIniFieldParse& p);
@@ -117,9 +117,7 @@ public:
 	StealthUpdate( Thing *thing, const ModuleData* moduleData );
 	// virtual destructor prototype provided by memory pool declaration
 
-
-  virtual StealthUpdate* getStealth() { return this; }
-
+	virtual StealthUpdate* getStealth() { return this; }
 
 	virtual UpdateSleepTime update();
 

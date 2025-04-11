@@ -1359,7 +1359,7 @@ std::string GameSpyPSMessageQueueInterface::formatPlayerKVPairs( PSPlayerStats s
 	ITERATE_OVER(buildingsBuilt);
 	ITERATE_OVER(earnings);
 	ITERATE_OVER(techCaptured);
-	
+
 	//GS  Report all disconnects, even if zero, because might have been 
 	//previously reported as 1 by updateAdditionalGameSpyDisconnections
 //	ITERATE_OVER(discons);

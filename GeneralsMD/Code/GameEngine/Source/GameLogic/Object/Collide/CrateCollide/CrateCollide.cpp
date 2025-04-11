@@ -198,46 +198,46 @@ Bool CrateCollide::isValidToExecute( const Object *other ) const
 void CrateCollide::doSabotageFeedbackFX( const Object *other, SabotageVictimType type )
 {
 
-  if ( ! getObject() )
-    return;
-  if ( ! other )
-    return;
+	if ( ! getObject() )
+		return;
+	if ( ! other )
+		return;
 
 	AudioEventRTS soundToPlay;
-  switch ( type )
-  {
-    case  CrateCollide::SAB_VICTIM_FAKE_BUILDING:
-    {
-      return; // THIS NEEDS NO ADD'L FEEDBACK
-    }
-    case 	CrateCollide::SAB_VICTIM_COMMAND_CENTER:
-    case 	CrateCollide::SAB_VICTIM_SUPERWEAPON:
-    {
-      soundToPlay = TheAudio->getMiscAudio()->m_sabotageResetTimerBuilding;
-      break;
-    }
-    case 	CrateCollide::SAB_VICTIM_DROP_ZONE:
-    case 	CrateCollide::SAB_VICTIM_SUPPLY_CENTER:
-    {
-      soundToPlay = TheAudio->getMiscAudio()->m_moneyWithdrawSound;
-      break;
-    }
-    case 	CrateCollide::SAB_VICTIM_INTERNET_CENTER:
-    case 	CrateCollide::SAB_VICTIM_MILITARY_FACTORY:
-    case 	CrateCollide::SAB_VICTIM_POWER_PLANT:
-    default:
-    {
-      soundToPlay = TheAudio->getMiscAudio()->m_sabotageShutDownBuilding;
-      break;
-    }
-  }
+	switch ( type )
+	{
+		case	CrateCollide::SAB_VICTIM_FAKE_BUILDING:
+		{
+			return; // THIS NEEDS NO ADD'L FEEDBACK
+		}
+		case 	CrateCollide::SAB_VICTIM_COMMAND_CENTER:
+		case 	CrateCollide::SAB_VICTIM_SUPERWEAPON:
+		{
+			soundToPlay = TheAudio->getMiscAudio()->m_sabotageResetTimerBuilding;
+			break;
+		}
+		case 	CrateCollide::SAB_VICTIM_DROP_ZONE:
+		case 	CrateCollide::SAB_VICTIM_SUPPLY_CENTER:
+		{
+			soundToPlay = TheAudio->getMiscAudio()->m_moneyWithdrawSound;
+			break;
+		}
+		case 	CrateCollide::SAB_VICTIM_INTERNET_CENTER:
+		case 	CrateCollide::SAB_VICTIM_MILITARY_FACTORY:
+		case 	CrateCollide::SAB_VICTIM_POWER_PLANT:
+		default:
+		{
+			soundToPlay = TheAudio->getMiscAudio()->m_sabotageShutDownBuilding;
+			break;
+		}
+	}
 
 	soundToPlay.setPosition( other->getPosition() );
 	TheAudio->addAudioEvent( &soundToPlay );
 
-  Drawable *draw = other->getDrawable();
-  if ( draw )
-    draw->flashAsSelected();
+	Drawable *draw = other->getDrawable();
+	if ( draw )
+		draw->flashAsSelected();
 
 }
 

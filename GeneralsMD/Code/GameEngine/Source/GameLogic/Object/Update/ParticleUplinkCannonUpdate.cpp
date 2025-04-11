@@ -305,12 +305,12 @@ Bool ParticleUplinkCannonUpdate::initiateIntentToDoSpecialPower(const SpecialPow
 		{
 			pos.set( targetObj->getPosition() );
 		}
-   	m_startAttackFrame = max( now, (UnsignedInt)1 );
+		m_startAttackFrame = max( now, (UnsignedInt)1 );
 		m_scriptedWaypointMode = TRUE;
-   	m_laserStatus = LASERSTATUS_NONE;
+		m_laserStatus = LASERSTATUS_NONE;
 		setLogicalStatus( STATUS_READY_TO_FIRE );
 		m_specialPowerModule->setReadyFrame( now );
-	  m_initialTargetPosition.set( &pos );
+		m_initialTargetPosition.set( &pos );
 		m_currentTargetPosition.set( &pos );
 
 		m_nextDestWaypointID = way->getID();
@@ -338,9 +338,9 @@ Bool ParticleUplinkCannonUpdate::initiateIntentToDoSpecialPower(const SpecialPow
 		{
 			pos.set( targetObj->getPosition() );
 		}
-   	m_initialTargetPosition.set( &pos );
-   	m_startAttackFrame = max( now, (UnsignedInt)1 );
-   	m_laserStatus = LASERSTATUS_NONE;
+		m_initialTargetPosition.set( &pos );
+		m_startAttackFrame = max( now, (UnsignedInt)1 );
+		m_laserStatus = LASERSTATUS_NONE;
 		setLogicalStatus( STATUS_READY_TO_FIRE );
 		m_specialPowerModule->setReadyFrame( now );
 	}
@@ -536,6 +536,7 @@ UpdateSleepTime ParticleUplinkCannonUpdate::update()
 
 				Real dotProduct = Vector2::Dot_Product( buildingToTargetVector, cartesianTargetVector );
 				dotProduct = __min( 0.99999f, __max( -0.99999f, dotProduct ) ); //Account for numerical errors.  Also, acos(-1.00000) is coming out QNAN on the superweapon general map.  Heh.
+
 				Real angle = (Real)ACos( dotProduct );
 
 				if( buildingToTargetVector.Y >= 0 )

@@ -152,7 +152,7 @@ JetSlowDeathBehavior::~JetSlowDeathBehavior( void )
 void JetSlowDeathBehavior::onDie( const DamageInfo *damageInfo )
 {
 	Object *us = getObject();
-	
+
 	// if the jet is on the ground we do just our ground fx death
 	if( us->isSignificantlyAboveTerrain() == FALSE || us->getStatusBits().test( OBJECT_STATUS_DECK_HEIGHT_OFFSET ) )
 	{

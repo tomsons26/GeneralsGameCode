@@ -507,9 +507,9 @@ public:
 	const AudioEventRTS *getSoundPromotedHero() const					{ return getAudio(TTAUDIO_soundPromotedHero); }
 	const AudioEventRTS *getSoundFalling() const							{ return getAudio(TTAUDIO_soundFalling); }
 
-  Bool hasSoundAmbient() const                              { return hasAudio(TTAUDIO_soundAmbient); }
+	Bool hasSoundAmbient() const                              { return hasAudio(TTAUDIO_soundAmbient); }
 
-  const AudioEventRTS *getPerUnitSound(const AsciiString& soundName) const;
+	const AudioEventRTS *getPerUnitSound(const AsciiString& soundName) const;
 	const FXList* getPerUnitFX(const AsciiString& fxName) const;
 
 	UnsignedInt getThreatValue() const								{ return m_threatValue; }
@@ -747,13 +747,13 @@ private:
 	UnsignedShort		m_maxSimultaneousOfType;			///< max simultaneous of this unit we can have (per player) at one time. (0 == unlimited)
 
 	// ---- Bool-sized things
-  Bool          m_maxSimultaneousDeterminedBySuperweaponRestriction; ///< If true, override value in m_maxSimultaneousOfType with value from GameInfo::getSuperweaponRestriction()
+	Bool					m_maxSimultaneousDeterminedBySuperweaponRestriction; ///< If true, override value in m_maxSimultaneousOfType with value from GameInfo::getSuperweaponRestriction()
 	Bool					m_isPrerequisite;							///< Is this thing considered in a prerequisite for any other thing?
 	Bool					m_isBridge;										///< True if this model is a bridge.
  	Bool					m_isBuildFacility;						///< is this the build facility for something? (calculated based on other template's prereqs)
 	Bool					m_isTrainable;								///< Whether or not I can even gain experience
-	Bool          m_enterGuard;									///< Whether or not I can enter objects when guarding
-	Bool          m_hijackGuard;								///< Whether or not I can hijack objects when guarding
+	Bool					m_enterGuard;									///< Whether or not I can enter objects when guarding
+	Bool					m_hijackGuard;								///< Whether or not I can hijack objects when guarding
 	Bool					m_isForbidden;								///< useful when overriding in <mapfile>.ini
 	Bool					m_armorCopiedFromDefault;
 	Bool					m_weaponsCopiedFromDefault;

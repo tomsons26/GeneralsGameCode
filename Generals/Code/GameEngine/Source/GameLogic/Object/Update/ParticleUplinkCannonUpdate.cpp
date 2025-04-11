@@ -292,9 +292,9 @@ void ParticleUplinkCannonUpdate::initiateIntentToDoSpecialPower(const SpecialPow
 	{
 		//All computer controlled players have automatic control -- the "S" curve.
 		UnsignedInt now = TheGameLogic->getFrame();
-   	m_initialTargetPosition.set( targetPos );
-   	m_startAttackFrame = max( now, (UnsignedInt)1 );
-   	m_laserStatus = LASERSTATUS_NONE;
+		m_initialTargetPosition.set( targetPos );
+		m_startAttackFrame = max( now, (UnsignedInt)1 );
+		m_laserStatus = LASERSTATUS_NONE;
 		setLogicalStatus( STATUS_READY_TO_FIRE );
 		m_specialPowerModule->setReadyFrame( now );
 	}

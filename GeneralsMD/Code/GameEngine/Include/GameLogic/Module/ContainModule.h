@@ -55,10 +55,10 @@ enum ObjectEnterExitType
 
 enum EvacDisposition
 {
-  EVAC_INVALID = 0,
-  EVAC_TO_LEFT,
-  EVAC_TO_RIGHT,
-  EVAC_BURST_FROM_CENTER,
+	EVAC_INVALID = 0,
+	EVAC_TO_LEFT,
+	EVAC_TO_RIGHT,
+	EVAC_BURST_FROM_CENTER,
 
 };
 
@@ -102,8 +102,8 @@ public:
 	virtual Bool isTunnelContain() const = 0;
 	virtual Bool isRiderChangeContain() const = 0;
 	virtual Bool isImmuneToClearBuildingAttacks() const = 0;
-  virtual Bool isSpecialOverlordStyleContainer() const = 0;
-  virtual Bool isAnyRiderAttacking() const = 0;
+	virtual Bool isSpecialOverlordStyleContainer() const = 0;
+	virtual Bool isAnyRiderAttacking() const = 0;
 	
 	///< if my object gets selected, then my visible passengers should, too
 	///< this gets called from
@@ -129,7 +129,7 @@ public:
 	virtual const Player* getApparentControllingPlayer(const Player* observingPlayer) const = 0;
 
 	virtual void recalcApparentControllingPlayer() = 0;
- 
+
 	//
 	// you will want to override onContaining() and onRemoving() if you need to
 	// do special actions at those event times for your module
@@ -147,7 +147,7 @@ public:
 	virtual void orderAllPassengersToIdle( CommandSourceType ) = 0; ///< Just like it sounds
 	virtual void orderAllPassengersToHackInternet( CommandSourceType ) = 0; ///< Just like it sounds
 	virtual void markAllPassengersDetected() = 0;										///< Cool game stuff got added to the system calls since this layer didn't exist, so this regains that functionality
- 
+
 	//
 	// interface for containing objects inside of objects.  Objects that are
 	// contained remove their drawable representations entirely from the client
@@ -187,11 +187,11 @@ public:
 	virtual PlayerMaskType getPlayerWhoEntered(void) const = 0;
 
 	virtual void processDamageToContained(Real percentDamage) = 0; ///< Do our % damage to units now.
-  virtual Object* getClosestRider ( const Coord3D *pos ) = 0;
+	virtual Object* getClosestRider ( const Coord3D *pos ) = 0;
 
 	virtual void enableLoadSounds( Bool enable ) = 0;
 
-  virtual void setEvacDisposition( EvacDisposition disp ) = 0;
+	virtual void setEvacDisposition( EvacDisposition disp ) = 0;
 
 	virtual Bool isWeaponBonusPassedToPassengers() const = 0;
 	virtual WeaponBonusConditionFlags getWeaponBonusPassedToPassengers() const = 0;

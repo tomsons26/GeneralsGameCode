@@ -46,8 +46,8 @@ class FXList;
 class FXListDieModuleData : public DieModuleData
 {
 public:
-	const FXList *m_defaultDeathFX;								///< default fx to make 
-	Bool m_orientToObject;
+	const FXList					*m_defaultDeathFX;								///< default fx to make 
+	Bool									m_orientToObject;
 
 	FXListDieModuleData()
 	{

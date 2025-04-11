@@ -1101,7 +1101,7 @@ Bool ParseAsciiStringToGameInfo(GameInfo *game, AsciiString options)
 								break;
 							}
 							UnicodeString name;
-              name.set(MultiByteToWideCharSingleLine(slotValue.str() +1).c_str());
+							name.set(MultiByteToWideCharSingleLine(slotValue.str() +1).c_str());
 
 							//DEBUG_LOG(("ParseAsciiStringToGameInfo - name is %s\n", slotValue.str()+1));
 							

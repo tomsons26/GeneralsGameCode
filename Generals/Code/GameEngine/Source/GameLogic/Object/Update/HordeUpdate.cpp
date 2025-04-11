@@ -120,8 +120,8 @@ const Int DEFAULT_UPDATE_RATE = LOGICFRAMES_PER_SECOND;
 //-------------------------------------------------------------------------------------------------
 HordeUpdateModuleData::HordeUpdateModuleData() :
 	m_updateRate(DEFAULT_UPDATE_RATE),
-  m_minCount(0),
-  m_minDist(0.0f),
+	m_minCount(0),
+	m_minDist(0.0f),
 	m_rubOffRadius(20.0f),
 	m_alliesOnly(true),
 	m_exactMatch(false),

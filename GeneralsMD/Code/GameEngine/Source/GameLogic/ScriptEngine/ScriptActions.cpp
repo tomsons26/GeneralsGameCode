@@ -2147,7 +2147,7 @@ void ScriptActions::doTeamHuntWithCommandButton(const AsciiString& teamName, con
 			case GUICOMMANDMODE_HIJACK_VEHICLE:
 			case GUICOMMANDMODE_CONVERT_TO_CARBOMB:
 			case GUICOMMANDMODE_SABOTAGE_BUILDING:
-			{
+				{
 					static NameKeyType key_CommandButtonHuntUpdate = NAMEKEY("CommandButtonHuntUpdate");
 
 					CommandButtonHuntUpdate* huntUpdate = (CommandButtonHuntUpdate*)obj->findUpdateModule(key_CommandButtonHuntUpdate);

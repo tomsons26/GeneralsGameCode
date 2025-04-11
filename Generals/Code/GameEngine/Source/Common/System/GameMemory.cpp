@@ -902,9 +902,11 @@ void MemoryPoolSingleBlock::initBlock(Int logicalSize, MemoryPoolBlob *owningBlo
 #endif
 }
 #endif // MEMORYPOOL_DEBUG
+
 #ifdef MEMORYPOOL_CHECKPOINTING
 	m_checkpointInfo = NULL;
 #endif
+
 #ifdef MEMORYPOOL_BOUNDINGWALL
 	m_wallPattern = theBoundingWallPattern++;
 	debugFillInWalls();
@@ -2690,8 +2692,7 @@ MemoryPool *MemoryPoolFactory::createMemoryPool(const char *poolName, Int alloca
 */
 MemoryPool *MemoryPoolFactory::findMemoryPool(const char *poolName)
 {
-	MemoryPool *pool = m_firstPoolInFactory;
-	for (; pool; pool = pool->getNextPoolInList())
+	for (MemoryPool *pool = m_firstPoolInFactory; pool; pool = pool->getNextPoolInList())
 	{
 		if (!strcmp(poolName, pool->getPoolName())) 
 		{

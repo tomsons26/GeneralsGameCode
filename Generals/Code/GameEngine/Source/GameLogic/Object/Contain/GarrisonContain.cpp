@@ -923,6 +923,7 @@ void GarrisonContain::healObjects( void )
 	}
 }
 
+
 //-------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------
 void GarrisonContain::healSingleObject( Object *obj, Real framesForFullHeal)
@@ -1254,6 +1255,7 @@ void GarrisonContain::exitObjectViaDoor( Object *exitObj, ExitDoorType exitDoor 
 	Coord3D endPosition;
 
 	Real exitAngle = getObject()->getOrientation();
+
 	// Garrison doesn't have reserveDoor or exitDelay, so if we do nothing, everyone will appear on top 
 	// of each other and get stuck inside each others' extent (except for the first guy).  So we'll
 	// scatter the start point around a little to make it better.
@@ -1292,6 +1294,7 @@ void GarrisonContain::exitObjectViaDoor( Object *exitObj, ExitDoorType exitDoor 
 		ai->aiFollowPath( &exitPath, getObject(), CMD_FROM_AI );
 		TheAI->pathfinder()->updateGoal(exitObj, &endPosition, TheTerrainLogic->getLayerForDestination(&endPosition));
 	}
+
 
 	recalcApparentControllingPlayer();
 }

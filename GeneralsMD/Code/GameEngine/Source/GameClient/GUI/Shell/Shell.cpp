@@ -459,13 +459,13 @@ void Shell::showShell( Bool runInit )
 	
 
 	if (!TheGlobalData->m_shellMapOn && m_screenCount == 0)
-  {
+	{
 #ifdef _PROFILE
-    Profile::StopRange("init");
+		Profile::StopRange("init");
 #endif
 	//else
 		TheShell->push( AsciiString("Menus/MainMenu.wnd") );
-  }
+	}
 	m_isShellActive = TRUE;
 }  // end showShell
 

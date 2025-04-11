@@ -58,7 +58,7 @@ void LanguageFilter::init() {
 		return;
 	}
 
-	wchar_t word[128];
+	WideChar word[128];
 	while (readWord(file1, word)) {
 		Int wordLen = wcslen(word);
 		if (wordLen == 0) {

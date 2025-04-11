@@ -933,6 +933,7 @@ void GameLogic::logicMessageDispatcher( GameMessage *msg, void *userData )
 			}
 			break;
 		}
+
 		//---------------------------------------------------------------------------------------------
 		case GameMessage::MSG_DEBUG_HURT_OBJECT:
 		{
@@ -960,8 +961,6 @@ void GameLogic::logicMessageDispatcher( GameMessage *msg, void *userData )
 			break;
 		}
 #endif
-
-
 
 
 #ifdef ALLOW_SURRENDER

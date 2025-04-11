@@ -968,8 +968,8 @@ void W3DDisplay::gatherDebugStats( void )
 		else
 				unibuffer.format( L"%.2f FPS, ", fps);
 
-				unibuffer2.format( L"%.2fms [cumuFPS=%.2f] draws: %d skins: %d sortP: %d skinP: %d", ms, cumuFPS, (Int)drawsPerFrame,(Int)skinDrawsPerFrame,(Int)sortPolysPerFrame, (Int)skinPolysPerFrame);
-				unibuffer.concat(unibuffer2);
+		unibuffer2.format( L"%.2fms [cumuFPS=%.2f] draws: %d skins: %d sortP: %d skinP: %d", ms, cumuFPS, (Int)drawsPerFrame,(Int)skinDrawsPerFrame,(Int)sortPolysPerFrame, (Int)skinPolysPerFrame);
+		unibuffer.concat(unibuffer2);
 #else
 		//Int LOD = TheGlobalData->m_terrainLOD;
 		//unibuffer.format( L"FPS: %.2f, %.2fms mapLOD=%d draws: %.2f sort %.2f", fps, ms, LOD, drawsPerFrame,sortPolysPerFrame);

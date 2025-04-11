@@ -105,7 +105,7 @@ public:
 			{ "SupplyWarehouseActionDelay", INI::parseDurationUnsignedInt, NULL, offsetof( WorkerAIUpdateModuleData, m_warehouseDelay ) },
 			{ "SupplyWarehouseScanDistance", INI::parseReal, NULL, offsetof( WorkerAIUpdateModuleData, m_warehouseScanDistance ) },
  			{ "SuppliesDepletedVoice", INI::parseAudioEventRTS, NULL, offsetof( WorkerAIUpdateModuleData, m_suppliesDepletedVoice) },
- 			{ "UpgradedSupplyBoost", INI::parseInt, NULL, offsetof( WorkerAIUpdateModuleData, m_upgradedSupplyBoost) },
+			{ "UpgradedSupplyBoost", INI::parseInt, NULL, offsetof( WorkerAIUpdateModuleData, m_upgradedSupplyBoost) },
 			{ 0, 0, 0, 0 }
 		};
     p.add(dataFieldParse);

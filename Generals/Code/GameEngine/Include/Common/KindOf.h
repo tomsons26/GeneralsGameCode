@@ -144,7 +144,6 @@ enum KindOfType
 	KINDOF_DONT_AUTO_CRUSH_INFANTRY,					///< These units don't try to crush the infantry if ai.
 
 	KINDOF_COUNT										// total number of kindofs
-
 };
 
 typedef BitFlags<KINDOF_COUNT>	KindOfMaskType;

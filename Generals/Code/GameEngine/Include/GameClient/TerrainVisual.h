@@ -156,7 +156,7 @@ public:
 	// Modify height.
 	//
 	virtual void setRawMapHeight(const ICoord2D *gridPos, Int height)=0;
-	
+
 	/// Replace the skybox texture
 	virtual void replaceSkyboxTextures(const AsciiString *oldTexName[NumSkyboxTextures], const AsciiString *newTexName[NumSkyboxTextures])=0;
 

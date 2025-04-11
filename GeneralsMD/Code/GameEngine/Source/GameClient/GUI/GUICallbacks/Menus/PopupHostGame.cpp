@@ -353,16 +353,16 @@ void PopupHostGameInit( WindowLayout *layout, void *userData )
 		GadgetComboBoxReset(comboBoxLadderName);
 	PopulateCustomLadderComboBox();
 
-  checkBoxUseStatsID = TheNameKeyGenerator->nameToKey(AsciiString("PopupHostGame.wnd:CheckBoxUseStats"));
-  checkBoxUseStats = TheWindowManager->winGetWindowFromId(parentPopup, checkBoxUseStatsID);
+	checkBoxUseStatsID = TheNameKeyGenerator->nameToKey(AsciiString("PopupHostGame.wnd:CheckBoxUseStats"));
+	checkBoxUseStats = TheWindowManager->winGetWindowFromId(parentPopup, checkBoxUseStatsID);
 	Bool usingStats = customPref.getUseStats();
-  GadgetCheckBoxSetChecked( checkBoxUseStats, usingStats );
+	GadgetCheckBoxSetChecked( checkBoxUseStats, usingStats );
 
 	// limit armies is disallowed in "use stats" games
-  checkBoxLimitArmiesID = TheNameKeyGenerator->nameToKey(AsciiString("PopupHostGame.wnd:CheckBoxLimitArmies"));
-  checkBoxLimitArmies = TheWindowManager->winGetWindowFromId(parentPopup, checkBoxLimitArmiesID);
+	checkBoxLimitArmiesID = TheNameKeyGenerator->nameToKey(AsciiString("PopupHostGame.wnd:CheckBoxLimitArmies"));
+	checkBoxLimitArmies = TheWindowManager->winGetWindowFromId(parentPopup, checkBoxLimitArmiesID);
 	checkBoxLimitArmies->winEnable(! usingStats );
-  GadgetCheckBoxSetChecked( checkBoxLimitArmies, usingStats? FALSE : customPref.getFactionsLimited() );
+	GadgetCheckBoxSetChecked( checkBoxLimitArmies, usingStats? FALSE : customPref.getFactionsLimited() );
 
 	TheWindowManager->winSetFocus( parentPopup );
 	TheWindowManager->winSetModal( parentPopup );
@@ -580,17 +580,17 @@ void createGame( void )
 	req.password = passwd.str();
 	CustomMatchPreferences customPref;
 	Bool aO = GadgetCheckBoxIsChecked(checkBoxAllowObservers);
-  Bool limitArmies = GadgetCheckBoxIsChecked( checkBoxLimitArmies );
-  Bool useStats = GadgetCheckBoxIsChecked( checkBoxUseStats );
+	Bool limitArmies = GadgetCheckBoxIsChecked( checkBoxLimitArmies );
+	Bool useStats = GadgetCheckBoxIsChecked( checkBoxUseStats );
 	customPref.setAllowsObserver(aO);
-  customPref.setFactionsLimited( limitArmies );
-  customPref.setUseStats( useStats );
+	customPref.setFactionsLimited( limitArmies );
+	customPref.setUseStats( useStats );
 	customPref.write();
 	req.stagingRoomCreation.allowObservers = aO;
-  req.stagingRoomCreation.useStats = useStats;
+	req.stagingRoomCreation.useStats = useStats;
 	TheGameSpyGame->setAllowObservers(aO);
-  TheGameSpyGame->setOldFactionsOnly( limitArmies );
-  TheGameSpyGame->setUseStats( useStats );
+	TheGameSpyGame->setOldFactionsOnly( limitArmies );
+	TheGameSpyGame->setUseStats( useStats );
 	req.stagingRoomCreation.exeCRC = TheGlobalData->m_exeCRC;
 	req.stagingRoomCreation.iniCRC = TheGlobalData->m_iniCRC;
 	req.stagingRoomCreation.gameVersion = TheGameSpyInfo->getInternalIP();

@@ -181,8 +181,8 @@ static const LookupListRec GameMessageMetaTypeNames[] =
 	{ "END_CAMERA_ZOOM_OUT",											GameMessage::MSG_META_END_CAMERA_ZOOM_OUT },
 	{ "CAMERA_RESET",															GameMessage::MSG_META_CAMERA_RESET },
 	{ "TOGGLE_CAMERA_TRACKING_DRAWABLE",					GameMessage::MSG_META_TOGGLE_CAMERA_TRACKING_DRAWABLE },
-	{ "TOGGLE_FAST_FORWARD_REPLAY",              GameMessage::MSG_META_TOGGLE_FAST_FORWARD_REPLAY },
-  	{ "DEMO_INSTANT_QUIT",												GameMessage::MSG_META_DEMO_INSTANT_QUIT },
+	{ "TOGGLE_FAST_FORWARD_REPLAY",							GameMessage::MSG_META_TOGGLE_FAST_FORWARD_REPLAY },
+	{ "DEMO_INSTANT_QUIT",												GameMessage::MSG_META_DEMO_INSTANT_QUIT },
 
 #if defined(_ALLOW_DEBUG_CHEATS_IN_RELEASE)//may be defined in GameCommon.h
 	{ "CHEAT_RUNSCRIPT1",								        	GameMessage::MSG_CHEAT_RUNSCRIPT1 },																	
@@ -195,16 +195,16 @@ static const LookupListRec GameMessageMetaTypeNames[] =
 	{ "CHEAT_RUNSCRIPT8",								        	GameMessage::MSG_CHEAT_RUNSCRIPT8 },																	
 	{ "CHEAT_RUNSCRIPT9",								        	GameMessage::MSG_CHEAT_RUNSCRIPT9 },																	
 	{ "CHEAT_TOGGLE_SPECIAL_POWER_DELAYS",	      GameMessage::MSG_CHEAT_TOGGLE_SPECIAL_POWER_DELAYS },	
-  { "CHEAT_SWITCH_TEAMS",							        	GameMessage::MSG_CHEAT_SWITCH_TEAMS },															
+	{ "CHEAT_SWITCH_TEAMS",							        	GameMessage::MSG_CHEAT_SWITCH_TEAMS },															
 	{ "CHEAT_KILL_SELECTION",						        	GameMessage::MSG_CHEAT_KILL_SELECTION },													
 	{ "CHEAT_TOGGLE_HAND_OF_GOD_MODE",		        GameMessage::MSG_CHEAT_TOGGLE_HAND_OF_GOD_MODE },					
 	{ "CHEAT_INSTANT_BUILD",							        GameMessage::MSG_CHEAT_INSTANT_BUILD },															
 	{ "CHEAT_DESHROUD",									          GameMessage::MSG_CHEAT_DESHROUD },																			
 	{ "CHEAT_ADD_CASH",									          GameMessage::MSG_CHEAT_ADD_CASH },																			
 	{ "CHEAT_GIVE_ALL_SCIENCES",					        GameMessage::MSG_CHEAT_GIVE_ALL_SCIENCES },											
-  { "CHEAT_GIVE_SCIENCEPURCHASEPOINTS",        	GameMessage::MSG_CHEAT_GIVE_SCIENCEPURCHASEPOINTS },
-  { "CHEAT_SHOW_HEALTH",                        GameMessage::MSG_CHEAT_SHOW_HEALTH },
-  { "CHEAT_TOGGLE_MESSAGE_TEXT",                GameMessage::MSG_CHEAT_TOGGLE_MESSAGE_TEXT },
+	{ "CHEAT_GIVE_SCIENCEPURCHASEPOINTS",        	GameMessage::MSG_CHEAT_GIVE_SCIENCEPURCHASEPOINTS },
+	{ "CHEAT_SHOW_HEALTH",                        GameMessage::MSG_CHEAT_SHOW_HEALTH },
+	{ "CHEAT_TOGGLE_MESSAGE_TEXT",                GameMessage::MSG_CHEAT_TOGGLE_MESSAGE_TEXT },
 
 #endif
 
@@ -276,8 +276,8 @@ static const LookupListRec GameMessageMetaTypeNames[] =
 	{ "DEMO_TOGGLE_GREEN_VIEW",										GameMessage::MSG_META_DEMO_TOGGLE_GREEN_VIEW },
 	{ "DEMO_TOGGLE_MOTION_BLUR_ZOOM",							GameMessage::MSG_META_DEMO_TOGGLE_MOTION_BLUR_ZOOM },
 	{ "DEMO_SHOW_EXTENTS",												GameMessage::MSG_META_DEBUG_SHOW_EXTENTS },
-  { "DEMO_SHOW_AUDIO_LOCATIONS",								GameMessage::MSG_META_DEBUG_SHOW_AUDIO_LOCATIONS },
-  { "DEMO_SHOW_HEALTH",													GameMessage::MSG_META_DEBUG_SHOW_HEALTH },
+	{ "DEMO_SHOW_AUDIO_LOCATIONS",								GameMessage::MSG_META_DEBUG_SHOW_AUDIO_LOCATIONS },
+	{ "DEMO_SHOW_HEALTH",													GameMessage::MSG_META_DEBUG_SHOW_HEALTH },
 	{ "DEMO_GIVE_VETERANCY",											GameMessage::MSG_META_DEBUG_GIVE_VETERANCY },
 	{ "DEMO_TAKE_VETERANCY",											GameMessage::MSG_META_DEBUG_TAKE_VETERANCY },
 	{ "DEMO_BATTLE_CRY",													GameMessage::MSG_META_DEMO_BATTLE_CRY },
@@ -428,8 +428,7 @@ GameMessageDisposition MetaEventTranslator::translateGameMessage(const GameMessa
 			newModState |= ALT;
 		}
 
-
-    for (const MetaMapRec *map = TheMetaMap->getFirstMetaMapRec(); map; map = map->m_next)
+		for (const MetaMapRec *map = TheMetaMap->getFirstMetaMapRec(); map; map = map->m_next)
 		{
 			DEBUG_ASSERTCRASH(map->m_meta > GameMessage::MSG_BEGIN_META_MESSAGES && 
 				map->m_meta < GameMessage::MSG_END_META_MESSAGES, ("hmm, expected only meta-msgs here"));
@@ -452,10 +451,6 @@ GameMessageDisposition MetaEventTranslator::translateGameMessage(const GameMessa
 			// if the shell is not active and this command is not usable in the game, continue			
 			if (TheShell && !TheShell->isShellActive() && !(map->m_usableIn & COMMANDUSABLE_GAME) )
 				continue;
-
-
-
-
 
 			// check for the special case of mods-only-changed.
 			if (
@@ -494,24 +489,24 @@ GameMessageDisposition MetaEventTranslator::translateGameMessage(const GameMessa
 				else
 				{
 
-          // THIS IS A GREASY HACK... MESSAGE SHOULD BE HANDLED IN A TRANSLATOR, BUT DURING CINEMATICS THE TRANSLATOR IS DISABLED
-          if( map->m_meta ==  GameMessage::MSG_META_TOGGLE_FAST_FORWARD_REPLAY)
-		      {
+					// THIS IS A GREASY HACK... MESSAGE SHOULD BE HANDLED IN A TRANSLATOR, BUT DURING CINEMATICS THE TRANSLATOR IS DISABLED
+					if( map->m_meta ==	GameMessage::MSG_META_TOGGLE_FAST_FORWARD_REPLAY)
+					{
 				#if defined(_ALLOW_DEBUG_CHEATS_IN_RELEASE)//may be defined in GameCommon.h
-			      if( TheGlobalData )
+						if( TheGlobalData )
 				#else
-				  if( TheGlobalData && TheGameLogic->isInReplayGame())
+					if( TheGlobalData && TheGameLogic->isInReplayGame())
 				#endif
-			      {
-	            if ( TheWritableGlobalData )
-                TheWritableGlobalData->m_TiVOFastMode = 1 - TheGlobalData->m_TiVOFastMode;
+						{
+							if ( TheWritableGlobalData )
+								TheWritableGlobalData->m_TiVOFastMode = 1 - TheGlobalData->m_TiVOFastMode;
 
-              if ( TheInGameUI )
-  				      TheInGameUI->message( TheGlobalData->m_TiVOFastMode ? TheGameText->fetch("GUI:FF_ON") : TheGameText->fetch("GUI:FF_OFF") );
-			      }  
-			      disp = KEEP_MESSAGE; // cause for goodness sake, this key gets used a lot by non-replay hotkeys
-			      break;
-		      }  
+							if ( TheInGameUI )
+								TheInGameUI->message( TheGlobalData->m_TiVOFastMode ? TheGameText->fetch("GUI:FF_ON") : TheGameText->fetch("GUI:FF_OFF") );
+						}	
+						disp = KEEP_MESSAGE; // cause for goodness sake, this key gets used a lot by non-replay hotkeys
+						break;
+					}	
 
 
 					/*GameMessage *metaMsg =*/ TheMessageStream->appendMessage(map->m_meta);
@@ -525,25 +520,25 @@ GameMessageDisposition MetaEventTranslator::translateGameMessage(const GameMessa
 
 
 		if (t == GameMessage::MSG_RAW_KEY_DOWN)
-    {
+		{
 			m_lastKeyDown = key;
 
 
 #ifdef DUMP_ALL_KEYS_TO_LOG
 
-		          WideChar Wkey = TheKeyboard->getPrintableKey(key, 0);
-		          UnicodeString uKey;
-		          uKey.set(&Wkey);
-		          AsciiString aKey;
-		          aKey.translate(uKey);
-  	          DEBUG_LOG(("^%s ", aKey.str()));
+							WideChar Wkey = TheKeyboard->getPrintableKey(key, 0);
+							UnicodeString uKey;
+							uKey.set(&Wkey);
+							AsciiString aKey;
+							aKey.translate(uKey);
+							DEBUG_LOG(("^%s ", aKey.str()));
 #endif
 
-    }
+		}
 
 
 
-    m_lastModState = newModState;
+		m_lastModState = newModState;
 	}
 
 

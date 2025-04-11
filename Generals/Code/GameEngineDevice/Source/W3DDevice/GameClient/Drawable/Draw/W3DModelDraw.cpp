@@ -2661,7 +2661,7 @@ Bool W3DModelDraw::updateBonesForClientParticleSystems()
 				sys->rotateLocalTransformZ(rotation);
 
 			}
-		}
+		}// next praticle system
 
 	}// end if Drawable
 

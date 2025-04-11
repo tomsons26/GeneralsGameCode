@@ -2298,18 +2298,22 @@ Bool GameLogic::isIntroMoviePlaying()
 // ------------------------------------------------------------------------------------------------
 void GameLogic::selectObject(Object *obj, Bool createNewSelection, PlayerMaskType playerMask, Bool affectClient)
 {
-	if (!obj) {
+	if (!obj) 
+	{
 		return;
 	}
 
-	if (!obj->isMassSelectable() && !createNewSelection) {
+	if (!obj->isMassSelectable() && !createNewSelection) 
+	{
 		DEBUG_LOG(("GameLogic::selectObject() - Object attempted to be added to selection, but isn't mass-selectable.\n"));
 		return;
 	}
 
-	while (playerMask) {
+	while( playerMask ) 
+	{
 		Player *player = ThePlayerList->getEachPlayerFromMask(playerMask);
-		if (!player) {
+		if( !player ) 
+		{
 			return;
 		}
 
@@ -2319,17 +2323,22 @@ void GameLogic::selectObject(Object *obj, Bool createNewSelection, PlayerMaskTyp
 		group->add(obj);
 
 		// add all selected agents to the AI group
-		if (createNewSelection)	{
+		if (createNewSelection)	
+		{
 			player->setCurrentlySelectedAIGroup(group);
-		} else {
+		} 
+		else 
+		{
 			player->addAIGroupToCurrentSelection(group);
 		}
 
 		TheAI->destroyGroup(group);
 
-		if (affectClient) {
+		if( affectClient ) 
+		{
 			Drawable *draw = obj->getDrawable();
-			if (draw) {
+			if( draw ) 
+			{
 				TheInGameUI->selectDrawable(draw);
 			}
 		}
@@ -2717,6 +2726,7 @@ void GameLogic::friend_awakenUpdateModule(Object* obj, UpdateModulePtr u, Unsign
 	}
 }
 
+
 // ------------------------------------------------------------------------------------------------
 #ifdef DO_UNIT_TIMINGS
 	enum {TIME_FRAMES=100};
@@ -2779,8 +2789,7 @@ static void unitTimings(void)
 		QueryPerformanceCounter((LARGE_INTEGER *)&endTime64);
 		double timeToUpdate = ((double)(endTime64-startTime64) / (double)(freq64));
 		timeToUpdate *= FACTOR;
-	
-		
+
 
 		if (mode == LOGIC) {
 			timeLogic = timeToUpdate;
@@ -2926,13 +2935,16 @@ static void unitTimings(void)
 				if (unitTypes==END) {
 					side++;
 					unitTypes = INFANTRY;
-					if (sides[side].isEmpty()) {
+					if (sides[side].isEmpty() ) // end of sides list
+					{
 						g_UT_startTiming = false;
-						if (g_UT_timingLog) {
+						if (g_UT_timingLog) 
+						{
 							fclose(g_UT_timingLog);
 							g_UT_timingLog = NULL;
 						}
-						if (g_UT_commaLog) {
+						if (g_UT_commaLog) 
+						{
 							fclose(g_UT_commaLog);
 							g_UT_commaLog = NULL;
 						}
@@ -3539,7 +3551,7 @@ UnsignedInt GameLogic::getCRC( Int mode, AsciiString deepCRCFileName )
 			CRCGEN_LOG(("CRC after module factory for frame %d is 0x%8.8X\n", m_frame, xferCRC->getCRC()));
 		}
 	}
-#endif //DEBUG_CRC
+#endif // DEBUG_CRC
 
 	marker = "MARKER:ThePlayerList";
 	xferCRC->xferAsciiString(&marker);

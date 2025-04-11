@@ -313,11 +313,11 @@ void RailroadBehavior::onCollide( Object *other, const Coord3D *loc, const Coord
 
 	//---------------------------
 	// if we made it this far, it is something we dont want to share space with
+
 	Coord3D dlt;
 	dlt.x = theirLoc->x - myLoc->x;
 	dlt.y = theirLoc->y - myLoc->y;
 	dlt.z = theirLoc->z - myLoc->z;
-
 
 	//Alert all the players of recent disaster 
 	if ( ! m_whistleSound.isCurrentlyPlaying())

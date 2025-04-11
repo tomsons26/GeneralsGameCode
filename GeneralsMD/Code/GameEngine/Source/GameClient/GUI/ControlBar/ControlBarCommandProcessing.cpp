@@ -462,7 +462,7 @@ CBCommandStatus ControlBar::processCommandUI( GameWindow *control,
 			break;
 
 		}  // end build unit
-		
+
 		//---------------------------------------------------------------------------------------------
 		case GUI_COMMAND_CANCEL_UNIT_BUILD:
 		{
@@ -709,7 +709,7 @@ CBCommandStatus ControlBar::processCommandUI( GameWindow *control,
 
 			}  // end if
 
-      //what if container is subdued... assert a logic failure, perhaps?
+			//what if container is subdued... assert a logic failure, perhaps?
 
 			// send message to exit
 			GameMessage *exitMsg = TheMessageStream->appendMessage( GameMessage::MSG_EXIT );

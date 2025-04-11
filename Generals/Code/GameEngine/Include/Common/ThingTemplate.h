@@ -510,7 +510,7 @@ public:
 	const FXList* getPerUnitFX(const AsciiString& fxName) const;
 
 	UnsignedInt getThreatValue() const								{ return m_threatValue; }
-	UnsignedInt getMaxSimultaneousOfType() const			{ return m_maxSimultaneousOfType; }
+	UnsignedInt getMaxSimultaneousOfType() const { return m_maxSimultaneousOfType; }
 
 	void validate();
 

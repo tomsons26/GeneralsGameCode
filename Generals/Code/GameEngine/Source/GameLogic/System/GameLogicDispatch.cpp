@@ -936,6 +936,7 @@ void GameLogic::logicMessageDispatcher( GameMessage *msg, void *userData )
 		}
 #endif
 
+
 #ifdef ALLOW_SURRENDER
 		//---------------------------------------------------------------------------------------------
 		case GameMessage::MSG_DO_SURRENDER:

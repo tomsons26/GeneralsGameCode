@@ -497,9 +497,9 @@ public:
 	Weapon* findWaypointFollowingCapableWeapon();
 	Bool getAmmoPipShowingInfo(Int& numTotal, Int& numFull) const;
 
-  void notifyFiringTrackerShotFired( const Weapon* weaponFired, ObjectID victimID ) ;
+	void notifyFiringTrackerShotFired( const Weapon* weaponFired, ObjectID victimID ) ;
 
-  /**
+	/**
 		Determines if the unit has any weapon that could conceivably
 		harm the victim. this does not take range, ammo, etc. into 
 		account, but immutable weapon properties, such as "can you

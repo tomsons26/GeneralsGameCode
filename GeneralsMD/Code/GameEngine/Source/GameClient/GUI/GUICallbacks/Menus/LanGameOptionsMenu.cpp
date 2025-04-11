@@ -819,8 +819,8 @@ void DeinitLanGameGadgets( void )
 	listboxChatWindowLanGame = NULL;
 	textEntryChat = NULL;
 	textEntryMapDisplay = NULL;
-  checkboxLimitSuperweapons = NULL;
-  comboBoxStartingCash = NULL;
+	checkboxLimitSuperweapons = NULL;
+	comboBoxStartingCash = NULL;
 	windowMap = NULL;
 	for (Int i = 0; i < MAX_SLOTS; i++)
 	{
@@ -874,8 +874,8 @@ void LanGameOptionsMenuInit( WindowLayout *layout, void *userData )
 		slot->setPlayerTemplate( pref.getPreferredFaction() );
 		slot->setNATBehavior(FirewallHelperClass::FIREWALL_TYPE_SIMPLE);
 		game->setMap( pref.getPreferredMap() );
-    game->setStartingCash( pref.getStartingCash() );
-    game->setSuperweaponRestriction( pref.getSuperweaponRestricted() ? 1 : 0 );
+		game->setStartingCash( pref.getStartingCash() );
+		game->setSuperweaponRestriction( pref.getSuperweaponRestricted() ? 1 : 0 );
 		AsciiString lowerMap = pref.getPreferredMap();
 		lowerMap.toLower();
 		std::map<AsciiString, MapMetaData>::iterator it = TheMapCache->find(lowerMap);
@@ -899,8 +899,8 @@ void LanGameOptionsMenuInit( WindowLayout *layout, void *userData )
 		//DEBUG_LOG(("LanGameOptionsMenuInit(): map is %s\n", TheLAN->GetMyGame()->getMap().str()));
 		buttonStart->winSetText(TheGameText->fetch("GUI:Accept"));
 		buttonSelectMap->winEnable( FALSE );
-    checkboxLimitSuperweapons->winEnable( FALSE ); // Can look but only host can touch
-    comboBoxStartingCash->winEnable( FALSE );      // Ditto
+		checkboxLimitSuperweapons->winEnable( FALSE ); // Can look but only host can touch
+		comboBoxStartingCash->winEnable( FALSE );			// Ditto
 		TheLAN->GetMyGame()->setMapCRC( TheLAN->GetMyGame()->getMapCRC() );		// force a recheck
 		TheLAN->GetMyGame()->setMapSize( TheLAN->GetMyGame()->getMapSize() ); // of if we have the map
 		TheLAN->RequestHasMap();
@@ -976,20 +976,20 @@ void updateGameOptions( void )
 			LanPositionStartSpots();
 		GadgetStaticTextSetText(textEntryMapDisplay, mapDisplayName);
 
-    GadgetCheckBoxSetChecked( checkboxLimitSuperweapons, theGame->getSuperweaponRestriction() != 0 );
+		GadgetCheckBoxSetChecked( checkboxLimitSuperweapons, theGame->getSuperweaponRestriction() != 0 );
 		Int itemCount = GadgetComboBoxGetLength(comboBoxStartingCash);
-    Int index = 0;
-    for ( ; index < itemCount; index++ )
-    {
-      Int value  = (Int)GadgetComboBoxGetItemData(comboBoxStartingCash, index);
-      if ( value == theGame->getStartingCash().countMoney() )
-      {
-        GadgetComboBoxSetSelectedPos(comboBoxStartingCash, index, TRUE);
-        break;
-      }
-    }
+		Int index = 0;
+		for ( ; index < itemCount; index++ )
+		{
+			Int value	= (Int)GadgetComboBoxGetItemData(comboBoxStartingCash, index);
+			if ( value == theGame->getStartingCash().countMoney() )
+			{
+				GadgetComboBoxSetSelectedPos(comboBoxStartingCash, index, TRUE);
+				break;
+			}
+		}
 
-    DEBUG_ASSERTCRASH( index < itemCount, ("Could not find new starting cash amount %d in list", theGame->getStartingCash().countMoney() ) );
+		DEBUG_ASSERTCRASH( index < itemCount, ("Could not find new starting cash amount %d in list", theGame->getStartingCash().countMoney() ) );
 	}
 }
 
@@ -1144,64 +1144,64 @@ WindowMsgHandledType LanGameOptionsMenuSystem( GameWindow *window, UnsignedInt m
 				Int controlID = control->winGetWindowId();
 				LANGameInfo *myGame = TheLAN->GetMyGame();
 
-        if ( controlID == comboBoxStartingCashID )
-        {
-          handleStartingCashSelection();
-        }
-        else
-        {
-				  for (Int i = 0; i < MAX_SLOTS; i++)
-				  {
-					  if (controlID == comboBoxColorID[i])
-					  {
-						  handleColorSelection(i);
-					  }
-					  else if (controlID == comboBoxPlayerTemplateID[i])
-					  {
-						  handlePlayerTemplateSelection(i);
-					  }
-					  else if (controlID == comboBoxTeamID[i])
-					  {
-						  handleTeamSelection(i);
-					  }
-					  else if( controlID == comboBoxPlayerID[i] && myGame->amIHost() )
-					  {
-						  // We don't have anything that'll happen if we click on ourselves
-						  if(i == myGame->getLocalSlotNum())
-						   break;
-						  // Get
-						  Int pos = -1;
-						  GadgetComboBoxGetSelectedPos(comboBoxPlayer[i], &pos);
-						  if( pos != SLOT_PLAYER && pos >= 0)
-						  {
-							  if( myGame->getLANSlot(i)->getState() == SLOT_PLAYER )
-							  {
-								  UnicodeString name = myGame->getPlayerName(i);
-								  myGame->getLANSlot(i)->setState(SlotState(pos));
-								  myGame->resetAccepted();
-								  TheLAN->OnPlayerLeave(name);
-							  }
-							  else if( myGame->getLANSlot(i)->getState() != pos )
-							  {
-								  Bool wasAI = (myGame->getLANSlot(i)->isAI());
-								  myGame->getLANSlot(i)->setState(SlotState(pos));
-								  Bool isAI = (myGame->getLANSlot(i)->isAI());
-								  if (wasAI || isAI)
-									  myGame->resetAccepted();
-								  if (wasAI ^ isAI)
-									  PopulatePlayerTemplateComboBox(i, comboBoxPlayerTemplate, myGame, wasAI);
-								  if (!s_isIniting)
-								  {
-									  TheLAN->RequestGameOptions(GenerateGameOptionsString(), true);
-									  lanUpdateSlotList();
-								  }
-							  }
-						  }
-              break;
-            }
-          }
+				if ( controlID == comboBoxStartingCashID )
+				{
+					handleStartingCashSelection();
 				}
-        break;
+				else
+				{
+					for (Int i = 0; i < MAX_SLOTS; i++)
+					{
+						if (controlID == comboBoxColorID[i])
+						{
+							handleColorSelection(i);
+						}
+						else if (controlID == comboBoxPlayerTemplateID[i])
+						{
+							handlePlayerTemplateSelection(i);
+						}
+						else if (controlID == comboBoxTeamID[i])
+						{
+							handleTeamSelection(i);
+						}
+						else if( controlID == comboBoxPlayerID[i] && myGame->amIHost() )
+						{
+							// We don't have anything that'll happen if we click on ourselves
+							if(i == myGame->getLocalSlotNum())
+							 break;
+							// Get
+							Int pos = -1;
+							GadgetComboBoxGetSelectedPos(comboBoxPlayer[i], &pos);
+							if( pos != SLOT_PLAYER && pos >= 0)
+							{
+								if( myGame->getLANSlot(i)->getState() == SLOT_PLAYER )
+								{
+									UnicodeString name = myGame->getPlayerName(i);
+									myGame->getLANSlot(i)->setState(SlotState(pos));
+									myGame->resetAccepted();
+									TheLAN->OnPlayerLeave(name);
+								}
+								else if( myGame->getLANSlot(i)->getState() != pos )
+								{
+									Bool wasAI = (myGame->getLANSlot(i)->isAI());
+									myGame->getLANSlot(i)->setState(SlotState(pos));
+									Bool isAI = (myGame->getLANSlot(i)->isAI());
+									if (wasAI || isAI)
+										myGame->resetAccepted();
+									if (wasAI ^ isAI)
+										PopulatePlayerTemplateComboBox(i, comboBoxPlayerTemplate, myGame, wasAI);
+									if (!s_isIniting)
+									{
+										TheLAN->RequestGameOptions(GenerateGameOptionsString(), true);
+										lanUpdateSlotList();
+									}
+								}
+							}
+							break;
+						}
+					}
+				}
+				break;
 			}// case GCM_SELECTED:
 		//-------------------------------------------------------------------------------------------------
 		case GBM_SELECTED:
@@ -1263,10 +1263,10 @@ WindowMsgHandledType LanGameOptionsMenuSystem( GameWindow *window, UnsignedInt m
 						
 					}
 				}
-        else if ( controlID == checkboxLimitSuperweaponsID )
-        {
-          handleLimitSuperweaponsClick();
-        }
+				else if ( controlID == checkboxLimitSuperweaponsID )
+				{
+					handleLimitSuperweaponsClick();
+				}
 				else
 				{
 					for (Int i = 0; i < MAX_SLOTS; i++)

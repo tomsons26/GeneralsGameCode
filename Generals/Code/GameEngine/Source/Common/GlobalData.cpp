@@ -457,7 +457,7 @@ GlobalData* GlobalData::m_theOriginal = NULL;
 	{ "SpecialPowerViewObject",			INI::parseAsciiString,	NULL,			offsetof( GlobalData, m_specialPowerViewObjectName ) },
 
 	{ "StandardPublicBone", INI::parseAsciiStringVectorAppend, NULL, offsetof(GlobalData, m_standardPublicBones) },
-	{ "ShowMetrics",								INI::parseBool,				NULL,			offsetof( GlobalData, m_showMetrics ) },
+	{ "ShowMetrics",								INI::parseBool,				NULL,		offsetof( GlobalData, m_showMetrics ) },
 	{ "DefaultStartingCash",				INI::parseUnsignedInt, NULL,		offsetof( GlobalData, m_defaultStartingCash ) },
 
 // NOTE: m_doubleClickTimeMS is still in use, but we disallow setting it from the GameData.ini file. It is now set in the constructor according to the windows parameter.
@@ -1050,7 +1050,9 @@ GlobalData::~GlobalData( void )
 		m_weaponBonusSet->deleteInstance();
 
 	if( m_theOriginal == this )
+	{
 		m_theOriginal = NULL;
+	}
 
 }  // end ~GlobalData
 
@@ -1186,7 +1188,7 @@ void GlobalData::parseGameDataDefinition( INI* ini )
 
 	// override INI values with user preferences
 	OptionPreferences optionPref;
- 	TheWritableGlobalData->m_useAlternateMouse = optionPref.getAlternateMouseModeEnabled();
+	TheWritableGlobalData->m_useAlternateMouse = optionPref.getAlternateMouseModeEnabled();
 	TheWritableGlobalData->m_keyboardScrollFactor = optionPref.getScrollFactor();
 	TheWritableGlobalData->m_defaultIP = optionPref.getLANIPAddress();
 	TheWritableGlobalData->m_firewallSendDelay = optionPref.getSendDelay();

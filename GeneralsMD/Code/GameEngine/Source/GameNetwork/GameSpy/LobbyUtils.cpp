@@ -77,7 +77,7 @@ static enum {
 	COLUMN_NUMPLAYERS,
 	COLUMN_PASSWORD,
 	COLUMN_OBSERVER,
-  COLUMN_USE_STATS,
+	COLUMN_USE_STATS,
 	COLUMN_PING,
 };
 
@@ -252,18 +252,18 @@ static void gameTooltip(GameWindow *window,
 			TheMouse->setCursorTooltip( UnicodeString::TheEmptyString );
 		return;
 	}
-  if (col == COLUMN_USE_STATS)
-  {
-    if ( room->getUseStats() )
-    {
-      TheMouse->setCursorTooltip( TheGameText->fetch("TOOLTIP:UseStatsOn") );
-    }
-    else
-    {
-      TheMouse->setCursorTooltip( TheGameText->fetch("TOOLTIP:UseStatsOff") );
-    }
-    return;
-  }
+	if (col == COLUMN_USE_STATS)
+	{
+		if ( room->getUseStats() )
+		{
+			TheMouse->setCursorTooltip( TheGameText->fetch("TOOLTIP:UseStatsOn") );
+		}
+		else
+		{
+			TheMouse->setCursorTooltip( TheGameText->fetch("TOOLTIP:UseStatsOff") );
+		}
+		return;
+	}
 
 	UnicodeString tooltip;
 
@@ -648,15 +648,15 @@ static Int insertGame( GameWindow *win, GameSpyStagingRoom *game, Bool showMap )
 		GadgetListBoxAddEntryText(win, UnicodeString(L" "), gameColor, index, COLUMN_OBSERVER);
 	}
 
-  {
-    if (game->getUseStats())
-    {
-      const Image *img = TheMappedImageCollection->findImageByName("GoodStatsIcon");
-      GadgetListBoxAddEntryImage(win, img, index, COLUMN_USE_STATS, img->getImageHeight(), img->getImageWidth());
+	{
+		if (game->getUseStats())
+		{
+			const Image *img = TheMappedImageCollection->findImageByName("GoodStatsIcon");
+			GadgetListBoxAddEntryImage(win, img, index, COLUMN_USE_STATS, img->getImageHeight(), img->getImageWidth());
 	}
-    
-  }
-  
+		
+	}
+
 	s.format(L"%d", game->getPingAsInt());
 	GadgetListBoxAddEntryText(win, s, gameColor, index, COLUMN_PING);
 	Int ping = game->getPingAsInt();

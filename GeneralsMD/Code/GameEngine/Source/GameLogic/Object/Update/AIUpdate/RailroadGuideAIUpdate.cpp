@@ -161,7 +161,7 @@ RailroadBehavior::RailroadBehavior( Thing *thing, const ModuleData *moduleData )
 	m_wantsToBeLeadCarraige = FALSE; 
 	m_disembark = FALSE;
 	m_inTunnel = FALSE;
-  m_held = FALSE;
+	m_held = FALSE;
 
 
 	m_conductorState = m_isLocomotive ? ACCELERATE : COAST;
@@ -310,12 +310,10 @@ void RailroadBehavior::onCollide( Object *other, const Coord3D *loc, const Coord
 	const Coord3D *myLoc = obj->getPosition();
 	const Coord3D *theirLoc = other->getPosition();
 
-  
 	//---------------------------
 	// if we made it this far, it is something we dont want to share space with
 
-
-  Coord3D dlt;
+	Coord3D dlt;
 	dlt.x = theirLoc->x - myLoc->x;
 	dlt.y = theirLoc->y - myLoc->y;
 	dlt.z = theirLoc->z - myLoc->z;
@@ -334,15 +332,15 @@ void RailroadBehavior::onCollide( Object *other, const Coord3D *loc, const Coord
 	{
 		overlap/= 4;
 
-	  dlt.scale( overlap);
-	  Coord3D newPos;
-	  newPos.x = theirLoc->x + dlt.x;
-	  newPos.y = theirLoc->y + dlt.y;
-	  newPos.z = theirLoc->z + dlt.z;
-	  other->setPosition( &newPos );
+		dlt.scale( overlap);
+		Coord3D newPos;
+		newPos.x = theirLoc->x + dlt.x;
+		newPos.y = theirLoc->y + dlt.y;
+		newPos.z = theirLoc->z + dlt.z;
+		other->setPosition( &newPos );
 	}
 
-  if ( m_conductorState == WAIT_AT_STATION || (m_conductorState == COAST && m_pullInfo.speed < modData->m_runningGarrisonSpeedMax) || !m_isLocomotive )
+	if ( m_conductorState == WAIT_AT_STATION || (m_conductorState == COAST && m_pullInfo.speed < modData->m_runningGarrisonSpeedMax) || !m_isLocomotive )
 	{
 //  AIUpdateInterface *ai = other->getAI();
 //	  if ( ai )
@@ -643,24 +641,24 @@ void RailroadBehavior::loadTrackData( void )
 
 void RailroadBehavior::makeAWallOutOfThisTrain( Bool on )
 {
-  if ( on == TRUE )
-  	TheAI->pathfinder()->createAWallFromMyFootprint( getObject() ); // Temporarily treat this object as an obstacle.
-  else
-  	TheAI->pathfinder()->removeWallFromMyFootprint( getObject() );  // Undo createAWallFromMyFootprint.
+	if ( on == TRUE )
+		TheAI->pathfinder()->createAWallFromMyFootprint( getObject() ); // Temporarily treat this object as an obstacle.
+	else
+		TheAI->pathfinder()->removeWallFromMyFootprint( getObject() );  // Undo createAWallFromMyFootprint.
 
 
 	if ( m_trailerID != INVALID_ID )
 	{
 		Object *trailer = TheGameLogic->findObjectByID( m_trailerID );
-    if ( trailer )
-    {
+		if ( trailer )
+		{
 			static NameKeyType key_RGUpdate = NAMEKEY("RailroadBehavior");
 			RailroadBehavior *RGUpdate = (RailroadBehavior*)trailer->findUpdateModule(key_RGUpdate);
 			if( RGUpdate )
 			{
 				RGUpdate->makeAWallOutOfThisTrain( on ); // recursive down the train
 			}
-    }
+		}
 	}
 
 
@@ -714,7 +712,7 @@ UpdateSleepTime RailroadBehavior::update( void )
 				m_conductorState = WAIT_AT_STATION;
 
 
-         makeAWallOutOfThisTrain( TRUE );
+				makeAWallOutOfThisTrain( TRUE );
 
 
 				if ( m_disembark )
@@ -722,7 +720,7 @@ UpdateSleepTime RailroadBehavior::update( void )
 					disembark();
 					m_disembark = FALSE;
 				}
-      } 
+			}
 		}
 		else if ( m_conductorState == WAIT_AT_STATION)
 		{
@@ -734,7 +732,7 @@ UpdateSleepTime RailroadBehavior::update( void )
 
 				m_runningSound.setPlayingHandle(TheAudio->addAudioEvent( &m_runningSound ));
 
-        makeAWallOutOfThisTrain( FALSE );
+				makeAWallOutOfThisTrain( FALSE );
 
 
 			}
@@ -765,13 +763,6 @@ UpdateSleepTime RailroadBehavior::update( void )
 		}
 
 	}
-
-
-
-  
-
-
-
 
 
 	if ( m_wantsToBeLeadCarraige > FRAMES_UNPULLED_LONG_ENOUGH_TO_UNHITCH )//if this flag survived until now, I have lost my puller
@@ -1326,15 +1317,10 @@ void RailroadBehavior::updatePositionTrackDistance( PullInfo *pullerInfo, PullIn
 	Coord3D normal ;
 	Real enforceElevation = TheTerrainLogic->getGroundHeight( turnPos.x, turnPos.y, &normal );
 	
-
-
-
 	obj->setTransformMatrix(&mtx);
 
 	if (!m_inTunnel)
 		obj->setPositionZ( enforceElevation );
-
-
 
 	obj->handlePartitionCellMaintenance();
 

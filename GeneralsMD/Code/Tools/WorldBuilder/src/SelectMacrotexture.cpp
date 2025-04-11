@@ -116,7 +116,7 @@ BOOL SelectMacrotexture::OnInitDialog()
 			ins.item.lParam = -1;
 			char defaultText[] = DEFAULT;
 			ins.item.pszText = defaultText;
-			ins.item.cchTextMax = strlen(defaultText);				
+			ins.item.cchTextMax = strlen(defaultText);
 			child = m_textureTreeView.InsertItem(&ins);
 
  		}

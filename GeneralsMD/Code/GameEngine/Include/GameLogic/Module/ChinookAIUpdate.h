@@ -46,8 +46,8 @@ class ChinookAIUpdateModuleData : public SupplyTruckAIUpdateModuleData
 {
 public:
 	AsciiString		m_ropeName;
-  AsciiString   m_rotorWashParticleSystem;
-  Real					m_rappelSpeed;
+	AsciiString		m_rotorWashParticleSystem;
+	Real					m_rappelSpeed;
 	Real					m_ropeDropSpeed;
 	Real					m_ropeWidth;
 	Real					m_ropeFinalHeight;
@@ -124,10 +124,9 @@ protected:
 	virtual void privateAttackPosition( const Coord3D *pos, Int maxShotsToFire, CommandSourceType cmdSource );///< Extension.  Also tell occupants to attackPosition
 	virtual void privateForceAttackObject( Object *victim, Int maxShotsToFire, CommandSourceType cmdSource );///< Extension.  Also tell occupants to forceAttackObject
 
-  virtual void privateIdle(CommandSourceType cmdSource);
+	virtual void privateIdle(CommandSourceType cmdSource);
 
-  void private___TellPortableStructureToAttackWithMe( Object *victim, Int maxShotsToFire, CommandSourceType cmdSource );
-
+	void private___TellPortableStructureToAttackWithMe( Object *victim, Int maxShotsToFire, CommandSourceType cmdSource );
 
 private:
 

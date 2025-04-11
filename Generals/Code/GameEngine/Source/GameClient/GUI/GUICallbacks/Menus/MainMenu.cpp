@@ -107,6 +107,7 @@ void DoCompressTest( void );
 #endif // TEST_COMPRESSION
 #endif
 
+
 // window ids -------------------------------------------------------------------------------------
 static NameKeyType mainMenuID = NAMEKEY_INVALID;
 static NameKeyType skirmishID = NAMEKEY_INVALID;
@@ -179,6 +180,7 @@ static Bool buttonPushed = FALSE;
 static Bool isShuttingDown = FALSE;
 static Bool startGame = FALSE;
 static Int	initialGadgetDelay = 210;
+
 enum
 {
 	SHOW_NONE = 0,

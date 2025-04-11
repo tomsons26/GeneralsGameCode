@@ -69,4 +69,5 @@ __inline void DumpExceptionInfo( unsigned int u, EXCEPTION_POINTERS* e_info ) {}
 #endif
 
 extern AsciiString g_LastErrorDump;
+
 #endif // __STACKDUMP_H_

@@ -282,9 +282,9 @@ Bool ProductionUpdate::queueUpgrade( const UpgradeTemplate *upgrade )
 	if( isUpgradeInQueue( upgrade ) == TRUE )
 		return FALSE;
 
- 	// STOP cheaters by making sure they can actually build this
- 	if( !getObject()->canProduceUpgrade(upgrade) )
- 		return FALSE;
+	// STOP cheaters by making sure they can actually build this
+	if( !getObject()->canProduceUpgrade(upgrade) )
+		return FALSE;
 
 	//
 	// you cannot queue a player upgrade production if you are producing one already somewhere else
@@ -1137,27 +1137,26 @@ void ProductionUpdate::onDie( const DamageInfo *damageInfo )
 // ------------------------------------------------------------------------------------------------
 void ProductionUpdate::cancelAndRefundAllProduction( void )
 {
-  // Empirically, in release the code can loop forever.  So we limit to 100 passes. jba. [8/31/2003]
-  const Int productionLimit = 100;// With luck, we never queue up 100 units. [8/31/2003]
-  Int i;
-  for (i=0; i<productionLimit; i++) 
-  {
-    // iterate through our production queue
-    if( m_productionQueue )
-    {
-      if( m_productionQueue->getProductionType() == PRODUCTION_UNIT )
-        cancelUnitCreate( m_productionQueue->getProductionID() );
-      else if( m_productionQueue->getProductionType() == PRODUCTION_UPGRADE )
-        cancelUpgrade( m_productionQueue->getProductionUpgrade() );
-      else
-      {
-        // unknown production type
-        DEBUG_CRASH(( "ProductionUpdate::cancelAndRefundAllProduction - Unknown production type '%d'\n",
-                      m_productionQueue->getProductionType() ));
-        return;
-      }  // end else
-    }  // end if
-  }
+	// Empirically, in release the code can loop forever.  So we limit to 100 passes. jba. [8/31/2003]
+	const Int productionLimit = 100;// With luck, we never queue up 100 units. [8/31/2003]
+	Int i;
+	for (i=0; i<productionLimit; i++) 
+	{
+		// iterate through our production queue
+		if( m_productionQueue )
+		{
+			if( m_productionQueue->getProductionType() == PRODUCTION_UNIT )
+				cancelUnitCreate( m_productionQueue->getProductionID() );
+			else if( m_productionQueue->getProductionType() == PRODUCTION_UPGRADE )
+				cancelUpgrade( m_productionQueue->getProductionUpgrade() );
+			else
+			{
+				// unknown production type
+				DEBUG_CRASH(( "ProductionUpdate::cancelAndRefundAllProduction - Unknown production type '%d'\n", m_productionQueue->getProductionType() ));
+				return;
+			}  // end else
+		}  // end if
+	}
 }  // end cancelAndRefundAllProduction
 
 // ------------------------------------------------------------------------------------------------

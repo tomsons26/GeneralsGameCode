@@ -399,7 +399,6 @@ public:
 	Real getShroudClearingRange() const;				///< How far do you clear shroud?
 	void setShroudClearingRange( Real newShroudClearingRange );	///< Access to setting someone's clear shroud distance
 
-
 	// Both of these calls are intended to only be used by TerrainLogic, specifically setActiveBoundary()
 	void friend_prepareForMapBoundaryAdjust(void);
 	void friend_notifyOfNewMapBoundary(void);
@@ -436,8 +435,8 @@ public:
 	const AsciiString& getCommandSetString() const;
 	void setCommandSetStringOverride( AsciiString newCommandSetString ) { m_commandSetStringOverride = newCommandSetString; }
 
- 	/// People are faking their commandsets, and, Suprise!, they are authoritative.  Challenge everything.
- 	Bool canProduceUpgrade( const UpgradeTemplate *upgrade );
+	/// People are faking their commandsets, and, Suprise!, they are authoritative.  Challenge everything.
+	Bool canProduceUpgrade( const UpgradeTemplate *upgrade );
 
 	// Weapons & Damage -------------------------------------------------------------------------------------------------
 	void reloadAllAmmo(Bool now);

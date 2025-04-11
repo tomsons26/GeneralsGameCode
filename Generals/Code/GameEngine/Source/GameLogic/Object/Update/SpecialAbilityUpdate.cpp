@@ -17,9 +17,9 @@
 */
 
 ////////////////////////////////////////////////////////////////////////////////
-//																																						//
-//  (c) 2001-2003 Electronic Arts Inc.																				//
-//																																						//
+//                                                                            //
+//  (c) 2001-2003 Electronic Arts Inc.                                        //
+//                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 
 // FILE: SpecialAbilityUpdate.cpp /////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@
 // Desc:   Handles processing of unit special abilities.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "PreRTS.h"	// This must go first in EVERY cpp file int the GameEngine
+#include "PreRTS.h" // This must go first in EVERY cpp file int the GameEngine
 
 #include "Common/GameAudio.h"
 #include "Common/GlobalData.h"
@@ -79,8 +79,8 @@ SpecialAbilityUpdate::SpecialAbilityUpdate( Thing *thing, const ModuleData* modu
 	//
 	m_active = false;
 	m_prepFrames = 0;
-	m_animFrames = 0;	
-  m_targetID = INVALID_ID;
+	m_animFrames = 0;
+	m_targetID = INVALID_ID;
 	m_targetPos.zero();
 	m_locationCount = 0;
 	m_specialObjectEntries = 0;
@@ -135,7 +135,7 @@ Options:
 	StartAbilityRange		 -- Specify how far you want your unit to be from the target before
 													start your special ability.
 	AbilityAbortRange		 -- After starting an attack, it'll allow preparation unless the target goes
-	                        beyond this range. If this happens, the ability is aborted outright.
+													beyond this range. If this happens, the ability is aborted outright.
 	PreparationTime			 -- How long it takes to prepare your special once in position and unpacked.
 	PersistentPrepTime	 -- This value defines whether or not you are using a persistent special. 
 													Once the special ability is triggered, it'll wait until this specified
@@ -149,7 +149,7 @@ Options:
 													of xTime +/- 20%. This is important because it represents averages.
 	UnpackTime					 -- Same as PackTime, except used once entering range of target.
 	SkipPackingWithNoTarget -- This option is used by the No Target Special variation, and only uses
-												  packing/unpacking when you have a specific target. In the case of Colonel
+													packing/unpacking when you have a specific target. In the case of Colonel
 													Burton, this value is set to true. When he plants a C4 charge, he has a
 													target, therefore he requires unpacking (laying the charge). When he runs
 													away and decides to detonate the charge, he calls the same special
@@ -167,7 +167,7 @@ Options:
 													the building (hacker), this value will dictate how long the building
 													will be disabled should the hacker die or stop the attack.
 	UniqueSpecialObjectTargets -- Prevents the owner from placing multiple special objects on the
-	                        same target. C4 charges once again.
+													same target. C4 charges once again.
 	SpecialObjectsPersistWhenOwnerDies -- If the owner dies, the special objects will remain in
 													the world. Timed C4 charges is a good example, but remote C4 charges
 													is a bad example -- because it requires the owner to detonate them.
@@ -193,7 +193,7 @@ UpdateSleepTime SpecialAbilityUpdate::update( void )
 
 /// @todo srj -- this could probably sleep more between stages. maybe someday.
 	// Note: This will be complicated because one difficult example is handling Burton when he dies while
-	//       bombs are in the world.
+	//			 bombs are in the world.
 
 	//Validation of special objects makes sure that they still exist. Sometimes special
 	//objects can be destroyed or removed, or detonate, etc! When they go missing,
@@ -212,7 +212,7 @@ UpdateSleepTime SpecialAbilityUpdate::update( void )
 		return calcSleepTime();
 	}
 
-	if( !m_active )	// Not active.
+	if( !m_active ) // Not active.
 		return calcSleepTime();
 	
 	AIUpdateInterface *ai = getObject()->getAIUpdateInterface();
@@ -249,7 +249,7 @@ UpdateSleepTime SpecialAbilityUpdate::update( void )
 				shouldAbort = TRUE;
 			else switch (data->m_specialPowerTemplate->getSpecialPowerType())
 			{
-				case SPECIAL_INFANTRY_CAPTURE_BUILDING:	
+				case SPECIAL_INFANTRY_CAPTURE_BUILDING:
 				case SPECIAL_BLACKLOTUS_CAPTURE_BUILDING:
 				case SPECIAL_HACKER_DISABLE_BUILDING:
 					if (target->getTeam() == getObject()->getTeam())
@@ -766,7 +766,7 @@ Bool SpecialAbilityUpdate::isWithinStartAbilityRange() const
 				{
 					return true;
 				}
-			}  
+			}
 			return false;
 		}
 		
@@ -840,7 +840,7 @@ Bool SpecialAbilityUpdate::isWithinAbilityAbortRange() const
 				{
 					return true;
 				}
-			}  
+			}
 			return false;
 		}
 
@@ -905,7 +905,7 @@ void SpecialAbilityUpdate::startPreparation()
 			}
 			break;
 		}
-		case SPECIAL_INFANTRY_CAPTURE_BUILDING:	
+		case SPECIAL_INFANTRY_CAPTURE_BUILDING:
 		{
 			Object *target = TheGameLogic->findObjectByID( m_targetID );
 			if (target)
@@ -1173,7 +1173,6 @@ void SpecialAbilityUpdate::triggerAbilityEffect()
 		}
 	}
 
-
 	AudioEventRTS sound = data->m_triggerSound;
 	sound.setObjectID( object->getID() );
 	TheAudio->addAudioEvent( &sound );
@@ -1286,7 +1285,7 @@ void SpecialAbilityUpdate::triggerAbilityEffect()
 			break;
 		}
 
-		case SPECIAL_INFANTRY_CAPTURE_BUILDING:	
+		case SPECIAL_INFANTRY_CAPTURE_BUILDING:
 		case SPECIAL_BLACKLOTUS_CAPTURE_BUILDING:
 		{
 			Object *target = TheGameLogic->findObjectByID( m_targetID );
@@ -1304,7 +1303,7 @@ void SpecialAbilityUpdate::triggerAbilityEffect()
 			}
 
 			// Just in case we are capturing a building which is already garrisoned by other
-			ContainModuleInterface * contain = 	target->getContain();
+			ContainModuleInterface * contain = target->getContain();
 			if ( contain && contain->isGarrisonable() )
 			{
 				contain->removeAllContained( TRUE );

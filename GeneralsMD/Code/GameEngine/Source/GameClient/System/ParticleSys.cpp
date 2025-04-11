@@ -1909,14 +1909,11 @@ Bool ParticleSystem::update( Int localPlayerIndex  )
 			if (!isShrouded)
 				isShrouded = (objectAttachedTo->getShroudedStatus(localPlayerIndex) >= OBJECTSHROUD_FOGGED);
  
-      const Drawable * draw = objectAttachedTo->getDrawable();
-      if ( draw )
-  			parentXfrm = draw->getTransformMatrix();
-      else
-  			parentXfrm = objectAttachedTo->getTransformMatrix();
-      
-
-
+			const Drawable * draw = objectAttachedTo->getDrawable();
+			if ( draw )
+				parentXfrm = draw->getTransformMatrix();
+			else
+				parentXfrm = objectAttachedTo->getTransformMatrix();
 
 			m_lastPos = m_pos;
 			m_pos = *objectAttachedTo->getPosition();
@@ -1931,30 +1928,28 @@ Bool ParticleSystem::update( Int localPlayerIndex  )
 		}
 	}
 
-
-
 	if (parentXfrm)
 	{
-    if (m_skipParentXfrm)
-    {
-      //this particle system is already in world space so no need to apply parent xform.
-      m_transform = m_localTransform;
-    }
-    else
-    {
-		  // if system has its own local transform, concatenate them
-		  if (m_isLocalIdentity == false)
-  #ifdef ALLOW_TEMPORARIES
-			  m_transform = (*parentXfrm) * m_localTransform;
-  #else
-			  m_transform.mul(*parentXfrm, m_localTransform);
-  #endif
-		  else
-			  m_transform = *parentXfrm;
-    }
+		if (m_skipParentXfrm)
+		{
+			//this particle system is already in world space so no need to apply parent xform.
+			m_transform = m_localTransform;
+		}
+		else
+		{
+			// if system has its own local transform, concatenate them
+			if (m_isLocalIdentity == false)
+	#ifdef ALLOW_TEMPORARIES
+				m_transform = (*parentXfrm) * m_localTransform;
+	#else
+				m_transform.mul(*parentXfrm, m_localTransform);
+	#endif
+			else
+				m_transform = *parentXfrm;
+		}
 
-		  m_isIdentity = false;
-		  transformSet = true;
+			m_isIdentity = false;
+			transformSet = true;
 	}
 
 

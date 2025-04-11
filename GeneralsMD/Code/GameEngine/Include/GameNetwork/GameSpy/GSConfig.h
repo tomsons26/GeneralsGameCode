@@ -65,6 +65,7 @@ public:
 
 	// Custom match
 	virtual Bool restrictGamesToLobby() = 0;
+
 	static GameSpyConfigInterface* create(AsciiString config);
 };
 

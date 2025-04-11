@@ -818,10 +818,10 @@ void AIGuardAttackAggressorState::crc( Xfer *xfer )
 //-------------------------------------------------------------------------------------------------
 void AIGuardAttackAggressorState::xfer( Xfer *xfer )
 {
-  // version
-  XferVersion currentVersion = 1;
-  XferVersion version = currentVersion;
-  xfer->xferVersion( &version, currentVersion );
+	// version
+	XferVersion currentVersion = 1;
+	XferVersion version = currentVersion;
+	xfer->xferVersion( &version, currentVersion );
 
 }
 

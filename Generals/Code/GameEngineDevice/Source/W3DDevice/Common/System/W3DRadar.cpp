@@ -60,6 +60,7 @@
 //#pragma MESSAGE("************************************** WARNING, optimization disabled for debugging purposes")
 #endif
 
+
 // PRIVATE DATA ///////////////////////////////////////////////////////////////////////////////////
 enum { OVERLAY_REFRESH_RATE = 6 };  ///< over updates once this many frames
 
@@ -276,8 +277,6 @@ void W3DRadar::drawHeroIcon( Int pixelX, Int pixelY, Int width, Int height, cons
 		TheDisplay->drawImage( image, offsetScreen.x , offsetScreen.y, offsetScreen.x + iconWidth, offsetScreen.y + iconHeight );
 	}
 }
-
-
 
 //-------------------------------------------------------------------------------------------------
 /** Draw a "box" into the texture passed in that represents the viewable area for
@@ -616,7 +615,6 @@ void W3DRadar::drawIcons( Int pixelX, Int pixelY, Int width, Int height )
 	}
 }
 
-
 //-------------------------------------------------------------------------------------------------
 /** Render an object list into the texture passed in */
 //-------------------------------------------------------------------------------------------------
@@ -704,7 +702,7 @@ void W3DRadar::renderObjectList( const RadarObject *listHead, TextureClass *text
 				continue;
 
       if ( ThePlayerList->getLocalPlayer()->getRelationship(obj->getTeam()) == ENEMIES )
-        if( !obj->testStatus( OBJECT_STATUS_DETECTED ) && !stealth->isDisguised() )
+		if( !obj->testStatus( OBJECT_STATUS_DETECTED ) && !stealth->isDisguised() )
 				  skip = TRUE;
 
 			UnsignedByte r, g, b, a;

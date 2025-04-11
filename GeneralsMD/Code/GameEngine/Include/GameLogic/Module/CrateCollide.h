@@ -98,8 +98,8 @@ enum SabotageVictimType
 	virtual Bool isHijackedVehicleCrateCollide() const { return FALSE; }
 	virtual Bool isSabotageBuildingCrateCollide() const { return FALSE; }
 
-  void doSabotageFeedbackFX( const Object *other, SabotageVictimType type = SAB_VICTIM_GENERIC );
-  
+	void doSabotageFeedbackFX( const Object *other, SabotageVictimType type = SAB_VICTIM_GENERIC );
+
 protected:
 
 	/// This is the game logic execution function that all real CrateCollides will implement

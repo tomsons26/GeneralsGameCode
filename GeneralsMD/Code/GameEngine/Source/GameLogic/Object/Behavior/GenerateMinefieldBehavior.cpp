@@ -103,9 +103,9 @@ GenerateMinefieldBehaviorModuleData::GenerateMinefieldBehaviorModuleData()
 		{ 0, 0, 0, 0 }
 	};
 
-  BehaviorModuleData::buildFieldParse(p);
-  p.add(dataFieldParse);
-  p.add(UpgradeMuxData::getFieldParse(), offsetof( GenerateMinefieldBehaviorModuleData, m_upgradeMuxData ));
+	BehaviorModuleData::buildFieldParse(p);
+	p.add(dataFieldParse);
+	p.add(UpgradeMuxData::getFieldParse(), offsetof( GenerateMinefieldBehaviorModuleData, m_upgradeMuxData ));
 }
 
 //-------------------------------------------------------------------------------------------------

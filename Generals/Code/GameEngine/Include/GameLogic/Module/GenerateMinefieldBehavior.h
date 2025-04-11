@@ -37,7 +37,6 @@
 #include "GameLogic/Module/DieModule.h"
 #include "GameLogic/Module/UpgradeModule.h"
 
-
 //-------------------------------------------------------------------------------------------------
 class GenerateMinefieldBehaviorModuleData : public BehaviorModuleData
 {
@@ -110,10 +109,10 @@ protected:
 
 
 private:
-	Coord3D m_target;
-	Bool m_hasTarget;
-	Bool m_generated;
-	
+	Coord3D							m_target;
+	Bool								m_hasTarget;
+	Bool								m_generated;
+
 	const Coord3D* getMinefieldTarget() const;
 	void placeMines();
 	void placeMinesInFootprint(const GeometryInfo& geom, const ThingTemplate* mineTemplate);

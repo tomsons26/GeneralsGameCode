@@ -89,9 +89,9 @@ void W3DDisplayStringManager::postProcessLoad( void )
 		displayNumber.format( L"%d", i);
 		m_groupNumeralStrings[i]->setText( displayNumber );
 #else
- 		AsciiString displayNumber;
- 		displayNumber.format("NUMBER:%d", i);
- 		m_groupNumeralStrings[i]->setText(TheGameText->fetch(displayNumber));
+		AsciiString displayNumber;
+		displayNumber.format("NUMBER:%d", i);
+		m_groupNumeralStrings[i]->setText(TheGameText->fetch(displayNumber));
 #endif
 	}
 

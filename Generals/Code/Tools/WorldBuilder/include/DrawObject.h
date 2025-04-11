@@ -16,6 +16,7 @@
 **	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+
 #ifndef __DRAW_OBJECT_H_
 #define __DRAW_OBJECT_H_
 
@@ -84,6 +85,7 @@ public:
 	static void setDoMeshFeedback(Bool val) { m_meshFeedback = val; }	
 	static void setDoRampFeedback(Bool val) { m_rampFeedback = val; }
 	static void setDoBoundaryFeedback(Bool val) { m_boundaryFeedback = val; }
+
 	static void setDoAmbientSoundFeedback(Bool val) { m_ambientSoundFeedback = val; }
 	
 	static void setBrushFeedbackParms(Bool square, Int width, Int featherWidth) 

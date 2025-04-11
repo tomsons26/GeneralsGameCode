@@ -623,14 +623,14 @@ StateReturnType ApproachState::update()
 
 	if (ai->getAIStateType() != AI_MOVE_TO)
 	{
-    if ( ai->getAIStateType() == AI_IDLE )
-    // Because something outside us has told us to IDLE, so geez, ignore it and try our approach again
-      return STATE_FAILURE;
-    else
-    {
-		  DEBUG_CRASH(("hmm, bailed from moveto state early... should this be possible?"));
-		  ai->aiMoveToPosition( ai->getMoveToPos(), CMD_FROM_AI );
-    }
+		if ( ai->getAIStateType() == AI_IDLE )
+		// Because something outside us has told us to IDLE, so geez, ignore it and try our approach again
+			return STATE_FAILURE;
+		else
+		{
+			DEBUG_CRASH(("hmm, bailed from moveto state early... should this be possible?"));
+			ai->aiMoveToPosition( ai->getMoveToPos(), CMD_FROM_AI );
+		}
 
 	}
 
@@ -773,15 +773,12 @@ StateReturnType DeliveringState::update() // Kick a dude out every so often
 				mfb->setMinefieldTarget(ai->getMoveToPos());
 			}
 
-
 			static NameKeyType key_SmartBombTargetHomingUpdate = NAMEKEY("SmartBombTargetHomingUpdate");
 			SmartBombTargetHomingUpdate* smthu = (SmartBombTargetHomingUpdate *)item->findUpdateModule(key_SmartBombTargetHomingUpdate);
 			if (smthu)
 			{
 				smthu->SetTargetPosition( *ai->getMoveToPos() );
 			}
-
-
 
 			if( ai->getData()->m_inheritTransportVelocity )
 			{
@@ -895,7 +892,6 @@ StateReturnType DeliveringState::update() // Kick a dude out every so often
 							{
 								payload->getAIUpdateInterface()->aiMoveToPosition( ai->getMoveToPos(), CMD_FROM_AI );
 							}
-
 						}
 					}
 				}
@@ -1183,7 +1179,7 @@ StateReturnType HeadOffMapState::onEnter() // Give move order out of town
 	ai->friend_setAcceptingCommands(false);
 
 
-  owner->getUnitDirectionVector3D( facingDirectionUponDelivery );
+	owner->getUnitDirectionVector3D( facingDirectionUponDelivery );
 
 	return STATE_CONTINUE;
 }
@@ -1200,20 +1196,20 @@ StateReturnType HeadOffMapState::update()
 
 	if (ai->isOffMap())
 		return STATE_SUCCESS;
-  
-  // greasy as this hack seems... if terrain or objects or whatever have turned me away from the map-edge that I had first headed for,...
-  //I blow up, rather than face eternally spinning on the point of a mineret or derrick or something awful.
-  if ( owner->getPhysics()->getTurning() != 0 )
-  {
-    Coord3D currentDirection;
-    owner->getUnitDirectionVector3D( currentDirection );
-  	Real dot = facingDirectionUponDelivery.x * currentDirection.x 
-             + facingDirectionUponDelivery.y * currentDirection.y 
-             + facingDirectionUponDelivery.z * currentDirection.z;
 
-    if ( dot < 0.3f )
-      owner->kill();
-  }
+	// greasy as this hack seems... if terrain or objects or whatever have turned me away from the map-edge that I had first headed for,...
+	//I blow up, rather than face eternally spinning on the point of a mineret or derrick or something awful.
+	if ( owner->getPhysics()->getTurning() != 0 )
+	{
+		Coord3D currentDirection;
+		owner->getUnitDirectionVector3D( currentDirection );
+		Real dot = facingDirectionUponDelivery.x * currentDirection.x 
+						 + facingDirectionUponDelivery.y * currentDirection.y 
+						 + facingDirectionUponDelivery.z * currentDirection.z;
+
+		if ( dot < 0.3f )
+			owner->kill();
+	}
 
 
 

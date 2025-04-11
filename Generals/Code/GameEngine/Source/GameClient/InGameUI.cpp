@@ -786,8 +786,8 @@ const FieldParse InGameUI::s_fieldParseTable[] =
 	{ "SpySatelliteRadiusCursor",		RadiusDecalTemplate::parseRadiusDecalTemplate, NULL, offsetof( InGameUI, m_radiusCursors[	RADIUSCURSOR_SPYSATELLITE] ) },
 	
 	{ "NuclearMissileRadiusCursor", RadiusDecalTemplate::parseRadiusDecalTemplate, NULL, offsetof( InGameUI, m_radiusCursors[	RADIUSCURSOR_NUCLEARMISSILE] ) }, 
-	{ "EMPPulseRadiusCursor",		  	RadiusDecalTemplate::parseRadiusDecalTemplate, NULL, offsetof( InGameUI, m_radiusCursors[	RADIUSCURSOR_EMPPULSE] ) },
-	{ "ArtilleryRadiusCursor",		  RadiusDecalTemplate::parseRadiusDecalTemplate, NULL, offsetof( InGameUI, m_radiusCursors[	RADIUSCURSOR_ARTILLERYBARRAGE] ) },
+	{ "EMPPulseRadiusCursor",				RadiusDecalTemplate::parseRadiusDecalTemplate, NULL, offsetof( InGameUI, m_radiusCursors[	RADIUSCURSOR_EMPPULSE] ) },
+	{ "ArtilleryRadiusCursor",			RadiusDecalTemplate::parseRadiusDecalTemplate, NULL, offsetof( InGameUI, m_radiusCursors[	RADIUSCURSOR_ARTILLERYBARRAGE] ) },
 	{ "NapalmStrikeRadiusCursor",		RadiusDecalTemplate::parseRadiusDecalTemplate, NULL, offsetof( InGameUI, m_radiusCursors[	RADIUSCURSOR_NAPALMSTRIKE] ) },
 	{ "ClusterMinesRadiusCursor",		RadiusDecalTemplate::parseRadiusDecalTemplate, NULL, offsetof( InGameUI, m_radiusCursors[	RADIUSCURSOR_CLUSTERMINES] ) },
 	
@@ -2311,7 +2311,7 @@ void InGameUI::createMouseoverHint( const GameMessage *msg )
 				str.concat(warehouseFeedback);
 			}
 
-      if (player)
+			if (player)
 			{
 				UnicodeString tooltip;
 				//if (TheRecorder->isMultiplayer() && player->getPlayerType() == PLAYER_HUMAN)
@@ -3509,10 +3509,6 @@ void InGameUI::postDraw( void )
 						}
 					}
 				}
-
-
-
-
 			}
 		}
 	}
@@ -3877,9 +3873,9 @@ void InGameUI::militarySubtitle( const AsciiString& label, Int duration )
 	TheInGameUI->disableTooltipsUntil(messageTimeout);
 	
 	// calculate where this screen position should be since the position being passed in is based off 8x6
-	Coord2D multiplyer;
-	multiplyer.x = TheDisplay->getWidth() / 800;
-	multiplyer.y = TheDisplay->getHeight() / 600;
+	Coord2D multiplier;
+	multiplier.x = TheDisplay->getWidth() / 800;
+	multiplier.y = TheDisplay->getHeight() / 600;
 
 	// lets bring out the data structure!
 	m_militarySubtitle = NEW MilitarySubtitleData;
@@ -3888,8 +3884,8 @@ void InGameUI::militarySubtitle( const AsciiString& label, Int duration )
 	m_militarySubtitle->blockDrawn = TRUE;
 	m_militarySubtitle->blockBeginFrame = currLogicFrame;
 	m_militarySubtitle->lifetime = messageTimeout;
-	m_militarySubtitle->blockPos.x =  m_militarySubtitle->position.x = m_militaryCaptionPosition.x * multiplyer.x;
-	m_militarySubtitle->blockPos.y =  m_militarySubtitle->position.y = m_militaryCaptionPosition.y * multiplyer.y;
+	m_militarySubtitle->blockPos.x =  m_militarySubtitle->position.x = m_militaryCaptionPosition.x * multiplier.x;
+	m_militarySubtitle->blockPos.y =  m_militarySubtitle->position.y = m_militaryCaptionPosition.y * multiplier.y;
 	m_militarySubtitle->incrementOnFrame = currLogicFrame + (Int)(((Real)LOGICFRAMES_PER_SECOND * m_militaryCaptionDelayMS)/1000.0f);
 	m_militarySubtitle->index = 0;
 	for (int i = 1; i < MAX_SUBTITLE_LINES; i ++)

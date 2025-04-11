@@ -404,7 +404,7 @@ protected:
 	AsciiString m_filename;										///< filename of file currently loading
 	INILoadType m_loadType;										///< load time for current file
 	UnsignedInt m_lineNum;										///< current line number that's been read
-	char m_buffer[ INI_MAX_CHARS_PER_LINE+1 ];///< buffer to read file contents into
+	char m_buffer[ INI_MAX_CHARS_PER_LINE+1 ];	///< buffer to read file contents into
 	const char *m_seps;												///< for strtok parsing
 	const char *m_sepsPercent;								///< m_seps with percent delimiter as well
 	const char *m_sepsColon;									///< m_seps with colon delimiter as well

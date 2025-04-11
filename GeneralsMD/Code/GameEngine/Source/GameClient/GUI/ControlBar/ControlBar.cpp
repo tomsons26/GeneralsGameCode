@@ -137,7 +137,7 @@ static void commandButtonTooltip(GameWindow *window,
 /// mark the UI as dirty so the context of everything is re-evaluated
 void ControlBar::markUIDirty( void )
 { 
-  m_UIDirty = TRUE;
+	m_UIDirty = TRUE;
 
 #if defined( _INTERNAL ) || defined( _DEBUG )
 	UnsignedInt now = TheGameLogic->getFrame();
@@ -2617,7 +2617,7 @@ void ControlBar::setPortraitByObject( Object *obj )
 				setPortraitByObject( NULL );
 				return;
 			}
-      StealthUpdate *stealth = obj->getStealth();
+			StealthUpdate *stealth = obj->getStealth();
 			if( stealth && stealth->isDisguised() )
 			{
 				//Fake player upgrades too!

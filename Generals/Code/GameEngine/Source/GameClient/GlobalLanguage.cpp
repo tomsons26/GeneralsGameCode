@@ -140,6 +140,7 @@ void GlobalLanguage::init( void )
 
 	OSVERSIONINFO	osvi;
 	osvi.dwOSVersionInfoSize=sizeof(OSVERSIONINFO);
+
 	//GS NOTE: Must call doesFileExist in either case so that NameKeyGenerator will stay in sync
 	AsciiString tempName;
 	tempName.format("Data\\%s\\Language9x.ini", GetRegistryLanguage().str());

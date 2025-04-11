@@ -122,7 +122,7 @@ private:
 	ContainModuleInterface *getRedirectedContain() const; ///< And this gets what are redirecting to.
 	void activateRedirectedContain();///< I need to shut this off since I can talk directly to my bunker, but he can never directly see me
 	void deactivateRedirectedContain();
-  void parseInitialPayload( INI* ini, void *instance, void *store, const void* /*userData*/ );
+	void parseInitialPayload( INI* ini, void *instance, void *store, const void* /*userData*/ );
 
 	Bool m_redirectionActivated;
 

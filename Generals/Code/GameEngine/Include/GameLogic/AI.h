@@ -307,7 +307,8 @@ class Weapon;
 // TheSuperHackers @compile xezon 22/03/2025 Renames AI_PASSIVE to not conflict with macro in ws2def.h
 
 // Note - written out in save/load xfer and .map files, don't change these numbers.  
-enum AttitudeType {
+enum AttitudeType
+{
 	ATTITUDE_SLEEP = -2,
 	ATTITUDE_PASSIVE=-1,
 	ATTITUDE_NORMAL=0,

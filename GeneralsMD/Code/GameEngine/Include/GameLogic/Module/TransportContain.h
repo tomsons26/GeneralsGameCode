@@ -87,8 +87,8 @@ public:
 	virtual UpdateSleepTime update();							///< called once per frame
 
 	virtual Bool isRiderChangeContain() const { return FALSE; }
-  virtual Bool isSpecialOverlordStyleContainer() const {return FALSE;}
-	
+	virtual Bool isSpecialOverlordStyleContainer() const {return FALSE;}
+
 	virtual Int getContainMax( void ) const;
 
 	virtual Int getExtraSlotsInUse( void ) { return m_extraSlotsInUse; }///< Transports have the ability to carry guys how take up more than spot.

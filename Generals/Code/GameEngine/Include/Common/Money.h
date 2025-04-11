@@ -83,7 +83,6 @@ public:
 	void setPlayerIndex(Int ndx) { m_playerIndex = ndx; }
 	
 protected:
-
 	// snapshot methods
 	virtual void crc( Xfer *xfer );
 	virtual void xfer( Xfer *xfer );

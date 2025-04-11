@@ -39,8 +39,8 @@
 
 class W3DShadowTexture;	//forward reference
 class W3DShadowTextureManager;	//forward reference
-class W3DProjectedShadow; //forward reference
 class Drawable;	//forward reference
+class W3DProjectedShadow; //forward reference.
 
 class W3DProjectedShadowManager	: public ProjectedShadowManager
 {

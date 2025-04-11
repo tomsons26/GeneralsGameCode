@@ -218,7 +218,7 @@ public:
 	virtual ObjectID getPreferredDockID() const { return m_preferredDock; }
 	virtual UnsignedInt getActionDelayForDock( Object *dock );
 	virtual Int getUpgradedSupplyBoost() const { return 0; }
-	
+
 	virtual UpdateSleepTime update();
 
 protected:

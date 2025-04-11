@@ -553,7 +553,7 @@ void RecorderClass::startRecording(GameDifficulty diff, Int originalGameMode, In
 	//
 	// save space for stats to be filled in.
 	//
-	// **** if this changes, change the LAN Playtest code above ****
+	// **** if this changes, change the LAN code above ****
 	//
 	time_t t = 0;
 	fwrite(&t, sizeof(time_t), 1, m_file);	// reserve space for start time
@@ -1022,6 +1022,7 @@ void RecorderClass::handleCRCMessage(UnsignedInt newCRC, Int playerIndex, Bool f
 		{
 			m_crcInfo->setSawCRCMismatch();
 
+			//Kris: Patch 1.01 November 10, 2003 (integrated changes from Matt Campbell)
 			// Since we don't seem to have any *visible* desyncs when replaying games, but get this warning
 			// virtually every replay, the assumption is our CRC checking is faulty.  Since we're at the
 			// tail end of patch season, let's just disable the message, and hope the users believe the

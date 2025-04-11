@@ -204,16 +204,16 @@ ImageCollection::ImageCollection( void )
 //-------------------------------------------------------------------------------------------------
 ImageCollection::~ImageCollection( void )
 {
-  for (std::map<unsigned,Image *>::iterator i=m_imageMap.begin();i!=m_imageMap.end();++i)
-    i->second->deleteInstance();
-}  // end ~ImageCollection
+	for (std::map<unsigned,Image *>::iterator i=m_imageMap.begin();i!=m_imageMap.end();++i)
+		i->second->deleteInstance();
+}	// end ~ImageCollection
 
 //-------------------------------------------------------------------------------------------------
 /** adds the given image to the collection, transfers ownership to this object */
 //-------------------------------------------------------------------------------------------------
 void ImageCollection::addImage( Image *image )
 {
-  m_imageMap[TheNameKeyGenerator->nameToLowercaseKey(image->getName())]=image;
+	m_imageMap[TheNameKeyGenerator->nameToLowercaseKey(image->getName())]=image;
 }  // end newImage
 
 //-------------------------------------------------------------------------------------------------
@@ -221,8 +221,8 @@ void ImageCollection::addImage( Image *image )
 //-------------------------------------------------------------------------------------------------
 const Image *ImageCollection::findImageByName( const AsciiString& name )
 {
-  std::map<unsigned,Image *>::iterator i=m_imageMap.find(TheNameKeyGenerator->nameToLowercaseKey(name));
-  return i==m_imageMap.end()?NULL:i->second;
+	std::map<unsigned,Image *>::iterator i=m_imageMap.find(TheNameKeyGenerator->nameToLowercaseKey(name));
+	return i==m_imageMap.end()?NULL:i->second;
 }  // end findImageByName
 
 //-------------------------------------------------------------------------------------------------

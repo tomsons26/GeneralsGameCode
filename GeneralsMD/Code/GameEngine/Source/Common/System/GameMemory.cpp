@@ -2159,7 +2159,7 @@ void DynamicMemoryAllocator::debugIgnoreLeaksForThisBlock(void* pBlockPtr)
 	out the block. if unable to allocate, throw ERROR_OUT_OF_MEMORY. this
 	function will never return null.
 
-  added code to make sure we're on a DWord boundary, throw exception if not
+	added code to make sure we're on a DWord boundary, throw exception if not
 */
 void *DynamicMemoryAllocator::allocateBytesDoNotZeroImplementation(Int numBytes DECLARE_LITERALSTRING_ARG2)
 {

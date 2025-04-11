@@ -112,12 +112,12 @@ public:
 
 	enum LocalLegalToBuildOptions
 	{
-		TERRAIN_RESTRICTIONS	= 0x00000001,	///< Check for basic terrain restrictions
-		CLEAR_PATH						= 0x00000002,	///< Must be able to path find to location
-		NO_OBJECT_OVERLAP			= 0X00000004,	///< Can't overlap enemy objects, or locally controled objects that can't move out of the way			
-		USE_QUICK_PATHFIND    = 0x00000008, ///< Use the quick pathfind method for CLEAR_PATH
-		SHROUD_REVEALED				= 0x00000010,	///< Check to make sure the shroud is revealed
-		NO_ENEMY_OBJECT_OVERLAP=0x00000020,	///< Can't overlap enemy objects only.			
+		TERRAIN_RESTRICTIONS		= 0x00000001,	///< Check for basic terrain restrictions
+		CLEAR_PATH							= 0x00000002,	///< Must be able to path find to location
+		NO_OBJECT_OVERLAP				= 0X00000004,	///< Can't overlap enemy objects, or locally controled objects that can't move out of the way			
+		USE_QUICK_PATHFIND			= 0x00000008, ///< Use the quick pathfind method for CLEAR_PATH
+		SHROUD_REVEALED					= 0x00000010,	///< Check to make sure the shroud is revealed
+		NO_ENEMY_OBJECT_OVERLAP	= 0x00000020,	///< Can't overlap enemy objects only.			
 	};
 
 public:

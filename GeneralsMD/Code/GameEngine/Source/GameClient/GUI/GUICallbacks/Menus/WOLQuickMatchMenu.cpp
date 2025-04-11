@@ -1226,20 +1226,20 @@ void WOLQuickMatchMenuUpdate( WindowLayout * layout, void *userData)
 
 
 // LORENZEN EXPRESSES DOUBT ABOUT THIS ONE, AS IT MAY HAVE SUFFERED MERGE MANGLING... SORRY
-            // I THINK THIS IS THE OBSOLETE VERSION... SEE THE NEWER LOOKING ONE ABOVE
+						// I THINK THIS IS THE OBSOLETE VERSION... SEE THE NEWER LOOKING ONE ABOVE
 /*
-  			case PeerResponse::PEERRESPONSE_DISCONNECT:
-  				{
-  					UnicodeString title, body;
-  					AsciiString disconMunkee;
-  					disconMunkee.format("GUI:GSDisconReason%d", resp.discon.reason);
-   				title = TheGameText->fetch( "GUI:GSErrorTitle" );
-  					body = TheGameText->fetch( disconMunkee );
-  					GameSpyCloseAllOverlays();
-  					GSMessageBoxOk( title, body );
-  					TheGameSpyInfo->reset();
-  					TheShell->pop();
-  				}
+			case PeerResponse::PEERRESPONSE_DISCONNECT:
+				{
+					UnicodeString title, body;
+					AsciiString disconMunkee;
+					disconMunkee.format("GUI:GSDisconReason%d", resp.discon.reason);
+ 				title = TheGameText->fetch( "GUI:GSErrorTitle" );
+					body = TheGameText->fetch( disconMunkee );
+					GameSpyCloseAllOverlays();
+					GSMessageBoxOk( title, body );
+					TheGameSpyInfo->reset();
+					TheShell->pop();
+				}
 */
 
 

@@ -566,17 +566,15 @@ StateReturnType HackInternetState::update()
 					pos.zero();
 					pos.add( owner->getPosition() );
 					pos.z += 20.0f; //add a little z to make it show up above the unit.
-          
 
-          Object *internetCenter = owner->getContainedBy();
-          if ( internetCenter )
-          {
-            Real width = internetCenter->getGeometryInfo().getMajorRadius() * 0.3f;
-            Real depth = internetCenter->getGeometryInfo().getMinorRadius() * 0.3f;
-            pos.x += GameClientRandomValue(-width,width);
-            pos.y += GameClientRandomValue(-depth,depth);
-          }
-
+					Object *internetCenter = owner->getContainedBy();
+					if ( internetCenter )
+					{
+						Real width = internetCenter->getGeometryInfo().getMajorRadius() * 0.3f;
+						Real depth = internetCenter->getGeometryInfo().getMinorRadius() * 0.3f;
+						pos.x += GameClientRandomValue(-width,width);
+						pos.y += GameClientRandomValue(-depth,depth);
+					}
 
 					TheInGameUI->addFloatingText( moneyString, &pos, GameMakeColor( 0, 255, 0, 255 ) );
 				}

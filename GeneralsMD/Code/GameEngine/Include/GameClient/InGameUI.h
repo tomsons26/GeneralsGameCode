@@ -125,7 +125,7 @@ static const char *TheRadiusCursorNames[] =
 	"CARPETBOMB",
 	"DAISYCUTTER",
 	"PARADROP",
-	"SPYSATELLITE",  
+	"SPYSATELLITE",
   "SPECTREGUNSHIP",
   "HELIX_NAPALM_BOMB",
 
@@ -188,7 +188,7 @@ public:
 		Bool hiddenByScript,
 		Bool hiddenByScience,
 		Bool ready,
-    Bool evaReadyPlayed,
+		Bool evaReadyPlayed,
 		const AsciiString& superweaponNormalFont, 
 		Int superweaponNormalPointSize, 
 		Bool superweaponNormalBold,
@@ -210,7 +210,7 @@ public:
 	Bool												m_hiddenByScript;
 	Bool												m_hiddenByScience;
  	Bool												m_ready;											///< Stores if we were ready last draw, since readyness can change without time changing
-  Bool                        m_evaReadyPlayed;             ///< Stores if Eva announced superweapon is ready
+	Bool												m_evaReadyPlayed;             ///< Stores if Eva announced superweapon is ready
 // not saved, but public
  	Bool												m_forceUpdateText;
 
@@ -582,8 +582,7 @@ public:
 	void registerWindowLayout(WindowLayout *layout); // register a layout for updates
 	void unregisterWindowLayout(WindowLayout *layout); // stop updates for this layout
 
-  void triggerDoubleClickAttackMoveGuardHint( void );
-  
+	void triggerDoubleClickAttackMoveGuardHint( void );
 
 public:
 	// World 2D animation methods
@@ -730,9 +729,9 @@ protected:
 	Int													m_maxSelectCount;												///< Max number of objects to select
 	UnsignedInt									m_frameSelectionChanged;								///< Frame when the selection last changed.
 
-  Int                         m_duringDoubleClickAttackMoveGuardHintTimer; ///< Frames left to draw the doubleClickFeedbackTimer 
-  Coord3D                     m_duringDoubleClickAttackMoveGuardHintStashedPosition; 
-  
+	Int							m_duringDoubleClickAttackMoveGuardHintTimer; ///< Frames left to draw the doubleClickFeedbackTimer 
+	Coord3D						m_duringDoubleClickAttackMoveGuardHintStashedPosition; 
+
 	// Video playback data
 	VideoBuffer*								m_videoBuffer;			///< video playback buffer
 	VideoStreamInterface*				m_videoStream;			///< Video stream;

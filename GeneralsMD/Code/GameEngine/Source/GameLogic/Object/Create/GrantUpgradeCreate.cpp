@@ -52,8 +52,8 @@ void GrantUpgradeCreateModuleData::buildFieldParse(MultiIniFieldParse& p)
 
 	static const FieldParse dataFieldParse[] = 
 	{
-		{ "UpgradeToGrant",	INI::parseAsciiString,							NULL, offsetof( GrantUpgradeCreateModuleData, m_upgradeName ) },
-		{ "ExemptStatus",		ObjectStatusMaskType::parseFromINI, NULL, offsetof( GrantUpgradeCreateModuleData, m_exemptStatus ) },
+		{ "UpgradeToGrant",	INI::parseAsciiString,		NULL, offsetof( GrantUpgradeCreateModuleData, m_upgradeName ) },
+		{ "ExemptStatus",	ObjectStatusMaskType::parseFromINI, NULL, offsetof( GrantUpgradeCreateModuleData, m_exemptStatus ) },
 		{ 0, 0, 0, 0 }
 	};
 

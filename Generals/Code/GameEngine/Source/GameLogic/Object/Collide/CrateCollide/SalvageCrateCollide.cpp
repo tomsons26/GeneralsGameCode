@@ -155,6 +155,7 @@ Bool SalvageCrateCollide::testWeaponChance()
 	return FALSE;
 }
 
+// ------------------------------------------------------------------------------------------------
 Bool SalvageCrateCollide::testLevelChance()
 {
 	const SalvageCrateCollideModuleData *md = getSalvageCrateCollideModuleData();
@@ -168,6 +169,7 @@ Bool SalvageCrateCollide::testLevelChance()
 	return FALSE;
 }
 
+// ------------------------------------------------------------------------------------------------
 void SalvageCrateCollide::doWeaponSet( Object *other )
 {
 	if( other->testWeaponSetFlag( WEAPONSET_CRATEUPGRADE_ONE ) )
@@ -181,11 +183,13 @@ void SalvageCrateCollide::doWeaponSet( Object *other )
 	}
 }
 
+// ------------------------------------------------------------------------------------------------
 void SalvageCrateCollide::doLevelGain( Object *other )
 {
 	other->getExperienceTracker()->gainExpForLevel( 1 );
 }
 
+// ------------------------------------------------------------------------------------------------
 void SalvageCrateCollide::doMoney( Object *other )
 {
 	const SalvageCrateCollideModuleData *md = getSalvageCrateCollideModuleData();

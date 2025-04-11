@@ -157,12 +157,12 @@ void AISkirmishPlayer::processBaseBuilding( void )
 							// make sure dozer is working on him.
 							ObjectID builder = bldg->getBuilderID();
 							Object* myDozer = TheGameLogic->findObjectByID(builder);
-              
-              if (myDozer && ( myDozer->getControllingPlayer() != m_player || myDozer->isDisabledByType( DISABLED_UNMANNED ) ) )
-              {//I don't expect this dozer to work well with me.
-                myDozer = NULL;
-                bldg->setBuilder( NULL );
-              }
+							
+							if (myDozer && ( myDozer->getControllingPlayer() != m_player || myDozer->isDisabledByType( DISABLED_UNMANNED ) ) )
+							{//I don't expect this dozer to work well with me.
+								myDozer = NULL;
+								bldg->setBuilder( NULL );
+							}
 
 							if (myDozer==NULL) {
 								DEBUG_LOG(("AI's Dozer got killed (or captured).  Find another dozer.\n"));

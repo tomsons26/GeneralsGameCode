@@ -65,7 +65,7 @@ void parseUpgradePair( INI *ini, void *instance, void *store, const void *userDa
 struct upgradePair
 {
 	std::string type;
-	Int         amount;
+	Int			amount;
 };
 
 //-----------------------------------------------------------------------------
@@ -74,7 +74,6 @@ struct upgradePair
 class AutoDepositUpdateModuleData : public UpdateModuleData
 {
 public:
-
 	UnsignedInt m_depositFrame;
 	Int m_depositAmount;
 	Int m_initialCaptureBonus;

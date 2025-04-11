@@ -226,7 +226,6 @@ public:
 	virtual Bool isRailroad() const ;
 	virtual UpdateSleepTime update( void );
 
-  
 	// TRAINY METHODS
 	void getPulled( PullInfo *info );
 	void destroyTheWholeTrainNow( void );
@@ -235,9 +234,9 @@ public:
 	void disembark( void );
 	Bool hasEverBeenHitched( void ) { return m_hasEverBeenHitched; };
 
-  void setHeld( Bool held ) {m_held = held;};
+	void setHeld( Bool held ) {m_held = held;};
 
-  void makeAWallOutOfThisTrain( Bool on );
+	void makeAWallOutOfThisTrain( Bool on );
 
 
 protected:
@@ -294,7 +293,7 @@ protected:
 												//  i.e. do I provide the movement and scheduling AI for m_trailerID 
 												//  And therefore for his and his and his..........
 
-  Bool m_held;   ///< This will prevent a loco from departing a station
+	Bool m_held;   ///< This will prevent a loco from departing a station
 
 	ConductorState m_conductorState;
 

@@ -929,9 +929,9 @@ void WaterRenderObjClass::ReAcquireResources(void)
 		}
 		shader = 
 			"ps.1.1\n \
-			tex t0 \n\
-			tex t1	\n\
-			tex t2	\n\
+			tex t0 ;get water texture\n\
+			tex t1 ;get white highlights on black background\n\
+			tex t2 ;get white highlights with more tiling\n\
 			tex t3	; get black shroud \n\
 			mul r0,v0,t0 ; blend vertex color and alpha into base texture. \n\
 			mad r0.rgb, t1, t2, r0	; blend sparkles and noise \n\

@@ -172,8 +172,7 @@ enum KindOfType
 	KINDOF_IGNORE_DOCKING_BONES,		///< Structure will not look up docking bones. Patch 1.03 hack.
 
 	KINDOF_COUNT										// total number of kindofs
-	
-}; 
+};
 
 typedef BitFlags<KINDOF_COUNT>	KindOfMaskType;
 

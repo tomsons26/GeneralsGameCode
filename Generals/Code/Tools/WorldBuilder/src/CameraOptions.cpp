@@ -58,6 +58,7 @@ BEGIN_MESSAGE_MAP(CameraOptions, CDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
+
 /////////////////////////////////////////////////////////////////////////////
 // CameraOptions message handlers
 

@@ -209,8 +209,8 @@ public:
 		Coord3D		parkingSpace; 
 		Real			parkingOrientation;
 		Coord3D		runwayPrep; 
-		Coord3D		runwayStart; 
-		Coord3D		runwayEnd; 
+		Coord3D		runwayStart;
+		Coord3D		runwayEnd;
 		Coord3D		runwayApproach;
 		Coord3D		hangarInternal;
 		Real			hangarInternalOrient;

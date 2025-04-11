@@ -683,7 +683,8 @@ void ScriptGroup::crc( Xfer *xfer )
 // ------------------------------------------------------------------------------------------------
 /** Xfer method
 	* Version Info:
-	* 1: Initial version */
+	* 1: Initial version 
+*/
 // ------------------------------------------------------------------------------------------------
 void ScriptGroup::xfer( Xfer *xfer )
 {
@@ -1645,7 +1646,7 @@ AsciiString Condition::getUiText(void)
 */
 void Condition::WriteConditionDataChunk(DataChunkOutput &chunkWriter, Condition	*pCondition)
 {
-	/**********ACTION  DATA ***********************/
+	/**********Condition  DATA ***********************/
 	while (pCondition) {
 		chunkWriter.openDataChunk("Condition", K_SCRIPT_CONDITION_VERSION_3);
 			chunkWriter.writeInt(pCondition->m_conditionType);
@@ -1924,7 +1925,7 @@ AsciiString Parameter::getUiText(void) const
 				default : DEBUG_CRASH(("Unknown Radar event type."));
 			}
 			break;
-			
+
 
 		case DIALOG:
 			uiText.format("'%s'", uiString.str());

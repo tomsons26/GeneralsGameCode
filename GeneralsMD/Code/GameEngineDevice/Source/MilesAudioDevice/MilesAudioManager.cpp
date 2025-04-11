@@ -474,10 +474,10 @@ void MilesAudioManager::reset()
 
 	AudioManager::reset();
 	stopAllAudioImmediately();
-  removeAllAudioRequests();
-  // This must come after stopAllAudioImmediately() and removeAllAudioRequests(), to ensure that
-  // sounds pointing to the temporary AudioEventInfo handles are deleted before their info is deleted
-  removeLevelSpecificAudioEventInfos();
+	removeAllAudioRequests();
+	// This must come after stopAllAudioImmediately() and removeAllAudioRequests(), to ensure that
+	// sounds pointing to the temporary AudioEventInfo handles are deleted before their info is deleted
+	removeLevelSpecificAudioEventInfos();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1166,16 +1166,16 @@ void MilesAudioManager::stopAllAudioImmediately( void )
 		it = m_playingStreams.erase(it);
 	}
 
-  for (it = m_fadingAudio.begin(); it != m_fadingAudio.end(); ) {
-    playing = (*it);
-    if (!playing) {
-      continue;
-    }
-    
-    releasePlayingAudio(playing);
-    it = m_fadingAudio.erase(it);
-  }
-  
+	for (it = m_fadingAudio.begin(); it != m_fadingAudio.end(); ) {
+		playing = (*it);
+		if (!playing) {
+			continue;
+		}
+		
+		releasePlayingAudio(playing);
+		it = m_fadingAudio.erase(it);
+	}
+	
 	std::list<HAUDIO>::iterator hit;
 	for (hit = m_audioForcePlayed.begin(); hit != m_audioForcePlayed.end(); ++hit) {
 		if (*hit) {
@@ -2404,28 +2404,28 @@ void MilesAudioManager::processPlayingList( void )
 
 Bool MilesAudioManager::has3DSensitiveStreamsPlaying( void ) const
 {
-  if ( m_playingStreams.empty() )
-    return FALSE;
+	if ( m_playingStreams.empty() )
+		return FALSE;
 
 	for ( std::list< PlayingAudio* >::const_iterator it = m_playingStreams.begin(); it != m_playingStreams.end(); ++it ) 
-  {
+	{
 		const PlayingAudio *playing = (*it);
 
-    if ( ! playing )
-      continue;
+		if ( ! playing )
+			continue;
 
-    if ( playing->m_audioEventRTS->getAudioEventInfo()->m_soundType != AT_Music )
-    {
-      return TRUE;
-    }
+		if ( playing->m_audioEventRTS->getAudioEventInfo()->m_soundType != AT_Music )
+		{
+			return TRUE;
+		}
 
-    if ( playing->m_audioEventRTS->getEventName().startsWith("Game_") == FALSE ) 
-    {
-      return TRUE;
-    }
-  }	
-  
-  return FALSE; 
+		if ( playing->m_audioEventRTS->getEventName().startsWith("Game_") == FALSE ) 
+		{
+			return TRUE;
+		}
+	}	
+	
+	return FALSE; 
 
 }
 
@@ -2529,14 +2529,14 @@ Bool MilesAudioManager::checkForSample( AudioRequest *req )
 		return true;
 	}
 
-  if ( req->m_pendingEvent->getAudioEventInfo() == NULL )
-  {
-    // Fill in event info
-    getInfoForAudioEvent( req->m_pendingEvent );
-  }
-  
+	if ( req->m_pendingEvent->getAudioEventInfo() == NULL )
+	{
+		// Fill in event info
+		getInfoForAudioEvent( req->m_pendingEvent );
+	}
+	
 	if (req->m_pendingEvent->getAudioEventInfo()->m_type != AT_SoundEffect) 
-  {
+	{
 		return true;
 	}
 

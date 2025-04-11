@@ -603,6 +603,7 @@ void MilesAudioManager::pauseAudio( AudioAffect which )
 	}
 }
 
+
 //-------------------------------------------------------------------------------------------------
 void MilesAudioManager::resumeAudio( AudioAffect which )
 {
@@ -2489,7 +2490,8 @@ Bool MilesAudioManager::checkForSample( AudioRequest *req )
 		return true;
 	}
 
-	if (req->m_pendingEvent->getAudioEventInfo()->m_type != AT_SoundEffect) {
+	if (req->m_pendingEvent->getAudioEventInfo()->m_type != AT_SoundEffect) 
+	{
 		return true;
 	}
 

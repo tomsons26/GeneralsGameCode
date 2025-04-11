@@ -819,6 +819,7 @@ Int GameSpyMiscPreferences::getMaxMessagesPerUpdate( void )
 {
 	return getInt("MaxMessagesPerUpdate", 100);
 }
+
 //-----------------------------------------------------------------------------
 // IgnorePreferences base class 
 //-----------------------------------------------------------------------------

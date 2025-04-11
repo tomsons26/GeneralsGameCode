@@ -196,10 +196,12 @@ File*		FileSystem::openFile( const Char *filename, Int access )
 Bool FileSystem::doesFileExist(const Char *filename) const
 {
 	USE_PERF_TIMER(FileSystem)
-	if (TheLocalFileSystem->doesFileExist(filename)) {
+	if (TheLocalFileSystem->doesFileExist(filename)) 
+	{
 		return TRUE;
 	}
-	if (TheArchiveFileSystem->doesFileExist(filename)) {
+	if (TheArchiveFileSystem->doesFileExist(filename)) 
+	{
 		return TRUE;
 	}
 	return FALSE;

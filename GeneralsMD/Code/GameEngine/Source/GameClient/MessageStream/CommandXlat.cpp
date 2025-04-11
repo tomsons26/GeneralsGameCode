@@ -188,40 +188,40 @@ static CanAttackResult canObjectForceAttack( Object *obj, const Object *victim, 
 
 		//Special case -- objects with spawn weapons have to do different checks. Stinger site with stinger soldiers is
 		//the catalyst example.
-    if ( obj->isKindOf( KINDOF_SPAWNS_ARE_THE_WEAPONS ) )
-    {
-      if( result != ATTACKRESULT_POSSIBLE && result != ATTACKRESULT_POSSIBLE_AFTER_MOVING )
-		  {
-			  SpawnBehaviorInterface *spawnInterface = obj->getSpawnBehaviorInterface();
-			  if( spawnInterface )
-			  {
-				  //We found the spawn interface, now get the closest slave to the target.
-				  Object *slave = spawnInterface->getClosestSlave( victim->getPosition() );
-				  if( slave ) 
-				  {
-					  result = slave->getAbleToAttackSpecificObject( ATTACK_NEW_TARGET_FORCED, victim, CMD_FROM_PLAYER );
-				  }
-			  }
-		  }
-      else // oh dear me. The wierd case of a garrisoncontainer being a KINDOF_SPAWNS_ARE_THE_WEAPONS... the AmericaBuildingFirebase
-      {
-        ContainModuleInterface *contain = obj->getContain();
-        if ( contain )
-        {
-          Object *rider = contain->getClosestRider( victim->getPosition() );
-          if ( rider )
-          {
-            result = rider->getAbleToAttackSpecificObject( ATTACK_NEW_TARGET_FORCED, victim, CMD_FROM_PLAYER );
-            if( result != ATTACKRESULT_NOT_POSSIBLE )
-              return result;
-          }
-        }
-      }
+		if ( obj->isKindOf( KINDOF_SPAWNS_ARE_THE_WEAPONS ) )
+		{
+			if( result != ATTACKRESULT_POSSIBLE && result != ATTACKRESULT_POSSIBLE_AFTER_MOVING )
+			{
+				SpawnBehaviorInterface *spawnInterface = obj->getSpawnBehaviorInterface();
+				if( spawnInterface )
+				{
+					//We found the spawn interface, now get the closest slave to the target.
+					Object *slave = spawnInterface->getClosestSlave( victim->getPosition() );
+					if( slave ) 
+					{
+						result = slave->getAbleToAttackSpecificObject( ATTACK_NEW_TARGET_FORCED, victim, CMD_FROM_PLAYER );
+					}
+				}
+			}
+			else // oh dear me. The wierd case of a garrisoncontainer being a KINDOF_SPAWNS_ARE_THE_WEAPONS... the AmericaBuildingFirebase
+			{
+				ContainModuleInterface *contain = obj->getContain();
+				if ( contain )
+				{
+					Object *rider = contain->getClosestRider( victim->getPosition() );
+					if ( rider )
+					{
+						result = rider->getAbleToAttackSpecificObject( ATTACK_NEW_TARGET_FORCED, victim, CMD_FROM_PLAYER );
+						if( result != ATTACKRESULT_NOT_POSSIBLE )
+							return result;
+					}
+				}
+			}
 
-    } // end if spawnsRweapons
+		} // end if spawnsRweapons
 
 		
-    return result;
+		return result;
 	}
 	else 
 	{
@@ -244,20 +244,20 @@ static CanAttackResult canObjectForceAttack( Object *obj, const Object *victim, 
 						testObj = slave;
 					}
 				}
-        else
-        {
-    			result = obj->getAbleToUseWeaponAgainstTarget( ATTACK_NEW_TARGET, NULL, pos, CMD_FROM_PLAYER );
-          if( result != ATTACKRESULT_POSSIBLE ) // oh dear me. The wierd case of a garrisoncontainer being a KINDOF_SPAWNS_ARE_THE_WEAPONS... the AmericaBuildingFirebase
-          {
-            ContainModuleInterface *contain = obj->getContain();
-            if ( contain )
-            {
-              Object *rider = contain->getClosestRider( pos );
-              if ( rider )
-                testObj = rider;
-            }
-          }
-        }
+				else
+				{
+					result = obj->getAbleToUseWeaponAgainstTarget( ATTACK_NEW_TARGET, NULL, pos, CMD_FROM_PLAYER );
+					if( result != ATTACKRESULT_POSSIBLE ) // oh dear me. The wierd case of a garrisoncontainer being a KINDOF_SPAWNS_ARE_THE_WEAPONS... the AmericaBuildingFirebase
+					{
+						ContainModuleInterface *contain = obj->getContain();
+						if ( contain )
+						{
+							Object *rider = contain->getClosestRider( pos );
+							if ( rider )
+								testObj = rider;
+						}
+					}
+				}
 			}
 			//Now evaluate the testObj again to see if it is capable of force attacking the pos.
 			result = testObj->getAbleToUseWeaponAgainstTarget( ATTACK_NEW_TARGET, NULL, pos, CMD_FROM_PLAYER );
@@ -2260,25 +2260,25 @@ GameMessage::Type CommandTranslator::evaluateContextCommand( Drawable *draw,
 					Object *obj = (*it) ? (*it)->getObject() : NULL;
 					AIUpdateInterface *ai = obj ? obj->getAI() : NULL;
 					if( ai )
-          {
-            if ( ai->isQuickPathAvailable( pos ) ) 
-					  { 
-						  validQuickPath = TRUE;
-						  break;
-					  }
-            // Wait! there are some units that CAN moveTo positions that Quickpath will reject,
-            // namely, Colonel Burton and the CombatBike. Both have CLIFF locomotors.
-            // We must detect whether the position is valid for these, before just invalidating the cursor,
-            // out of hand.
-            if ( ai->hasLocomotorForSurface( LOCOMOTORSURFACE_CLIFF ) )
-            {
-              if ( TheTerrainLogic->isCliffCell( pos->x, pos->y ) )
-              {
-						    validQuickPath = TRUE;// yeah, not really quick, but you know...
-						    break;
-              }
-            }
-          }
+					{
+						if ( ai->isQuickPathAvailable( pos ) ) 
+						{ 
+							validQuickPath = TRUE;
+							break;
+						}
+						// Wait! there are some units that CAN moveTo positions that Quickpath will reject,
+						// namely, Colonel Burton and the CombatBike. Both have CLIFF locomotors.
+						// We must detect whether the position is valid for these, before just invalidating the cursor,
+						// out of hand.
+						if ( ai->hasLocomotorForSurface( LOCOMOTORSURFACE_CLIFF ) )
+						{
+							if ( TheTerrainLogic->isCliffCell( pos->x, pos->y ) )
+							{
+								validQuickPath = TRUE;// yeah, not really quick, but you know...
+								break;
+							}
+						}
+					}
 
 
 				}
@@ -3240,7 +3240,7 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 		case GameMessage::MSG_META_TOGGLE_CAMERA_TRACKING_DRAWABLE:
 			TheInGameUI->setCameraTrackingDrawable( true );
 			break;
-        //--------------------------------------------------------------------------------------
+		//--------------------------------------------------------------------------------------
 		case GameMessage::MSG_META_TOGGLE_FAST_FORWARD_REPLAY:
 		{
 			if( TheGlobalData )
@@ -3261,15 +3261,15 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 		}  // end toggle special power delays
 
 #if defined(_ALLOW_DEBUG_CHEATS_IN_RELEASE)//may be defined in GameCommon.h
-    case GameMessage::MSG_CHEAT_RUNSCRIPT1:
-    case GameMessage::MSG_CHEAT_RUNSCRIPT2:      
-    case GameMessage::MSG_CHEAT_RUNSCRIPT3:
-    case GameMessage::MSG_CHEAT_RUNSCRIPT4:
-    case GameMessage::MSG_CHEAT_RUNSCRIPT5:
-    case GameMessage::MSG_CHEAT_RUNSCRIPT6:
-    case GameMessage::MSG_CHEAT_RUNSCRIPT7:
-    case GameMessage::MSG_CHEAT_RUNSCRIPT8:
-    case GameMessage::MSG_CHEAT_RUNSCRIPT9:
+		case GameMessage::MSG_CHEAT_RUNSCRIPT1:
+		case GameMessage::MSG_CHEAT_RUNSCRIPT2:      
+		case GameMessage::MSG_CHEAT_RUNSCRIPT3:
+		case GameMessage::MSG_CHEAT_RUNSCRIPT4:
+		case GameMessage::MSG_CHEAT_RUNSCRIPT5:
+		case GameMessage::MSG_CHEAT_RUNSCRIPT6:
+		case GameMessage::MSG_CHEAT_RUNSCRIPT7:
+		case GameMessage::MSG_CHEAT_RUNSCRIPT8:
+		case GameMessage::MSG_CHEAT_RUNSCRIPT9:
 		{
 			if ( !TheGameLogic->isInMultiplayerGame() )
 			{
@@ -3284,8 +3284,8 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 			}
 			break;
 		}
-    //--------------------------------------------------------------------------------------
-    case GameMessage::MSG_CHEAT_TOGGLE_SPECIAL_POWER_DELAYS:
+		//--------------------------------------------------------------------------------------
+		case GameMessage::MSG_CHEAT_TOGGLE_SPECIAL_POWER_DELAYS:
 		{
 			if ( !TheGameLogic->isInMultiplayerGame() )
 			{
@@ -3303,8 +3303,8 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 			break;
 
 		}  // end toggle special power delays
-    //--------------------------------------------------------------------------------------
-    case GameMessage::MSG_CHEAT_SWITCH_TEAMS:							
+		//--------------------------------------------------------------------------------------
+		case GameMessage::MSG_CHEAT_SWITCH_TEAMS:							
 		{
 			if ( !TheGameLogic->isInMultiplayerGame() )
 			{
@@ -3345,8 +3345,8 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 			}
 			break;
 		} 
-    //--------------------------------------------------------------------------------------
-    case GameMessage::MSG_CHEAT_KILL_SELECTION:						
+		//--------------------------------------------------------------------------------------
+		case GameMessage::MSG_CHEAT_KILL_SELECTION:						
 		{
 			if ( !TheGameLogic->isInMultiplayerGame() )
 			{
@@ -3356,7 +3356,7 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 			}
 			break;
 		}
-    case GameMessage::MSG_CHEAT_INSTANT_BUILD:						
+		case GameMessage::MSG_CHEAT_INSTANT_BUILD:						
 		{
 			if ( !TheGameLogic->isInMultiplayerGame() )
 			{
@@ -3367,7 +3367,7 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 			}
 			break;
 		}
-    case GameMessage::MSG_CHEAT_ADD_CASH:									
+		case GameMessage::MSG_CHEAT_ADD_CASH:									
 		{
 			if ( !TheGameLogic->isInMultiplayerGame() )
 			{
@@ -3377,7 +3377,7 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 			}
 			break;
 		}
-    case GameMessage::MSG_CHEAT_GIVE_ALL_SCIENCES:				
+		case GameMessage::MSG_CHEAT_GIVE_ALL_SCIENCES:				
 		{ 
 			if ( !TheGameLogic->isInMultiplayerGame() )
 			{
@@ -3400,7 +3400,7 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 			}
 			break;
 		}
-    case GameMessage::MSG_CHEAT_GIVE_SCIENCEPURCHASEPOINTS:
+		case GameMessage::MSG_CHEAT_GIVE_SCIENCEPURCHASEPOINTS:
 		{
 			if ( !TheGameLogic->isInMultiplayerGame() )
 			{
@@ -3732,7 +3732,7 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 
 				ThePlayerList->getLocalPlayer()->getAcademyStats()->recordDoubleClickAttackMoveOrderGiven();
 
-        TheInGameUI->triggerDoubleClickAttackMoveGuardHint();
+				TheInGameUI->triggerDoubleClickAttackMoveGuardHint();
 
 				break;
 			}
@@ -3756,9 +3756,9 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 
 			const CommandButton *command = TheInGameUI->getGUICommand();
 			// maintain this as the list of GUI button initiated commands that fire with left click in alt mouse mode
-  			Bool isFiringGUICommand = (command	&& (command->getCommandType() == GUI_COMMAND_SPECIAL_POWER
-  												|| command->getCommandType() == GUI_COMMAND_SPECIAL_POWER_FROM_SHORTCUT
- 												|| command->getCommandType() == GUI_COMMAND_FIRE_WEAPON
+				Bool isFiringGUICommand = (command	&& (command->getCommandType() == GUI_COMMAND_SPECIAL_POWER
+													|| command->getCommandType() == GUI_COMMAND_SPECIAL_POWER_FROM_SHORTCUT
+												|| command->getCommandType() == GUI_COMMAND_FIRE_WEAPON
 												|| command->getCommandType() == GUI_COMMAND_COMBATDROP
 												|| command->getCommandType() == GUICOMMANDMODE_HIJACK_VEHICLE
 												|| command->getCommandType() == GUICOMMANDMODE_CONVERT_TO_CARBOMB));
@@ -4437,7 +4437,7 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 							d->clearAndSetModelConditionFlags(empty, empty);
 						}
 					}
-        } 
+				}
 			}
 			disp = DESTROY_MESSAGE;
 			break;
@@ -4452,7 +4452,7 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 			localPlayer->toggleIgnorePrereqs();
 			disp = DESTROY_MESSAGE;
 			break;
-    } 
+		}
 
 		//------------------------------------------------------------------------------- DEMO MESSAGES
 		//-----------------------------------------------------------------------------------------
@@ -4509,7 +4509,7 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 		case GameMessage::MSG_META_DEMO_RUNSCRIPT8:
 		case GameMessage::MSG_META_DEMO_RUNSCRIPT9:
 		{
-			if( TheScriptEngine ) 
+			if( TheScriptEngine )
 			{
 				Int script = t - GameMessage::MSG_META_DEMO_RUNSCRIPT1 + 1;
 				AsciiString scriptName;
@@ -4851,15 +4851,15 @@ GameMessageDisposition CommandTranslator::translateGameMessage(const GameMessage
 				                    TheGlobalData->m_showCollisionExtents ? L"ON" : L"OFF" );
 			break;
 
-    //------------------------------------------------------------------------------- DEMO MESSAGES
-    //-----------------------------------------------------------------------------------------
-    case GameMessage::MSG_META_DEBUG_SHOW_AUDIO_LOCATIONS:
-      TheWritableGlobalData->m_showAudioLocations = 1 - TheGlobalData->m_showAudioLocations;
-      TheInGameUI->message( UnicodeString( L"Show AudioLocations %s" ),
-                            TheGlobalData->m_showAudioLocations ? L"ON" : L"OFF" );
-      break;       
+		//------------------------------------------------------------------------------- DEMO MESSAGES
+		//-----------------------------------------------------------------------------------------
+		case GameMessage::MSG_META_DEBUG_SHOW_AUDIO_LOCATIONS:
+			TheWritableGlobalData->m_showAudioLocations = 1 - TheGlobalData->m_showAudioLocations;
+			TheInGameUI->message( UnicodeString( L"Show AudioLocations %s" ),
+														TheGlobalData->m_showAudioLocations ? L"ON" : L"OFF" );
+			break;			 
 
-    //------------------------------------------------------------------------------- DEMO MESSAGES
+		//------------------------------------------------------------------------------- DEMO MESSAGES
 		//-----------------------------------------------------------------------------------------
 		case GameMessage::MSG_META_DEBUG_SHOW_HEALTH:
 		{

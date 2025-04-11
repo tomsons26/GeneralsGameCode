@@ -388,6 +388,7 @@ Bool ModuleInfo::clearModuleDataWithTag(const AsciiString& tagToClear, AsciiStri
 	return cleared;
 }
 
+
 //-------------------------------------------------------------------------------------------------
 Bool ModuleInfo::clearCopiedFromDefaultEntries(Int interfaceMask) 
 { 

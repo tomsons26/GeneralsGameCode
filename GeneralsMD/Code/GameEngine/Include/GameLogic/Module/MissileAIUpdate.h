@@ -63,7 +63,8 @@ public:
 
 	Real						m_lockDistance;				///< If I get this close to my target, guaranteed hit.
 	Bool						m_detonateCallsKill;			///< if true, kill() will be called, instead of KILL_SELF state, which calls destroy.
-  Int             m_killSelfDelay;      ///< If I have detonated and entered the KILL-SELF state, how ling do I wait before I Kill/destroy self?
+	Int							m_killSelfDelay;      ///< If I have detonated and entered the KILL-SELF state, how ling do I wait before I Kill/destroy self?
+
 	MissileAIUpdateModuleData();
 
 	static void buildFieldParse(MultiIniFieldParse& p);
@@ -105,7 +106,6 @@ public:
 	virtual UpdateSleepTime update();
 	virtual void onDelete( void );
 
-
 protected:
 
 	void detonate();
@@ -131,7 +131,7 @@ private:
 	Bool									m_isArmed;								///< if true, missile will explode on contact
 	Bool									m_noDamage;								///< if true, missile will not cause damage when it detonates. (Used for flares).
 	Bool									m_isJammed;								///< No target, just shooting at a scattered position
-	
+
 	void doPrelaunchState();
 	void doLaunchState();
 	void doIgnitionState();

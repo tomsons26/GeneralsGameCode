@@ -2386,17 +2386,21 @@ void PathfindZoneManager::calculateZones( PathfindCell **map, PathfindLayer laye
 
 	allocateZones();
 	DEBUG_ASSERTCRASH(xBlock==m_zoneBlockExtent.x && yBlock==m_zoneBlockExtent.y, ("Inconsistent allocation - SERIOUS ERROR. jba"));
-	for (xBlock=0; xBlock<xCount; xBlock++) {
-		for (yBlock=0; yBlock<yCount; yBlock++) {
+	for (xBlock=0; xBlock<xCount; xBlock++) 
+	{
+		for (yBlock=0; yBlock<yCount; yBlock++) 
+		{
 			IRegion2D bounds;
 			bounds.lo.x = globalBounds.lo.x + xBlock*ZONE_BLOCK_SIZE;
 			bounds.lo.y = globalBounds.lo.y + yBlock*ZONE_BLOCK_SIZE;
 			bounds.hi.x = bounds.lo.x + ZONE_BLOCK_SIZE - 1; // bounds are inclusive.
 			bounds.hi.y = bounds.lo.y + ZONE_BLOCK_SIZE - 1; // bounds are inclusive.
-			if (bounds.hi.x > globalBounds.hi.x) {
+			if (bounds.hi.x > globalBounds.hi.x) 
+			{
 				bounds.hi.x = globalBounds.hi.x;
 			}
-			if (bounds.hi.y > globalBounds.hi.y) {
+			if (bounds.hi.y > globalBounds.hi.y) 
+			{
 				bounds.hi.y = globalBounds.hi.y;
 			}
 			if (bounds.lo.x>bounds.hi.x || bounds.lo.y>bounds.hi.y) {

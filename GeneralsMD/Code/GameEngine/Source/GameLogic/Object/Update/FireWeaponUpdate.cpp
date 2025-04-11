@@ -47,7 +47,7 @@
 FireWeaponUpdateModuleData::FireWeaponUpdateModuleData()
 {
 	m_weaponTemplate = NULL;
-  m_initialDelayFrames = 0;
+	m_initialDelayFrames = 0;
 	m_exclusiveWeaponDelay = 0;
 }
 
@@ -58,7 +58,7 @@ FireWeaponUpdateModuleData::FireWeaponUpdateModuleData()
 
 	static const FieldParse dataFieldParse[] = 
 	{
-		{ "Weapon",								INI::parseWeaponTemplate,	      NULL, offsetof( FireWeaponUpdateModuleData, m_weaponTemplate ) },
+		{ "Weapon",								INI::parseWeaponTemplate,				NULL, offsetof( FireWeaponUpdateModuleData, m_weaponTemplate ) },
 		{ "InitialDelay",					INI::parseDurationUnsignedInt,	NULL, offsetof( FireWeaponUpdateModuleData, m_initialDelayFrames ) },
 		{ "ExclusiveWeaponDelay",	INI::parseDurationUnsignedInt,	NULL, offsetof( FireWeaponUpdateModuleData, m_exclusiveWeaponDelay ) },
 		{ 0, 0, 0, 0 }
@@ -80,7 +80,7 @@ FireWeaponUpdate::FireWeaponUpdate( Thing *thing, const ModuleData* moduleData )
 	}
 
 
-  m_initialDelayFrame = TheGameLogic->getFrame() + getFireWeaponUpdateModuleData()->m_initialDelayFrames;
+	m_initialDelayFrame = TheGameLogic->getFrame() + getFireWeaponUpdateModuleData()->m_initialDelayFrames;
 
 }
 
@@ -96,9 +96,8 @@ FireWeaponUpdate::~FireWeaponUpdate( void )
 //-------------------------------------------------------------------------------------------------
 UpdateSleepTime FireWeaponUpdate::update( void )
 {
-  
-  if ( TheGameLogic->getFrame() < m_initialDelayFrame )
-    return UPDATE_SLEEP_NONE;
+	if ( TheGameLogic->getFrame() < m_initialDelayFrame )
+		return UPDATE_SLEEP_NONE;
 
 
 	// If my weapon is ready, shoot it.
@@ -162,8 +161,8 @@ void FireWeaponUpdate::xfer( Xfer *xfer )
 	// weapon
 	xfer->xferSnapshot( m_weapon );
 
-  if ( version >= 2 )
-    xfer->xferUnsignedInt( &m_initialDelayFrame );
+	if ( version >= 2 )
+		xfer->xferUnsignedInt( &m_initialDelayFrame );
 
 }  // end xfer
 

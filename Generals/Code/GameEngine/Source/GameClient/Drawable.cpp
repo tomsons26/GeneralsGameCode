@@ -413,7 +413,6 @@ Drawable::Drawable( const ThingTemplate *thingTemplate, DrawableStatus statusBit
 
 	m_ambientSoundEnabled = TRUE;
 
-	//
 	// allocate any modules we need to, we should keep
 	// this at or near the end of the drawable construction so that we have
 	// all the valid data about the thing when we create the module

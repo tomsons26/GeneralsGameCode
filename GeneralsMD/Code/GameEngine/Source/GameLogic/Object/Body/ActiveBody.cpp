@@ -142,7 +142,7 @@ ActiveBodyModuleData::ActiveBodyModuleData()
 //-------------------------------------------------------------------------------------------------
 void ActiveBodyModuleData::buildFieldParse(MultiIniFieldParse& p) 
 {
-  ModuleData::buildFieldParse(p);
+	ModuleData::buildFieldParse(p);
 
 	static const FieldParse dataFieldParse[] = 
 	{
@@ -154,7 +154,7 @@ void ActiveBodyModuleData::buildFieldParse(MultiIniFieldParse& p)
 		{ "SubdualDamageHealAmount",	INI::parseReal,									NULL,		offsetof( ActiveBodyModuleData, m_subdualDamageHealAmount ) },
 		{ 0, 0, 0, 0 }
 	};
-  p.add(dataFieldParse);
+	p.add(dataFieldParse);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -426,8 +426,8 @@ void ActiveBody::attemptDamage( DamageInfo *damageInfo )
 					obj->setDisabled( DISABLED_UNMANNED );
 					TheGameLogic->deselectObject(obj, PLAYERMASK_ALL, TRUE);
 
-          if ( obj->getAI() )
-            obj->getAI()->aiIdle( CMD_FROM_AI );
+					if ( obj->getAI() )
+						obj->getAI()->aiIdle( CMD_FROM_AI );
 
 					// Convert it to the neutral team so it renders gray giving visual representation that it is unmanned.
 					obj->setTeam( ThePlayerList->getNeutralPlayer()->getDefaultTeam() );
@@ -435,7 +435,7 @@ void ActiveBody::attemptDamage( DamageInfo *damageInfo )
 
 				//We don't care which team sniped the vehicle... we use this information to flag whether or not
 				//we captured a vehicle.
-	      ThePlayerList->getNeutralPlayer()->getAcademyStats()->recordVehicleSniped();
+				ThePlayerList->getNeutralPlayer()->getAcademyStats()->recordVehicleSniped();
 			}
 			alreadyHandled = TRUE;
 			allowModifier = FALSE;
@@ -1282,9 +1282,9 @@ void ActiveBody::onSubdualChange( Bool isNowSubdued )
 		{
 			me->setDisabled(DISABLED_SUBDUED);
 
-      ContainModuleInterface *contain = me->getContain();
-      if ( contain )
-        contain->orderAllPassengersToIdle( CMD_FROM_AI );
+			ContainModuleInterface *contain = me->getContain();
+			if ( contain )
+				contain->orderAllPassengersToIdle( CMD_FROM_AI );
 
 		}
 		else

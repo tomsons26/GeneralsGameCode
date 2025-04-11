@@ -1710,17 +1710,26 @@ Bool ScriptConditions::evaluateMultiplayerPlayerDefeat(void)
 //-------------------------------------------------------------------------------------------------
 Bool ScriptConditions::evaluatePlayerUnitCondition(Condition *pCondition, Parameter *pPlayerParm, Parameter *pComparisonParm, Parameter *pCountParm, Parameter *pUnitTypeParm)
 {					
-	if (pCondition->getCustomData()!=0) {
+	if (pCondition->getCustomData()!=0) 
+	{
 		// We have a cached value.
-		if (TheScriptEngine->getFrameObjectCountChanged()+1 < TheGameLogic->getFrame()) {
+		if( TheScriptEngine->getFrameObjectCountChanged()+1 < TheGameLogic->getFrame() ) 
+		{
 			// object count hasn't changed recently.  Use cached value.
-			if (pCondition->getCustomData()==1) return true;
-			if (pCondition->getCustomData()==-1) return false;
+			if( pCondition->getCustomData() == 1 ) 
+			{
+				return true;
+			}
+			if( pCondition->getCustomData() == -1 ) 
+			{
+				return false;
+			}
 		}
 	}
 
 	Player* pPlayer = playerFromParam(pPlayerParm);
-	if (!pPlayer) {
+	if (!pPlayer) 
+	{
 		return false;
 	}
 
@@ -1733,7 +1742,8 @@ Bool ScriptConditions::evaluatePlayerUnitCondition(Condition *pCondition, Parame
 	Int numObjs = types.m_types->prepForPlayerCounting(templates, counts);
 	Int count = 0;
 
-	if (numObjs > 0) {
+	if (numObjs > 0) 
+	{
 		pPlayer->countObjectsByThingTemplate(numObjs, &(*templates.begin()), false, &(*counts.begin()));
 		count = rts::sum(counts);
 	}
@@ -1741,18 +1751,31 @@ Bool ScriptConditions::evaluatePlayerUnitCondition(Condition *pCondition, Parame
 	Bool comparison = false;
 	switch (pComparisonParm->getInt())
 	{
-		case Parameter::LESS_THAN :			comparison = (count < pCountParm->getInt()); break;
-		case Parameter::LESS_EQUAL :		comparison = (count <= pCountParm->getInt()); break;
-		case Parameter::EQUAL :					comparison = (count == pCountParm->getInt()); break; 
-		case Parameter::GREATER_EQUAL :	comparison = (count >= pCountParm->getInt()); break;
-		case Parameter::GREATER :				comparison = (count > pCountParm->getInt()); break;
-		case Parameter::NOT_EQUAL :			comparison = (count != pCountParm->getInt()); break;
+		case Parameter::LESS_THAN :			
+			comparison = (count < pCountParm->getInt()); 
+			break;
+		case Parameter::LESS_EQUAL :		
+			comparison = (count <= pCountParm->getInt()); 
+			break;
+		case Parameter::EQUAL :					
+			comparison = (count == pCountParm->getInt()); 
+			break; 
+		case Parameter::GREATER_EQUAL :	
+			comparison = (count >= pCountParm->getInt()); 
+			break;
+		case Parameter::GREATER :				
+			comparison = (count > pCountParm->getInt()); 
+			break;
+		case Parameter::NOT_EQUAL :			
+			comparison = (count != pCountParm->getInt()); 
+			break;
 		default:
 			DEBUG_CRASH(("ScriptConditions::evaluatePlayerUnitCondition: Invalid comparison type. (jkmcd)"));
 			break;
 	}
 	pCondition->setCustomData(-1); // false.
-	if (comparison) {
+	if (comparison) 
+	{
 		pCondition->setCustomData(1); // true.
 	}
 	return comparison;
@@ -2166,7 +2189,7 @@ Bool ScriptConditions::evaluateSkirmishPlayerTechBuildingWithinDistancePerimeter
 	if (!player) {
 		return false;
 	}
-
+	// If we have a chached value, return it. [8/8/2003]
 	if (pCondition->getCustomData()==1) return true;
 	if (pCondition->getCustomData()==-1) return false;
 
@@ -2402,12 +2425,14 @@ Bool ScriptConditions::evaluateSkirmishNamedAreaExists(Parameter *, Parameter *p
 Bool ScriptConditions::evaluateSkirmishPlayerHasUnitsInArea(Condition *pCondition, Parameter *pSkirmishPlayerParm, Parameter *pTriggerParm )
 {
 	Player *player = playerFromParam(pSkirmishPlayerParm);
-	if (!player) {
+	if (!player) 
+	{
 		return FALSE;
 	}
 
 	PolygonTrigger *pTrig = TheScriptEngine->getQualifiedTriggerAreaByName(pTriggerParm->getString());
-	if (!pTrig) {
+	if (!pTrig) 
+	{
 		return FALSE;
 	}
 

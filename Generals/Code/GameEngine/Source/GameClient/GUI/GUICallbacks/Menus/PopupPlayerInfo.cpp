@@ -108,6 +108,7 @@ static const char *rankNames[] = {
 	"Commander",
 };
 
+
 static const Image* lookupRankImage(AsciiString side, Int rank)
 {
 	if (side.isEmpty())
@@ -141,6 +142,7 @@ static const Image* lookupRankImage(AsciiString side, Int rank)
 	}
 	return img;
 }
+
 
 static Int getTotalDisconnectsFromFile(Int playerID)
 {

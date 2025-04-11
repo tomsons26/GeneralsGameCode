@@ -2367,42 +2367,42 @@ void WbView3d::OnPaint()
 /// Draw a (not very good) circle into the hdc
 void WbView3d::drawCircle( HDC hdc, const Coord3D & centerPoint, Real radius, COLORREF color )
 {
-  CPoint rulerPoints[2];
-  Coord3D pnt;
-  Real angle = 0.0f;
-  Real inc = PI/4.0f;
+	CPoint rulerPoints[2];
+	Coord3D pnt;
+	Real angle = 0.0f;
+	Real inc = PI/4.0f;
 
-  // Create and select a correctly colored pen. Remember the old one so that it can be restored.
-  HPEN pen = CreatePen(PS_SOLID, 2, color);
-  HPEN penOld = (HPEN)SelectObject(hdc, pen); 
-  
-  
-  // Get the starting point on the circumference of the circle.
-  pnt.x = centerPoint.x + radius * (Real)cosf(angle);
-  pnt.y = centerPoint.y + radius * (Real)sinf(angle);
-  pnt.z = centerPoint.z;
-  docToViewCoords(pnt, &rulerPoints[0]);
-  
-  angle += inc;
-  for(; angle <= 2.0f * PI; angle += inc) {
+	// Create and select a correctly colored pen. Remember the old one so that it can be restored.
+	HPEN pen = CreatePen(PS_SOLID, 2, color);
+	HPEN penOld = (HPEN)SelectObject(hdc, pen); 
+	
+	
+	// Get the starting point on the circumference of the circle.
+	pnt.x = centerPoint.x + radius * (Real)cosf(angle);
+	pnt.y = centerPoint.y + radius * (Real)sinf(angle);
+	pnt.z = centerPoint.z;
+	docToViewCoords(pnt, &rulerPoints[0]);
+	
+	angle += inc;
+	for(; angle <= 2.0f * PI; angle += inc) {
 		// Get a new point on the circumference of the circle.
 		pnt.x = centerPoint.x + radius * (Real)cosf(angle);
-    pnt.y = centerPoint.y + radius * (Real)sinf(angle);
-    pnt.z = centerPoint.z;
-    
-    docToViewCoords(pnt, &rulerPoints[1]);
-    
-    ::Polyline(hdc, rulerPoints, 2);
-    
-    // Remember the last point to use as the starting point for the next line.
-    rulerPoints[0].x = rulerPoints[1].x; 
-    rulerPoints[0].y = rulerPoints[1].y;
-  }
+		pnt.y = centerPoint.y + radius * (Real)sinf(angle);
+		pnt.z = centerPoint.z;
+		
+		docToViewCoords(pnt, &rulerPoints[1]);
+		
+		::Polyline(hdc, rulerPoints, 2);
+		
+		// Remember the last point to use as the starting point for the next line.
+		rulerPoints[0].x = rulerPoints[1].x; 
+		rulerPoints[0].y = rulerPoints[1].y;
+	}
 
-  // Restore previous pen.
-  SelectObject(hdc, penOld);	
-  // Delete new pen.
-  DeleteObject(pen);	
+	// Restore previous pen.
+	SelectObject(hdc, penOld);	
+	// Delete new pen.
+	DeleteObject(pen);	
 }
 
 
@@ -2538,24 +2538,24 @@ void WbView3d::drawLabels(HDC hdc)
 
 	if (hdc && m_doRulerFeedback) {
 		if (m_doRulerFeedback == RULER_LINE) {
-      // Change world coords to screen viewport coords.
-      CPoint rulerPoints[2];
-      docToViewCoords(m_rulerPoints[0], &rulerPoints[0]);
-      docToViewCoords(m_rulerPoints[1], &rulerPoints[1]);
-      
-      // Create and select a green pen. Remember the old one so that it can be restored.
-      HPEN pen = CreatePen(PS_SOLID, 2, RGB(0,255,0));
-      HPEN penOld = (HPEN)SelectObject(hdc, pen); 
-      // Draw the line ruler.
+			// Change world coords to screen viewport coords.
+			CPoint rulerPoints[2];
+			docToViewCoords(m_rulerPoints[0], &rulerPoints[0]);
+			docToViewCoords(m_rulerPoints[1], &rulerPoints[1]);
+			
+			// Create and select a green pen. Remember the old one so that it can be restored.
+			HPEN pen = CreatePen(PS_SOLID, 2, RGB(0,255,0));
+			HPEN penOld = (HPEN)SelectObject(hdc, pen); 
+			// Draw the line ruler.
 			::Polyline(hdc, rulerPoints, 2);
 
-      // Restore previous pen.
-      SelectObject(hdc, penOld);	
-      // Delete new pen.
-      DeleteObject(pen);	
+			// Restore previous pen.
+			SelectObject(hdc, penOld);	
+			// Delete new pen.
+			DeleteObject(pen);	
 		} else if (m_doRulerFeedback == RULER_CIRCLE) {
-      drawCircle( hdc, m_rulerPoints[0], m_rulerLength, RGB( 0, 255, 0 ) );
-		}  
+			drawCircle( hdc, m_rulerPoints[0], m_rulerLength, RGB( 0, 255, 0 ) );
+		}	
 	}
 
 	if (hdc && m_doLightFeedback)

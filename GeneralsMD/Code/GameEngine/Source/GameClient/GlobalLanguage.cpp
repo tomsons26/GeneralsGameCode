@@ -152,7 +152,6 @@ void GlobalLanguage::init( void )
 		fname = tempName;
 	}
 
-
 	ini.load( fname, INI_LOAD_OVERWRITE, NULL );
 	StringListIt it = m_localFonts.begin();
 	while( it != m_localFonts.end())

@@ -124,7 +124,7 @@ class FireWeaponNugget : public ObjectCreationNugget
 public:
 
 	FireWeaponNugget() : 
-    m_weapon(NULL)
+	m_weapon(NULL)
 	{
 	}
 
@@ -133,14 +133,14 @@ public:
 		if (!primaryObj || !primary || !secondary)
 		{ 
 			DEBUG_CRASH(("You must have a primary and secondary source for this effect"));
-      return;
-    }
+			return;
+		}
 
-	  if (m_weapon)
-	  {
-		  TheWeaponStore->createAndFireTempWeapon( m_weapon, primaryObj, secondary );
-	  }
-  }
+		if (m_weapon)
+		{
+			TheWeaponStore->createAndFireTempWeapon( m_weapon, primaryObj, secondary );
+		}
+	}
 
 	static void parse(INI *ini, void *instance, void* /*store*/, const void* /*userData*/)
 	{
@@ -168,7 +168,7 @@ class AttackNugget : public ObjectCreationNugget
 public:
 
 	AttackNugget() : 
-    m_numberOfShots(1),
+		m_numberOfShots(1),
 		m_weaponSlot(PRIMARY_WEAPON),
 		m_deliveryDecalRadius(0)
 	{
@@ -179,8 +179,8 @@ public:
 		if (!primaryObj || !primary || !secondary)
 		{ 
 			DEBUG_CRASH(("You must have a primary and secondary source for this effect"));
-      return;
-    }
+			return;
+		}
 
 		// Star trekkin, across the universe.
 		// Boldly goin forward now, cause we can't find reverse!
@@ -271,8 +271,8 @@ public:
 		if (!primaryObj || !primary || !secondary)
 		{
 			DEBUG_CRASH(("You must have a primary and secondary source for this effect"));
-      return;
-    }
+			return;
+		}
 
 		Team* owner = primaryObj ? primaryObj->getControllingPlayer()->getDefaultTeam() : NULL;
 
@@ -613,23 +613,23 @@ public:
 		{
 			/// @todo srj -- ack. const_cast is evil.
 			PhysicsBehavior* p = const_cast<Object*>(primary)->getPhysics();
-      if (p)
-      {
+			if (p)
+			{
 				Coord3D force;
 				calcRandomForce(m_minMag, m_maxMag, m_minPitch, m_maxPitch, &force);
 				p->applyForce(&force);
 
-			  Real yaw = GameLogicRandomValueReal( -m_spinRate, m_spinRate );
-			  Real roll = GameLogicRandomValueReal( -m_spinRate, m_spinRate );
-			  Real pitch = GameLogicRandomValueReal( -m_spinRate, m_spinRate );
-			  p->setYawRate(yaw);
-			  p->setRollRate(roll);
-			  p->setPitchRate(pitch);
-      }
-      else
-      {
-  			DEBUG_CRASH(("You must have a Physics module source for this effect"));
-      }
+				Real yaw = GameLogicRandomValueReal( -m_spinRate, m_spinRate );
+				Real roll = GameLogicRandomValueReal( -m_spinRate, m_spinRate );
+				Real pitch = GameLogicRandomValueReal( -m_spinRate, m_spinRate );
+				p->setYawRate(yaw);
+				p->setRollRate(roll);
+				p->setPitchRate(pitch);
+			}
+			else
+			{
+				DEBUG_CRASH(("You must have a Physics module source for this effect"));
+			}
 		}
 		else
 		{

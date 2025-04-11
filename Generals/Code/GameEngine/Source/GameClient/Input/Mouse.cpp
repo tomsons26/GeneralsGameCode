@@ -389,6 +389,7 @@ void Mouse::checkForDrag( void )
 
 }  // end checkForDrag
 
+
 //-------------------------------------------------------------------------------------------------
 /** Check for mouse click, using allowed drag forgiveness */
 //-------------------------------------------------------------------------------------------------
@@ -409,6 +410,7 @@ Bool Mouse::isClick(const ICoord2D *anchor, const ICoord2D *dest, UnsignedInt pr
 	}
 	return TRUE;
 }
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -675,10 +677,10 @@ void Mouse::createStreamMessages( void )
 	msg->appendPixelArgument( m_currMouse.pos );
 	msg->appendIntegerArgument( TheKeyboard->getModifierFlags() );
 
-  Int delay = m_tooltipDelayTime;
-  if(m_tooltipDelay >= 0 )
-     delay = m_tooltipDelay;
-  
+	Int delay = m_tooltipDelayTime;
+	if(m_tooltipDelay >= 0 )
+		delay = m_tooltipDelay;
+
 	if( now - m_stillTime >= delay )
 	{
 		if (!m_displayTooltip)

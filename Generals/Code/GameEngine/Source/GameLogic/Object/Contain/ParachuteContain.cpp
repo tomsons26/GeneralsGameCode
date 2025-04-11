@@ -329,7 +329,7 @@ UpdateSleepTime ParachuteContain::update( void )
 
 			// When a parachute opens, it should look for a good place to land.  This could be explicitly set
 			// by a DeliverPayload, otherwise any place clear is good.
-			if( parachuteAI )
+			if( parachuteAI ) 
 			{
 				Coord3D target = *parachute->getPosition();
 				if( m_isLandingOverrideSet )
@@ -505,9 +505,13 @@ void ParachuteContain::onRemoving( Object *rider )
 	{
 		Player* controller = rider->getControllingPlayer();
 		if (controller && controller->isSkirmishAIPlayer())
+		{
 			riderAI->aiHunt(CMD_FROM_AI);	// hunt, as per Dustin's request.
+		}
 		else
-			riderAI->aiIdle(CMD_FROM_AI); // become idle.		
+		{
+			riderAI->aiIdle(CMD_FROM_AI); // become idle.
+		}
 	}
 	
 	// if we land in the water, we die. alas.

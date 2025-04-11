@@ -459,18 +459,18 @@ CanAttackResult WeaponSet::getAbleToAttackSpecificObject( AbleToAttackType attac
 	if (victim->testStatus(OBJECT_STATUS_NO_ATTACK_FROM_AI) && commandSource == CMD_FROM_AI)
 		return ATTACKRESULT_NOT_POSSIBLE;
 
-  Bool allowStealthToPreventAttacks = TRUE;
+	Bool allowStealthToPreventAttacks = TRUE;
 	if (source->testStatus(OBJECT_STATUS_IGNORING_STEALTH) || sameOwnerForceAttack)
 		allowStealthToPreventAttacks = FALSE;
-  if( isForcedAttack( attackType ) && victim->isKindOf( KINDOF_DISGUISER ) )
-  {
-    // force-attack allows you to attack disguised things, which also happen to be stealthed.
-    // since we normally disallow attacking stealthed things (even via force-fire), we check
-    // for disguised and explicitly ignore stealth in that case
-	  StealthUpdate *update = (StealthUpdate*)victim->findUpdateModule( key_StealthUpdate );
-    if (update && update->isDisguised())
-  	  allowStealthToPreventAttacks = FALSE;
-  }
+	if( isForcedAttack( attackType ) && victim->isKindOf( KINDOF_DISGUISER ) )
+	{
+		// force-attack allows you to attack disguised things, which also happen to be stealthed.
+		// since we normally disallow attacking stealthed things (even via force-fire), we check
+		// for disguised and explicitly ignore stealth in that case
+		StealthUpdate *update = (StealthUpdate*)victim->findUpdateModule( key_StealthUpdate );
+		if (update && update->isDisguised())
+			allowStealthToPreventAttacks = FALSE;
+	}
 
 	// If an object is stealthed and hasn't been detected yet, then it is not a valid target to fire 
 	// on.

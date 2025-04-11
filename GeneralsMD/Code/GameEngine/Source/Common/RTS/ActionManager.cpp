@@ -562,10 +562,8 @@ Bool ActionManager::canEnterObject( const Object *obj, const Object *objectToEnt
 		return FALSE;
 	}
 
-
-  if (objectToEnter->isDisabledByType( DISABLED_SUBDUED ))
-    return FALSE; // a microwave tank has soldered the doors shut
-
+	if (objectToEnter->isDisabledByType( DISABLED_SUBDUED ))
+		return FALSE; // a microwave tank has soldered the doors shut
 
 	if( obj->isKindOf( KINDOF_STRUCTURE ) || obj->isKindOf( KINDOF_IMMOBILE ) )
 	{
@@ -794,20 +792,20 @@ CanAttackResult ActionManager::getCanAttackObject( const Object *obj, const Obje
 				}
 			}
 		}
-    else if( result == ATTACKRESULT_NOT_POSSIBLE )// oh dear me. The wierd case of a garrisoncontainer being a KINDOF_SPAWNS_ARE_THE_WEAPONS... the AmericaBuildingFirebase
-    {
-      ContainModuleInterface *contain = obj->getContain();
-      if ( contain )
-      {
-        Object *rider = contain->getClosestRider( objectToAttack->getPosition() );
-        if ( rider )
-        {
-          result = rider->getAbleToAttackSpecificObject( attackType, objectToAttack, commandSource );
-          if( result != ATTACKRESULT_NOT_POSSIBLE )
-            return result;
-        }
-      }
-    }
+		else if( result == ATTACKRESULT_NOT_POSSIBLE )// oh dear me. The wierd case of a garrisoncontainer being a KINDOF_SPAWNS_ARE_THE_WEAPONS... the AmericaBuildingFirebase
+		{
+			ContainModuleInterface *contain = obj->getContain();
+			if ( contain )
+			{
+				Object *rider = contain->getClosestRider( objectToAttack->getPosition() );
+				if ( rider )
+				{
+					result = rider->getAbleToAttackSpecificObject( attackType, objectToAttack, commandSource );
+					if( result != ATTACKRESULT_NOT_POSSIBLE )
+						return result;
+				}
+			}
+		}
 	}
 
 	return ATTACKRESULT_NOT_POSSIBLE;
@@ -1479,7 +1477,7 @@ Bool ActionManager::canDoSpecialPowerAtLocation( const Object *obj, const Coord3
 				return false;
 			}
 		}
-    
+
 		// First check terrain type, if it is cared about.  Don't return a true, since there are more checks.
 		switch( spTemplate->getSpecialPowerType() )
 		{
@@ -1548,11 +1546,10 @@ Bool ActionManager::canDoSpecialPowerAtLocation( const Object *obj, const Coord3
 			case SPECIAL_RADAR_VAN_SCAN:
 			case SPECIAL_SPY_DRONE:
 			case SPECIAL_HELIX_NAPALM_BOMB:
-
-        //These specials can be used anywhere!
-        return isPointOnMap( loc );
-      case SPECIAL_LAUNCH_BAIKONUR_ROCKET:
-			  return TRUE;
+				//These specials can be used anywhere!
+				return isPointOnMap( loc );
+			case SPECIAL_LAUNCH_BAIKONUR_ROCKET:
+				return true;
 
 			//These special powers require object targets!
 			case SPECIAL_MISSILE_DEFENDER_LASER_GUIDED_MISSILES:
@@ -1897,7 +1894,7 @@ Bool ActionManager::canDoSpecialPower( const Object *obj, const SpecialPowerTemp
 			case SPECIAL_SCUD_STORM:
 			case SPECIAL_A10_THUNDERBOLT_STRIKE:
 			case AIRF_SPECIAL_A10_THUNDERBOLT_STRIKE:
-      case SPECIAL_SPECTRE_GUNSHIP:
+			case SPECIAL_SPECTRE_GUNSHIP:
 			case AIRF_SPECIAL_SPECTRE_GUNSHIP:
 			case SPECIAL_ARTILLERY_BARRAGE:
 			case SPECIAL_FRENZY:
@@ -1905,7 +1902,7 @@ Bool ActionManager::canDoSpecialPower( const Object *obj, const SpecialPowerTemp
 			case SPECIAL_DISGUISE_AS_VEHICLE:
 			case SPECIAL_REPAIR_VEHICLES:
 			case EARLY_SPECIAL_REPAIR_VEHICLES:
-      case SPECIAL_GPS_SCRAMBLER:
+			case SPECIAL_GPS_SCRAMBLER:
 			case SLTH_SPECIAL_GPS_SCRAMBLER:
 			case SPECIAL_PARTICLE_UPLINK_CANNON:
 			case SPECIAL_CASH_BOUNTY:

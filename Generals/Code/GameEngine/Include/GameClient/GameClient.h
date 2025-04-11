@@ -183,7 +183,6 @@ private:
 	virtual TerrainVisual *createTerrainVisual( void ) = 0;			///< Factory for TerrainVisual classes. Called during init to instance TheTerrainVisual
 	virtual Keyboard *createKeyboard( void ) = 0;								///< factory for the keyboard
 	virtual Mouse *createMouse( void ) = 0;											///< factory for the mouse
-
 	virtual void setFrameRate(Real msecsPerFrame) = 0;
 
 	// ----------------------------------------------------------------------------------------------

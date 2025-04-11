@@ -115,7 +115,7 @@ static const BlockParse theTypeTable[] =
 	{ "Mouse",							INI::parseMouseDefinition },
 	{ "MouseCursor",				INI::parseMouseCursorDefinition },
 	{ "MultiplayerColor",		INI::parseMultiplayerColorDefinition },
-  { "MultiplayerStartingMoneyChoice",		INI::parseMultiplayerStartingMoneyChoiceDefinition },
+	{ "MultiplayerStartingMoneyChoice",		INI::parseMultiplayerStartingMoneyChoiceDefinition },
 	{ "OnlineChatColors",		INI::parseOnlineChatColorDefinition },
 	{ "MultiplayerSettings",INI::parseMultiplayerSettingsDefinition },
 	{ "MusicTrack",					INI::parseMusicTrackDefinition },
@@ -185,7 +185,7 @@ INI::INI( void )
 {
 
 	m_file							= NULL;
-  m_readBufferNext=m_readBufferUsed=0;
+	m_readBufferNext=m_readBufferUsed=0;
 	m_filename					= "None";
 	m_loadType					= INI_LOAD_INVALID;
 	m_lineNum						= 0;
@@ -299,7 +299,7 @@ void INI::unPrepFile()
 	// close the file
 	m_file->close();
 	m_file = NULL;
-  m_readBufferUsed=m_readBufferNext=0;
+	m_readBufferUsed=m_readBufferNext=0;
 	m_filename = "None";
 	m_loadType = INI_LOAD_INVALID;
 	m_lineNum = 0;
@@ -424,61 +424,61 @@ void INI::readLine( void )
 	// sanity
 	DEBUG_ASSERTCRASH( m_file, ("readLine(), file pointer is NULL\n") );
 
-  if (m_endOfFile)
-    *m_buffer=0;
-  else
-  {
-    char *p=m_buffer;
-    while (p!=m_buffer+INI_MAX_CHARS_PER_LINE)
-    {
-      // get next character
-      if (m_readBufferNext==m_readBufferUsed)
-      {
-        // refill buffer
-        m_readBufferNext=0;
-        m_readBufferUsed=m_file->read(m_readBuffer,INI_READ_BUFFER);
+	if( m_endOfFile )
+		*m_buffer=0;
+	else
+	{
+		char *p=m_buffer;
+		while (p!=m_buffer+INI_MAX_CHARS_PER_LINE)
+		{
+			// get next character
+			if (m_readBufferNext==m_readBufferUsed)
+			{
+				// refill buffer
+				m_readBufferNext=0;
+				m_readBufferUsed=m_file->read(m_readBuffer,INI_READ_BUFFER);
 
-        // EOF?
-        if (!m_readBufferUsed)
-        {
-          m_endOfFile=true;
-          *p=0;
-          break;
-        }
-      }
-      *p=m_readBuffer[m_readBufferNext++];
+				// EOF?
+				if (!m_readBufferUsed)
+				{
+					m_endOfFile=true;
+					*p=0;
+					break;
+				}
+			}
+			*p=m_readBuffer[m_readBufferNext++];
 
-      // CR?
-      if (*p=='\n')
-      {
-        *p=0;
-        break;
-      }
+			// CR?
+			if (*p=='\n')
+			{
+				*p=0;
+				break;
+			}
 
-      DEBUG_ASSERTCRASH(*p != '\t', ("tab characters are not allowed in INI files (%s). please check your editor settings. Line Number %d\n",m_filename.str(), getLineNum()));
+			DEBUG_ASSERTCRASH(*p != '\t', ("tab characters are not allowed in INI files (%s). please check your editor settings. Line Number %d\n",m_filename.str(), getLineNum()));
 
-      // comment?
-      if (*p==';')
-        *p=0;
-      // whitespace?
-      else if (*p>0&&*p<32)
-        *p=' ';
-      p++;
-    }
-    *p=0;
+			// comment?
+			if (*p==';')
+				*p=0;
+			// whitespace?
+			else if (*p>0&&*p<32)
+				*p=' ';
+			p++;
+		}
+		*p=0;
 
 		// increase our line count
 		m_lineNum++;
 
 		// check for at the max
-		if ( p == m_buffer+INI_MAX_CHARS_PER_LINE )
+		if( p == m_buffer+INI_MAX_CHARS_PER_LINE )
 		{
 
 			DEBUG_ASSERTCRASH( 0, ("Buffer too small (%d) and was truncated, increase INI_MAX_CHARS_PER_LINE\n", 
 														 INI_MAX_CHARS_PER_LINE) );
 
 		}  // end if
-  }
+	}
 
 	if (s_xfer)
 	{

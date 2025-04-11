@@ -151,8 +151,8 @@ public:
 	Real m_overlapZVel;					///< fake Z velocity
 	Real m_overlapZ;						///< current height (additional)
 	Real m_wobble;							///< for wobbling
-  Real m_yawModulator;        ///< for the swimmy soft hover of a helicopter
-  Real m_pitchModulator;        ///< for the swimmy soft hover of a helicopter
+	Real m_yawModulator;				///< for the swimmy soft hover of a helicopter
+	Real m_pitchModulator;				///< for the swimmy soft hover of a helicopter
 	TWheelInfo m_wheelInfo;			///< Wheel offset & angle info for a wheeled type locomotor.
 
 	DrawableLocoInfo();
@@ -294,7 +294,7 @@ public:
 	Drawable( const ThingTemplate *thing, DrawableStatus statusBits = DRAWABLE_STATUS_NONE );
 
 	void onDestroy( void );																							///< run from GameClient::destroyDrawable
-  void onLevelStart();                                                ///< run from GameLogic::startNewGame
+	void onLevelStart();                                                ///< run from GameLogic::startNewGame
 
 	Drawable *getNextDrawable( void ) const { return m_nextDrawable; }	///< return the next drawable in the global list
 	Drawable *getPrevDrawable( void ) const { return m_prevDrawable; }  ///< return the prev drawable in the global list
@@ -309,8 +309,7 @@ public:
 	TintEnvelope *getColorTintEnvelope( void ) { return m_colorTintEnvelope; }
 	void setColorTintEnvelope( TintEnvelope &source ) { if (m_colorTintEnvelope) *m_colorTintEnvelope = source; }
 
-  
-  void imitateStealthLook( Drawable& otherDraw );
+	void imitateStealthLook( Drawable& otherDraw );
 
 	void setTerrainDecal(TerrainDecalType type);	///<decal that is to appear under the drawable
 	void setTerrainDecalSize(Real x, Real y);
@@ -415,7 +414,7 @@ public:
 	void stopAmbientSound( void );
 	void enableAmbientSound( Bool enable );
 	void setTimeOfDay( TimeOfDay tod );
-  Bool getAmbientSoundEnabledFromScript( void ) const { return m_ambientSoundEnabledFromScript; }
+	Bool getAmbientSoundEnabledFromScript( void ) const { return m_ambientSoundEnabledFromScript; }
 
 	void prependToList(Drawable **pListHead);
 	void removeFromList(Drawable **pListHead);
@@ -457,7 +456,7 @@ public:
 	void changedTeam();
 
 	const TWheelInfo *getWheelInfo(void) const { return m_locoInfo ? &m_locoInfo->m_wheelInfo : NULL; }
-	
+
 	const DrawableLocoInfo *getLocoInfo() const { return m_locoInfo; }
 
 	// this method must ONLY be called from the client, NEVER From the logic, not even indirectly.
@@ -497,7 +496,7 @@ public:
 		"inbetween", it is included in the completion time.
 	*/
 	void setAnimationCompletionTime(UnsignedInt numFrames);
-	
+
 	//Kris: Manually set a drawable's current animation to specific frame.
 	virtual void setAnimationFrame( int frame );
 
@@ -563,26 +562,26 @@ public:
 	void killIcon(DrawableIconType t) { if (m_iconInfo) m_iconInfo->killIcon(t); }
 	Bool hasIconInfo() const { return m_iconInfo != NULL; }
 
-  
-  Bool getReceivesDynamicLights( void ) { return m_receivesDynamicLights; };
-  void setReceivesDynamicLights( Bool set ) { m_receivesDynamicLights = set; };
-  
-  //---------------------------------------------------------------------------------
-  // Stuff for overriding ambient sound
-  const AudioEventInfo * getBaseSoundAmbientInfo() const; //< Possible starting point if only some parameters are customized
-  void enableAmbientSoundFromScript( Bool enable );
-  const AudioEventRTS * getAmbientSound() const { return m_ambientSound == NULL ? NULL : &m_ambientSound->m_event; }
-  void setCustomSoundAmbientOff(); //< Kill the ambient sound
-  void setCustomSoundAmbientInfo( DynamicAudioEventInfo * customAmbientInfo ); //< Set ambient sound.
-  void clearCustomSoundAmbient( ) { clearCustomSoundAmbient( true ); } //< Return to using defaults
-  Bool getAmbientSoundEnabled( void ) const { return m_ambientSoundEnabled; }
-  void mangleCustomAudioName( DynamicAudioEventInfo * audioToMangle ) const;
+
+	Bool getReceivesDynamicLights( void ) { return m_receivesDynamicLights; };
+	void setReceivesDynamicLights( Bool set ) { m_receivesDynamicLights = set; };
+
+	//---------------------------------------------------------------------------------
+	// Stuff for overriding ambient sound
+	const AudioEventInfo * getBaseSoundAmbientInfo() const; //< Possible starting point if only some parameters are customized
+	void enableAmbientSoundFromScript( Bool enable );
+	const AudioEventRTS * getAmbientSound() const { return m_ambientSound == NULL ? NULL : &m_ambientSound->m_event; }
+	void setCustomSoundAmbientOff(); //< Kill the ambient sound
+	void setCustomSoundAmbientInfo( DynamicAudioEventInfo * customAmbientInfo ); //< Set ambient sound.
+	void clearCustomSoundAmbient( ) { clearCustomSoundAmbient( true ); } //< Return to using defaults
+	Bool getAmbientSoundEnabled( void ) const { return m_ambientSoundEnabled; }
+	void mangleCustomAudioName( DynamicAudioEventInfo * audioToMangle ) const;
 
 
-  Real friend_getStealthOpacity( void ) { return m_stealthOpacity; }
-  Real friend_getExplicitOpacity( void ) { return m_explicitOpacity; }
-  Real friend_getEffectiveStealthOpacity( void ) { return m_effectiveStealthOpacity; }
-  
+	Real friend_getStealthOpacity( void ) { return m_stealthOpacity; }
+	Real friend_getExplicitOpacity( void ) { return m_explicitOpacity; }
+	Real friend_getEffectiveStealthOpacity( void ) { return m_effectiveStealthOpacity; }
+
 protected:
 
 	// snapshot methods
@@ -629,7 +628,7 @@ protected:
 
 	const AudioEventRTS& getAmbientSoundByDamage(BodyDamageType dt);
 
-  void clearCustomSoundAmbient( bool restartSound ); //< Return to using defaults
+	void clearCustomSoundAmbient( bool restartSound ); //< Return to using defaults
 
 #ifdef _DEBUG
 	void validatePos() const;

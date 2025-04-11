@@ -158,8 +158,8 @@ void StickyBombUpdate::initStickyBomb( Object *target, const Object *bomber, con
 		AudioEventRTS soundCreateBomb = *(getObject()->getTemplate()->getPerUnitSound("StickyBombCreated"));
 		soundCreateBomb.setPosition( getObject()->getPosition() );
 		TheAudio->addAudioEvent(&soundCreateBomb);
-		
-	}	
+
+	}
 }
 
 //-------------------------------------------------------------------------------------------------

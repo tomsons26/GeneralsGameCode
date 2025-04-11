@@ -342,7 +342,7 @@ UpdateSleepTime StealthDetectorUpdate::update( void )
 				{
 					rider = *it;
 
-          StealthUpdate *stealth = rider->getStealth();
+					StealthUpdate *stealth = rider->getStealth();
 					if ( stealth ) 
 					{
 						// we have found someone
@@ -364,59 +364,59 @@ UpdateSleepTime StealthDetectorUpdate::update( void )
 	//Make sure the detector is visible to the local player before we add effects or sounds.
 	if ( self->getShroudedStatus( localPlayer->getPlayerIndex() ) <= OBJECTSHROUD_PARTIAL_CLEAR )
 	{
-    if ( self->testStatus( OBJECT_STATUS_STEALTHED ) == FALSE || self->getControllingPlayer() == localPlayer )
-    {
-		  Drawable *myDraw = self->getDrawable();
-		  Coord3D bonePosition = {-1.66f,5.5f,15};
-		  if (myDraw)
-			  myDraw->getPristineBonePositions( data->m_IRParticleSysBone.str(), 0, &bonePosition, NULL, 1);
+		if ( self->testStatus( OBJECT_STATUS_STEALTHED ) == FALSE || self->getControllingPlayer() == localPlayer )
+		{
+			Drawable *myDraw = self->getDrawable();
+			Coord3D bonePosition = {-1.66f,5.5f,15};
+			if (myDraw)
+				myDraw->getPristineBonePositions( data->m_IRParticleSysBone.str(), 0, &bonePosition, NULL, 1);
 
-		  const ParticleSystemTemplate *pingTemplate;
-		  if ( foundSomeone )
-			  pingTemplate = data->m_IRBrightParticleSysTmpl;
-		  else
-			  pingTemplate = data->m_IRParticleSysTmpl;
+			const ParticleSystemTemplate *pingTemplate;
+			if ( foundSomeone )
+				pingTemplate = data->m_IRBrightParticleSysTmpl;
+			else
+				pingTemplate = data->m_IRParticleSysTmpl;
 
-		  if (pingTemplate)
-		  {
-			  ParticleSystem *sys = TheParticleSystemManager->createParticleSystem( pingTemplate );
-			  if (sys)
-			  {
-				  if (myDraw)
-					  sys->attachToDrawable( myDraw );
-				  else
-					  sys->attachToObject( self );
+			if (pingTemplate)
+			{
+				ParticleSystem *sys = TheParticleSystemManager->createParticleSystem( pingTemplate );
+				if (sys)
+				{
+					if (myDraw)
+						sys->attachToDrawable( myDraw );
+					else
+						sys->attachToObject( self );
 
-				  sys->setPosition( &bonePosition );
-			  }
-		  }
+					sys->setPosition( &bonePosition );
+				}
+			}
 
-		  const ParticleSystemTemplate *beaconTemplate = data->m_IRBeaconParticleSysTmpl;
-		  if (beaconTemplate)
-		  {
-			  ParticleSystem *sys = TheParticleSystemManager->createParticleSystem( beaconTemplate );//BEACON
-			  if (sys)
-			  {
-				  if (myDraw)
-					  sys->attachToDrawable( myDraw );
-				  else
-					  sys->attachToObject( self );
+			const ParticleSystemTemplate *beaconTemplate = data->m_IRBeaconParticleSysTmpl;
+			if (beaconTemplate)
+			{
+				ParticleSystem *sys = TheParticleSystemManager->createParticleSystem( beaconTemplate );//BEACON
+				if (sys)
+				{
+					if (myDraw)
+						sys->attachToDrawable( myDraw );
+					else
+						sys->attachToObject( self );
 
-				  sys->setPosition( &bonePosition );
-				  
-			  }
-		  }
+					sys->setPosition( &bonePosition );
+					
+				}
+			}
 
-		  AudioEventRTS IRPingSound;
-		  if (foundSomeone)
-			  IRPingSound = data->m_loudPingSound;
-		  else
-			  IRPingSound = data->m_pingSound;
+			AudioEventRTS IRPingSound;
+			if (foundSomeone)
+				IRPingSound = data->m_loudPingSound;
+			else
+				IRPingSound = data->m_pingSound;
 
-		  IRPingSound.setObjectID( self->getID() );
-		  TheAudio->addAudioEvent(&IRPingSound);
+			IRPingSound.setObjectID( self->getID() );
+			TheAudio->addAudioEvent(&IRPingSound);
 
-    }
+		}
 
 	} // end if doIRFX
 

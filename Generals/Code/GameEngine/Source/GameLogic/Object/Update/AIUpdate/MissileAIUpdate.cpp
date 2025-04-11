@@ -413,12 +413,14 @@ void MissileAIUpdate::doPrelaunchState()
 //-------------------------------------------------------------------------------------------------
 void MissileAIUpdate::doKillSelfState()
 {
-	if (m_stateTimestamp > TheGameLogic->getFrame()-3) {
+	if (m_stateTimestamp > TheGameLogic->getFrame()-3) 
+	{
 		// Hold in this state 2 frames to let the contrail catch up. jba.
 		return;
 	}
 	Object* obj = getObject();
-	if (m_detonationWeaponTmpl)	{
+	if (m_detonationWeaponTmpl)	
+	{
 		TheGameLogic->destroyObject( obj );	
 	}
 	switchToState(DEAD);

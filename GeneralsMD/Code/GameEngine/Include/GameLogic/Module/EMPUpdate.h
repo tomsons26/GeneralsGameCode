@@ -52,13 +52,13 @@ public:
 	RGBColor		m_startColor;
 	RGBColor		m_endColor;
 	const ParticleSystemTemplate *m_disableFXParticleSystem;
-	Real				m_sparksPerCubicFoot; //<just like it sounds
-	Real				m_effectRadius;
-	Int         m_rejectMask;
+	Real			m_sparksPerCubicFoot; //<just like it sounds
+	Real			m_effectRadius;
+	Int				m_rejectMask;
 
-  KindOfMaskType m_victimKindOf;
-  KindOfMaskType m_victimKindOfNot;
-	Bool				m_doesNotAffectMyOwnBuildings;
+	KindOfMaskType	m_victimKindOf;
+	KindOfMaskType	m_victimKindOfNot;
+	Bool			m_doesNotAffectMyOwnBuildings;
 
 	EMPUpdateModuleData()
 	{
@@ -77,8 +77,8 @@ public:
 		m_rejectMask = 0;
 		m_doesNotAffectMyOwnBuildings = FALSE;
 
-    m_victimKindOf.clear();
-    m_victimKindOfNot.clear();
+	m_victimKindOf.clear();
+	m_victimKindOfNot.clear();
 	}
 
 	static void buildFieldParse(MultiIniFieldParse& p) 
@@ -101,9 +101,9 @@ public:
 			{ "DoesNotAffect", INI::parseBitString32,	TheWeaponAffectsMaskNames, offsetof(EMPUpdateModuleData, m_rejectMask) },
 			{ "DoesNotAffectMyOwnBuildings", INI::parseBool, NULL, offsetof( EMPUpdateModuleData, m_doesNotAffectMyOwnBuildings ) },
 
-      { "VictimRequiredKindOf", KindOfMaskType::parseFromINI, NULL, offsetof( EMPUpdateModuleData, m_victimKindOf ) },
-		  { "VictimForbiddenKindOf", KindOfMaskType::parseFromINI, NULL, offsetof( EMPUpdateModuleData, m_victimKindOfNot ) },
-      
+			{ "VictimRequiredKindOf", KindOfMaskType::parseFromINI, NULL, offsetof( EMPUpdateModuleData, m_victimKindOf ) },
+			{ "VictimForbiddenKindOf", KindOfMaskType::parseFromINI, NULL, offsetof( EMPUpdateModuleData, m_victimKindOfNot ) },
+
 			{ 0, 0, 0, 0 }
 		};
     p.add(dataFieldParse);
@@ -142,16 +142,6 @@ protected:
 
 
 };
-
-
-
-
-
-
-
-
-
-
 
 
 //-------------------------------------------------------------------------------------------------
@@ -222,21 +212,5 @@ protected:
   Bool  m_fxFired; ///< have we done our fx yet
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif // __EMPUPDATE_H_
 
- 

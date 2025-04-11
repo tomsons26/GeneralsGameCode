@@ -125,7 +125,7 @@ DumbProjectileBehavior::DumbProjectileBehavior( Thing *thing, const ModuleData* 
 	m_currentFlightPathStep = 0;
 	m_extraBonusFlags = 0;
 
-  m_hasDetonated = FALSE;
+	m_hasDetonated = FALSE;
 } 
 
 //-------------------------------------------------------------------------------------------------
@@ -532,8 +532,8 @@ Bool DumbProjectileBehavior::projectileHandleCollision( Object *other )
 //-------------------------------------------------------------------------------------------------
 void DumbProjectileBehavior::detonate()
 {
-  if ( m_hasDetonated )
-    return;
+	if ( m_hasDetonated )
+		return;
 
 	Object* obj = getObject();
 	if (m_detonationWeaponTmpl)
@@ -569,8 +569,8 @@ void DumbProjectileBehavior::detonate()
 
 	if (obj->getDrawable())
 		obj->getDrawable()->setDrawableHidden(true);
-  
-  m_hasDetonated = TRUE; 
+
+	m_hasDetonated = TRUE; 
 
 }
 
@@ -633,35 +633,35 @@ UpdateSleepTime DumbProjectileBehavior::update()
 	Coord3D flightStep = m_flightPath[m_currentFlightPathStep];
 
 	if (d->m_orientToFlightPath && (!d->m_tumbleRandomly) )
-  {
-    if ( m_currentFlightPathStep > 0)
-	  {
-	  // this seems reasonable; however, if this object has a PhysicsBehavior on it, this calc will be wrong, 
-	  // since Physics is applying gravity, which we duly ignore, but the prevPos won't be what we expect.
-	  // get it from the flight path instead. (srj)
-	  //Coord3D prevPos = *getObject()->getPosition();
+	{
+		if ( m_currentFlightPathStep > 0)
+		{
+		// this seems reasonable; however, if this object has a PhysicsBehavior on it, this calc will be wrong, 
+		// since Physics is applying gravity, which we duly ignore, but the prevPos won't be what we expect.
+		// get it from the flight path instead. (srj)
+		//Coord3D prevPos = *getObject()->getPosition();
 
-		  Coord3D prevPos = m_flightPath[m_currentFlightPathStep - 1];
+			Coord3D prevPos = m_flightPath[m_currentFlightPathStep - 1];
 
-		  Vector3 curDir(flightStep.x - prevPos.x, flightStep.y - prevPos.y, flightStep.z - prevPos.z);
-		  curDir.Normalize();	// buildTransformMatrix wants it this way
-      Matrix3D orientMtx;
-		  orientMtx.buildTransformMatrix(Vector3(flightStep.x, flightStep.y, flightStep.z), curDir);
-		  getObject()->setTransformMatrix(&orientMtx);
-    }
-    else // oops! how do we orient the projectile on the zeroeth frame? This didn't matter until we started using the
-      //long, blurry projectile graphics which look badly oriented on step 0 of the flight path
-      // so lets orient it the same as if it were on frame 1!
-    {
-		  Coord3D prevPos = m_flightPath[0];
-		  Coord3D curPos = m_flightPath[1];
+			Vector3 curDir(flightStep.x - prevPos.x, flightStep.y - prevPos.y, flightStep.z - prevPos.z);
+			curDir.Normalize();	// buildTransformMatrix wants it this way
+			Matrix3D orientMtx;
+			orientMtx.buildTransformMatrix(Vector3(flightStep.x, flightStep.y, flightStep.z), curDir);
+			getObject()->setTransformMatrix(&orientMtx);
+		}
+		else // oops! how do we orient the projectile on the zeroeth frame? This didn't matter until we started using the
+			//long, blurry projectile graphics which look badly oriented on step 0 of the flight path
+			// so lets orient it the same as if it were on frame 1!
+		{
+			Coord3D prevPos = m_flightPath[0];
+			Coord3D curPos = m_flightPath[1];
 
-		  Vector3 curDir(curPos.x - prevPos.x, curPos.y - prevPos.y, curPos.z - prevPos.z);
-		  curDir.Normalize();	// buildTransformMatrix wants it this way
-      Matrix3D orientMtx;
-		  orientMtx.buildTransformMatrix(Vector3(flightStep.x, flightStep.y, flightStep.z), curDir);
-		  getObject()->setTransformMatrix(&orientMtx);
-    }
+			Vector3 curDir(curPos.x - prevPos.x, curPos.y - prevPos.y, curPos.z - prevPos.z);
+			curDir.Normalize();	// buildTransformMatrix wants it this way
+			Matrix3D orientMtx;
+			orientMtx.buildTransformMatrix(Vector3(flightStep.x, flightStep.y, flightStep.z), curDir);
+			getObject()->setTransformMatrix(&orientMtx);
+		}
 
 	}
 	else

@@ -736,7 +736,7 @@ void ModelConditionInfo::validateWeaponBarrelInfo() const
 		const AsciiString& recoilBoneName = m_weaponRecoilBoneName[wslot];
 		const AsciiString& mfName = m_weaponMuzzleFlashName[wslot];
 		const AsciiString& plbName = m_weaponProjectileLaunchBoneName[wslot];
-    
+
 // a useful tool for finding missing INI entries in the weapon-bone block
 // since this class has no idea which object it refers to, it must assume that the projectilelaunchbonename
 // is required if the fxBoneName is specified
@@ -1021,7 +1021,7 @@ void ModelConditionInfo::clear()
 W3DModelDrawModuleData::W3DModelDrawModuleData() : 
 	m_validated(0),
 	m_okToChangeModelColor(false),
-  m_particlesAttachedToAnimatedBones(false),
+	m_particlesAttachedToAnimatedBones(false),
 	m_animationsRequirePower(true),
 #ifdef CACHE_ATTACH_BONE
 	m_attachToDrawableBoneOffsetValid(false),
@@ -1040,8 +1040,7 @@ W3DModelDrawModuleData::W3DModelDrawModuleData() :
 	m_recoilDamping = RECOIL_DAMPING;
 	m_recoilSettle = SETTLE_RATE;
 
-
-  m_receivesDynamicLights = TRUE;
+	m_receivesDynamicLights = TRUE;
 
 	// m_ignoreConditionStates defaults to all zero, which is what we want
 }
@@ -1218,7 +1217,7 @@ void W3DModelDrawModuleData::buildFieldParse(MultiIniFieldParse& p)
 		{ "AttachToBoneInAnotherModule", parseAsciiStringLC, NULL, offsetof(W3DModelDrawModuleData, m_attachToDrawableBone) },
 		{ "IgnoreConditionStates", ModelConditionFlags::parseFromINI, NULL, offsetof(W3DModelDrawModuleData, m_ignoreConditionStates) },
 		{ "ReceivesDynamicLights", INI::parseBool, NULL, offsetof(W3DModelDrawModuleData, m_receivesDynamicLights) },
-    { 0, 0, 0, 0 }
+		{ 0, 0, 0, 0 }
 	};
   p.add(dataFieldParse);
 
@@ -1757,24 +1756,24 @@ W3DModelDraw::W3DModelDraw(Thing *thing, const ModuleData* moduleData) : DrawMod
 
 	Drawable* draw = getDrawable();
 
-  if ( draw )
-  {
-	  Object* obj = draw->getObject();
-	  if (obj)
-	  {	
-		  if (TheGlobalData->m_timeOfDay == TIME_OF_DAY_NIGHT)
-			  m_hexColor = obj->getNightIndicatorColor();
-		  else
-			  m_hexColor = obj->getIndicatorColor();
-	  }
+	if ( draw )
+	{
+		Object* obj = draw->getObject();
+		if (obj)
+		{	
+			if (TheGlobalData->m_timeOfDay == TIME_OF_DAY_NIGHT)
+				m_hexColor = obj->getNightIndicatorColor();
+			else
+				m_hexColor = obj->getIndicatorColor();
+		}
 
-    // THE VAST MAJORITY OF THESE SHOULD BE TRUE
-    if ( ! getW3DModelDrawModuleData()->m_receivesDynamicLights)
-    {
-      draw->setReceivesDynamicLights( FALSE );
-		  DEBUG_LOG(("setReceivesDynamicLights = FALSE: %s\n", draw->getTemplate()->getName().str()));
-    }
-  }
+		// THE VAST MAJORITY OF THESE SHOULD BE TRUE
+		if ( ! getW3DModelDrawModuleData()->m_receivesDynamicLights)
+		{
+			draw->setReceivesDynamicLights( FALSE );
+			DEBUG_LOG(("setReceivesDynamicLights = FALSE: %s\n", draw->getTemplate()->getName().str()));
+		}
+	}
 
 	setModelState(info);
 }
@@ -2103,13 +2102,13 @@ void W3DModelDraw::doDrawModule(const Matrix3D* transformMtx)
 
 	handleClientTurretPositioning();
 	recalcBonesForClientParticleSystems();
-  
-  const W3DModelDrawModuleData *modData = getW3DModelDrawModuleData();
-  if ( modData->m_particlesAttachedToAnimatedBones )
-    updateBonesForClientParticleSystems();// LORENZEN ADDED THIS 
-                                          // IT REPOSITIONS PARTICLESYSTEMS TO TSTAY IN SYNC WITH ANIMATED BONES
+
+	const W3DModelDrawModuleData *modData = getW3DModelDrawModuleData();
+	if ( modData->m_particlesAttachedToAnimatedBones )
+		updateBonesForClientParticleSystems();// LORENZEN ADDED THIS 
+																					// IT REPOSITIONS PARTICLESYSTEMS TO TSTAY IN SYNC WITH ANIMATED BONES
 	
-  handleClientRecoil();
+	handleClientRecoil();
 
 }
 
@@ -2684,12 +2683,10 @@ Bool W3DModelDraw::updateBonesForClientParticleSystems()
 
 //		Matrix3D originalTransform = m_renderObject->Get_Transform();
 //		Matrix3D tmp = originalTransform;
- //   Vector3 zeroTranslation(0,0,0);
-  //  tmp.Set_Translation( zeroTranslation );
+//		Vector3 zeroTranslation(0,0,0);
+//		tmp.Set_Translation( zeroTranslation );
 	//	tmp.Scale(drawable->getScale());
-//		m_renderObject->Set_Transform(tmp);					
-				
-    
+//		m_renderObject->Set_Transform(tmp);
 
 		for (std::vector<ParticleSysTrackerType>::const_iterator it = m_particleSystemIDs.begin(); it != m_particleSystemIDs.end(); ++it)
 		{
@@ -2697,22 +2694,21 @@ Bool W3DModelDraw::updateBonesForClientParticleSystems()
 			Int boneIndex = (*it).boneIndex;
 			if ( (sys != NULL) && (boneIndex != 0)  ) 
 			{
-    		const Matrix3D boneTransform = m_renderObject->Get_Bone_Transform(boneIndex);// just a little worried about state changes
-        
-        Vector3 vpos = boneTransform.Get_Translation();
+				const Matrix3D boneTransform = m_renderObject->Get_Bone_Transform(boneIndex);// just a little worried about state changes
+				Vector3 vpos = boneTransform.Get_Translation();
 
-        Coord3D pos;
+				Coord3D pos;
 				pos.x = vpos.X;
 				pos.y = vpos.Y;
 				pos.z = vpos.Z;
 
 				sys->setPosition(&pos);
 
-        Real orientation = boneTransform.Get_Z_Rotation();
+				Real orientation = boneTransform.Get_Z_Rotation();
 				sys->rotateLocalTransformZ(orientation);
-        
-        sys->setLocalTransform(&boneTransform);
-        sys->setSkipParentXfrm(true);
+				
+				sys->setLocalTransform(&boneTransform);
+				sys->setSkipParentXfrm(true);
 
 			}
 		}// next praticle system

@@ -369,7 +369,7 @@ void DataChunkOutput::writeUnicodeString( UnicodeString theString )
 }
 
 void DataChunkOutput::writeNameKey( const NameKeyType key ) 
-{ 
+{
 		AsciiString kname = TheNameKeyGenerator->keyToName(key);
 		Int keyAndType = m_contents.allocateID(kname);
 		keyAndType <<= 8;

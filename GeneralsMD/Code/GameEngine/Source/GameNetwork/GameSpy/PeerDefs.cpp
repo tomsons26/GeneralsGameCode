@@ -529,20 +529,20 @@ void GameSpyInfo::markAsStagingRoomHost( void )
 {
 	m_localStagingRoomID = 0;
 	m_joinedStagingRoom = FALSE; m_isHosting = TRUE;
-  
-  // There are a few options we don't want to reset when we are hosting (they carry over
-  // from the the create game dialog).
-  // Interesting fact: oldFactionsOnly will be carried over correctly if I remove these
-  // lines. UseStats won't be. I have no idea why.
-  Int useStats = m_localStagingRoom.getUseStats();
-  Bool oldFactionsOnly = m_localStagingRoom.oldFactionsOnly();
 
-  m_localStagingRoom.reset();
+	// There are a few options we don't want to reset when we are hosting (they carry over
+	// from the the create game dialog).
+	// Interesting fact: oldFactionsOnly will be carried over correctly if I remove these
+	// lines. UseStats won't be. I have no idea why.
+	Int useStats = m_localStagingRoom.getUseStats();
+	Bool oldFactionsOnly = m_localStagingRoom.oldFactionsOnly();
+
+	m_localStagingRoom.reset();
 	m_localStagingRoom.enterGame();
 	m_localStagingRoom.setSeed(GetTickCount());
-  
-  m_localStagingRoom.setUseStats( useStats );
-  m_localStagingRoom.setOldFactionsOnly( oldFactionsOnly );
+	
+	m_localStagingRoom.setUseStats( useStats );
+	m_localStagingRoom.setOldFactionsOnly( oldFactionsOnly );
 
 	GameSlot newSlot;
 	UnicodeString uName;

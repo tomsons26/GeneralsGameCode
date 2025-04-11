@@ -78,8 +78,8 @@ MissileAIUpdateModuleData::MissileAIUpdateModuleData()
 	m_garrisonHitKillFX = NULL;
 	m_lockDistance = 75.0f;	
 	m_distanceScatterWhenJammed = 75.0f;
-    m_detonateCallsKill = FALSE;
-    m_killSelfDelay   = 3; // just long enough for the contrail to catch up to me
+	m_detonateCallsKill = FALSE;
+	m_killSelfDelay   = 3; // just long enough for the contrail to catch up to me
 }
 
 //-----------------------------------------------------------------------------
@@ -105,9 +105,9 @@ void MissileAIUpdateModuleData::buildFieldParse(MultiIniFieldParse& p)
 		{ "GarrisonHitKillForbiddenKindOf", KindOfMaskType::parseFromINI, NULL, offsetof( MissileAIUpdateModuleData, m_garrisonHitKillKindofNot ) },
 		{ "GarrisonHitKillCount", INI::parseUnsignedInt, NULL, offsetof( MissileAIUpdateModuleData, m_garrisonHitKillCount ) },
 		{ "GarrisonHitKillFX", INI::parseFXList, NULL, offsetof( MissileAIUpdateModuleData, m_garrisonHitKillFX ) },
-    { "DetonateCallsKill", INI::parseBool,   NULL, offsetof( MissileAIUpdateModuleData, m_detonateCallsKill ) },
-    { "KillSelfDelay",     INI::parseDurationUnsignedInt, NULL, offsetof( MissileAIUpdateModuleData, m_killSelfDelay ) },
-    { 0, 0, 0, 0 }
+		{ "DetonateCallsKill", INI::parseBool,   NULL, offsetof( MissileAIUpdateModuleData, m_detonateCallsKill ) },
+		{ "KillSelfDelay",     INI::parseDurationUnsignedInt, NULL, offsetof( MissileAIUpdateModuleData, m_killSelfDelay ) },
+		{ 0, 0, 0, 0 }
 	};
 
   p.add(dataFieldParse);
@@ -294,7 +294,7 @@ void MissileAIUpdate::projectileFireAtObjectOrPosition( const Object *victim, co
 		m_victimID = INVALID_ID;
 	}
 
-  setCurrentVictim( victim );/// extending access to the victim via the parent class
+	setCurrentVictim( victim );/// extending access to the victim via the parent class
 	m_prevPos = *getObject()->getPosition();
 }
 
@@ -436,20 +436,20 @@ void MissileAIUpdate::doPrelaunchState()
 //-------------------------------------------------------------------------------------------------
 void MissileAIUpdate::doKillSelfState()
 {
-  const MissileAIUpdateModuleData *modData = getMissileAIUpdateModuleData();
+	const MissileAIUpdateModuleData *modData = getMissileAIUpdateModuleData();
 
 	if (m_stateTimestamp > TheGameLogic->getFrame() - modData->m_killSelfDelay ) 
-  {
+	{
 		// Hold in this state [modData->m_killSelfDelay] frames to let the contrail catch up. jba.
 		return;
 	}
 	Object* obj = getObject();
 	if (m_detonationWeaponTmpl)	
-  {
-    if ( modData->m_detonateCallsKill )
-      obj->kill(); // kill it (vs destroying it) so that its Die modules are called
-    else  
-		  TheGameLogic->destroyObject( obj );	
+	{
+		if ( modData->m_detonateCallsKill )
+			obj->kill(); // kill it (vs destroying it) so that its Die modules are called
+		else	
+			TheGameLogic->destroyObject( obj );	
 	}
 	switchToState(DEAD);
 }

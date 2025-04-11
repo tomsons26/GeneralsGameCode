@@ -180,7 +180,7 @@ void ControlBar::populateStructureInventory( Object *building )
 		m_commandWindows[ EVACUATE_ID ]->winEnable( TRUE );
 		m_commandWindows[ STOP_ID ]->winEnable( TRUE );
 	}
-	
+
 	//
 	// iterate each of the objects inside the container and put them in a button, note
 	// we're iterating in reverse order here

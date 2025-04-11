@@ -159,8 +159,8 @@ UpdateSleepTime SlavedUpdate::update( void )
 		//Let's disable the drone so it crashes instead!
 		//Added special case code in physics falling to ensure death.
 		me->setDisabled( DISABLED_UNMANNED );
-    if ( me->getAI() )
-      me->getAI()->aiIdle( CMD_FROM_AI);
+		if ( me->getAI() )
+			me->getAI()->aiIdle( CMD_FROM_AI);
 
 		return UPDATE_SLEEP_NONE;
 	}
@@ -172,9 +172,6 @@ UpdateSleepTime SlavedUpdate::update( void )
 		{//slaver must have been hijacked or something..	// we will join his team
 			me->defect( masterTeam, 0 );
 		}
-
-    
-
 
 	}
 	
@@ -724,18 +721,16 @@ void SlavedUpdate::startSlavedEffects( const Object *slaver )
 	// mark selves as not selectable
 	getObject()->setStatus( MAKE_OBJECT_STATUS_MASK( OBJECT_STATUS_UNSELECTABLE ) );
 
-
-  if ( slaver->testStatus( OBJECT_STATUS_STEALTHED ) )
-  {
-    StealthUpdate *myStealth = getObject()->getStealth();
-    if ( myStealth )
-    {
-      myStealth->receiveGrant( true );
-      // note to anyone... once stealth is granted to this drone(or such) 
-      // let its own stealthupdate govern the allowedtostealth cases
-    }
-  }
-
+	if ( slaver->testStatus( OBJECT_STATUS_STEALTHED ) )
+	{
+		StealthUpdate *myStealth = getObject()->getStealth();
+		if ( myStealth )
+		{
+			myStealth->receiveGrant( true );
+			// note to anyone... once stealth is granted to this drone(or such) 
+			// let its own stealthupdate govern the allowedtostealth cases
+		}
+	}
 
 }
 

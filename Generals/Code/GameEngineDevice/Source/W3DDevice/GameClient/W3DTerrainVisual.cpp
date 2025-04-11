@@ -618,7 +618,8 @@ void W3DTerrainVisual::addFactionBibDrawable(Drawable *factionBuilding, Bool hig
 // ------------------------------------------------------------------------------------------------
 void W3DTerrainVisual::addFactionBib(Object *factionBuilding, Bool highlight, Real extra)
 {
-	if (m_terrainHeightMap) {
+	if (m_terrainHeightMap) 
+	{
 		const Matrix3D * mtx = factionBuilding->getTransformMatrix();
 		Vector3 corners[4];
 		Coord3D pos;

@@ -207,7 +207,6 @@ void ControlBar::doTransportInventoryUI( Object *transport, const CommandSet *co
 			m_commandWindows[ i ]->winHide( FALSE );
 			m_commandWindows[ i ]->winEnable( FALSE );
 
-      
 ///////// poopy
 
 			//Clear any potential veterancy rank, or else we'll see it when it's empty!
@@ -219,8 +218,7 @@ void ControlBar::doTransportInventoryUI( Object *transport, const CommandSet *co
  				m_commandWindows[ i ]->winHide( TRUE );
  			}
 
-      
-     //  is this where we set the cameos disabled when container is subdued?
+		//  is this where we set the cameos disabled when container is subdued?
 
 			// if we've counted more UI spots than the transport can hold, hide this command window
 			if( inventoryCommandCount > transportMax )
@@ -1135,7 +1133,7 @@ CommandAvailability ControlBar::getCommandAvailability( const CommandButton *com
 	{
 		case GUI_COMMAND_DOZER_CONSTRUCT:
 		{
-      const ThingTemplate * whatToBuild = command->getThingTemplate();
+			const ThingTemplate * whatToBuild = command->getThingTemplate();
 			// if the command is a dozer construct task and the object dozer is building anything
 			// this command is not available
 			if(whatToBuild)
@@ -1172,7 +1170,6 @@ CommandAvailability ControlBar::getCommandAvailability( const CommandButton *com
 			{
 				return COMMAND_RESTRICTED;//COMMAND_CANT_AFFORD;
 			}
-      
 
 			break;
 		}  
@@ -1184,9 +1181,9 @@ CommandAvailability ControlBar::getCommandAvailability( const CommandButton *com
 			if (obj->testScriptStatusBit(OBJECT_STATUS_SCRIPT_UNSELLABLE))
 				return COMMAND_HIDDEN;
 
-    //since the container can be subdued, , M Lorenzen 8/11
-      if ( obj->isDisabledByType( DISABLED_SUBDUED ) )
-        return COMMAND_RESTRICTED;
+		//since the container can be subdued, , M Lorenzen 8/11
+			if ( obj->isDisabledByType( DISABLED_SUBDUED ) )
+				return COMMAND_RESTRICTED;
 
 			break;
 		}
@@ -1375,9 +1372,9 @@ CommandAvailability ControlBar::getCommandAvailability( const CommandButton *com
 			// container changes the UI is completely repopulated
 			//
 
-    //since the container can be subdued, the above is no longer true, M Lorenzen 8/11
-      if ( obj->isDisabledByType( DISABLED_SUBDUED ) )
-        return COMMAND_RESTRICTED;
+		//since the container can be subdued, the above is no longer true, M Lorenzen 8/11
+			if ( obj->isDisabledByType( DISABLED_SUBDUED ) )
+				return COMMAND_RESTRICTED;
 
 			break;
 		} 
@@ -1389,8 +1386,8 @@ CommandAvailability ControlBar::getCommandAvailability( const CommandButton *com
 			if( !obj->getContain() || obj->getContain()->getContainCount() <= 0 )
 				return COMMAND_RESTRICTED;
 
-      if ( obj->isDisabledByType( DISABLED_SUBDUED ) )
-        return COMMAND_RESTRICTED;
+			if ( obj->isDisabledByType( DISABLED_SUBDUED ) )
+				return COMMAND_RESTRICTED;
 
 
 			break;

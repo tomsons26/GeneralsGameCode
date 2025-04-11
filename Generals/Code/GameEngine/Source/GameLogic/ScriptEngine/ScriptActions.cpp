@@ -4831,22 +4831,26 @@ void ScriptActions::doSetToppleDirection( const AsciiString& unitName, const Coo
 void ScriptActions::doMoveUnitTowardsNearest( const AsciiString& unitName, const AsciiString& objectType, AsciiString triggerName)
 {
 	Object *obj = TheScriptEngine->getUnitNamed(unitName);
-	if (!obj) {
+	if (!obj) 
+	{
 		return;
 	}
 
 	AIUpdateInterface *ai = obj->getAIUpdateInterface();
-	if (!ai) {
+	if (!ai) 
+	{
 		return;
 	}
 	
 	const ThingTemplate *templ = TheThingFactory->findTemplate(objectType);
-	if (!templ) {
+	if (!templ) 
+	{
 		return;
 	}
 
 	PolygonTrigger *trig = TheScriptEngine->getQualifiedTriggerAreaByName(triggerName);
-	if (!trig) {
+	if (!trig) 
+	{
 		return;
 	}
 
@@ -4857,7 +4861,8 @@ void ScriptActions::doMoveUnitTowardsNearest( const AsciiString& unitName, const
 	PartitionFilter *filters[] = { &thingsToAccept, &acceptWithin, &filterMapStatus, NULL };
 
 	Object *dest = ThePartitionManager->getClosestObject(obj->getPosition(), REALLY_FAR, FROM_CENTER_2D, filters);
-	if (!dest) {
+	if (!dest) 
+	{
 		return;
 	}
 	
@@ -4871,28 +4876,33 @@ void ScriptActions::doMoveUnitTowardsNearest( const AsciiString& unitName, const
 void ScriptActions::doMoveTeamTowardsNearest( const AsciiString& teamName, const AsciiString& objectType, AsciiString triggerName)
 {
 	Team *team = TheScriptEngine->getTeamNamed(teamName);
-	if (!team) {
+	if (!team) 
+	{
 		return;
 	}
 	
 	const ThingTemplate *templ = TheThingFactory->findTemplate(objectType);
-	if (!templ) {
+	if (!templ) 
+	{
 		return;
 	}
 
 	PolygonTrigger *trig = TheScriptEngine->getQualifiedTriggerAreaByName(triggerName);
-	if (!trig) {
+	if (!trig) 
+	{
 		return;
 	}
 
 	for (DLINK_ITERATOR<Object> iter = team->iterate_TeamMemberList(); !iter.done(); iter.advance())
 	{
 		Object *obj = iter.cur();
-		if (!obj) {
+		if (!obj) 
+		{
 			continue;
 		}
 		AIUpdateInterface *ai = obj->getAIUpdateInterface();
-		if (!ai) {
+		if (!ai) 
+		{
 			continue;
 		}
 
@@ -4906,9 +4916,8 @@ void ScriptActions::doMoveTeamTowardsNearest( const AsciiString& teamName, const
 		if (!dest) {
 			return;
 		}
-		
 		ai->chooseLocomotorSet( LOCOMOTORSET_NORMAL );
-		ai->aiMoveToObject(dest, CMD_FROM_SCRIPT);
+		ai->aiMoveToObject( dest, CMD_FROM_SCRIPT );
 	}
 }
 

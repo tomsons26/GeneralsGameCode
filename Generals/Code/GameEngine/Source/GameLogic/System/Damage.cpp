@@ -60,7 +60,8 @@ void DamageInfo::xfer( Xfer *xfer )
 // ------------------------------------------------------------------------------------------------
 /** Xfer method
 	* Version Info:
-	* 1: Initial version */
+	* 1: Initial version 
+*/
 // ------------------------------------------------------------------------------------------------
 void DamageInfoInput::xfer( Xfer *xfer )
 {

@@ -126,7 +126,6 @@ public:
 	Int getSpecialPowerShortcutButtonCount( void ) const {return m_specialPowerShortcutButtonCount;	}
 	
 	AsciiString getLoadScreenMusic( void ) const {return m_loadScreenMusic;	}
-	
 
 	static const FieldParse* getFieldParse();
 
@@ -200,7 +199,6 @@ public:
 	const PlayerTemplate* getNthPlayerTemplate(Int i) const;
 	const PlayerTemplate* findPlayerTemplate(NameKeyType namekey) const;
 	inline Int getPlayerTemplateCount() const { return m_playerTemplates.size(); }
-
 	
 	// This function will fill outStringList with all the sides found in all the templates
 	void getAllSideStrings(AsciiStringList *outStringList);	

@@ -130,16 +130,16 @@ const LocomotorTemplateVector* AIUpdateModuleData::findLocomotorTemplateVector(L
 
 	static const FieldParse dataFieldParse[] = 
 	{
-		{ "Turret", AIUpdateModuleData::parseTurret, NULL, offsetof(AIUpdateModuleData, m_turretData[0]) },
-		{ "AltTurret", AIUpdateModuleData::parseTurret, NULL, offsetof(AIUpdateModuleData, m_turretData[1]) },
+		{ "Turret",											AIUpdateModuleData::parseTurret,	NULL, offsetof(AIUpdateModuleData, m_turretData[0]) },
+		{ "AltTurret",									AIUpdateModuleData::parseTurret,	NULL, offsetof(AIUpdateModuleData, m_turretData[1]) },
 		{ "AutoAcquireEnemiesWhenIdle", INI::parseBitString32, TheAutoAcquireEnemiesNames, offsetof(AIUpdateModuleData, m_autoAcquireEnemiesWhenIdle) },
-		{ "MoodAttackCheckRate", INI::parseDurationUnsignedInt, NULL, offsetof(AIUpdateModuleData, m_moodAttackCheckRate) },
+		{ "MoodAttackCheckRate",				INI::parseDurationUnsignedInt,		NULL, offsetof(AIUpdateModuleData, m_moodAttackCheckRate) },
 #ifdef ALLOW_SURRENDER
-		{ "SurrenderDuration", INI::parseDurationUnsignedInt, NULL, offsetof(AIUpdateModuleData, m_surrenderDuration) },
+		{ "SurrenderDuration",					INI::parseDurationUnsignedInt,		NULL, offsetof(AIUpdateModuleData, m_surrenderDuration) },
 #endif
 		{ 0, 0, 0, 0 }
 	};
-  p.add(dataFieldParse);
+	p.add(dataFieldParse);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -2764,7 +2764,7 @@ void AIUpdateInterface::aiDoCommand(const AICommandParms* parms)
  */
 void AIUpdateInterface::privateMoveToPosition( const Coord3D *pos, CommandSourceType cmdSource )
 {
-	if (getObject()->isMobile() == FALSE)
+	if (getObject()->isMobile() == FALSE) 
 		return;
 
 	//Resetting the locomotor here was initially added for scripting purposes. It has been moved

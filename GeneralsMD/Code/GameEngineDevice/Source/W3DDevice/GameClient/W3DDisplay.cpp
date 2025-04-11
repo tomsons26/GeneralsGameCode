@@ -201,26 +201,26 @@ void StatDumpClass::dumpStats( Bool brief, Bool flagSpikes )
 		return;
 	}
 
-  
-  Bool beBrief = brief & s_notFirstDump;
-  s_notFirstDump = TRUE;
+	
+	Bool beBrief = brief & s_notFirstDump;
+	s_notFirstDump = TRUE;
 
 	fprintf( m_fp, "----------------------------------------------------------------\n" );
 	fprintf( m_fp, "Performance Statistical Dump -- Frame %d\n", TheGameLogic->getFrame() );
-  if ( ! beBrief )
-  {
-	  //static char buf[1024];
-	  fprintf( m_fp, "Time:\t%s", getCurrentTimeString() );
-	  fprintf( m_fp, "Map:\t%s\n", TheGlobalData->m_mapName.str());
-	  fprintf( m_fp, "Side:\t%s\n", ThePlayerList->getLocalPlayer()->getSide().str());
-	  fprintf( m_fp, "----------------------------------------------------------------\n" );
-  }
+	if ( ! beBrief )
+	{
+		//static char buf[1024];
+		fprintf( m_fp, "Time:\t%s", getCurrentTimeString() );
+		fprintf( m_fp, "Map:\t%s\n", TheGlobalData->m_mapName.str());
+		fprintf( m_fp, "Side:\t%s\n", ThePlayerList->getLocalPlayer()->getSide().str());
+		fprintf( m_fp, "----------------------------------------------------------------\n" );
+	}
 
 	//FPS
 	Real fps = TheDisplay->getAverageFPS();
 	fprintf( m_fp, "Average FPS: %.1f (%.5f msec)\n", fps, 1000.0f / fps );
-  if ( flagSpikes && fps<20.0f )
-  	fprintf( m_fp, "                                                                      FPS OUT OF TOLERANCE\n" );
+	if ( flagSpikes && fps<20.0f )
+		fprintf( m_fp, "																																			FPS OUT OF TOLERANCE\n" );
 
 
 	//Rendering stats
@@ -230,36 +230,36 @@ void StatDumpClass::dumpStats( Bool brief, Bool flagSpikes )
 
 	Int onScreenParticleCount = TheParticleSystemManager->getOnScreenParticleCount();
 
-  if ( flagSpikes )
-  {
-    if ( Debug_Statistics::Get_Draw_Calls()>2000 )
-  	  fprintf( m_fp, "                                                                      DRAWS OUT OF TOLERANCE(2000)\n" );
-    if ( Debug_Statistics::Get_Sorting_Polygons() > (onScreenParticleCount*2) + 300 )
-  	  fprintf( m_fp, "                                                                      NON-PARTICLE-SORTS OUT OF TOLERANCE(300)\n" );
-    if ( Debug_Statistics::Get_DX8_Skin_Renders()>100 )
-  	  fprintf( m_fp, "                                                                      SKINS OUT OF TOLERANCE(100)\n" );
-  }
+	if ( flagSpikes )
+	{
+		if ( Debug_Statistics::Get_Draw_Calls()>2000 )
+			fprintf( m_fp, "																																			DRAWS OUT OF TOLERANCE(2000)\n" );
+		if ( Debug_Statistics::Get_Sorting_Polygons() > (onScreenParticleCount*2) + 300 )
+			fprintf( m_fp, "																																			NON-PARTICLE-SORTS OUT OF TOLERANCE(300)\n" );
+		if ( Debug_Statistics::Get_DX8_Skin_Renders()>100 )
+			fprintf( m_fp, "																																			SKINS OUT OF TOLERANCE(100)\n" );
+	}
 
 
 	//Object stats
 	UnsignedInt objCount = TheGameLogic->getObjectCount();
 	UnsignedInt objScreenCount = TheGameClient->getRenderedObjectCount();
 	fprintf( m_fp, "Objects: %d in world (%d onscreen)\n", objCount, objScreenCount );
-  if ( flagSpikes && objCount > 800 )
-  	fprintf( m_fp, "                                                                      OBJS OUT OF TOLERANCE(800)\n" );
+	if ( flagSpikes && objCount > 800 )
+		fprintf( m_fp, "																																			OBJS OUT OF TOLERANCE(800)\n" );
 
 	//AI stats
 	UnsignedInt numAI, numMoving, numAttacking, numWaitingForPath, overallFailedPathfinds;
 	TheGameLogic->getAIMetricsStatistics( &numAI, &numMoving, &numAttacking, &numWaitingForPath, &overallFailedPathfinds );
 	fprintf( m_fp, "\n" );
 	fprintf( m_fp, "AI Statistics:\n" );
-	fprintf( m_fp, "  Total AI Objects: %d\n", numAI );
-	fprintf( m_fp, "    -moving: %d\n", numMoving );
-	fprintf( m_fp, "    -attacking: %d\n", numAttacking );
-	fprintf( m_fp, "    -waiting for path: %d\n", numWaitingForPath );
-	fprintf( m_fp, "  Total failed pathfinds: %d\n", overallFailedPathfinds );
-  if ( flagSpikes && overallFailedPathfinds > 0 )
-  	fprintf( m_fp, "                                                                      FAILEDPATHFINDS OUT OF TOLERANCE(0)\n" );
+	fprintf( m_fp, "	Total AI Objects: %d\n", numAI );
+	fprintf( m_fp, "		-moving: %d\n", numMoving );
+	fprintf( m_fp, "		-attacking: %d\n", numAttacking );
+	fprintf( m_fp, "		-waiting for path: %d\n", numWaitingForPath );
+	fprintf( m_fp, "	Total failed pathfinds: %d\n", overallFailedPathfinds );
+	if ( flagSpikes && overallFailedPathfinds > 0 )
+		fprintf( m_fp, "																																			FAILEDPATHFINDS OUT OF TOLERANCE(0)\n" );
 	fprintf( m_fp, "\n" );
 
 	// Script stats
@@ -267,11 +267,11 @@ void StatDumpClass::dumpStats( Bool brief, Bool flagSpikes )
 	AsciiString slowScripts = TheScriptEngine->getStats(&timeLastFrame, &slowScript1, &slowScript2);
 	fprintf( m_fp, "\n" );
 	fprintf( m_fp, "Script Engine Statistics:\n" );
-	fprintf( m_fp, "  Total time last frame: %.5f msec\n", timeLastFrame*1000 );
-	fprintf( m_fp, "    -Slowest 2 scripts      %s\n", slowScripts.str() );
-	fprintf( m_fp, "    -Slowest 2 script times %.5f msec, %.5f msec \n", slowScript1*1000, slowScript2*1000 );
-  if ( flagSpikes && slowScript1*1000 > 0.2f || slowScript2*1000 > 0.2f )
-  	fprintf( m_fp, "                                                                      SLOW SCRIPT OUT OF TOLERANCE(0.2)\n" );
+	fprintf( m_fp, "	Total time last frame: %.5f msec\n", timeLastFrame*1000 );
+	fprintf( m_fp, "		-Slowest 2 scripts			%s\n", slowScripts.str() );
+	fprintf( m_fp, "		-Slowest 2 script times %.5f msec, %.5f msec \n", slowScript1*1000, slowScript2*1000 );
+	if ( flagSpikes && slowScript1*1000 > 0.2f || slowScript2*1000 > 0.2f )
+		fprintf( m_fp, "																																			SLOW SCRIPT OUT OF TOLERANCE(0.2)\n" );
 	fprintf( m_fp, "\n" );
 
 
@@ -280,8 +280,8 @@ void StatDumpClass::dumpStats( Bool brief, Bool flagSpikes )
 	double gcoTimeThisFrameTotal, gcoTimeThisFrameAvg;
 	ThePartitionManager->getPMStats(gcoTimeThisFrameTotal, gcoTimeThisFrameAvg);
 	fprintf(m_fp, "Partition Manager Statistics:\n");
-	fprintf(m_fp, "  Total time for object scans this frame is %.5f msec\n", gcoTimeThisFrameTotal);
-	fprintf(m_fp, "  Avg time per object scan this frame is %.5f msec\n", gcoTimeThisFrameAvg);
+	fprintf(m_fp, "	Total time for object scans this frame is %.5f msec\n", gcoTimeThisFrameTotal);
+	fprintf(m_fp, "	Avg time per object scan this frame is %.5f msec\n", gcoTimeThisFrameAvg);
 	fprintf( m_fp, "\n" );
 
 	// setup texture stats
@@ -289,45 +289,45 @@ void StatDumpClass::dumpStats( Bool brief, Bool flagSpikes )
 
 	fprintf( m_fp, "Video Statistics:\n" );
 	//Particle system stats
-	fprintf( m_fp, "  Particle Systems: %d\n", TheParticleSystemManager->getParticleSystemCount() );
+	fprintf( m_fp, "	Particle Systems: %d\n", TheParticleSystemManager->getParticleSystemCount() );
 	Int totalParticles = TheParticleSystemManager->getParticleCount();
-	fprintf( m_fp, "  Particles: %d in world (%d onscreen)\n", totalParticles, onScreenParticleCount );
+	fprintf( m_fp, "	Particles: %d in world (%d onscreen)\n", totalParticles, onScreenParticleCount );
 
-  if ( flagSpikes && totalParticles > TheGlobalData->m_maxParticleCount - 10 )
-  	fprintf( m_fp, "                                                                      PARTICLES OUT OF TOLERANCE(CAP-10)\n" );
-  if ( flagSpikes && onScreenParticleCount > TheGlobalData->m_maxParticleCount - 10 )
-  	fprintf( m_fp, "                                                                      ON_SCREEN_PARTICLES OUT OF TOLERANCE(CAP-10)\n" );
+	if ( flagSpikes && totalParticles > TheGlobalData->m_maxParticleCount - 10 )
+		fprintf( m_fp, "																																			PARTICLES OUT OF TOLERANCE(CAP-10)\n" );
+	if ( flagSpikes && onScreenParticleCount > TheGlobalData->m_maxParticleCount - 10 )
+		fprintf( m_fp, "																																			ON_SCREEN_PARTICLES OUT OF TOLERANCE(CAP-10)\n" );
 
 
 	// polygons this frame	
 	Int polyPerFrame = Debug_Statistics::Get_DX8_Polygons();
 	Int polyPerSecond = (Int)(polyPerFrame * fps);
-	fprintf( m_fp, "  Polygons: %d per frame (%d per second)\n", polyPerFrame, polyPerSecond );
+	fprintf( m_fp, "	Polygons: %d per frame (%d per second)\n", polyPerFrame, polyPerSecond );
 
 	// vertices this frame
-	fprintf( m_fp, "  Vertices: %d\n", Debug_Statistics::Get_DX8_Vertices() );
+	fprintf( m_fp, "	Vertices: %d\n", Debug_Statistics::Get_DX8_Vertices() );
 
 	//
 	// I'm adjusting the texture memory usage counter by subtracting 
 	// out the terrain alpha texture (since it's really == terrain texture).
 	//
-	fprintf( m_fp, "  Video RAM: %d\n", Debug_Statistics::Get_Record_Texture_Size() - 1376256 );
+	fprintf( m_fp, "	Video RAM: %d\n", Debug_Statistics::Get_Record_Texture_Size() - 1376256 );
 
 	// terrain stats
-	fprintf( m_fp, "  3-Way Blends: %d/%d, \n Shoreline Blends: %d/%d\n", TheTerrainRenderObject->getNumExtraBlendTiles(TRUE),TheTerrainRenderObject->getNumExtraBlendTiles(FALSE), TheTerrainRenderObject->getNumShoreLineTiles(TRUE),TheTerrainRenderObject->getNumShoreLineTiles(FALSE));
-  if ( flagSpikes && TheTerrainRenderObject->getNumExtraBlendTiles(TRUE) > 2000 )
-  	fprintf( m_fp, "                                                                      3-WAYS OUT OF TOLERANCE(2000)\n" );
-  if ( flagSpikes && TheTerrainRenderObject->getNumShoreLineTiles(TRUE) > 2000 )
-  	fprintf( m_fp, "                                                                      SHORELINES OUT OF TOLERANCE(2000)\n" );
+	fprintf( m_fp, "	3-Way Blends: %d/%d, \n Shoreline Blends: %d/%d\n", TheTerrainRenderObject->getNumExtraBlendTiles(TRUE),TheTerrainRenderObject->getNumExtraBlendTiles(FALSE), TheTerrainRenderObject->getNumShoreLineTiles(TRUE),TheTerrainRenderObject->getNumShoreLineTiles(FALSE));
+	if ( flagSpikes && TheTerrainRenderObject->getNumExtraBlendTiles(TRUE) > 2000 )
+		fprintf( m_fp, "																																			3-WAYS OUT OF TOLERANCE(2000)\n" );
+	if ( flagSpikes && TheTerrainRenderObject->getNumShoreLineTiles(TRUE) > 2000 )
+		fprintf( m_fp, "																																			SHORELINES OUT OF TOLERANCE(2000)\n" );
 
 	fprintf( m_fp, "\n" );
 
 #if defined(_DEBUG) || defined(_INTERNAL)
-  if ( ! beBrief )
-  {
-    TheAudio->audioDebugDisplay( NULL, NULL, m_fp );
-	  fprintf( m_fp, "\n" );
-  }
+	if ( ! beBrief )
+	{
+		TheAudio->audioDebugDisplay( NULL, NULL, m_fp );
+		fprintf( m_fp, "\n" );
+	}
 #endif
 	
 #ifdef MEMORYPOOL_DEBUG
@@ -340,12 +340,12 @@ void StatDumpClass::dumpStats( Bool brief, Bool flagSpikes )
 
 	fprintf( m_fp, "%s", TheSubsystemList->dumpTimesForAll().str());
 
-  if ( ! beBrief )
-  {
-	  fprintf( m_fp, "----------------------------------------------------------------\n" );
-	  fprintf( m_fp, "END -- Frame %d\n", TheGameLogic->getFrame() );
-	  fprintf( m_fp, "----------------------------------------------------------------\n" );
-  }
+	if ( ! beBrief )
+	{
+		fprintf( m_fp, "----------------------------------------------------------------\n" );
+		fprintf( m_fp, "END -- Frame %d\n", TheGameLogic->getFrame() );
+		fprintf( m_fp, "----------------------------------------------------------------\n" );
+	}
 	fprintf( m_fp, "\n\n" );
 	fflush(m_fp);
 }
@@ -474,12 +474,12 @@ W3DDisplay::~W3DDisplay()
 
 Bool IS_FOUR_BY_THREE_ASPECT( Real x, Real y )
 {
-  if ( y == 0 )
-    return FALSE;
-  
-  Real aspectRatio = fabs( x / y ); 
-  return (( aspectRatio > 1.332f) && ( aspectRatio < 1.334f));
-  
+	if ( y == 0 )
+		return FALSE;
+	
+	Real aspectRatio = fabs( x / y ); 
+	return (( aspectRatio > 1.332f) && ( aspectRatio < 1.334f));
+
 }
 
 
@@ -507,7 +507,7 @@ Int W3DDisplay::getDisplayModeCount(void)
 	{
 		// Is this the resolution we are looking for?
 		if (resolutions[res].BitDepth >= 24 && resolutions[res].Width >= MIN_DISPLAY_RESOLUTION_X 
-      && IS_FOUR_BY_THREE_ASPECT( (Real)resolutions[res].Width, (Real)resolutions[res].Height ) )	//only accept 4:3 aspect ratio modes.
+			&& IS_FOUR_BY_THREE_ASPECT( (Real)resolutions[res].Width, (Real)resolutions[res].Height ) )	//only accept 4:3 aspect ratio modes.
 		{	
 			numResolutions++;
 		}
@@ -526,7 +526,7 @@ void W3DDisplay::getDisplayModeDescription(Int modeIndex, Int *xres, Int *yres, 
 	{
 		// Is this the resolution we are looking for?
 		if ( resolutions[res].BitDepth >= 24 && resolutions[res].Width >= MIN_DISPLAY_RESOLUTION_X 
-      && IS_FOUR_BY_THREE_ASPECT( (Real)resolutions[res].Width, (Real)resolutions[res].Height ) )	//only accept 4:3 aspect ratio modes.
+			&& IS_FOUR_BY_THREE_ASPECT( (Real)resolutions[res].Width, (Real)resolutions[res].Height ) )	//only accept 4:3 aspect ratio modes.
 		{	
 			if (numResolutions == modeIndex)
 			{	//found the mode
@@ -1697,16 +1697,16 @@ AGAIN:
 		TheStatDump.dumpStats( FALSE, TRUE );
 		TheWritableGlobalData->m_dumpPerformanceStatistics = FALSE;
 	}
-  //The <= GAME_REPLAY essentially means, GAME_SINGLE_PLAYER || GAME_LAN || GAME_SKIRMISH || GAME_REPLAY
-  else if ( TheGlobalData->m_dumpStatsAtInterval && TheGameLogic->getGameMode() <= GAME_REPLAY )
-  {
-    Int interval = TheGlobalData->m_statsInterval;
-    if ( TheGameLogic->getFrame() > 0 && (TheGameLogic->getFrame() % interval) == 0 )
-    {
-  	  TheStatDump.dumpStats( TRUE, TRUE );
-    	TheInGameUI->message( UnicodeString( L"-stats is running, at interval: %d." ), TheGlobalData->m_statsInterval );
-    }
-  }
+	//The <= GAME_REPLAY essentially means, GAME_SINGLE_PLAYER || GAME_LAN || GAME_SKIRMISH || GAME_REPLAY
+	else if ( TheGlobalData->m_dumpStatsAtInterval && TheGameLogic->getGameMode() <= GAME_REPLAY )
+	{
+		Int interval = TheGlobalData->m_statsInterval;
+		if ( TheGameLogic->getFrame() > 0 && (TheGameLogic->getFrame() % interval) == 0 )
+		{
+			TheStatDump.dumpStats( TRUE, TRUE );
+			TheInGameUI->message( UnicodeString( L"-stats is running, at interval: %d." ), TheGlobalData->m_statsInterval );
+		}
+	}
 
 
 
@@ -1846,14 +1846,14 @@ AGAIN:
 			//trying to refresh the visible terrain geometry.
 //			if(TheGlobalData->m_loadScreenRender != TRUE)
 				updateViews();
-     		TheParticleSystemManager->update();//LORENZEN AND WILCZYNSKI MOVED THIS FROM ITS NATIVE POSITION, ABOVE
-                                           //FOR THE PURPOSE OF LETTING THE PARTICLE SYSTEM LOOK UP THE RENDER OBJECT"S
-                                           //TRANSFORM MATRIX, WHILE IT IS STILL VALID (HAVING DONE ITS CLIENT TRANSFORMS
-                                           //BUT NOT YET RESETTING TOT HE LOGICAL TRANSFORM)
-                                           //THE RESULT IS THAT PARTICLESYSTEMS LINKED TO BONES IN DRAWABLES.OBJECTS
-                                           //MOVE WITH THE CLIENT TRANSFORMS, NOW.
-                                           //REVOLUTIONARY!
-                                           //-LORENZEN
+		 		TheParticleSystemManager->update();//LORENZEN AND WILCZYNSKI MOVED THIS FROM ITS NATIVE POSITION, ABOVE
+																					 //FOR THE PURPOSE OF LETTING THE PARTICLE SYSTEM LOOK UP THE RENDER OBJECT"S
+																					 //TRANSFORM MATRIX, WHILE IT IS STILL VALID (HAVING DONE ITS CLIENT TRANSFORMS
+																					 //BUT NOT YET RESETTING TOT HE LOGICAL TRANSFORM)
+																					 //THE RESULT IS THAT PARTICLESYSTEMS LINKED TO BONES IN DRAWABLES.OBJECTS
+																					 //MOVE WITH THE CLIENT TRANSFORMS, NOW.
+																					 //REVOLUTIONARY!
+																					 //-LORENZEN
 
 
 			if (TheWaterRenderObj && TheGlobalData->m_waterType == 2)
@@ -1872,11 +1872,11 @@ AGAIN:
 		Int numRenderTargetVertices=Debug_Statistics::Get_DX8_Vertices();
 
 		// start render block
-		#if defined(_ALLOW_DEBUG_CHEATS_IN_RELEASE)
-    if ( (TheGameLogic->getFrame() % 30 == 1) || ( ! ( !TheGameLogic->isGamePaused() && TheGlobalData->m_TiVOFastMode) ) )
-		#else
-	    if ( (TheGameLogic->getFrame() % 30 == 1) || ( ! (!TheGameLogic->isGamePaused() && TheGlobalData->m_TiVOFastMode && TheGameLogic->isInReplayGame())) )
-    #endif
+	#if defined(_ALLOW_DEBUG_CHEATS_IN_RELEASE)
+		if ( (TheGameLogic->getFrame() % 30 == 1) || ( ! ( !TheGameLogic->isGamePaused() && TheGlobalData->m_TiVOFastMode) ) )
+	#else
+		if ( (TheGameLogic->getFrame() % 30 == 1) || ( ! (!TheGameLogic->isGamePaused() && TheGlobalData->m_TiVOFastMode && TheGameLogic->isInReplayGame())) )
+	#endif
 		{
 			//USE_PERF_TIMER(BigAssRenderLoop)
 			static Bool couldRender = true;

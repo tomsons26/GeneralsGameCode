@@ -135,7 +135,7 @@ ActiveBodyModuleData::ActiveBodyModuleData()
 //-------------------------------------------------------------------------------------------------
 void ActiveBodyModuleData::buildFieldParse(MultiIniFieldParse& p) 
 {
-  ModuleData::buildFieldParse(p);
+	ModuleData::buildFieldParse(p);
 
 	static const FieldParse dataFieldParse[] = 
 	{
@@ -143,7 +143,7 @@ void ActiveBodyModuleData::buildFieldParse(MultiIniFieldParse& p)
 		{ "InitialHealth",				INI::parseReal,						NULL,		offsetof( ActiveBodyModuleData, m_initialHealth ) },
 		{ 0, 0, 0, 0 }
 	};
-  p.add(dataFieldParse);
+	p.add(dataFieldParse);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -172,6 +172,7 @@ ActiveBody::ActiveBody( Thing *thing, const ModuleData* moduleData ) :
 	validateArmorAndDamageFX();
 	// start us in the right state
 	setCorrectDamageState();
+
 }
 
 //-------------------------------------------------------------------------------------------------

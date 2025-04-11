@@ -54,7 +54,7 @@ FireWeaponUpdateModuleData::FireWeaponUpdateModuleData()
 
 	static const FieldParse dataFieldParse[] = 
 	{
-		{ "Weapon",	INI::parseWeaponTemplate,	NULL, offsetof( FireWeaponUpdateModuleData, m_weaponTemplate ) },
+		{ "Weapon",								INI::parseWeaponTemplate,				NULL, offsetof( FireWeaponUpdateModuleData, m_weaponTemplate ) },
 		{ 0, 0, 0, 0 }
 	};
   p.add(dataFieldParse);

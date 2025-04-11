@@ -247,22 +247,22 @@ void EMPUpdate::doDisableAttack( void )
       
 
 
-      if ( !curVictim->isKindOf( KINDOF_VEHICLE ) && !curVictim->isKindOf(KINDOF_STRUCTURE) && !curVictim->isKindOf(KINDOF_SPAWNS_ARE_THE_WEAPONS) )
+			if ( !curVictim->isKindOf( KINDOF_VEHICLE ) && !curVictim->isKindOf(KINDOF_STRUCTURE) && !curVictim->isKindOf(KINDOF_SPAWNS_ARE_THE_WEAPONS) )
 			{
 				//DONT DISABLE PEOPLE, EXCEPT FOR STINGER SOLDIERS
 				continue;
 			}
 			else if ( curVictim->isKindOf( KINDOF_AIRCRAFT ) && curVictim->isAirborneTarget() )// is in the sky
-      {
-        // WITHIN THE SET OF ALL FLYING THINGS, WE WANT TO EXEMPT SUPERWEAPON TRANSPORTS
-//        if ( curVictim->isKindOf( KINDOF_TRANSPORT ) )                  // is transport kindof
-//          if ( curVictim->getContain() )                                // does carry stuff
-//            if ( curVictim->getContain()->getContainCount() > 0 )     // is carrying something
-//              if ( ! curVictim->isKindOf( KINDOF_PRODUCED_AT_HELIPAD ) )  // but not a helicopter
-//                continue;
+			{
+				// WITHIN THE SET OF ALL FLYING THINGS, WE WANT TO EXEMPT SUPERWEAPON TRANSPORTS
+//				if ( curVictim->isKindOf( KINDOF_TRANSPORT ) )									// is transport kindof
+//					if ( curVictim->getContain() )																// does carry stuff
+//						if ( curVictim->getContain()->getContainCount() > 0 )		 // is carrying something
+//							if ( ! curVictim->isKindOf( KINDOF_PRODUCED_AT_HELIPAD ) )	// but not a helicopter
+//								continue;
 
-        if ( curVictim->isKindOf( KINDOF_EMP_HARDENED ) ) // self-explanitory
-          continue;
+				if ( curVictim->isKindOf( KINDOF_EMP_HARDENED ) ) // self-explanitory
+					continue;
 
 				curVictim->kill();// @todo this should use some sort of DEADSTICK DIE or something...
 				Drawable *drw = curVictim->getDrawable();
@@ -306,7 +306,7 @@ void EMPUpdate::doDisableAttack( void )
 					Real victimVolume = victimFootprintArea * MIN(victimHeight, 10.0f);
 
 					UnsignedInt emitterCount = MAX(15, REAL_TO_INT_CEIL(data->m_sparksPerCubicFoot * victimVolume));
-			
+
 					for (Int e = 0 ; e < emitterCount; ++e)
 					{
 
@@ -346,7 +346,7 @@ void EMPUpdate::doDisableAttack( void )
 	//Handle edge case when the EMP explodes, but "misses" the intended target.
 	if( intendedVictim && !intendedVictimProcessed && intendedVictim->isKindOf( KINDOF_AIRCRAFT ) )
 	{
-    if( !intendedVictim->isKindOf( KINDOF_EMP_HARDENED ) )
+		if( !intendedVictim->isKindOf( KINDOF_EMP_HARDENED ) )
 		{
 			//Victim position
 			Coord3D coord;
@@ -418,7 +418,7 @@ void EMPUpdate::loadPostProcess( void )
 LeafletDropBehavior::LeafletDropBehavior( Thing *thing, const ModuleData* moduleData ) : UpdateModule( thing, moduleData )
 {
 
-  m_fxFired = FALSE;
+	m_fxFired = FALSE;
 	//s_lastInstanceSpunPositive = !s_lastInstanceSpunPositive; //TOGGLES STATIC BOOL 
 
 	const LeafletDropBehaviorModuleData *data = getLeafletDropBehaviorModuleData();
@@ -427,7 +427,7 @@ LeafletDropBehavior::LeafletDropBehavior( Thing *thing, const ModuleData* module
 		//SANITY
 		DEBUG_ASSERTCRASH( TheGameLogic, ("LeafletDropBehavior::LeafletDropBehavior - TheGameLogic is NULL\n" ) );
 		UnsignedInt now = TheGameLogic->getFrame();
-    m_startFrame = now + data->m_delayFrames;
+		m_startFrame = now + data->m_delayFrames;
 		
 		return;
 	}
@@ -449,40 +449,40 @@ LeafletDropBehavior::~LeafletDropBehavior( void )
 UpdateSleepTime LeafletDropBehavior::update( void )
 {
 
-  if ( ! m_fxFired )
-  {
-    // start shoveling out those leaflets, boys.
-	  const LeafletDropBehaviorModuleData *data = getLeafletDropBehaviorModuleData();
-	  const ParticleSystemTemplate *tmp = data->m_leafletFXParticleSystem;
-	  if (tmp)
-	  {
-		  ParticleSystem *sys = TheParticleSystemManager->createParticleSystem(tmp);
-		  if (sys)
-			  sys->attachToObject(getObject());
-    }
+	if ( ! m_fxFired )
+	{
+		// start shoveling out those leaflets, boys.
+		const LeafletDropBehaviorModuleData *data = getLeafletDropBehaviorModuleData();
+		const ParticleSystemTemplate *tmp = data->m_leafletFXParticleSystem;
+		if (tmp)
+		{
+			ParticleSystem *sys = TheParticleSystemManager->createParticleSystem(tmp);
+			if (sys)
+				sys->attachToObject(getObject());
+		}
 
-    m_fxFired = TRUE; // hey, at least we tried.
-  }
+		m_fxFired = TRUE; // hey, at least we tried.
+	}
 
 
-  if( TheGameLogic->getFrame() < m_startFrame )
-  {
+	if( TheGameLogic->getFrame() < m_startFrame )
+	{
 	//	TheGameLogic->destroyObject( getObject() );
-    return UPDATE_SLEEP_FOREVER;
-  }
+		return UPDATE_SLEEP_FOREVER;
+	}
 
-  doDisableAttack();
+	doDisableAttack();
 
-  return UPDATE_SLEEP_NONE;
+	return UPDATE_SLEEP_NONE;
 }
 
 //-------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------
 void LeafletDropBehavior::onDie( const DamageInfo *damageInfo )
 {
-  // the dieModule callback
+	// the dieModule callback
 
-  doDisableAttack();
+	doDisableAttack();
 
 }
 
@@ -516,12 +516,12 @@ void LeafletDropBehavior::doDisableAttack( void )
 	{
 		if ( curVictim != object)
 		{
-      if ( ! (curVictim->isKindOf( KINDOF_INFANTRY) || curVictim->isKindOf( KINDOF_VEHICLE ) ) ) // both commuters and pedestrians
+			if ( ! (curVictim->isKindOf( KINDOF_INFANTRY) || curVictim->isKindOf( KINDOF_VEHICLE ) ) ) // both commuters and pedestrians
 				continue;
 
-      if ( curVictim->getRelationship( object ) != ENEMIES ) // only enemies
+			if ( curVictim->getRelationship( object ) != ENEMIES ) // only enemies
 				continue;
-    
+
 			//Disable the target for a specified amount of time.
 			curVictim->setDisabledUntil( DISABLED_EMP, TheGameLogic->getFrame() + data->m_disabledDuration );
 
@@ -551,7 +551,7 @@ void LeafletDropBehavior::xfer( Xfer *xfer )
 	XferVersion version = currentVersion;
 	xfer->xferVersion( &version, currentVersion );
 
-  xfer->xferUnsignedInt( &m_startFrame );
+	xfer->xferUnsignedInt( &m_startFrame );
 
 }  // end xfer
 
@@ -562,24 +562,4 @@ void LeafletDropBehavior::loadPostProcess( void )
 {
 
 }  // end loadPostProcess
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

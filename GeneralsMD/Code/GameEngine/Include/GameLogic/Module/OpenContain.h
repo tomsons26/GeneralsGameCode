@@ -127,7 +127,7 @@ public:
 	virtual void onBodyDamageStateChange( const DamageInfo* damageInfo, 
 																				BodyDamageType oldState, 
 																				BodyDamageType newState){};  ///< state change callback
- 
+
 
 	// our object changed position... react as appropriate.
 	virtual void containReactToTransformChange();
@@ -139,14 +139,14 @@ public:
 	///< if my object gets selected, then my visible passengers should, too
 	///< this gets called from
 	virtual void clientVisibleContainedFlashAsSelected() {}; 
- 
+
 	virtual const Player* getApparentControllingPlayer(const Player* observingPlayer) const { return NULL; }
 	virtual void recalcApparentControllingPlayer() { }
 		
 	virtual void onContaining( Object *obj, Bool wasSelected );		///< object now contains 'obj'
 	virtual void onRemoving( Object *obj );			///< object no longer contains 'obj'
 	virtual void onSelling();///< Container is being sold.  Open responds by kicking people out
- 
+
 	virtual void orderAllPassengersToExit( CommandSourceType commandSource, Bool instantly ); ///< All of the smarts of exiting are in the passenger's AIExit. removeAllFrommContain is a last ditch system call, this is the game Evacuate
 	virtual void orderAllPassengersToIdle( CommandSourceType commandSource ); ///< Just like it sounds
 	virtual void orderAllPassengersToHackInternet( CommandSourceType ); ///< Just like it sounds
@@ -163,9 +163,9 @@ public:
 	virtual Bool isEnclosingContainerFor( const Object *obj ) const;	///< Does this type of Contain Visibly enclose its contents?
 	virtual Bool isPassengerAllowedToFire( ObjectID id = INVALID_ID ) const;	///< Hey, can I shoot out of this container?
 
-  virtual void setPassengerAllowedToFire( Bool permission = TRUE ) { m_passengerAllowedToFire = permission; }	///< Hey, can I shoot out of this container?
+	virtual void setPassengerAllowedToFire( Bool permission = TRUE ) { m_passengerAllowedToFire = permission; }	///< Hey, can I shoot out of this container?
 
-  virtual void setOverrideDestination( const Coord3D * ){} ///< Instead of falling peacefully towards a clear spot, I will now aim here
+	virtual void setOverrideDestination( const Coord3D * ){} ///< Instead of falling peacefully towards a clear spot, I will now aim here
 	virtual Bool isDisplayedOnControlBar() const {return FALSE;}///< Does this container display its contents on the ControlBar?
 	virtual Int getExtraSlotsInUse( void ) { return 0; }
 	virtual Bool isKickOutOnCapture(){ return TRUE; }///< By default, yes, all contain modules kick passengers out on capture
@@ -206,8 +206,8 @@ public:
 	virtual Bool isRiderChangeContain() const { return FALSE; }
 	virtual Bool isSpecialZeroSlotContainer() const { return false; }
 	virtual Bool isImmuneToClearBuildingAttacks() const { return true; }
-  virtual Bool isSpecialOverlordStyleContainer() const { return false; }
-  virtual Bool isAnyRiderAttacking( void ) const;
+	virtual Bool isSpecialOverlordStyleContainer() const { return false; }
+	virtual Bool isAnyRiderAttacking( void ) const;
 
 	/**
 		this is used for containers that must do something to allow people to enter or exit...
@@ -227,10 +227,10 @@ public:
 
 	virtual void enableLoadSounds( Bool enable ) { m_loadSoundsEnabled = enable; }
 
-  Real getDamagePercentageToUnits( void );
-  virtual Object* getClosestRider ( const Coord3D *pos );
+	Real getDamagePercentageToUnits( void );
+	virtual Object* getClosestRider ( const Coord3D *pos );
 
-  virtual void setEvacDisposition( EvacDisposition disp ) {};
+	virtual void setEvacDisposition( EvacDisposition disp ) {};
 protected:
 
 	virtual void monitorConditionChanges( void );				///< check to see if we need to update our occupant postions from a model change or anything else
@@ -282,7 +282,7 @@ private:
 	Coord3D							m_rallyPoint;												///< Where units should move to after they have reached the "natural" rally point
 	Bool								m_rallyPointExists;										///< Only move to the rally point if this is true
 	Bool								m_loadSoundsEnabled;								///< Don't serialize -- used for disabling sounds during payload creation.
-  Bool                m_passengerAllowedToFire;      ///< Newly promoted from the template data to the module for upgrade overriding access
+	Bool				m_passengerAllowedToFire;      ///< Newly promoted from the template data to the module for upgrade overriding access
 };
 
 #endif  // end __OPENCONTAIN_H_

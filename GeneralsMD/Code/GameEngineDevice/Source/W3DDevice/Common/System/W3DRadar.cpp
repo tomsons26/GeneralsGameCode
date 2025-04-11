@@ -696,7 +696,7 @@ void W3DRadar::renderObjectList( const RadarObject *listHead, TextureClass *text
 		if( obj->testStatus( OBJECT_STATUS_STEALTHED ) )
 		{
       if ( ThePlayerList->getLocalPlayer()->getRelationship(obj->getTeam()) == ENEMIES )
-        if( !obj->testStatus( OBJECT_STATUS_DETECTED ) && !obj->testStatus( OBJECT_STATUS_DISGUISED ) )
+			if( !obj->testStatus( OBJECT_STATUS_DETECTED ) && !obj->testStatus( OBJECT_STATUS_DISGUISED ) )
 				  skip = TRUE;
 
 			UnsignedByte r, g, b, a;

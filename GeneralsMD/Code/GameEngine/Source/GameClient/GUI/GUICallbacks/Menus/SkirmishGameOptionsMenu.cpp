@@ -299,42 +299,42 @@ static const char superweaponRestrictionKey[] = "SuperweaponRestrict";
 
 Bool SkirmishPreferences::getSuperweaponRestricted(void) const
 {
-  const_iterator it = find(superweaponRestrictionKey);
-  if (it == end())
-  {
-    return false;
-  }
-  
-  return ( it->second.compareNoCase( "yes" ) == 0 );
+	const_iterator it = find(superweaponRestrictionKey);
+	if (it == end())
+	{
+		return false;
+	}
+	
+	return ( it->second.compareNoCase( "yes" ) == 0 );
 }
 
 void SkirmishPreferences::setSuperweaponRestricted( Bool superweaponRestricted )
 {
-  (*this)[superweaponRestrictionKey] = superweaponRestricted ? "Yes" : "No";
+	(*this)[superweaponRestrictionKey] = superweaponRestricted ? "Yes" : "No";
 }
 
 static const char startingCashKey[] = "StartingCash";
 Money SkirmishPreferences::getStartingCash(void) const
 {
-  const_iterator it = find(startingCashKey);
-  if (it == end())
-  {
-    return TheMultiplayerSettings->getDefaultStartingMoney();
-  }
-  
-  Money money;
-  money.deposit( strtoul( it->second.str(), NULL, 10 ), FALSE  );
-  
-  return money;
+	const_iterator it = find(startingCashKey);
+	if (it == end())
+	{
+		return TheMultiplayerSettings->getDefaultStartingMoney();
+	}
+	
+	Money money;
+	money.deposit( strtoul( it->second.str(), NULL, 10 ), FALSE	);
+	
+	return money;
 }
 
 void SkirmishPreferences::setStartingCash( const Money & startingCash )
 {
-  AsciiString option;
-  
-  option.format( "%d", startingCash.countMoney() );
-  
-  (*this)[startingCashKey] = option;
+	AsciiString option;
+	
+	option.format( "%d", startingCash.countMoney() );
+	
+	(*this)[startingCashKey] = option;
 }
 
 
@@ -356,8 +356,8 @@ Bool SkirmishPreferences::write(void)
 
 	(*this)["UserName"] = UnicodeStringToQuotedPrintable(TheSkirmishGameInfo->getConstSlot(0)->getName());
 
-  setStartingCash( TheSkirmishGameInfo->getStartingCash() );
-  setSuperweaponRestricted( TheSkirmishGameInfo->getSuperweaponRestriction() != 0 );
+	setStartingCash( TheSkirmishGameInfo->getStartingCash() );
+	setSuperweaponRestricted( TheSkirmishGameInfo->getSuperweaponRestriction() != 0 );
 
 	setSlotList();
 
@@ -834,12 +834,12 @@ void updateMapStartSpots( GameInfo *myGame, GameWindow *buttonMapStartPositions[
 	if (it == TheMapCache->end())
 	{
 		for (Int i = 0; i < MAX_SLOTS; ++i)
-    {
-      if ( buttonMapStartPositions[i] != NULL )
-      {
-  			buttonMapStartPositions[i]->winHide(TRUE);
-      }
-    }
+		{
+			if ( buttonMapStartPositions[i] != NULL )
+			{
+				buttonMapStartPositions[i]->winHide(TRUE);
+			}
+		}
 		return;
 	}
 	MapMetaData mmd = it->second;
@@ -847,19 +847,19 @@ void updateMapStartSpots( GameInfo *myGame, GameWindow *buttonMapStartPositions[
 	Int i = 0;
 	for(; i < MAX_SLOTS; ++i)
 	{
-    if ( buttonMapStartPositions[i] != NULL )
-    {
-		  GadgetButtonSetText(buttonMapStartPositions[i], UnicodeString::TheEmptyString);
-		  if (!onLoadScreen)
-		  {
-			  buttonMapStartPositions[i]->winSetTooltip(TheGameText->fetch("TOOLTIP:StartPosition"));
-		  }
-    }
+		if ( buttonMapStartPositions[i] != NULL )
+		{
+			GadgetButtonSetText(buttonMapStartPositions[i], UnicodeString::TheEmptyString);
+			if (!onLoadScreen)
+			{
+				buttonMapStartPositions[i]->winSetTooltip(TheGameText->fetch("TOOLTIP:StartPosition"));
+			}
+		}
 	}
 	for( i = 0; i < MAX_SLOTS; ++i)
 	{
-    if ( buttonMapStartPositions[i] == NULL )
-      continue;
+		if ( buttonMapStartPositions[i] == NULL )
+			continue;
 
 		GameSlot *gs =myGame->getSlot(i);
 		if(onLoadScreen)
@@ -1029,36 +1029,36 @@ static void handleTeamSelection(int index)
 
 static void handleStartingCashSelection()
 {
-  GameInfo *myGame = TheSkirmishGameInfo;
-  
-  if (myGame)
-  {
-    Int selIndex;
-    GadgetComboBoxGetSelectedPos(comboBoxStartingCash, &selIndex);
+	GameInfo *myGame = TheSkirmishGameInfo;
+	
+	if (myGame)
+	{
+		Int selIndex;
+		GadgetComboBoxGetSelectedPos(comboBoxStartingCash, &selIndex);
 
-    Money startingCash;
-    startingCash.deposit( (UnsignedInt)GadgetComboBoxGetItemData( comboBoxStartingCash, selIndex ), FALSE );
-    myGame->setStartingCash( startingCash );
-  }
+		Money startingCash;
+		startingCash.deposit( (UnsignedInt)GadgetComboBoxGetItemData( comboBoxStartingCash, selIndex ), FALSE );
+		myGame->setStartingCash( startingCash );
+	}
 }
 
 static void handleLimitSuperweaponsClick()
 {
-  GameInfo *myGame = TheSkirmishGameInfo;
-  
-  if (myGame)
-  {
-    // At the moment, 1 and 0 are the only choices supported in the GUI, though the system could
-    // support more.
-    if ( GadgetCheckBoxIsChecked( checkBoxLimitSuperweapons ) )
-    {
-      myGame->setSuperweaponRestriction( 1 );
-    }
-    else
-    {
-      myGame->setSuperweaponRestriction( 0 );
-    }
-  }
+	GameInfo *myGame = TheSkirmishGameInfo;
+	
+	if (myGame)
+	{
+		// At the moment, 1 and 0 are the only choices supported in the GUI, though the system could
+		// support more.
+		if ( GadgetCheckBoxIsChecked( checkBoxLimitSuperweapons ) )
+		{
+			myGame->setSuperweaponRestriction( 1 );
+		}
+		else
+		{
+			myGame->setSuperweaponRestriction( 0 );
+		}
+	}
 }
 
 
@@ -1076,8 +1076,8 @@ void InitSkirmishGameGadgets( void )
 	buttonResetID = TheNameKeyGenerator->nameToKey( AsciiString( "SkirmishGameOptionsMenu.wnd:ButtonReset" ) );
 	windowMapID = TheNameKeyGenerator->nameToKey( AsciiString( "SkirmishGameOptionsMenu.wnd:MapWindow" ) );
 	staticTextGameSpeedID = TheNameKeyGenerator->nameToKey( AsciiString( "SkirmishGameOptionsMenu.wnd:StaticTextGameSpeed" ) );
-  checkBoxLimitSuperweaponsID = TheNameKeyGenerator->nameToKey( AsciiString( "SkirmishGameOptionsMenu.wnd:CheckboxLimitSuperweapons" ) );
-  comboBoxStartingCashID = TheNameKeyGenerator->nameToKey( AsciiString( "SkirmishGameOptionsMenu.wnd:ComboBoxStartingCash" ) );
+	checkBoxLimitSuperweaponsID = TheNameKeyGenerator->nameToKey( AsciiString( "SkirmishGameOptionsMenu.wnd:CheckboxLimitSuperweapons" ) );
+	comboBoxStartingCashID = TheNameKeyGenerator->nameToKey( AsciiString( "SkirmishGameOptionsMenu.wnd:ComboBoxStartingCash" ) );
 
 	// Initialize the pointers to our gadgets
 	parentSkirmishGameOptions = TheWindowManager->winGetWindowFromId( NULL, parentSkirmishGameOptionsID );
@@ -1094,11 +1094,11 @@ void InitSkirmishGameGadgets( void )
 	DEBUG_ASSERTCRASH(buttonReset, ("Could not find the buttonReset"));
 	staticTextGameSpeed = TheWindowManager->winGetWindowFromId( parentSkirmishGameOptions, staticTextGameSpeedID );
 	DEBUG_ASSERTCRASH(staticTextGameSpeed, ("Could not find the staticTextGameSpeed"));
-  checkBoxLimitSuperweapons = TheWindowManager->winGetWindowFromId( parentSkirmishGameOptions, checkBoxLimitSuperweaponsID );
-  DEBUG_ASSERTCRASH(checkBoxLimitSuperweapons, ("Could not find the checkBoxLimitSuperweapons"));
-  comboBoxStartingCash = TheWindowManager->winGetWindowFromId( parentSkirmishGameOptions, comboBoxStartingCashID );
-  DEBUG_ASSERTCRASH(comboBoxStartingCash, ("Could not find the comboBoxStartingCash"));
-  PopulateStartingCashComboBox(comboBoxStartingCash, TheSkirmishGameInfo );
+	checkBoxLimitSuperweapons = TheWindowManager->winGetWindowFromId( parentSkirmishGameOptions, checkBoxLimitSuperweaponsID );
+	DEBUG_ASSERTCRASH(checkBoxLimitSuperweapons, ("Could not find the checkBoxLimitSuperweapons"));
+	comboBoxStartingCash = TheWindowManager->winGetWindowFromId( parentSkirmishGameOptions, comboBoxStartingCashID );
+	DEBUG_ASSERTCRASH(comboBoxStartingCash, ("Could not find the comboBoxStartingCash"));
+	PopulateStartingCashComboBox(comboBoxStartingCash, TheSkirmishGameInfo );
 
 	textEntryPlayerNameID = TheNameKeyGenerator->nameToKey( AsciiString( "SkirmishGameOptionsMenu.wnd:TextEntryPlayerName" ) );
   textEntryPlayerName = TheWindowManager->winGetWindowFromId( NULL, textEntryPlayerNameID );
@@ -1278,20 +1278,20 @@ void updateSkirmishGameOptions( void )
 		}
 	}
 
-  GadgetCheckBoxSetChecked( checkBoxLimitSuperweapons, TheSkirmishGameInfo->getSuperweaponRestriction() != 0 );
-  Int itemCount = GadgetComboBoxGetLength(comboBoxStartingCash);
-  Int index = 0;
-  for ( ; index < itemCount; index++ )
-  {
-    Int value  = (Int)GadgetComboBoxGetItemData(comboBoxStartingCash, index);
-    if ( value == TheSkirmishGameInfo->getStartingCash().countMoney() )
-    {
-      GadgetComboBoxSetSelectedPos(comboBoxStartingCash, index, TRUE);
-      break;
-    }
-  }
-  
-  DEBUG_ASSERTCRASH( index < itemCount, ("Could not find new starting cash amount %d in list", TheSkirmishGameInfo->getStartingCash().countMoney() ) );
+	GadgetCheckBoxSetChecked( checkBoxLimitSuperweapons, TheSkirmishGameInfo->getSuperweaponRestriction() != 0 );
+	Int itemCount = GadgetComboBoxGetLength(comboBoxStartingCash);
+	Int index = 0;
+	for ( ; index < itemCount; index++ )
+	{
+		Int value	= (Int)GadgetComboBoxGetItemData(comboBoxStartingCash, index);
+		if ( value == TheSkirmishGameInfo->getStartingCash().countMoney() )
+		{
+			GadgetComboBoxSetSelectedPos(comboBoxStartingCash, index, TRUE);
+			break;
+		}
+	}
+	
+	DEBUG_ASSERTCRASH( index < itemCount, ("Could not find new starting cash amount %d in list", TheSkirmishGameInfo->getStartingCash().countMoney() ) );
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1361,10 +1361,10 @@ void SkirmishGameOptionsMenuInit( WindowLayout *layout, void *userData )
 		TheSkirmishGameInfo->markPlayerAsPreorder(0);
 	}
 
-  TheSkirmishGameInfo->setStartingCash( prefs.getStartingCash() );
-  TheSkirmishGameInfo->setSuperweaponRestriction( prefs.getSuperweaponRestricted() ? 1 : 0 );
- 
-  TheSkirmishGameInfo->setMap(prefs.getPreferredMap());
+	TheSkirmishGameInfo->setStartingCash( prefs.getStartingCash() );
+	TheSkirmishGameInfo->setSuperweaponRestriction( prefs.getSuperweaponRestricted() ? 1 : 0 );
+
+	TheSkirmishGameInfo->setMap(prefs.getPreferredMap());
 	const MapMetaData *md = TheMapCache->findMap(TheSkirmishGameInfo->getMap());
 	if (!md)
 	{
@@ -1382,8 +1382,8 @@ void SkirmishGameOptionsMenuInit( WindowLayout *layout, void *userData )
 	std::map<AsciiString, MapMetaData>::iterator it = TheMapCache->find(lowerMap);
 	if (it != TheMapCache->end())
 	{
-    GadgetStaticTextSetText(textEntryMapDisplay, it->second.m_displayName);
-  }
+		GadgetStaticTextSetText(textEntryMapDisplay, it->second.m_displayName);
+	}
 
 	skirmishPositionStartSpots();
 	//updateSkirmishGameOptions();
@@ -1478,7 +1478,7 @@ void SkirmishGameOptionsMenuShutdown( WindowLayout *layout, void *userData )
 
 	// our shutdown is complete
 	TheTransitionHandler->reverse("SkirmishGameOptionsMenuFade");
-	
+
 }  // void SkirmishGameOptionsMenuShutdown( WindowLayout *layout, void *userData )
 
 //-------------------------------------------------------------------------------------------------
@@ -1589,35 +1589,35 @@ WindowMsgHandledType SkirmishGameOptionsMenuSystem( GameWindow *window, Unsigned
 			{
 				GameWindow *control = (GameWindow *)mData1;
 				Int controlID = control->winGetWindowId();
-        if ( controlID == comboBoxStartingCashID )
-        {
-          handleStartingCashSelection();
-        }
-        else
-        {
-				  for (Int i = 0; i < MAX_SLOTS; i++)
-				  {
-					  if (controlID == comboBoxColorID[i])
-					  {
-						  handleColorSelection(i);
-					  }
-					  else if (controlID == comboBoxPlayerTemplateID[i])
-					  {
-						  handlePlayerTemplateSelection(i);
-					  }
-					  else if (controlID == comboBoxTeamID[i])
-					  {
-						  handleTeamSelection(i);
-					  }
-            else if (controlID == comboBoxPlayerID[i])
-            {
-              handlePlayerSelection(i);
-            }
-				  }
-        }
+				if ( controlID == comboBoxStartingCashID )
+				{
+					handleStartingCashSelection();
+				}
+				else
+				{
+					for (Int i = 0; i < MAX_SLOTS; i++)
+					{
+						if (controlID == comboBoxColorID[i])
+						{
+							handleColorSelection(i);
+						}
+						else if (controlID == comboBoxPlayerTemplateID[i])
+						{
+							handlePlayerTemplateSelection(i);
+						}
+						else if (controlID == comboBoxTeamID[i])
+						{
+							handleTeamSelection(i);
+						}
+						else if (controlID == comboBoxPlayerID[i])
+						{
+							handlePlayerSelection(i);
+						}
+					}
+				}
 				sandboxOk = FALSE;
-        skirmishUpdateSlotList();
-        break;
+				skirmishUpdateSlotList();
+				break;
 			}// case GCM_SELECTED:
 		//-------------------------------------------------------------------------------------------------
 		case GSM_SLIDER_TRACK:
@@ -1674,8 +1674,8 @@ WindowMsgHandledType SkirmishGameOptionsMenuSystem( GameWindow *window, Unsigned
 				else if ( controlID == buttonStartID )
 				{
 					buttonPushed = TRUE;
-          SkirmishPreferences prefs;
-          prefs.write();
+					SkirmishPreferences prefs;
+					prefs.write();
 					startPressed();
 				}
 				else if ( controlID == buttonResetID )
@@ -1685,10 +1685,10 @@ WindowMsgHandledType SkirmishGameOptionsMenuSystem( GameWindow *window, Unsigned
 					stats.write();
 					populateSkirmishBattleHonors();
 				}
-        else if ( controlID == checkBoxLimitSuperweaponsID )
-        {
-          handleLimitSuperweaponsClick();
-        }
+				else if ( controlID == checkBoxLimitSuperweaponsID )
+				{
+					handleLimitSuperweaponsClick();
+				}
 				else
 				{
 					for (Int i = 0; i < MAX_SLOTS; i++)

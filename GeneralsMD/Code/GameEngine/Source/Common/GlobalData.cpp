@@ -457,8 +457,8 @@ GlobalData* GlobalData::m_theOriginal = NULL;
 	{ "SpecialPowerViewObject",			INI::parseAsciiString,	NULL,			offsetof( GlobalData, m_specialPowerViewObjectName ) },
 
 	{ "StandardPublicBone", INI::parseAsciiStringVectorAppend, NULL, offsetof(GlobalData, m_standardPublicBones) },
-	{ "ShowMetrics",								INI::parseBool,				   NULL,		offsetof( GlobalData, m_showMetrics ) },
-  { "DefaultStartingCash",				Money::parseMoneyAmount, NULL,		offsetof( GlobalData, m_defaultStartingCash ) },
+	{ "ShowMetrics",								INI::parseBool,				NULL,		offsetof( GlobalData, m_showMetrics ) },
+	{ "DefaultStartingCash",				Money::parseMoneyAmount, NULL,		offsetof( GlobalData, m_defaultStartingCash ) },
 
 // NOTE: m_doubleClickTimeMS is still in use, but we disallow setting it from the GameData.ini file. It is now set in the constructor according to the windows parameter.
 //	{ "DoubleClickTimeMS",									INI::parseUnsignedInt,			NULL, offsetof( GlobalData, m_doubleClickTimeMS ) },
@@ -500,7 +500,7 @@ GlobalData* GlobalData::m_theOriginal = NULL;
 	{ "ShroudOn",										INI::parseBool,				NULL,			offsetof( GlobalData, m_shroudOn ) },
 	{ "FogOfWarOn",										INI::parseBool,				NULL,			offsetof( GlobalData, m_fogOfWarOn ) },
 	{ "ShowCollisionExtents",				INI::parseBool,				NULL,			offsetof( GlobalData, m_showCollisionExtents ) },
-  { "ShowAudioLocations",  				INI::parseBool,				NULL,			offsetof( GlobalData, m_showAudioLocations ) },
+	{ "ShowAudioLocations",  				INI::parseBool,				NULL,			offsetof( GlobalData, m_showAudioLocations ) },
 	{ "DebugProjectileTileWidth",		INI::parseReal,				NULL,			offsetof( GlobalData, m_debugProjectileTileWidth) },
 	{ "DebugProjectileTileDuration",INI::parseInt,				NULL,			offsetof( GlobalData, m_debugProjectileTileDuration) },
 	{ "DebugProjectileTileColor",		INI::parseRGBColor,		NULL,			offsetof( GlobalData, m_debugProjectileTileColor) },
@@ -892,8 +892,8 @@ GlobalData::GlobalData()
 
 	m_hotKeyTextColor = GameMakeColor(255,255,0,255);
 
-  // THis is put ON ice until later
-  //  m_cheaterHasBeenSpiedIfMyLowestBitIsTrue = GameMakeColor(255,128,0,0);// orange, to the hacker's eye
+	// THis is put ON ice until later
+	//  m_cheaterHasBeenSpiedIfMyLowestBitIsTrue = GameMakeColor(255,128,0,0);// orange, to the hacker's eye
 
 	m_shroudColor.setFromInt( 0x00FFFFFF ) ;
 	m_clearAlpha = 255;
@@ -1043,41 +1043,41 @@ GlobalData::GlobalData()
 	
 #ifdef DUMP_PERF_STATS
 	m_dumpPerformanceStatistics = FALSE;
-  m_dumpStatsAtInterval = FALSE;
-  m_statsInterval = 30;      
+	m_dumpStatsAtInterval = FALSE;
+	m_statsInterval = 30;
 #endif
 
 	m_forceBenchmark = FALSE;	///<forces running of CPU detection benchmark, even on known cpu's.
 
 	m_keyboardCameraRotateSpeed = 0.1f;
 
-  // Set user data directory based on registry settings instead of INI parameters. This allows us to 
-  // localize the leaf name.
-  char temp[_MAX_PATH + 1];
-  if (::SHGetSpecialFolderPath(NULL, temp, CSIDL_PERSONAL, true))
-  {
-    AsciiString myDocumentsDirectory = temp;
-
-    if (myDocumentsDirectory.getCharAt(myDocumentsDirectory.getLength() -1) != '\\')
-      myDocumentsDirectory.concat( '\\' );
-
-    AsciiString leafName;
-    
-    if ( !GetStringFromRegistry( "", "UserDataLeafName", leafName ) )
-    {
-      // Use something, anything
-      // [MH] had to remove this, otherwise mapcache build step won't run... DEBUG_CRASH( ( "Could not find registry key UserDataLeafName; defaulting to \"Command and Conquer Generals Zero Hour Data\" " ) );
-      leafName = "Command and Conquer Generals Zero Hour Data";
-    }
-
-    myDocumentsDirectory.concat( leafName );
-    if (myDocumentsDirectory.getCharAt( myDocumentsDirectory.getLength() - 1) != '\\')
-      myDocumentsDirectory.concat( '\\' );
-
-    CreateDirectory(myDocumentsDirectory.str(), NULL);
-    m_userDataDir = myDocumentsDirectory;
-  }
+	// Set user data directory based on registry settings instead of INI parameters. This allows us to 
+	// localize the leaf name.
+	char temp[_MAX_PATH + 1];
+	if (::SHGetSpecialFolderPath(NULL, temp, CSIDL_PERSONAL, true))
+	{
+		AsciiString myDocumentsDirectory = temp;
 	
+		if (myDocumentsDirectory.getCharAt(myDocumentsDirectory.getLength() -1) != '\\')
+			myDocumentsDirectory.concat( '\\' );
+	
+		AsciiString leafName;
+
+		if ( !GetStringFromRegistry( "", "UserDataLeafName", leafName ) )
+		{
+			// Use something, anything
+			// [MH] had to remove this, otherwise mapcache build step won't run... DEBUG_CRASH( ( "Could not find registry key UserDataLeafName; defaulting to \"Command and Conquer Generals Zero Hour Data\" " ) );
+			leafName = "Command and Conquer Generals Zero Hour Data";
+		}
+	
+		myDocumentsDirectory.concat( leafName );
+		if (myDocumentsDirectory.getCharAt( myDocumentsDirectory.getLength() - 1) != '\\')
+			myDocumentsDirectory.concat( '\\' );
+	
+		CreateDirectory(myDocumentsDirectory.str(), NULL);
+		m_userDataDir = myDocumentsDirectory;
+	}
+
 	//-allAdvice feature
 	//m_allAdvice = FALSE;
 
@@ -1095,7 +1095,8 @@ GlobalData::~GlobalData( void )
 	if (m_weaponBonusSet)
 		m_weaponBonusSet->deleteInstance();
 
-	if( m_theOriginal == this )	{
+	if( m_theOriginal == this )
+	{
 		m_theOriginal = NULL;
 		TheWritableGlobalData = NULL;
 	}

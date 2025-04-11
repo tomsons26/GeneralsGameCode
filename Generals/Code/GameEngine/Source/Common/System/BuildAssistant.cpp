@@ -349,10 +349,10 @@ Object *BuildAssistant::buildObjectNow( Object *constructorObject, const ThingTe
 
 	}  // end if
 
- 	// Need to validate that we can make this in case someone fakes their CommandSet
+	// Need to validate that we can make this in case someone fakes their CommandSet
 	// A Null constructorObject is used by the script engine to cheat, so let it slide
- 	if( constructorObject && !isPossibleToMakeUnit(constructorObject, what) )
- 		return NULL;
+	if( constructorObject && !isPossibleToMakeUnit(constructorObject, what) )
+		return NULL;
 
 	// clear out any objects from the building area that are "auto-clearable" when building
 	clearRemovableForConstruction( what, pos, angle );
@@ -893,7 +893,6 @@ LegalBuildCode BuildAssistant::isLocationLegalToBuild( const Coord3D *worldPos,
 		{
 			return LBC_OBJECTS_IN_THE_WAY;
 		}
-
 	}  // end if
 
 	if (build->isKindOf(KINDOF_CANNOT_BUILD_NEAR_SUPPLIES) && TheGlobalData->m_SupplyBuildBorder > 0)
@@ -924,7 +923,7 @@ LegalBuildCode BuildAssistant::isLocationLegalToBuild( const Coord3D *worldPos,
 		}
 	}
 
-	// if clear path is requestsed check to see if the builder object can get there
+	// if clear path is requested check to see if the builder object can get there
 	if( BitIsSet( options, CLEAR_PATH ) && builderObject )
 	{
 		AIUpdateInterface *ai = builderObject->getAIUpdateInterface();

@@ -91,7 +91,7 @@ AIUpdateModuleData::AIUpdateModuleData()
 	m_surrenderDuration = LOGICFRAMES_PER_SECOND * 120;
 #endif
 
-  m_forbidPlayerCommands = FALSE;
+	m_forbidPlayerCommands = FALSE;
 	m_turretsLinked = FALSE;
 }
 
@@ -140,11 +140,11 @@ const LocomotorTemplateVector* AIUpdateModuleData::findLocomotorTemplateVector(L
 #ifdef ALLOW_SURRENDER
 		{ "SurrenderDuration",					INI::parseDurationUnsignedInt,		NULL, offsetof(AIUpdateModuleData, m_surrenderDuration) },
 #endif
-    { "ForbidPlayerCommands",				INI::parseBool,										NULL, offsetof(AIUpdateModuleData, m_forbidPlayerCommands) },
-    { "TurretsLinked",							INI::parseBool,										NULL, offsetof( AIUpdateModuleData, m_turretsLinked ) },
+		{ "ForbidPlayerCommands",				INI::parseBool,										NULL, offsetof(AIUpdateModuleData, m_forbidPlayerCommands) },
+		{ "TurretsLinked",							INI::parseBool,										NULL, offsetof( AIUpdateModuleData, m_turretsLinked ) },
 		{ 0, 0, 0, 0 }
 	};
-  p.add(dataFieldParse);
+	p.add(dataFieldParse);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -2362,12 +2362,12 @@ void AIUpdateInterface::setLocomotorGoalNone()
 //-------------------------------------------------------------------------------------------------
 Bool AIUpdateInterface::isDoingGroundMovement(void) const
 {
-  
-  if (getObject()->isDisabledByType( DISABLED_UNMANNED ) 
-   && getObject()->isKindOf( KINDOF_PRODUCED_AT_HELIPAD ) )
-  {
-    return TRUE; // an unmanned helicopter gets grounded, eventually.
-  }
+	
+	if (getObject()->isDisabledByType( DISABLED_UNMANNED ) 
+	 && getObject()->isKindOf( KINDOF_PRODUCED_AT_HELIPAD ) )
+	{
+		return TRUE; // an unmanned helicopter gets grounded, eventually.
+	}
 
 	if (m_locomotorSet.getValidSurfaces() == LOCOMOTORSURFACE_AIR) 
 	{
@@ -2607,16 +2607,16 @@ Bool AIUpdateInterface::isAllowedToRespondToAiCommands(const AICommandParms* par
 	if ((moodParms & MM_Controller_AI) && (moodParms & MM_Mood_Sleep) && (parms->m_cmd != AICMD_MOVE_TO_POSITION_EVEN_IF_SLEEPING))
 		return FALSE;
 
-  const AIUpdateModuleData *data = getAIUpdateModuleData();
+	const AIUpdateModuleData *data = getAIUpdateModuleData();
 
-  Bool forbidden = data->m_forbidPlayerCommands;
+	Bool forbidden = data->m_forbidPlayerCommands;
 
-  if ( parms->m_cmdSource == CMD_FROM_PLAYER && forbidden )
-    return FALSE; 
-  // THIS IS JUST FOR THE SPECTREGUNSHIP FOR NOW... 
-  // IT LOCKS OUT USER INPUT, 
-  // ALLOWING ONLY THE SPECTREUPDATE TO COMMAND IT VIA CMD_FROM_AI
-  // AUTHOR, LORENZEN... 5/15/03
+	if ( parms->m_cmdSource == CMD_FROM_PLAYER && forbidden )
+		return FALSE; 
+	// THIS IS JUST FOR THE SPECTREGUNSHIP FOR NOW... 
+	// IT LOCKS OUT USER INPUT, 
+	// ALLOWING ONLY THE SPECTREUPDATE TO COMMAND IT VIA CMD_FROM_AI
+	// AUTHOR, LORENZEN... 5/15/03
 
 
 	return TRUE;
@@ -3854,8 +3854,8 @@ void AIUpdateInterface::privateExitInstantly( Object *objectToExit, CommandSourc
 	if (!objectToExit)
 		return;
 
-  if ( objectToExit->isDisabledByType( DISABLED_SUBDUED ) )
-    return;
+	if ( objectToExit->isDisabledByType( DISABLED_SUBDUED ) )
+		return;
 
 	// we must go thru this state (rather than calling exitObjectViaDoor directly!), 
 	// because a few containers might need to delay to allow
@@ -3894,8 +3894,8 @@ void AIUpdateInterface::doQuickExit( const std::vector<Coord3D>* path )
 void AIUpdateInterface::privateEvacuate( Int exposeStealthUnits, CommandSourceType cmdSource )
 {
 
-  if ( getObject()->isDisabledByType( DISABLED_SUBDUED ) )
-    return;
+	if ( getObject()->isDisabledByType( DISABLED_SUBDUED ) )
+		return;
 
 
 	ContainModuleInterface *contain = getObject()->getContain();
@@ -3916,8 +3916,8 @@ void AIUpdateInterface::privateEvacuate( Int exposeStealthUnits, CommandSourceTy
 void AIUpdateInterface::privateEvacuateInstantly( Int exposeStealthUnits, CommandSourceType cmdSource )
 {
 
-  if ( getObject()->isDisabledByType( DISABLED_SUBDUED ) )
-    return;
+	if ( getObject()->isDisabledByType( DISABLED_SUBDUED ) )
+		return;
 
 
 	ContainModuleInterface *contain = getObject()->getContain();
@@ -4482,9 +4482,9 @@ void AIUpdateInterface::setNextMoodCheckTime( UnsignedInt frame )
 
 Bool AIUpdateInterface::canAutoAcquireWhileStealthed() const 
 { 
-  if ( getObject() && getObject()->getStealth() && getObject()->getStealth()->isGrantedBySpecialPower() )
-    return TRUE;
-  return getAIUpdateModuleData()->m_autoAcquireEnemiesWhenIdle & AAS_Idle_Stealthed;
+	if ( getObject() && getObject()->getStealth() && getObject()->getStealth()->isGrantedBySpecialPower() )
+		return TRUE;
+	return getAIUpdateModuleData()->m_autoAcquireEnemiesWhenIdle & AAS_Idle_Stealthed;
 }
 
 
@@ -4528,13 +4528,13 @@ Object* AIUpdateInterface::getNextMoodTarget( Bool calledByAI, Bool calledDuring
 		{
 			if( !canAutoAcquireWhileStealthed() ) 
 			{
-  			const Object *container = obj->getContainedBy();
-  			if( ! (container && container->getContain()->isPassengerAllowedToFire()) )
-  			{
+				const Object *container = obj->getContainedBy();
+				if( ! (container && container->getContain()->isPassengerAllowedToFire()) )
+				{
 					// Sorry, stealthed and not allowed to idle fire when stealthed.
 					// Being in a firing container is an exception to this veto.
-  				return NULL;
-  			}
+					return NULL;
+				}
 			}
 		}
 	}
@@ -4746,14 +4746,14 @@ void AIUpdateInterface::evaluateMoraleBonus( void )
 
 		// nationalism
 		if( nationalism )
-    {
+		{
 			us->setWeaponBonusCondition( WEAPONBONUSCONDITION_NATIONALISM );
-      // fanaticism
-      if ( fanaticism )
-        us->setWeaponBonusCondition( WEAPONBONUSCONDITION_FANATICISM );// FOR THE NEW GC INFANTRY GENERAL
-      else 
-        us->clearWeaponBonusCondition( WEAPONBONUSCONDITION_FANATICISM );
-    }
+			// fanaticism
+			if ( fanaticism )
+				us->setWeaponBonusCondition( WEAPONBONUSCONDITION_FANATICISM );// FOR THE NEW GC INFANTRY GENERAL
+			else 
+				us->clearWeaponBonusCondition( WEAPONBONUSCONDITION_FANATICISM );
+		}
 		else
 			us->clearWeaponBonusCondition( WEAPONBONUSCONDITION_NATIONALISM );
 

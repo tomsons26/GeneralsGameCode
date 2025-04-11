@@ -369,7 +369,7 @@ void ControlBar::populatePurchaseScience( Player* player )
 		progress = ((player->getSkillPoints() - player->getSkillPointsLevelDown()) * 100) /(player->getSkillPointsLevelUp() - player->getSkillPointsLevelDown());
 		GadgetProgressBarSetProgress(win, progress);
 	}
-	
+
 	win = TheWindowManager->winGetWindowFromId( m_contextParent[ CP_PURCHASE_SCIENCE ], TheNameKeyGenerator->nameToKey( "GeneralsExpPoints.wnd:StaticTextTitle" ) );
 	if(win)
 	{
@@ -3146,11 +3146,7 @@ void ControlBar::initSpecialPowershortcutBar( Player *player)
 		id = TheNameKeyGenerator->nameToKey( windowName.str() );
 		m_specialPowerShortcutButtonParents[ i ] = 
 			TheWindowManager->winGetWindowFromId( m_specialPowerShortcutParent, id );
-		
-
 	}  // end for i
-
-
 
 }
 

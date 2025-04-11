@@ -686,14 +686,15 @@ void Player::update()
 		m_ai->update();
 
 	// Allow the teams this player owns to update themselves.
-
-	for (PlayerTeamList::iterator it = m_playerTeamPrototypes.begin(); it != m_playerTeamPrototypes.end(); ++it) {
-		for (DLINK_ITERATOR<Team> iter = (*it)->iterate_TeamInstanceList(); !iter.done(); iter.advance()) {
+	for( PlayerTeamList::iterator it = m_playerTeamPrototypes.begin(); it != m_playerTeamPrototypes.end(); ++it ) 
+	{
+		for( DLINK_ITERATOR<Team> iter = (*it)->iterate_TeamInstanceList(); !iter.done(); iter.advance() ) 
+		{
 			Team *team = iter.cur();
-			if (!team) {
+			if( !team ) 
+			{
 				continue;
 			}
-
 			team->updateGenericScripts();
 		}
 	}
@@ -859,14 +860,17 @@ void Player::initFromDict(const Dict* d)
 		}
 		Int diffInt  = d->getInt(TheKey_skirmishDifficulty, &exists);
 		GameDifficulty difficulty = TheScriptEngine->getGlobalDifficulty();
-		if (exists) {
+		if (exists) 
+		{
 			difficulty = (GameDifficulty) diffInt;
 		}
-		if (m_ai) {
+		if (m_ai) 
+		{
 			m_ai->setAIDifficulty(difficulty);
 		}
 
-		if (!found) {
+		if (!found) 
+		{
 			DEBUG_CRASH(("Could not find skirmish player for side %s", mySide.str()));
 		} else {
 			m_playerName = qualTemplatePlayerName;
@@ -3201,7 +3205,8 @@ void Player::processSelectTeamGameMessage(Int hotkeyNum, GameMessage *msg) {
 	VecObjectPtr objectList = m_squads[hotkeyNum]->getLiveObjects();
 	Int numObjs = objectList.size();
 	
-	for (Int i = 0; i < numObjs; ++i) {
+	for (Int i = 0; i < numObjs; ++i) 
+	{
 		m_currentSelection->addObject(objectList[i]);
 	}
 }
@@ -3508,7 +3513,7 @@ void Player::crc( Xfer *xfer )
 	// Same cheat principle as pulling NeedScience off your Generals buttons.
 	xfer->xferInt( &m_skillPoints );
 	xfer->xferInt( &m_sciencePurchasePoints );
-	
+
 }  // end crc
 
 // ------------------------------------------------------------------------------------------------
@@ -3882,11 +3887,6 @@ void Player::xfer( Xfer *xfer )
 
 	// score keeper
 	xfer->xferSnapshot( &m_scoreKeeper );
-
-	
-
-
-
 
 	// size of and data for kindof percent production change list
 	UnsignedShort percentProductionChangeCount = m_kindOfPercentProductionChangeList.size();

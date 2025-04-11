@@ -1020,14 +1020,14 @@ void InitWOLGameGadgets( void )
 
 	// Initialize the pointers to our gadgets
 	parentWOLGameSetup = TheWindowManager->winGetWindowFromId( NULL, parentWOLGameSetupID );
-	buttonEmote = TheWindowManager->winGetWindowFromId( parentWOLGameSetup,buttonEmoteID  );
-	buttonSelectMap = TheWindowManager->winGetWindowFromId( parentWOLGameSetup,buttonSelectMapID  );
-	buttonStart = TheWindowManager->winGetWindowFromId( parentWOLGameSetup,buttonStartID  );
-	buttonBack = TheWindowManager->winGetWindowFromId( parentWOLGameSetup,  buttonBackID);
+	buttonEmote = TheWindowManager->winGetWindowFromId( parentWOLGameSetup,buttonEmoteID );
+	buttonSelectMap = TheWindowManager->winGetWindowFromId( parentWOLGameSetup,buttonSelectMapID );
+	buttonStart = TheWindowManager->winGetWindowFromId( parentWOLGameSetup,buttonStartID );
+	buttonBack = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, buttonBackID);
 	listboxGameSetupChat = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, listboxGameSetupChatID );
 	textEntryChat = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, textEntryChatID );
 	textEntryMapDisplay = TheWindowManager->winGetWindowFromId( parentWOLGameSetup, textEntryMapDisplayID );
-	windowMap = TheWindowManager->winGetWindowFromId( parentWOLGameSetup,windowMapID  );
+	windowMap = TheWindowManager->winGetWindowFromId( parentWOLGameSetup,windowMapID );
 	DEBUG_ASSERTCRASH(windowMap, ("Could not find the parentWOLGameSetup.wnd:MapWindow" ));
 	
 	//Added By Sadullah Nader
@@ -2617,11 +2617,11 @@ WindowMsgHandledType WOLGameSetupMenuSystem( GameWindow *window, UnsignedInt msg
 			}// case GBM_SELECTED:
 		//-------------------------------------------------------------------------------------------------
 		case GBM_SELECTED_RIGHT:
-   		{
-   			if (buttonPushed)
-   				break;
-   
-   			GameWindow *control = (GameWindow *)mData1;
+	 		{
+	 			if (buttonPushed)
+					break;
+
+	 			GameWindow *control = (GameWindow *)mData1;
 				Int controlID = control->winGetWindowId();
 				for (Int i = 0; i < MAX_SLOTS; i++)
 				{

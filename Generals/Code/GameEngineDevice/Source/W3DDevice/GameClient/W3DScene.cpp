@@ -687,14 +687,15 @@ void RTS3DScene::renderOneObject(RenderInfoClass &rinfo, RenderObjClass *robj, I
 				// THIS WILL EXPLICITLY SKIP THE FIRST PASS SO THAT HEATVISION ONLY WILL RENDER
 				rinfo.Push_Override_Flags(RenderInfoClass::RINFO_OVERRIDE_ADDITIONAL_PASSES_ONLY);
 				rinfo.Push_Material_Pass(m_heatVisionOnlyPass);
-				doExtraFlagsPop=TRUE;
+				doExtraFlagsPop = TRUE;
 			}
 			else
 			{
 				//THIS CALLS FOR THE HEATVISION TO RENDER
 				rinfo.Push_Material_Pass(m_heatVisionMaterialPass);
 			}
-			doExtraMaterialPop=TRUE;
+
+			doExtraMaterialPop = TRUE;
 		}
 	}
 	else

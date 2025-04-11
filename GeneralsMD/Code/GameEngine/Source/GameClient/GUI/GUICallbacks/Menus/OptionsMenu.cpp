@@ -1235,15 +1235,15 @@ static void saveOptions( void )
 		}
 
 		//Apply the sound volumes in the audio system now.
-    TheAudio->setVolume( sound2DVolume, (AudioAffect) (AudioAffect_Sound | AudioAffect_SystemSetting) );
+		TheAudio->setVolume( sound2DVolume, (AudioAffect) (AudioAffect_Sound | AudioAffect_SystemSetting) );
 		TheAudio->setVolume( sound3DVolume, (AudioAffect) (AudioAffect_Sound3D | AudioAffect_SystemSetting) );
 
 		//Save the settings in the options.ini.
-    TheWritableGlobalData->m_SFXVolumeFactor = val;
-    AsciiString prefString;
-    prefString.format("%d", REAL_TO_INT( sound2DVolume * 100.0f ) );
-    (*pref)["SFXVolume"] = prefString;
-    prefString.format("%d", REAL_TO_INT( sound3DVolume * 100.0f ) );
+		TheWritableGlobalData->m_SFXVolumeFactor = val;
+		AsciiString prefString;
+		prefString.format("%d", REAL_TO_INT( sound2DVolume * 100.0f ) );
+		(*pref)["SFXVolume"] = prefString;
+		prefString.format("%d", REAL_TO_INT( sound3DVolume * 100.0f ) );
 		(*pref)["SFX3DVolume"] = prefString;
 	}
 
@@ -1252,11 +1252,11 @@ static void saveOptions( void )
 	val = GadgetSliderGetPosition(sliderVoiceVolume);
 	if(val != -1)
 	{
-    TheWritableGlobalData->m_voiceVolumeFactor = val;
-    AsciiString prefString;
-    prefString.format("%d", val);
-    (*pref)["VoiceVolume"] = prefString;
-    TheAudio->setVolume(val / 100.0f, (AudioAffect) (AudioAffect_Speech | AudioAffect_SystemSetting));
+		TheWritableGlobalData->m_voiceVolumeFactor = val;
+		AsciiString prefString;
+		prefString.format("%d", val);
+		(*pref)["VoiceVolume"] = prefString;
+		TheAudio->setVolume(val / 100.0f, (AudioAffect) (AudioAffect_Speech | AudioAffect_SystemSetting));
 	}
 
  	//-------------------------------------------------------------------------------------------------
@@ -1330,6 +1330,7 @@ static void cancelAdvancedOptions()
 
 	WinAdvancedDisplay->winHide(TRUE);
 }
+
 //-------------------------------------------------------------------------------------------------
 /** Initialize the options menu */
 //-------------------------------------------------------------------------------------------------

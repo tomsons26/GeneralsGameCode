@@ -1043,7 +1043,6 @@ WindowMsgHandledType LanGameOptionsMenuSystem( GameWindow *window, UnsignedInt m
 		//-------------------------------------------------------------------------------------------------
 		case GCM_SELECTED:
 			{
-				
 				if (LANbuttonPushed)
 					break;
 				GameWindow *control = (GameWindow *)mData1;

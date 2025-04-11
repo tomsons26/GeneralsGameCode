@@ -62,7 +62,7 @@ TransportContainModuleData::TransportContainModuleData()
 	m_orientLikeContainerOnExit = false;
 	m_keepContainerVelocityOnExit = false;
 	m_goAggressiveOnExit = FALSE;
-  m_armedRidersUpgradeWeaponSet = FALSE;
+	m_armedRidersUpgradeWeaponSet = FALSE;
 	m_resetMoodCheckTimeOnExit = true;
 	m_destroyRidersWhoAreNotFreeToExit = false;
 	m_exitPitchRate = 0.0f;
@@ -115,9 +115,9 @@ void TransportContainModuleData::buildFieldParse(MultiIniFieldParse& p)
 		{ "ArmedRidersUpgradeMyWeaponSet",	INI::parseBool,		NULL, offsetof( TransportContainModuleData, m_armedRidersUpgradeWeaponSet ) },
 		{ "DelayExitInAir",	INI::parseBool,		NULL, offsetof( TransportContainModuleData, m_isDelayExitInAir ) },
 	
-    { 0, 0, 0, 0 }
-  };
-  p.add(dataFieldParse);
+		{ 0, 0, 0, 0 }
+	};
+	p.add(dataFieldParse);
 }
 
 
@@ -204,9 +204,9 @@ Bool TransportContain::isValidContainerFor(const Object* rider, Bool checkCapaci
 
 	if (checkCapacity)
 	{
-    Int containMax = getContainMax();
-    Int containCount = getContainCount();
-    
+		Int containMax = getContainMax();
+		Int containCount = getContainCount();
+
 		return (m_extraSlotsInUse + containCount + transportSlotCount <= containMax);
 
 	}
@@ -223,16 +223,16 @@ Bool TransportContain::isValidContainerFor(const Object* rider, Bool checkCapaci
 void TransportContain::letRidersUpgradeWeaponSet( void )
 {
 
-  const TransportContainModuleData * d = getTransportContainModuleData();
+	const TransportContainModuleData * d = getTransportContainModuleData();
 
-  if ( ! d->m_armedRidersUpgradeWeaponSet )
-    return;
+	if ( ! d->m_armedRidersUpgradeWeaponSet )
+		return;
 
-  Object *self = getObject();
-  if ( self == NULL )
-    return;
+	Object *self = getObject();
+	if ( self == NULL )
+		return;
 
-  Bool anyRiderHasViableWeapon = FALSE;
+	Bool anyRiderHasViableWeapon = FALSE;
 
 	const ContainedItemsList* riderList = getContainedItemsList();
 	if( riderList )
@@ -247,32 +247,32 @@ void TransportContain::letRidersUpgradeWeaponSet( void )
 			//Advance to the next iterator
 			it++;
 
-      if ( rider )
-      {
+			if ( rider )
+			{
 		if(rider->isKindOf(KINDOF_INFANTRY) == false)
 			continue;
-        Weapon *weapon = NULL;
-        for ( Int w = PRIMARY_WEAPON; w < WEAPONSLOT_COUNT; ++ w )
-        {
-          weapon = rider->getWeaponInWeaponSlot( (WeaponSlotType)w );
-          if ( weapon )
-          {
-            if ( weapon->getTemplate()->isContactWeapon() == FALSE && weapon->isDamageWeapon() == TRUE ) // THIS MAY NEED TO CHECK MORE WEAPON ATTRIBUTES TO WORK BEST
-            {
-              anyRiderHasViableWeapon = TRUE;
-              break;
-            }
-          }
-        }
-      }//end if rider
+				Weapon *weapon = NULL;
+				for ( Int w = PRIMARY_WEAPON; w < WEAPONSLOT_COUNT; ++ w )
+				{
+					weapon = rider->getWeaponInWeaponSlot( (WeaponSlotType)w );
+					if ( weapon )
+					{
+						if ( weapon->getTemplate()->isContactWeapon() == FALSE && weapon->isDamageWeapon() == TRUE ) // THIS MAY NEED TO CHECK MORE WEAPON ATTRIBUTES TO WORK BEST
+						{
+							anyRiderHasViableWeapon = TRUE;
+							break;
+						}
+					}
+				}
+			}//end if rider
 
-    }
-  }
+		}
+	}
 
-  if ( anyRiderHasViableWeapon )
-  	self->setWeaponSetFlag( WEAPONSET_PLAYER_UPGRADE );
-  else
-  	self->clearWeaponSetFlag( WEAPONSET_PLAYER_UPGRADE );
+	if ( anyRiderHasViableWeapon )
+		self->setWeaponSetFlag( WEAPONSET_PLAYER_UPGRADE );
+	else
+		self->clearWeaponSetFlag( WEAPONSET_PLAYER_UPGRADE );
 
 }
 
@@ -306,8 +306,8 @@ void TransportContain::onContaining( Object *rider, Bool wasSelected )
 
 	}  // end if
 
-  if ( getTransportContainModuleData()->m_armedRidersUpgradeWeaponSet )
-    letRidersUpgradeWeaponSet();
+	if ( getTransportContainModuleData()->m_armedRidersUpgradeWeaponSet )
+		letRidersUpgradeWeaponSet();
 
 	//Kris: October 20, 2003 - Patch 1.01
 	//Force Jarmen Kell to transfer weapon timer for snipe to and from the combat bike.
@@ -420,8 +420,8 @@ void TransportContain::onRemoving( Object *rider )
 	m_frameExitNotBusy = TheGameLogic->getFrame() + d->m_exitDelay;
 
 
-  if ( d->m_armedRidersUpgradeWeaponSet )
-    letRidersUpgradeWeaponSet();
+	if ( d->m_armedRidersUpgradeWeaponSet )
+		letRidersUpgradeWeaponSet();
 
 	//Kris: October 20, 2003 - Patch 1.01
 	//Force Jarmen Kell to transfer weapon timer for snipe to and from the combat bike.
@@ -602,20 +602,20 @@ Bool TransportContain::isPassengerAllowedToFire( ObjectID id ) const
 			return FALSE;
 	}
 
-  if ( ! getObject() )
-    return FALSE;
+	if ( ! getObject() )
+		return FALSE;
 
-  // but wait! I may be riding on an Overlord
-  // This code detects the case of whether the contained passenger is in a bunker riding on an overlord, inside a helix!
-  // Oh  my  God.
-  const Object *heWhoContainsMe = getObject()->getContainedBy();
-  if ( heWhoContainsMe)
-  {
-    ContainModuleInterface *hisContain = heWhoContainsMe->getContain();
-    DEBUG_ASSERTCRASH( hisContain,("TransportContain::isPassengerAllowedToFire()... CONTAINER WITHOUT A CONTAIN! AARRGH!") );
-    if ( hisContain && hisContain->isSpecialOverlordStyleContainer() )
-      return hisContain->isPassengerAllowedToFire( id );
-  }
+	// but wait! I may be riding on an Overlord
+	// This code detects the case of whether the contained passenger is in a bunker riding on an overlord, inside a helix!
+	// Oh	my	God.
+	const Object *heWhoContainsMe = getObject()->getContainedBy();
+	if ( heWhoContainsMe)
+	{
+		ContainModuleInterface *hisContain = heWhoContainsMe->getContain();
+		DEBUG_ASSERTCRASH( hisContain,("TransportContain::isPassengerAllowedToFire()... CONTAINER WITHOUT A CONTAIN! AARRGH!") );
+		if ( hisContain && hisContain->isSpecialOverlordStyleContainer() )
+			return hisContain->isPassengerAllowedToFire( id );
+	}
 
 
 

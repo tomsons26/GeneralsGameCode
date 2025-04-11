@@ -311,16 +311,16 @@ void GameInfo::reset( void )
 	m_seed = GetTickCount(); //GameClientRandomValue(0, INT_MAX - 1);
 	m_useStats = TRUE;
 	m_surrendered = FALSE;
-  m_oldFactionsOnly = FALSE;
+	m_oldFactionsOnly = FALSE;
 	// Added By Sadullah Nader
 	// Initializations missing and needed
 //	m_localIP = 0; // BGC - actually we don't want this to be reset since the m_localIP is 
 										// set properly in the constructor of LANGameInfo which uses this as a base class.
 	m_mapCRC = 0;
 	m_mapSize = 0;
-  m_superweaponRestriction = 0; 
-  m_startingCash = TheGlobalData->m_defaultStartingCash;
-  
+	m_superweaponRestriction = 0; 
+	m_startingCash = TheGlobalData->m_defaultStartingCash;
+
 	//
 
 	for (Int i=0; i<MAX_SLOTS; ++i)
@@ -701,12 +701,12 @@ void GameInfo::setSlotPointer( Int index, GameSlot *slot )
 
 void GameInfo::setSuperweaponRestriction( UnsignedShort restriction )
 {
-  m_superweaponRestriction = restriction;
+	m_superweaponRestriction = restriction;
 }
 
 void GameInfo::setStartingCash( const Money & startingCash )
 {
-  m_startingCash = startingCash;
+	m_startingCash = startingCash;
 }
 
 Bool GameInfo::isColorTaken(Int colorIdx, Int slotToIgnore ) const
@@ -1107,23 +1107,23 @@ Bool ParseAsciiStringToGameInfo(GameInfo *game, AsciiString options)
 			crc = atoi(val.str());
 			sawCRC = TRUE;
 		}
-    else if (key.compare("SR") == 0 )
-    {
-      restriction = (UnsignedShort)atoi(val.str());
-      sawSuperweaponRestriction = TRUE;
-    }
-    else if (key.compare("SC") == 0 )
-    {
-      UnsignedInt startingCashAmount = strtoul( val.str(), NULL, 10 );
-      startingCash.init();
-      startingCash.deposit( startingCashAmount, FALSE );
-      sawStartingCash = TRUE;
-    }
-    else if (key.compare("O") == 0 )
-    {
-      oldFactionsOnly = ( val.compareNoCase( "Y" ) == 0 );
-      sawOldFactions = TRUE;
-    }
+		else if (key.compare("SR") == 0 )
+		{
+			restriction = (UnsignedShort)atoi(val.str());
+			sawSuperweaponRestriction = TRUE;
+		}
+		else if (key.compare("SC") == 0 )
+		{
+			UnsignedInt startingCashAmount = strtoul( val.str(), NULL, 10 );
+			startingCash.init();
+			startingCash.deposit( startingCashAmount, FALSE );
+			sawStartingCash = TRUE;
+		}
+		else if (key.compare("O") == 0 )
+		{
+			oldFactionsOnly = ( val.compareNoCase( "Y" ) == 0 );
+			sawOldFactions = TRUE;
+		}
 		else if (key.getLength() == 1 && *key.str() == slotListID)
 		{
 			sawSlotlist = true;
@@ -1155,7 +1155,7 @@ Bool ParseAsciiStringToGameInfo(GameInfo *game, AsciiString options)
 								break;
 							}
 							UnicodeString name;
-              				name.set(MultiByteToWideCharSingleLine(slotValue.str() +1).c_str());
+							name.set(MultiByteToWideCharSingleLine(slotValue.str() +1).c_str());
 
 							//DEBUG_LOG(("ParseAsciiStringToGameInfo - name is %s\n", slotValue.str()+1));
 							
@@ -1483,9 +1483,9 @@ Bool ParseAsciiStringToGameInfo(GameInfo *game, AsciiString options)
 		game->setSeed(seed);
 		game->setCRCInterval(crc);
 		game->setUseStats(useStats);
-    game->setSuperweaponRestriction(restriction);
-    game->setStartingCash( startingCash );
-    game->setOldFactionsOnly( oldFactionsOnly );
+		game->setSuperweaponRestriction(restriction);
+		game->setStartingCash( startingCash );
+		game->setOldFactionsOnly( oldFactionsOnly );
 
 		return true;
 	}
@@ -1591,24 +1591,24 @@ void SkirmishGameInfo::xfer( Xfer *xfer )
 	xfer->xferInt(&m_mapMask);
 	xfer->xferInt(&m_seed);
 
-  if ( version >= 3 )
-  {
-    xfer->xferUnsignedShort( &m_superweaponRestriction );
-    
-    if ( version == 3 )
-    {
-      // Version 3 had a bool which is now gone
-      Bool obsoleteBool;
-      xfer->xferBool( &obsoleteBool );
-    }
+	if ( version >= 3 )
+	{
+		xfer->xferUnsignedShort( &m_superweaponRestriction );
+		
+		if ( version == 3 )
+		{
+			// Version 3 had a bool which is now gone
+			Bool obsoleteBool;
+			xfer->xferBool( &obsoleteBool );
+		}
 
-    xfer->xferSnapshot( &m_startingCash );
-  }
-  else if ( xfer->getXferMode() == XFER_LOAD )
-  {
-    m_superweaponRestriction = 0;
-    m_startingCash = TheGlobalData->m_defaultStartingCash;
-  }
+		xfer->xferSnapshot( &m_startingCash );
+	}
+	else if ( xfer->getXferMode() == XFER_LOAD )
+	{
+		m_superweaponRestriction = 0;
+		m_startingCash = TheGlobalData->m_defaultStartingCash;
+	}
 
 }  // end xfer
 

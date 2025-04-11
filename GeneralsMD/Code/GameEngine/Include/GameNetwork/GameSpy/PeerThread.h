@@ -119,7 +119,7 @@ public:
 			UnsignedInt iniCRC;
 			UnsignedInt gameVersion;
 			Bool allowObservers;
-      Bool useStats;
+			Bool useStats;
 			UnsignedShort ladPort;
 			UnsignedInt ladPassCRC;
 			Bool restrictGameList;
@@ -333,7 +333,7 @@ public:
 			Bool isStaging;
 			Bool requiresPassword;
 			Bool allowObservers;
-      Bool useStats;
+			Bool useStats;
 			UnsignedInt version;
 			UnsignedInt exeCRC;
 			UnsignedInt iniCRC;

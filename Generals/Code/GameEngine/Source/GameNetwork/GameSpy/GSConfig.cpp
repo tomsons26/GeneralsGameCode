@@ -348,7 +348,7 @@ m_qmChannel(0)
 			if (md)
 			{
 				m_qmMaps.push_back(mapName);
-			} 
+			}
 			#endif
 		}
 		else if (inQMBot)

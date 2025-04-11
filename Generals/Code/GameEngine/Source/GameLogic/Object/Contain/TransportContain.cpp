@@ -111,7 +111,7 @@ void TransportContainModuleData::buildFieldParse(MultiIniFieldParse& p)
 		{ "ExitDelay",	INI::parseDurationUnsignedInt,		NULL, offsetof( TransportContainModuleData, m_exitDelay ) },
 		{ 0, 0, 0, 0 }
 	};
-  p.add(dataFieldParse);
+	p.add(dataFieldParse);
 }
 
 
@@ -409,7 +409,6 @@ UpdateSleepTime TransportContain::update()
 			}
 		}
 	}
-
 	return OpenContain::update(); //extend
 }
 

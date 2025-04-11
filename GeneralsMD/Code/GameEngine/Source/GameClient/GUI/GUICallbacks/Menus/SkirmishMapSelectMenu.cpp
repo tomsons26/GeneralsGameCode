@@ -574,21 +574,21 @@ WindowMsgHandledType SkirmishMapSelectMenuSystem( GameWindow *window, UnsignedIn
 					win	= TheWindowManager->winGetWindowFromId( parent, TheNameKeyGenerator->nameToKey("SkirmishGameOptionsMenu.wnd:TextEntryMapDisplay") );
 					if(win)
 					{
-				    if (md)
-				    {
-  						GadgetStaticTextSetText(win, md->m_displayName);
-                    }
-		         }
+						if (md)
+						{
+							GadgetStaticTextSetText(win, md->m_displayName);
+						}
+					}
 					//if (mapFname)
 						//setupGameStart(mapFname);
 
-				showSkirmishGameOptionsUnderlyingGUIElements(TRUE);
-				skirmishPositionStartSpots();
-				skirmishUpdateSlotList();
+					showSkirmishGameOptionsUnderlyingGUIElements(TRUE);
+					skirmishPositionStartSpots();
+					skirmishUpdateSlotList();
 
-				skirmishMapSelectLayout->destroyWindows();
-				skirmishMapSelectLayout->deleteInstance();
-				skirmishMapSelectLayout = NULL;
+					skirmishMapSelectLayout->destroyWindows();
+					skirmishMapSelectLayout->deleteInstance();
+					skirmishMapSelectLayout = NULL;
 					//TheShell->pop();
 
 				}  // end if

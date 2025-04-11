@@ -670,7 +670,7 @@ void GameEngine::init( int argc, char *argv[] )
 			TheWritableGlobalData->m_afterIntro = TRUE;
 
 		//initDisabledMasks();
-		
+
 	}
 	catch (ErrorCode ec)
 	{

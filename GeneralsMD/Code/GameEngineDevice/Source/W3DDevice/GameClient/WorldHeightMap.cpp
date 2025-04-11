@@ -920,9 +920,9 @@ Bool WorldHeightMap::ParseHeightMapData(DataChunkInput &file, DataChunkInfo *inf
 	Int numBytesY = m_height;	
 	m_seismicUpdateWidth=numBytesX;
 	m_seismicUpdateFlag	= MSGNEW("WorldHeightMap::ParseHeightMapData _ m_seismicUpdateFlag allocated") UnsignedByte[numBytesX*numBytesY];
-  clearSeismicUpdateFlags();
-  m_seismicZVelocities = MSGNEW("WorldHeightMap_ParseHeightMapData _ zvelocities allocated") Real[m_dataSize];
-  fillSeismicZVelocities( 0 );
+	clearSeismicUpdateFlags();
+	m_seismicZVelocities = MSGNEW("WorldHeightMap_ParseHeightMapData _ zvelocities allocated") Real[m_dataSize];
+	fillSeismicZVelocities( 0 );
 
 
 	file.readArrayOfBytes((char *)m_data, m_dataSize);

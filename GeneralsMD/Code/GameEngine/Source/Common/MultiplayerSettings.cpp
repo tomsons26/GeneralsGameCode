@@ -84,7 +84,7 @@ MultiplayerSettings::MultiplayerSettings()
 	m_observerColor;
 	m_randomColor;
 
-  m_gotDefaultStartingMoney = false;
+	m_gotDefaultStartingMoney = false;
 }  // end MultiplayerSettings
 
 MultiplayerColorDefinition::MultiplayerColorDefinition()
@@ -142,13 +142,13 @@ MultiplayerColorDefinition * MultiplayerSettings::newMultiplayerColorDefinition(
 
 void MultiplayerSettings::addStartingMoneyChoice( const Money & money, Bool isDefault )
 {
-  m_startingMoneyList.push_back( money );
-  if ( isDefault )
-  {
-    DEBUG_ASSERTCRASH( !m_gotDefaultStartingMoney, ("Cannot have more than one default MultiplayerStartingMoneyChoice") );
-    m_defaultStartingMoney = money;
-    m_gotDefaultStartingMoney = true;
-  }
+	m_startingMoneyList.push_back( money );
+	if ( isDefault )
+	{
+		DEBUG_ASSERTCRASH( !m_gotDefaultStartingMoney, ("Cannot have more than one default MultiplayerStartingMoneyChoice") );
+		m_defaultStartingMoney = money;
+		m_gotDefaultStartingMoney = true;
+	}
 }
 
 MultiplayerColorDefinition * MultiplayerColorDefinition::operator =(const MultiplayerColorDefinition& other)
@@ -171,4 +171,3 @@ void MultiplayerColorDefinition::setNightColor( RGBColor rgb )
 {
 	m_colorNight = rgb.getAsInt() | 0xFF << 24;
 }
-

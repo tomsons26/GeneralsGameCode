@@ -136,9 +136,6 @@ extern void externalAddTree(Coord3D location, Real scale, Real angle, AsciiStrin
 //#pragma MESSAGE("************************************** WARNING, optimization disabled for debugging purposes")
 #endif
 
-
-
-
 // I'm making this larger now that we know how big our maps are going to be. 
 enum { OBJ_HASH_SIZE	= 8192 };
 
@@ -625,7 +622,7 @@ LoadScreen *GameLogic::getLoadScreen( Bool loadingSaveGame )
 	{
 	case GAME_SHELL:
 		return NEW ShellGameLoadScreen;
-		break;                         
+		break;
 	case GAME_SINGLE_PLAYER:
 	{
 		Campaign* currentCampaign = TheCampaignManager->getCurrentCampaign();
@@ -2332,18 +2329,18 @@ void GameLogic::startNewGame( Bool loadingSaveGame )
 		TheGameSpyBuddyMessageQueue->addRequest(req);
 	}	
 	
-  if( loadingSaveGame == FALSE )
-  {
-    // Drawables need to do some work on level start; give them a chance to do it
-    Drawable * drawable = TheGameClient->getDrawableList();
-  
-    while ( drawable != NULL )
-    {
-      drawable->onLevelStart();
-      drawable = drawable->getNextDrawable();
-    }
-  }
-  
+	if( loadingSaveGame == FALSE )
+	{
+		// Drawables need to do some work on level start; give them a chance to do it
+		Drawable * drawable = TheGameClient->getDrawableList();
+	
+		while ( drawable != NULL )
+		{
+			drawable->onLevelStart();
+			drawable = drawable->getNextDrawable();
+		}
+	}
+	
 	//Added By Sadullah Nader
 	//Added to fix the quit menu 
 	//ReAllows quit menu to work during loading scene
@@ -2361,11 +2358,11 @@ void GameLogic::startNewGame( Bool loadingSaveGame )
 	if (TheGameSpyInfo)
 		TheGameSpyInfo->updateAdditionalGameSpyDisconnections(1);
 
-  
-  if ( isInReplayGame() && TheInGameUI && TheGameText )
-  {
+	
+	if ( isInReplayGame() && TheInGameUI && TheGameText )
+	{
 		TheInGameUI->message( TheGameText->fetch( "GUI:FastForwardInstructions" ) );
-  }
+	}
 
 
 }  // end startNewGame
@@ -2521,7 +2518,6 @@ void GameLogic::processDestroyList( void )
 			eraseSleepyUpdate(idx);
 			DEBUG_ASSERTCRASH(sleepyUpdatesForThisObject[numSUO]->friend_getIndexInLogic() == -1, ("Hmm, expected index to be -1 here"));
 		}
-
 
 		currentObject->removeFromList(&m_objList);//remove from object list
 
@@ -3048,11 +3044,6 @@ void GameLogic::friend_awakenUpdateModule(Object* obj, UpdateModulePtr u, Unsign
 }
 
 
-
-
-
-
-
 // ------------------------------------------------------------------------------------------------
 #ifdef DO_UNIT_TIMINGS
 
@@ -3224,41 +3215,41 @@ static void unitTimings(void)
 			thingName = "No Object";
 		}
 
-    sprintf(remark, "All %f: (%d ms) for %d %s's\n", timeAll, (Int)(timeAll*1000/TIME_FRAMES), TOTAL_UNITS, thingName.str() );
-    DEBUG_LOG((remark));
-    drawGraph( "@", graphScale, timeAll );
+		sprintf(remark, "All %f: (%d ms) for %d %s's\n", timeAll, (Int)(timeAll*1000/TIME_FRAMES), TOTAL_UNITS, thingName.str() );
+		DEBUG_LOG((remark));
+		drawGraph( "@", graphScale, timeAll );
 
 		sprintf(remark, "Without Particles %f\n", timeNoPart);
-    DEBUG_LOG((remark));
-    drawGraph( "@", graphScale, timeNoPart );
-        
- 		sprintf(remark, "Without Spawn %f  \n", timeNoSpawn );
-    DEBUG_LOG((remark));
-    drawGraph( "@", graphScale, timeNoSpawn );
+		DEBUG_LOG((remark));
+		drawGraph( "@", graphScale, timeNoPart );
+				
+ 		sprintf(remark, "Without Spawn %f	\n", timeNoSpawn );
+		DEBUG_LOG((remark));
+		drawGraph( "@", graphScale, timeNoSpawn );
 
  		sprintf(remark, "Logic %f \n", timeLogic);
-    DEBUG_LOG((remark));
-    drawGraph( "@", graphScale, timeLogic );
-    
-    
+		DEBUG_LOG((remark));
+		drawGraph( "@", graphScale, timeLogic );
+		
+		
 		sprintf(remark, "DrawCalls for %s \n", thingName.str() ) ;
 		DEBUG_LOG((remark));
 
 		sprintf(remark, "All %f\n", drawCallAll );
 		DEBUG_LOG((remark));
-    drawGraph( "#", graphScale, drawCallAll );
+		drawGraph( "#", graphScale, drawCallAll );
 
 		sprintf(remark, "Without Particles %f\n", drawCallNoPart );
 		DEBUG_LOG((remark));
-    drawGraph( "#", graphScale, drawCallNoPart );
+		drawGraph( "#", graphScale, drawCallNoPart );
 
 		sprintf(remark, "Without Spawn %f \n", drawCallNoSpawn );
 		DEBUG_LOG((remark));
-    drawGraph( "#", graphScale, drawCallNoSpawn );
+		drawGraph( "#", graphScale, drawCallNoSpawn );
 
 		sprintf(remark, "Draw Call Logic %f \n", drawCallLogic );
 		DEBUG_LOG((remark));
-    drawGraph( "#", graphScale, drawCallLogic );
+		drawGraph( "#", graphScale, drawCallLogic );
 
 
 		if (g_UT_timingLog) {
@@ -3347,15 +3338,15 @@ static void unitTimings(void)
 					side++;
 					unitTypes = INFANTRY;
 					if (sides[side].isEmpty() ) // end of sides list
-          {
+					{
 						g_UT_startTiming = false;
 						if (g_UT_timingLog) 
-            {
+						{
 							fclose(g_UT_timingLog);
 							g_UT_timingLog = NULL;
 						}
 						if (g_UT_commaLog) 
-            {
+						{
 							fclose(g_UT_commaLog);
 							g_UT_commaLog = NULL;
 						}
@@ -3815,10 +3806,6 @@ void GameLogic::update( void )
 			}
 		}
 	}
-
-  
-
-
 
 	// increment world time
 	if (!m_startNewGame)
@@ -4690,7 +4677,7 @@ void GameLogic::prepareLogicForObjectLoad( void )
 // ------------------------------------------------------------------------------------------------
 void GameLogic::xfer( Xfer *xfer )
 {
-  
+
 	// version
 	const XferVersion currentVersion = 10;
 	XferVersion version = currentVersion;
@@ -5005,14 +4992,14 @@ void GameLogic::xfer( Xfer *xfer )
 		xfer->xferInt(&m_rankPointsToAddAtGameStart);
 	}
 
-  if ( version >= 10 )
-  {
-    xfer->xferUnsignedShort( &m_superweaponRestriction );
-  }
-  else if ( xfer->getXferMode() == XFER_LOAD )
-  {
-    m_superweaponRestriction = 0;
-  }
+	if ( version >= 10 )
+	{
+		xfer->xferUnsignedShort( &m_superweaponRestriction );
+	}
+	else if ( xfer->getXferMode() == XFER_LOAD )
+	{
+		m_superweaponRestriction = 0;
+	}
 }  // end xfer
 
 // ------------------------------------------------------------------------------------------------

@@ -49,7 +49,7 @@ public:
 	RGBColor		m_startColor;
 	RGBColor		m_endColor;
 	const ParticleSystemTemplate *m_disableFXParticleSystem;
-	Real m_sparksPerCubicFoot; //<just like it sounds
+	Real			m_sparksPerCubicFoot; //<just like it sounds
 
 	EMPUpdateModuleData()
 	{

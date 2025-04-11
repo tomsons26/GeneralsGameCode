@@ -168,7 +168,7 @@ StateReturnType State::friend_checkForTransitions( StateReturnType status )
 						}
 						else if (it->toStateID == EXIT_MACHINE_WITH_FAILURE)
 						{
-							return STATE_FAILURE;
+							return STATE_FAILURE;//Lorenzen wants to know why...
 						}
 
 						// move to new state

@@ -138,8 +138,6 @@ public:
 	void loadMusicFilesFromCD();
 	void unloadMusicFilesFromCD();
 protected:
-
-
 };
 
 extern FileSystem*	TheFileSystem;

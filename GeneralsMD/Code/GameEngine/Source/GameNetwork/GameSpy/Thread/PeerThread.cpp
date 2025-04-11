@@ -103,7 +103,7 @@ enum
 	INICRC_KEY,
 	PW_KEY,
 	OBS_KEY,
-  USE_STATS_KEY,
+	USE_STATS_KEY,
 	LADIP_KEY,
 	LADPORT_KEY,
 	PINGSTR_KEY,
@@ -121,7 +121,7 @@ enum
 #define INICRC_STR		"iniCRC"
 #define PW_STR				"pw"
 #define OBS_STR				"obs"
-#define USE_STATS_STR "stat"
+#define USE_STATS_STR	"stat"
 #define LADIP_STR			"ladIP"
 #define LADPORT_STR		"ladPort"
 #define PINGSTR_STR		"pings"
@@ -191,7 +191,7 @@ public:
 		//Added By Sadullah Nader
 		//Initializations inserted
 		m_roomJoined = m_allowObservers = m_hasPassword = FALSE;
-    m_useStats = TRUE;
+		m_useStats = TRUE;
 		m_exeCRC = m_iniCRC = 0;
 		m_gameVersion = 0;
 		m_ladderPort = 0;
@@ -244,7 +244,7 @@ public:
 	void stopHostingAlready(PEER peer);
 	Bool hasPassword( void ) { return m_hasPassword; }
 	Bool allowObservers( void ) { return m_allowObservers; }
-  Bool useStats(void) const { return m_useStats; }
+	Bool useStats(void) const { return m_useStats; }
 	std::string getMapName( void ) { return m_mapName; }
 	UnsignedInt exeCRC( void ) { return m_exeCRC; }
 	UnsignedInt iniCRC( void ) { return m_iniCRC; }
@@ -316,7 +316,7 @@ private:
 	UnsignedInt m_iniCRC;
 	UnsignedInt m_gameVersion;
 	Bool m_allowObservers;
-  Bool m_useStats;
+	Bool m_useStats;
 	std::string m_pingStr;
 	std::string m_ladderIP;
 	UnsignedShort m_ladderPort;
@@ -816,9 +816,9 @@ static void QRServerKeyCallback
 	case OBS_KEY:
 		ADDINT(t->allowObservers());
 		break;
-  case USE_STATS_KEY:
-    ADDINT(t->useStats());
-    break;
+	case USE_STATS_KEY:
+		ADDINT(t->useStats());
+		break;
 	case LADIP_KEY:
 		ADD(t->ladderIP().c_str());
 		break;
@@ -963,7 +963,7 @@ static void QRKeyListCallback
 		qr2_keybuffer_add(keyBuffer, INICRC_KEY);
 		qr2_keybuffer_add(keyBuffer, PW_KEY);
 		qr2_keybuffer_add(keyBuffer, OBS_KEY);
-    qr2_keybuffer_add(keyBuffer, USE_STATS_KEY);
+		qr2_keybuffer_add(keyBuffer, USE_STATS_KEY);
 		qr2_keybuffer_add(keyBuffer, LADIP_KEY);
 		qr2_keybuffer_add(keyBuffer, LADPORT_KEY);
 		qr2_keybuffer_add(keyBuffer, PINGSTR_KEY);
@@ -1214,7 +1214,7 @@ void PeerThreadClass::Thread_Function()
 	qr2_register_key(INICRC_KEY, INICRC_STR);
 	qr2_register_key(PW_KEY, PW_STR);
 	qr2_register_key(OBS_KEY, OBS_STR);
-  qr2_register_key(USE_STATS_KEY, USE_STATS_STR);
+	qr2_register_key(USE_STATS_KEY, USE_STATS_STR);
 	qr2_register_key(LADIP_KEY, LADIP_STR);
 	qr2_register_key(LADPORT_KEY, LADPORT_STR);
 	qr2_register_key(PINGSTR_KEY, PINGSTR_STR);
@@ -1244,7 +1244,7 @@ void PeerThreadClass::Thread_Function()
 		INICRC_KEY,
 		PW_KEY,
 		OBS_KEY,
-    USE_STATS_KEY,
+		USE_STATS_KEY,
 		LADIP_KEY,
 		LADPORT_KEY,
 		PINGSTR_KEY,
@@ -1252,7 +1252,7 @@ void PeerThreadClass::Thread_Function()
 		NUMPLAYER_KEY,
 		MAXPLAYER_KEY,
 		HOSTNAME_KEY
-  };
+	};
 
 	/*
 	const char *allKeys = "\\pid_\\mapname\\gamever\\gamename" \
@@ -1644,7 +1644,7 @@ void PeerThreadClass::Thread_Function()
 						s_wantStateChangedHeartbeat = FALSE;
 						m_isHosting = TRUE;
 						m_allowObservers = incomingRequest.stagingRoomCreation.allowObservers;
-            m_useStats = incomingRequest.stagingRoomCreation.useStats;
+						m_useStats = incomingRequest.stagingRoomCreation.useStats;
 						m_mapName = "";
 						for (Int i=0; i<MAX_SLOTS; ++i)
 						{
@@ -2881,7 +2881,7 @@ static void listingGamesCallback(PEER peer, PEERBool success, const char * name,
 	{
 		Bool hasPassword = (Bool)SBServerGetIntValue(server, PW_STR, FALSE);
 		Bool allowObservers = (Bool)SBServerGetIntValue(server, OBS_STR, FALSE);
-    Bool usesStats = (Bool)SBServerGetIntValue(server, USE_STATS_STR, TRUE);
+		Bool usesStats = (Bool)SBServerGetIntValue(server, USE_STATS_STR, TRUE);
 		const char *verStr = SBServerGetStringValue(server, "gamever", "000000");
 		const char *exeStr = SBServerGetStringValue(server, EXECRC_STR, "000000");
 		const char *iniStr = SBServerGetStringValue(server, INICRC_STR, "000000");
@@ -2893,7 +2893,7 @@ static void listingGamesCallback(PEER peer, PEERBool success, const char * name,
 		UnsignedInt iniVal = strtoul(iniStr, NULL, 10);
 		resp.stagingRoom.requiresPassword = hasPassword;
 		resp.stagingRoom.allowObservers = allowObservers;
-    resp.stagingRoom.useStats = usesStats;
+		resp.stagingRoom.useStats = usesStats;
 		resp.stagingRoom.version = verVal;
 		resp.stagingRoom.exeCRC = exeVal;
 		resp.stagingRoom.iniCRC = iniVal;

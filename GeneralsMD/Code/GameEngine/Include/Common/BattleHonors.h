@@ -65,7 +65,7 @@
 //-----------------------------------------------------------------------------
 enum
 {
-  BATTLE_HONOR_LADDER_CHAMP				= 0x00000001,
+	BATTLE_HONOR_LADDER_CHAMP				= 0x00000001,
 	BATTLE_HONOR_STREAK							= 0x00000002,
 //	BATTLE_HONOR_STREAK_5					= 0x00000004, // NOT TO BE REUSED
 //	BATTLE_HONOR_STREAK_10				= 0x00000008, // NOT TO BE REUSED
@@ -91,7 +91,7 @@ enum
 	BATTLE_HONOR_DOMINATION_ONLINE	= 0x00800000,
 	BATTLE_HONOR_STREAK_ONLINE			= 0x01000000,
 	BATTLE_HONOR_CHALLENGE					= 0x02000000, // not set in battle honors field in persistent storage
-//BATTLE_HONOR_FREE								= 0x04000000,
+	//BATTLE_HONOR_FREE								= 0x04000000,
 	BATTLE_HONOR_NOT_GAINED					= 0x08000000  // This is set in tooltip item data to indicate that the honor isn't actually gained.
 };
 

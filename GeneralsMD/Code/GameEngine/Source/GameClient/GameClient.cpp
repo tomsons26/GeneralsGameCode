@@ -372,10 +372,10 @@ void GameClient::init( void )
  		TheInGameUI->setName("TheInGameUI");
 	}
 
- 	TheChallengeGenerals = createChallengeGenerals();
- 	if( TheChallengeGenerals ) {
- 		TheChallengeGenerals->init();
- 	}
+	TheChallengeGenerals = createChallengeGenerals();
+	if( TheChallengeGenerals ) {
+		TheChallengeGenerals->init();
+	}
 
 	TheHotKeyManager = MSGNEW("GameClientSubsystem") HotKeyManager;
 	if( TheHotKeyManager ) {
@@ -608,17 +608,17 @@ void GameClient::update( void )
 	}  // end if
 	
 
-  if (TheInGameUI->isCameraTrackingDrawable())
-  {
-    Drawable *draw = TheInGameUI->getFirstSelectedDrawable();
-    if ( draw )
-    {
-      const Coord3D *pos = draw->getPosition();
-      TheTacticalView->lookAt( pos );
-    }
-    else
-      TheInGameUI->setCameraTrackingDrawable( FALSE );
-  }
+	if (TheInGameUI->isCameraTrackingDrawable())
+	{
+		Drawable *draw = TheInGameUI->getFirstSelectedDrawable();
+		if ( draw )
+		{
+			const Coord3D *pos = draw->getPosition();
+			TheTacticalView->lookAt( pos );
+		}
+		else
+			TheInGameUI->setCameraTrackingDrawable( FALSE );
+	}
 
 	if(TheGlobalData->m_playIntro || TheGlobalData->m_afterIntro)
 	{

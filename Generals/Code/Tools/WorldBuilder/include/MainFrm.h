@@ -119,7 +119,6 @@ protected:  // control bar embedded members
 	CameraOptions				m_cameraOptions;
 	LayersList*					m_layersList;
 	
-
 	CWnd							*m_curOptions;
 	Int								m_curOptionsX;
 	Int								m_curOptionsY;

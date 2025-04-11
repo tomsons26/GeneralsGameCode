@@ -186,7 +186,7 @@ enum GUICommandType
 	GUI_COMMAND_FIRE_WEAPON,							///< fire a weapon
 	GUI_COMMAND_SPECIAL_POWER,						///< do a special power
 	GUI_COMMAND_PURCHASE_SCIENCE,					///< purchase science
-	GUI_COMMAND_HACK_INTERNET,						///< Hey author, write me!
+	GUI_COMMAND_HACK_INTERNET,						///< gain income from the ether (by hacking the internet)
 	GUI_COMMAND_TOGGLE_OVERCHARGE,				///< Overcharge command for power plants
 #ifdef ALLOW_SURRENDER
 	GUI_COMMAND_POW_RETURN_TO_PRISON,			///< POW Truck, return to prison

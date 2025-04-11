@@ -142,7 +142,6 @@ void W3DShroud::init(WorldHeightMap *pMap, Real worldCellSizeX, Real worldCellSi
 		TextureLoader::Validate_Texture_Size((unsigned int &)dstTextureWidth,(unsigned int &)dstTextureHeight, depth);
 	}
 
-
 	UnsignedInt srcWidth,srcHeight;
 
 	srcWidth=m_numCellsX;

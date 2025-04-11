@@ -41,10 +41,10 @@ class ObjectCreationList;
 class OCLUpdateModuleData : public UpdateModuleData
 {
 public:
-	const ObjectCreationList *m_ocl;
-	UnsignedInt m_minDelay;
-	UnsignedInt m_maxDelay;
-	Bool m_isCreateAtEdge; ///< Otherwise, it is created on top of myself
+	const ObjectCreationList *	m_ocl;
+	UnsignedInt									m_minDelay;
+	UnsignedInt									m_maxDelay;
+	Bool												m_isCreateAtEdge;				///< Otherwise, it is created on top of myself
 
 	OCLUpdateModuleData();
 
@@ -74,8 +74,8 @@ public:
 
 protected:
 	
-	UnsignedInt m_nextCreationFrame;
-	UnsignedInt m_timerStartedFrame;
+	UnsignedInt			m_nextCreationFrame;
+	UnsignedInt			m_timerStartedFrame;
 
 	Bool shouldCreate();
 	void setNextCreationFrame();

@@ -68,27 +68,27 @@
 
 StealthUpdateModuleData::StealthUpdateModuleData()
 {
-		//Added By Sadullah Nader
-		//Initialization(s) inserted
-		m_disguiseFX = NULL;
-    m_disguiseRevealFX = NULL;
-    //
-    m_stealthDelay		= UINT_MAX;
-    m_stealthLevel		= 0;
-    m_stealthSpeed		= 0.0f;
-    m_friendlyOpacityMin = 0.5f;
-    m_friendlyOpacityMax = 1.0f;
-    m_pulseFrames = 30;
-    m_teamDisguised		= false;
-    m_revealDistanceFromTarget = 0.0f;
-    m_orderIdleEnemiesToAttackMeUponReveal = false;
-    m_innateStealth   = true;
-    m_disguiseTransitionFrames = 0;
-    m_disguiseRevealTransitionFrames = 0;
-    m_blackMarketCheckFrames = 0;
-    m_enemyDetectionEvaEvent = EVA_Invalid;
-    m_ownDetectionEvaEvent = EVA_Invalid;
-    m_grantedBySpecialPower = FALSE;
+	//Added By Sadullah Nader
+	//Initialization(s) inserted
+	m_disguiseFX = NULL;
+	m_disguiseRevealFX = NULL;
+	//
+	m_stealthDelay		= UINT_MAX;
+	m_stealthLevel		= 0;
+	m_stealthSpeed		= 0.0f;
+	m_friendlyOpacityMin = 0.5f;
+	m_friendlyOpacityMax = 1.0f;
+	m_pulseFrames = 30;
+	m_teamDisguised		= false;
+	m_revealDistanceFromTarget = 0.0f;
+	m_orderIdleEnemiesToAttackMeUponReveal = false;
+	m_innateStealth   = true;
+	m_disguiseTransitionFrames = 0;
+	m_disguiseRevealTransitionFrames = 0;
+	m_blackMarketCheckFrames = 0;
+	m_enemyDetectionEvaEvent = EVA_Invalid;
+	m_ownDetectionEvaEvent = EVA_Invalid;
+	m_grantedBySpecialPower = FALSE;
 }
 
 
@@ -160,10 +160,10 @@ StealthUpdate::StealthUpdate( Thing *thing, const ModuleData* moduleData ) : Upd
 	}
 
 	// start active, since some stealths start enabled from the get-go
-  if ( data->m_grantedBySpecialPower )
-	  setWakeFrame( getObject(), UPDATE_SLEEP_FOREVER );
-  else
-	  setWakeFrame( getObject(), UPDATE_SLEEP_NONE );
+	if ( data->m_grantedBySpecialPower )
+		setWakeFrame( getObject(), UPDATE_SLEEP_FOREVER );
+	else
+		setWakeFrame( getObject(), UPDATE_SLEEP_NONE );
 
 	// we do not need to restore a disguise
 	m_xferRestoreDisguise = FALSE;
@@ -237,17 +237,17 @@ void StealthUpdate::receiveGrant( Bool active, UnsignedInt frames )
 		}
 	}
 
-  const ContainModuleInterface *contain = obj->getContain();
-  if ( contain && contain->isRiderChangeContain() )
-  {
-    const Object *rider = contain->friend_getRider(); 
-    if ( rider )
-    {
-      StealthUpdate *riderStealth = rider->getStealth();
-      if ( riderStealth )
-        riderStealth->receiveGrant( active, frames );
-    }
-  }
+	const ContainModuleInterface *contain = obj->getContain();
+	if ( contain && contain->isRiderChangeContain() )
+	{
+		const Object *rider = contain->friend_getRider(); 
+		if ( rider )
+		{
+			StealthUpdate *riderStealth = rider->getStealth();
+			if ( riderStealth )
+				riderStealth->receiveGrant( active, frames );
+		}
+	}
 
 
 
@@ -396,17 +396,17 @@ Bool StealthUpdate::allowedToStealth( Object *stealthOwner ) const
 		}
 	}
 
-  //new past-alpha feature, grr...
+	//new past-alpha feature, grr...
 	if( flags & STEALTH_NOT_WHILE_RIDERS_ATTACKING )
 	{
-    ContainModuleInterface *myContain = self->getContain();
-    if ( myContain && myContain->isPassengerAllowedToFire() )
-    {
-      if ( myContain->isAnyRiderAttacking() )
-        return FALSE;
+		ContainModuleInterface *myContain = self->getContain();
+		if ( myContain && myContain->isPassengerAllowedToFire() )
+		{
+			if ( myContain->isAnyRiderAttacking() )
+				return FALSE;
 
-    }
-  }
+		}
+	}
 
 
 

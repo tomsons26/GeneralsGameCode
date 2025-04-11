@@ -137,7 +137,7 @@ void TunnelContain::harmAndForceExitAllContained( DamageInfo *info )
 	{
 		obj = *it;
 		removeFromContain( obj, true );
-    obj->attemptDamage( info );
+		obj->attemptDamage( info );
 		it = (*fullList).begin();
 	}  // end while
 
@@ -160,7 +160,7 @@ void TunnelContain::killAllContained( void )
 		obj = *it;
 		it++;
 		removeFromContain( obj, true );
-    obj->kill();
+		obj->kill();
 	}
 }
 //-------------------------------------------------------------------------------------------------
@@ -200,12 +200,8 @@ void TunnelContain::onContaining( Object *obj, Bool wasSelected )
 	obj->setDisabled( DISABLED_HELD );
 
 	obj->getControllingPlayer()->getAcademyStats()->recordUnitEnteredTunnelNetwork();
-  
 
-
-  
-  obj->handlePartitionCellMaintenance();
-
+	obj->handlePartitionCellMaintenance();
 
 }
 
@@ -227,8 +223,6 @@ void TunnelContain::onRemoving( Object *obj )
 	}
 
 	doUnloadSound();
-
-
 }
 
 //-------------------------------------------------------------------------------------------------
